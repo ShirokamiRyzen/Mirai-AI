@@ -107,6 +107,18 @@ class BackupRepository(
             }
         }
 
+        val chatImageBase64Map = mutableMapOf<String, String>()
+        for (msg in messages) {
+            val uriStr = msg.imageUri
+            if (!uriStr.isNullOrBlank()) {
+                val rawBytes = ImageUtils.getImageBytesForUpload(context, uriStr)
+                val webp = rawBytes?.let { ImageUtils.toWebpBytes(it, 1024, 85) }
+                if (webp != null && webp.isNotEmpty()) {
+                    chatImageBase64Map[msg.id] = ImageUtils.safeBase64Encode(webp)
+                }
+            }
+        }
+
         val backup = MiraiBackupData(
             version = 2,
             appName = "MiraiAI",
@@ -120,7 +132,8 @@ class BackupRepository(
             showThinkingProcess = showThinking,
             debugLoggingEnabled = debugLogging,
             characterAvatars = charBase64Map.ifEmpty { null },
-            personaAvatars = personaBase64Map.ifEmpty { null }
+            personaAvatars = personaBase64Map.ifEmpty { null },
+            messageImages = chatImageBase64Map.ifEmpty { null }
         )
         gson.toJson(backup)
     }
@@ -164,6 +177,20 @@ class BackupRepository(
                 }
             }
 
+            val chatImageWebpMap = mutableMapOf<String, ByteArray>()
+            val chatImageBase64Map = mutableMapOf<String, String>()
+            for (msg in messages) {
+                val uriStr = msg.imageUri
+                if (!uriStr.isNullOrBlank()) {
+                    val rawBytes = ImageUtils.getImageBytesForUpload(context, uriStr)
+                    val webp = rawBytes?.let { ImageUtils.toWebpBytes(it, 1024, 85) }
+                    if (webp != null && webp.isNotEmpty()) {
+                        chatImageWebpMap[msg.id] = webp
+                        chatImageBase64Map[msg.id] = ImageUtils.safeBase64Encode(webp)
+                    }
+                }
+            }
+
             val backup = MiraiBackupData(
                 version = 2,
                 appName = "MiraiAI",
@@ -177,7 +204,8 @@ class BackupRepository(
                 showThinkingProcess = showThinking,
                 debugLoggingEnabled = debugLogging,
                 characterAvatars = charBase64Map.ifEmpty { null },
-                personaAvatars = personaBase64Map.ifEmpty { null }
+                personaAvatars = personaBase64Map.ifEmpty { null },
+                messageImages = chatImageBase64Map.ifEmpty { null }
             )
 
             val jsonString = gson.toJson(backup)
@@ -207,6 +235,14 @@ class BackupRepository(
                         zipOut.closeEntry()
                     }
 
+                    // 4. Write chat images as WebP
+                    for ((msgId, bytes) in chatImageWebpMap) {
+                        val entry = ZipEntry("chat_images/$msgId.webp")
+                        zipOut.putNextEntry(entry)
+                        zipOut.write(bytes)
+                        zipOut.closeEntry()
+                    }
+
                     zipOut.finish()
                 }
             } ?: return@withContext Result.failure(Exception("Failed to open destination file"))
@@ -226,9 +262,11 @@ class BackupRepository(
 
             if (isZip) {
                 val avatarsDir = File(context.filesDir, "avatars").apply { if (!exists()) mkdirs() }
+                val chatImagesDir = File(context.filesDir, "chat_images").apply { if (!exists()) mkdirs() }
                 var jsonContent: String? = null
                 val extractedCharAvatars = mutableMapOf<String, String>()
                 val extractedPersonaAvatars = mutableMapOf<String, String>()
+                val extractedChatImages = mutableMapOf<String, String>()
 
                 ZipInputStream(ByteArrayInputStream(bytes)).use { zipIn ->
                     var entry = zipIn.nextEntry
@@ -248,6 +286,12 @@ class BackupRepository(
                             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
                             FileOutputStream(targetFile).use { it.write(entryBytes) }
                             extractedPersonaAvatars[personaId] = targetFile.absolutePath
+                        } else if (name.startsWith("chat_images/")) {
+                            val msgId = name.removePrefix("chat_images/").substringBeforeLast(".")
+                            val entryBytes = zipIn.readBytes()
+                            val targetFile = File(chatImagesDir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
+                            FileOutputStream(targetFile).use { it.write(entryBytes) }
+                            extractedChatImages[msgId] = targetFile.absolutePath
                         }
                         zipIn.closeEntry()
                         entry = zipIn.nextEntry
@@ -285,9 +329,22 @@ class BackupRepository(
                     }
                 }
 
+                val updatedMessages = rawBackup.messages.map { msg ->
+                    val localPath = extractedChatImages[msg.id]
+                        ?: rawBackup.messageImages?.get(msg.id)?.let { b64 ->
+                            saveBase64ChatImage(context, b64)
+                        }
+                    if (localPath != null) {
+                        msg.copy(imageUri = localPath)
+                    } else {
+                        msg
+                    }
+                }
+
                 val finalBackup = rawBackup.copy(
                     characters = updatedCharacters,
-                    personas = updatedPersonas
+                    personas = updatedPersonas,
+                    messages = updatedMessages
                 )
                 Result.success(finalBackup)
             } else {
@@ -318,9 +375,21 @@ class BackupRepository(
                     }
                 }
 
+                val updatedMessages = rawBackup.messages.map { msg ->
+                    val localPath = rawBackup.messageImages?.get(msg.id)?.let { b64 ->
+                        saveBase64ChatImage(context, b64)
+                    }
+                    if (localPath != null) {
+                        msg.copy(imageUri = localPath)
+                    } else {
+                        msg
+                    }
+                }
+
                 val finalBackup = rawBackup.copy(
                     characters = updatedCharacters,
-                    personas = updatedPersonas
+                    personas = updatedPersonas,
+                    messages = updatedMessages
                 )
                 Result.success(finalBackup)
             }
@@ -338,6 +407,23 @@ class BackupRepository(
             val webpBytes = ImageUtils.toWebpBytes(bytes, 720, 85) ?: bytes
             val avatarsDir = File(context.filesDir, "avatars").apply { if (!exists()) mkdirs() }
             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
+            FileOutputStream(targetFile).use { it.write(webpBytes) }
+            targetFile.absolutePath
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun saveBase64ChatImage(context: Context, base64: String): String? {
+        return try {
+            val rawData = if (base64.startsWith("data:image/")) {
+                base64.substringAfter("base64,")
+            } else base64
+            val bytes = ImageUtils.safeBase64Decode(rawData)
+            val webpBytes = ImageUtils.toWebpBytes(bytes, 1024, 85) ?: bytes
+            val chatImagesDir = File(context.filesDir, "chat_images").apply { if (!exists()) mkdirs() }
+            val targetFile = File(chatImagesDir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
             FileOutputStream(targetFile).use { it.write(webpBytes) }
             targetFile.absolutePath
         } catch (e: Exception) {

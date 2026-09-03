@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 68 files · ~50,590 words
+- 68 files · ~50,916 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 598 nodes · 899 edges · 40 communities (31 shown, 9 thin omitted)
+- 599 nodes · 902 edges · 40 communities (31 shown, 9 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 60 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c0a09e89`
+- Built from commit: `16a9c223`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -153,7 +153,7 @@ Cohesion: 0.07
 Nodes (29): 1. Bring Your Own Key (BYOK) and Custom Inference Providers, 2. Deep Character and Persona Management, 3. Real-Time Streaming and Reasoning / Thinking Process, 4. Multimodal Vision Support, 5. Hugging Face Model Hub, 6. Full Data Backup and Restore, 7. Modern Material 3 Design, Architecture and Tech Stack (+21 more)
 
 ### Community 30 - "BackupRepository"
-Cohesion: 0.22
+Cohesion: 0.21
 Nodes (7): BackupRepository, Context, Gson, Result, Uri, BackupStats, MiraiBackupData
 
 ### Community 31 - "RustFsUploader"
@@ -193,7 +193,7 @@ Nodes (3): Context, JsonObject, MiraiToolManager
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MiraiNavGraph()` connect `UserPersonaEntity` to `SettingsViewModel`, `ChatViewModel`, `HuggingFaceRepository`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.299) - this node is a cross-community bridge._
+  _High betweenness centrality (0.300) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `LocalModelManager`, `CharacterEntity`, `OpenAiRepository`?**
   _High betweenness centrality (0.079) - this node is a cross-community bridge._
 - **Why does `ModelHubViewModel` connect `ModelHubViewModel` to `UserPersonaEntity`?**

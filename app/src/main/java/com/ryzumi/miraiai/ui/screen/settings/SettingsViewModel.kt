@@ -449,7 +449,7 @@ class SettingsViewModel(
                 readResult.onSuccess { backupData ->
                     val restoreResult = repo.restoreBackup(backupData, clearExisting)
                     restoreResult.onSuccess { stats ->
-                        _backupSuccessMessage.value = "Restored successfully: ${stats.characterCount} chars, ${stats.personaCount} personas, ${stats.sessionCount} sessions, ${stats.messageCount} messages, ${stats.configCount} configs."
+                        _backupSuccessMessage.value = "Restored successfully: ${stats.characterCount} chars, ${stats.personaCount} personas, ${stats.sessionCount} sessions, ${stats.messageCount} messages, ${stats.assetCount} assets (${stats.formattedDataSize})."
                         _backupStats.value = repo.getBackupStats()
                     }.onFailure { ex ->
                         _backupErrorMessage.value = "Restore failed: ${ex.message}"

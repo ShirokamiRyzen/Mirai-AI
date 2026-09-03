@@ -20,7 +20,8 @@ data class MiraiBackupData(
     val showThinkingProcess: Boolean? = null,
     val debugLoggingEnabled: Boolean? = null,
     val characterAvatars: Map<String, String>? = null,
-    val personaAvatars: Map<String, String>? = null
+    val personaAvatars: Map<String, String>? = null,
+    val messageImages: Map<String, String>? = null
 )
 
 data class BackupStats(

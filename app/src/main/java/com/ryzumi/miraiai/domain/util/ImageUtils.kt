@@ -110,12 +110,12 @@ object ImageUtils {
         quality: Int
     ): String? {
         return try {
-            val processed = processImageBytes(bytes, maxDimension, quality) ?: return null
+            val webpBytes = toWebpBytes(bytes, maxDimension, quality) ?: return null
             val dir = File(context.filesDir, "chat_images").apply { if (!exists()) mkdirs() }
-            val targetFile = File(dir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.${processed.extension}")
+            val targetFile = File(dir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
 
             val fos = FileOutputStream(targetFile)
-            fos.write(processed.bytes)
+            fos.write(webpBytes)
             fos.flush()
             fos.close()
 
