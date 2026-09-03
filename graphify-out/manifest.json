@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788400557.8364482,
-    "ast_hash": "fae8b802ed9193de72f71c200e25e418",
+    "mtime": 1788404286.9632447,
+    "ast_hash": "2338df555968e9fd314977fcb8540426",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/AvatarCropDialog.kt": {
@@ -387,26 +387,6 @@
   "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt": {
     "mtime": 1788338655.0452454,
     "ast_hash": "b25e52e039471b38410cd91d47a15409",
-    "semantic_hash": ""
-  },
-  "app/debug/output-metadata.json": {
-    "mtime": 1788398341.5180748,
-    "ast_hash": "acd84e0f9751e3f911d7794857cb634a",
-    "semantic_hash": ""
-  },
-  "app/release/baselineProfiles/0/app-release.dm": {
-    "mtime": 1788400625.302506,
-    "ast_hash": "46276f38b9fe027c8465515c616cd28c",
-    "semantic_hash": ""
-  },
-  "app/release/baselineProfiles/1/app-release.dm": {
-    "mtime": 1788400625.3515067,
-    "ast_hash": "5188593bdd6129992fed796ebc19a6b3",
-    "semantic_hash": ""
-  },
-  "app/release/output-metadata.json": {
-    "mtime": 1788400628.6892774,
-    "ast_hash": "9352fbdc8636b9460991db2f997cdb33",
     "semantic_hash": ""
   },
   "app/src/main/ic_launcher-playstore.png": {
@@ -457,6 +437,11 @@
   "app/src/main/res/mipmap-xhdpi/ic_channel_foreground.png": {
     "mtime": 1788399635.067415,
     "ast_hash": "8615c94f1ce9408f3b8e7e2d49d4e403",
+    "semantic_hash": ""
+  },
+  ".github/workflows/release.yml": {
+    "mtime": 1788404267.3535602,
+    "ast_hash": "ac09db476deaaba26e09f8ad85edccd9",
     "semantic_hash": ""
   }
 }

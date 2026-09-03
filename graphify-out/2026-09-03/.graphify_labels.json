@@ -3,10 +3,10 @@
   "1": "ChatViewModel",
   "2": "UserPersonaEntity",
   "3": "ModelHubViewModel",
-  "4": "MiraiApplication",
+  "4": "CharacterEntity",
   "5": "CharacterEditViewModel",
   "6": "OpenAiRepository",
-  "7": "MiraiNavGraph",
+  "7": "SettingsRepository",
   "8": "InferenceState",
   "9": "ChatSessionDao",
   "10": "DataUrlFetcher",
@@ -34,6 +34,7 @@
   "32": "ModelDownloadWorker",
   "33": "RustFsUploaderTest",
   "34": "ChatNotificationHelper",
+  "35": "HuggingFaceRepository",
   "36": "DeviceContextManager",
   "38": "MiraiToolManager"
 }

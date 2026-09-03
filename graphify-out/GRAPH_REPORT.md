@@ -1,13 +1,18 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 72 files · ~50,616 words
+- 68 files · ~50,590 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 592 nodes · 893 edges · 38 communities (30 shown, 8 thin omitted)
+- 598 nodes · 899 edges · 40 communities (31 shown, 9 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 60 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `c0a09e89`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - SettingsViewModel
@@ -42,7 +47,9 @@
 - ChatNotificationHelper
 - HuggingFaceRepository
 - DeviceContextManager
+- InferenceConfigEntity
 - MiraiToolManager
+- .parseMarkdown
 
 ## God Nodes (most connected - your core abstractions)
 1. `SettingsViewModel` - 29 edges
@@ -71,11 +78,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (38 total, 8 thin omitted)
+## Communities (40 total, 9 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
-Cohesion: 0.06
-Nodes (13): InferenceConfigDao, Flow, InferenceConfigEntity, AdvanceAndBackupState, BackupState, ExtraState, FiveNetwork, StateFlow (+5 more)
+Cohesion: 0.08
+Nodes (10): AdvanceAndBackupState, BackupState, ExtraState, FiveNetwork, StateFlow, Uri, ViewModel, Quadruple (+2 more)
 
 ### Community 1 - "ChatViewModel"
 Cohesion: 0.08
@@ -126,8 +133,8 @@ Cohesion: 0.25
 Nodes (6): ImageUtils, Bitmap, ByteArray, Context, Uri, ProcessedImage
 
 ### Community 13 - "SettingsScreen.kt"
-Cohesion: 0.18
-Nodes (16): androidx, AnnotatedString, Color, MarkdownRenderer, AdvanceSettingsView(), BackupSettingsView(), ConfigCardItem(), ConfigEditorForm() (+8 more)
+Cohesion: 0.25
+Nodes (14): androidx, AnnotatedString, AdvanceSettingsView(), BackupSettingsView(), ConfigCardItem(), ConfigEditorForm(), DebugLogCardItem(), SettingsScreen() (+6 more)
 
 ### Community 14 - "DebugLogManager"
 Cohesion: 0.23
@@ -142,8 +149,8 @@ Cohesion: 0.16
 Nodes (10): Context, Flow, Result, StateFlow, LocalModelManager, LocalModelStatus, ERROR, LOADED (+2 more)
 
 ### Community 29 - "Mirai AI"
-Cohesion: 0.08
-Nodes (23): 1. Bring Your Own Key (BYOK) and Custom Inference Providers, 2. Deep Character and Persona Management, 3. Real-Time Streaming and Reasoning / Thinking Process, 4. Multimodal Vision Support, 5. Hugging Face Model Hub, 6. Full Data Backup and Restore, 7. Modern Material 3 Design, Architecture and Tech Stack (+15 more)
+Cohesion: 0.07
+Nodes (29): 1. Bring Your Own Key (BYOK) and Custom Inference Providers, 2. Deep Character and Persona Management, 3. Real-Time Streaming and Reasoning / Thinking Process, 4. Multimodal Vision Support, 5. Hugging Face Model Hub, 6. Full Data Backup and Restore, 7. Modern Material 3 Design, Architecture and Tech Stack (+21 more)
 
 ### Community 30 - "BackupRepository"
 Cohesion: 0.22
@@ -169,24 +176,28 @@ Nodes (3): HuggingFacePageResult, HuggingFaceRepository, Result
 Cohesion: 0.24
 Nodes (5): DeviceContextManager, Context, ResolvedLocation, WeatherCache, Location
 
+### Community 37 - "InferenceConfigEntity"
+Cohesion: 0.15
+Nodes (3): InferenceConfigDao, Flow, InferenceConfigEntity
+
 ### Community 38 - "MiraiToolManager"
 Cohesion: 0.33
 Nodes (3): Context, JsonObject, MiraiToolManager
 
 ## Knowledge Gaps
-- **59 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `OPTIMAL`, `MODERATE` (+54 more)
+- **62 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `OPTIMAL`, `MODERATE` (+57 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MiraiNavGraph()` connect `UserPersonaEntity` to `SettingsViewModel`, `ChatViewModel`, `HuggingFaceRepository`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.305) - this node is a cross-community bridge._
+  _High betweenness centrality (0.299) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `LocalModelManager`, `CharacterEntity`, `OpenAiRepository`?**
-  _High betweenness centrality (0.081) - this node is a cross-community bridge._
+  _High betweenness centrality (0.079) - this node is a cross-community bridge._
 - **Why does `ModelHubViewModel` connect `ModelHubViewModel` to `UserPersonaEntity`?**
-  _High betweenness centrality (0.080) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **Are the 5 inferred relationships involving `UserPersonaEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**
   _`UserPersonaEntity` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 7 inferred relationships involving `ChatMessageEntity` (e.g. with `.startGeneration()` and `.stopGeneration()`) actually correct?**
@@ -194,4 +205,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 6 inferred relationships involving `CharacterEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.saveCharacter()`) actually correct?**
   _`CharacterEntity` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `AccumulatedToolCall`, `Unloaded`, `Error` to the rest of the system?**
-  _59 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _62 weakly-connected nodes found - possible documentation gaps or missing edges._

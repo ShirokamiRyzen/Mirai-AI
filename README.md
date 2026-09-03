@@ -11,6 +11,9 @@ Mirai AI is an open-source, high-performance native Android application designed
 - [Supported Providers and Local LLMs](#supported-providers-and-local-llms)
 - [Architecture and Tech Stack](#architecture-and-tech-stack)
 - [Building from Source](#building-from-source)
+- [Automated Builds and Releases (CI/CD)](#automated-builds-and-releases-cicd)
+  - [Triggering a Release](#triggering-a-release)
+  - [Configuring GitHub Secrets for APK Signing](#configuring-github-secrets-for-apk-signing)
 - [Configuration and Usage](#configuration-and-usage)
   - [Character Macros](#character-macros)
   - [Connecting to Local LLMs (Ollama / LM Studio)](#connecting-to-local-llms-ollama--lm-studio)
@@ -158,6 +161,60 @@ cd MiraiAI
 
 The compiled APK will be located at:
 `app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+## Automated Builds and Releases (CI/CD)
+
+Mirai AI includes a GitHub Actions workflow ([`.github/workflows/release.yml`](.github/workflows/release.yml)) that automatically compiles release APKs, signs them, generates SHA-256 checksums, compiles changelogs from commits, and publishes them to GitHub Releases.
+
+### Triggering a Release
+
+#### Method 1: Push a Git Tag (Recommended)
+Tagging any commit with a version tag matching `v*` triggers the release pipeline:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+#### Method 2: Manual Trigger via GitHub Actions UI
+1. Navigate to the **Actions** tab in your GitHub repository.
+2. Select **Build & Release APK** from the workflows list.
+3. Click **Run workflow**, specify the tag name (or leave empty to auto-detect `versionName` from `app/build.gradle.kts`), choose whether to create a Draft or Pre-release, and click **Run workflow**.
+
+### Configuring GitHub Secrets for APK Signing
+
+By default, if no custom signing keys are configured, the workflow generates a temporary self-signed release key so that the resulting APK is signed and immediately installable on Android devices.
+
+To sign releases with your official production keystore, configure the following secrets under **Settings** > **Secrets and variables** > **Actions** > **New repository secret**:
+
+| Secret Name | Description | Example / Instructions |
+| :--- | :--- | :--- |
+| `KEYSTORE_BASE64` | Base64-encoded string of your `.jks` / `.keystore` file | See conversion commands below |
+| `KEY_ALIAS` | Key alias name inside the keystore | `mirai` |
+| `KEYSTORE_PASSWORD` | Password protecting the keystore file | `your_keystore_password` |
+| `KEY_PASSWORD` | Password protecting the specific key alias | `your_key_password` |
+
+#### How to Generate `KEYSTORE_BASE64`
+
+**On Windows (PowerShell):**
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("path\to\your-key.jks")) | Set-Clipboard
+```
+*(The base64 string is copied directly to your clipboard; paste it into the GitHub Secret value).*
+
+**On macOS / Linux (Terminal):**
+```bash
+# macOS
+base64 -i path/to/your-key.jks | pbcopy
+
+# Linux (xclip)
+base64 -w 0 path/to/your-key.jks | xclip -selection clipboard
+
+# Or output directly to a file:
+base64 -w 0 path/to/your-key.jks > keystore_base64.txt
+```
 
 ---
 

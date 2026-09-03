@@ -36,5 +36,7 @@
   "34": "ChatNotificationHelper",
   "35": "HuggingFaceRepository",
   "36": "DeviceContextManager",
-  "38": "MiraiToolManager"
+  "37": "InferenceConfigEntity",
+  "38": "MiraiToolManager",
+  "39": ".parseMarkdown"
 }
