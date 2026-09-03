@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import com.ryzumi.miraiai.domain.util.ImageUtils
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -74,6 +75,7 @@ class PersonaViewModel(
 
     fun deletePersona(persona: UserPersonaEntity) {
         viewModelScope.launch {
+            ImageUtils.deleteLocalFile(persona.avatarUri)
             personaDao.deletePersona(persona)
         }
     }
@@ -81,6 +83,10 @@ class PersonaViewModel(
     fun deletePersonas(personaIds: Set<String>) {
         viewModelScope.launch {
             for (id in personaIds) {
+                val persona = personaDao.getPersonaByIdSync(id)
+                if (persona != null) {
+                    ImageUtils.deleteLocalFile(persona.avatarUri)
+                }
                 personaDao.deletePersonaById(id)
             }
         }

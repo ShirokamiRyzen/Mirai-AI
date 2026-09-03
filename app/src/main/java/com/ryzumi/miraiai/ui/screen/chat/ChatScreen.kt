@@ -196,6 +196,7 @@ fun ChatScreen(
     var showEditChatDialog by remember { mutableStateOf(false) }
     var selectedMessageIds by rememberSaveable { mutableStateOf<Set<String>>(emptySet()) }
     var showBulkDeleteMessagesDialog by remember { mutableStateOf(false) }
+    var showClearChatConfirmDialog by remember { mutableStateOf(false) }
     var previewImageUrl by remember { mutableStateOf<String?>(null) }
     var messageForOptions by remember { mutableStateOf<ChatMessageEntity?>(null) }
     var textSelectionMessage by remember { mutableStateOf<ChatMessageEntity?>(null) }
@@ -477,8 +478,8 @@ fun ChatScreen(
                             text = { Text("Clear Chat History") },
                             leadingIcon = { Icon(Icons.Default.Clear, contentDescription = null) },
                             onClick = {
-                                onClearHistory()
                                 isTopMenuExpanded = false
+                                showClearChatConfirmDialog = true
                             }
                         )
                     }
@@ -1071,6 +1072,29 @@ fun ChatScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showBulkDeleteMessagesDialog = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    if (showClearChatConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showClearChatConfirmDialog = false },
+            title = { Text("Clear Chat History?") },
+            text = { Text("Are you sure you want to clear this chat? All messages and attachments will be permanently deleted.") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showClearChatConfirmDialog = false
+                        onClearHistory()
+                    }
+                ) {
+                    Text("Clear", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showClearChatConfirmDialog = false }) {
                     Text("Cancel")
                 }
             }

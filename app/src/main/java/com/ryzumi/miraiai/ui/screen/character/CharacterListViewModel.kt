@@ -13,6 +13,7 @@ import com.ryzumi.miraiai.data.local.entity.ChatSessionEntity
 import com.ryzumi.miraiai.data.local.entity.InferenceConfigEntity
 import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
 import com.ryzumi.miraiai.domain.macro.MacroEngine
+import com.ryzumi.miraiai.domain.util.ImageUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -128,6 +129,14 @@ class CharacterListViewModel(
 
     fun deleteCharacter(character: CharacterEntity) {
         viewModelScope.launch {
+            ImageUtils.deleteLocalFile(character.avatarUri)
+            val sessions = chatSessionDao.getSessionsForCharacterSync(character.id)
+            for (session in sessions) {
+                val msgs = chatMessageDao.getMessagesForSessionSync(session.id)
+                msgs.forEach { ImageUtils.deleteLocalFile(it.imageUri) }
+                chatSessionDao.deleteSession(session)
+                chatMessageDao.deleteMessagesForSession(session.id)
+            }
             characterDao.deleteCharacter(character)
         }
     }
@@ -135,6 +144,17 @@ class CharacterListViewModel(
     fun deleteCharacters(characterIds: Set<String>) {
         viewModelScope.launch {
             for (id in characterIds) {
+                val character = characterDao.getCharacterByIdSync(id)
+                if (character != null) {
+                    ImageUtils.deleteLocalFile(character.avatarUri)
+                }
+                val sessions = chatSessionDao.getSessionsForCharacterSync(id)
+                for (session in sessions) {
+                    val msgs = chatMessageDao.getMessagesForSessionSync(session.id)
+                    msgs.forEach { ImageUtils.deleteLocalFile(it.imageUri) }
+                    chatSessionDao.deleteSession(session)
+                    chatMessageDao.deleteMessagesForSession(session.id)
+                }
                 characterDao.deleteCharacterById(id)
             }
         }
@@ -142,6 +162,8 @@ class CharacterListViewModel(
 
     fun deleteSession(session: ChatSessionEntity) {
         viewModelScope.launch {
+            val msgs = chatMessageDao.getMessagesForSessionSync(session.id)
+            msgs.forEach { ImageUtils.deleteLocalFile(it.imageUri) }
             chatSessionDao.deleteSession(session)
             chatMessageDao.deleteMessagesForSession(session.id)
         }
@@ -150,6 +172,8 @@ class CharacterListViewModel(
     fun deleteSessions(sessionIds: Set<String>) {
         viewModelScope.launch {
             for (id in sessionIds) {
+                val msgs = chatMessageDao.getMessagesForSessionSync(id)
+                msgs.forEach { ImageUtils.deleteLocalFile(it.imageUri) }
                 chatSessionDao.deleteSessionById(id)
                 chatMessageDao.deleteMessagesForSession(id)
             }

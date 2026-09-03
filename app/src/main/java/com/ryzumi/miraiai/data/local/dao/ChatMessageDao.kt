@@ -20,6 +20,12 @@ interface ChatMessageDao {
     @Query("SELECT * FROM chat_messages WHERE sessionId = :sessionId ORDER BY timestamp DESC LIMIT 1")
     suspend fun getLastMessageForSession(sessionId: String): ChatMessageEntity?
 
+    @Query("SELECT * FROM chat_messages WHERE id = :id")
+    suspend fun getMessageByIdSync(id: String): ChatMessageEntity?
+
+    @Query("SELECT * FROM chat_messages WHERE id IN (:ids)")
+    suspend fun getMessagesByIdsSync(ids: List<String>): List<ChatMessageEntity>
+
     @Query("SELECT * FROM chat_messages ORDER BY timestamp ASC")
     fun getAllMessages(): Flow<List<ChatMessageEntity>>
 

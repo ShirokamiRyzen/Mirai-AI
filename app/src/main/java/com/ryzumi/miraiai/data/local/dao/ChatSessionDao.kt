@@ -17,6 +17,9 @@ interface ChatSessionDao {
     @Query("SELECT * FROM chat_sessions WHERE characterId = :characterId ORDER BY updatedAt DESC")
     fun getSessionsForCharacter(characterId: String): Flow<List<ChatSessionEntity>>
 
+    @Query("SELECT * FROM chat_sessions WHERE characterId = :characterId")
+    suspend fun getSessionsForCharacterSync(characterId: String): List<ChatSessionEntity>
+
     @Query("SELECT * FROM chat_sessions WHERE id = :id")
     fun getSessionById(id: String): Flow<ChatSessionEntity?>
 

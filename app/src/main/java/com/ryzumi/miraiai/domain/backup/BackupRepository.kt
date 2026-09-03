@@ -27,7 +27,50 @@ class BackupRepository(
 ) {
     private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
+    suspend fun cleanupOrphanAssets(): Int = withContext(Dispatchers.IO) {
+        var deletedCount = 0
+        try {
+            val allMessages = database.chatMessageDao().getAllMessagesSync()
+            val validChatImagePaths = allMessages.mapNotNull { it.imageUri }
+                .map { if (it.startsWith("file://")) Uri.parse(it).path ?: it else it }
+                .toSet()
+
+            val chatImagesDir = File(context.filesDir, "chat_images")
+            if (chatImagesDir.exists() && chatImagesDir.isDirectory) {
+                chatImagesDir.listFiles()?.forEach { file ->
+                    if (file.isFile && !validChatImagePaths.contains(file.absolutePath)) {
+                        if (file.delete()) {
+                            deletedCount++
+                        }
+                    }
+                }
+            }
+
+            val allCharacters = database.characterDao().getAllCharactersSync()
+            val allPersonas = database.userPersonaDao().getAllPersonasSync()
+            val validAvatarPaths = (allCharacters.mapNotNull { it.avatarUri } + allPersonas.mapNotNull { it.avatarUri })
+                .map { if (it.startsWith("file://")) Uri.parse(it).path ?: it else it }
+                .toSet()
+
+            val avatarsDir = File(context.filesDir, "avatars")
+            if (avatarsDir.exists() && avatarsDir.isDirectory) {
+                avatarsDir.listFiles()?.forEach { file ->
+                    if (file.isFile && !validAvatarPaths.contains(file.absolutePath)) {
+                        if (file.delete()) {
+                            deletedCount++
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        deletedCount
+    }
+
     suspend fun getBackupStats(): BackupStats = withContext(Dispatchers.IO) {
+        cleanupOrphanAssets()
+
         val chars = database.characterDao().getAllCharactersSync().size
         val personas = database.userPersonaDao().getAllPersonasSync().size
         val sessions = database.chatSessionDao().getAllSessionsSync().size

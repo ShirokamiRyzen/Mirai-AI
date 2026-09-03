@@ -6,7 +6,7 @@
   "4": "MiraiApplication",
   "5": "CharacterEditViewModel",
   "6": "OpenAiRepository",
-  "7": "MiraiNavGraph",
+  "7": "SettingsRepository",
   "8": "InferenceState",
   "9": "ChatSessionDao",
   "10": "DataUrlFetcher",
@@ -39,5 +39,6 @@
   "37": "InferenceConfigEntity",
   "38": "MiraiToolManager",
   "39": ".parseMarkdown",
-  "40": "MarkdownRendererTest"
+  "40": "MarkdownRendererTest",
+  "41": "HuggingFaceRepository"
 }

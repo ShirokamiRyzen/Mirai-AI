@@ -1,11 +1,11 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 69 files · ~53,139 words
+- 69 files · ~54,026 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 617 nodes · 937 edges · 41 communities (31 shown, 10 thin omitted)
+- 618 nodes · 940 edges · 41 communities (31 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -55,7 +55,7 @@
 ## God Nodes (most connected - your core abstractions)
 1. `SettingsViewModel` - 30 edges
 2. `UserPersonaEntity` - 29 edges
-3. `ChatMessageEntity` - 27 edges
+3. `ChatMessageEntity` - 28 edges
 4. `ChatViewModel` - 27 edges
 5. `CharacterEntity` - 23 edges
 6. `InferenceConfigEntity` - 20 edges
@@ -87,7 +87,7 @@ Nodes (10): AdvanceAndBackupState, BackupState, ExtraState, FiveNetwork, StateFl
 
 ### Community 1 - "ChatViewModel"
 Cohesion: 0.08
-Nodes (20): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), ThinkingProcessCard(), TypingDotsIndicator() (+12 more)
+Nodes (21): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), TextSelectionDialog(), ThinkingProcessCard() (+13 more)
 
 ### Community 2 - "UserPersonaEntity"
 Cohesion: 0.09
@@ -196,7 +196,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `UserPersonaEntity`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
   _High betweenness centrality (0.293) - this node is a cross-community bridge._
 - **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `MiraiNavGraph`, `ChatSessionDao`?**
-  _High betweenness centrality (0.082) - this node is a cross-community bridge._
+  _High betweenness centrality (0.084) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `.startGeneration`, `MiraiApplication`, `OpenAiRepository`?**
   _High betweenness centrality (0.077) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `UserPersonaEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**

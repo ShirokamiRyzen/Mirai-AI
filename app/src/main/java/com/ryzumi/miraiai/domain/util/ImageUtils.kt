@@ -513,4 +513,23 @@ object ImageUtils {
             null
         }
     }
+
+    fun deleteLocalFile(uriString: String?) {
+        if (uriString.isNullOrBlank()) return
+        try {
+            val filePath = when {
+                uriString.startsWith("file://") -> Uri.parse(uriString).path
+                uriString.startsWith("/") -> uriString
+                else -> null
+            }
+            if (!filePath.isNullOrBlank()) {
+                val file = File(filePath)
+                if (file.exists() && file.isFile) {
+                    file.delete()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

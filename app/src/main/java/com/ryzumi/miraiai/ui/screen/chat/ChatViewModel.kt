@@ -415,6 +415,7 @@ class ChatViewModel(
         viewModelScope.launch {
             val lastMsg = currentState.messages.lastOrNull()
             if (lastMsg != null && lastMsg.sender.equals("CHARACTER", ignoreCase = true)) {
+                ImageUtils.deleteLocalFile(lastMsg.imageUri)
                 chatMessageDao.deleteMessage(lastMsg)
             }
 
@@ -443,12 +444,15 @@ class ChatViewModel(
 
     fun deleteMessage(msg: ChatMessageEntity) {
         viewModelScope.launch {
+            ImageUtils.deleteLocalFile(msg.imageUri)
             chatMessageDao.deleteMessage(msg)
         }
     }
 
     fun deleteMessages(messageIds: Set<String>) {
         viewModelScope.launch {
+            val msgs = chatMessageDao.getMessagesByIdsSync(messageIds.toList())
+            msgs.forEach { ImageUtils.deleteLocalFile(it.imageUri) }
             chatMessageDao.deleteMessagesByIds(messageIds.toList())
         }
     }
@@ -456,7 +460,10 @@ class ChatViewModel(
     fun clearHistory() {
         viewModelScope.launch {
             val msgs = chatMessageDao.getMessagesForSessionSync(sessionId)
-            msgs.forEach { chatMessageDao.deleteMessage(it) }
+            msgs.forEach {
+                ImageUtils.deleteLocalFile(it.imageUri)
+                chatMessageDao.deleteMessage(it)
+            }
 
             // Re-seed character's firstMessage greeting if available
             val char = characterDao.getCharacterByIdSync(uiState.value.character?.id ?: "")
