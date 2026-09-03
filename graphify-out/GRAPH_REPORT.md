@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 68 files · ~51,829 words
+- 69 files · ~54,026 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 606 nodes · 920 edges · 40 communities (31 shown, 9 thin omitted)
+- 618 nodes · 940 edges · 41 communities (31 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `10b58a59`
+- Built from commit: `d3ed5e6a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -50,11 +50,12 @@
 - InferenceConfigEntity
 - MiraiToolManager
 - .parseMarkdown
+- MarkdownRendererTest
 
 ## God Nodes (most connected - your core abstractions)
-1. `UserPersonaEntity` - 29 edges
-2. `SettingsViewModel` - 29 edges
-3. `ChatMessageEntity` - 27 edges
+1. `SettingsViewModel` - 30 edges
+2. `UserPersonaEntity` - 29 edges
+3. `ChatMessageEntity` - 28 edges
 4. `ChatViewModel` - 27 edges
 5. `CharacterEntity` - 23 edges
 6. `InferenceConfigEntity` - 20 edges
@@ -78,15 +79,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (40 total, 9 thin omitted)
+## Communities (41 total, 10 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
-Cohesion: 0.09
+Cohesion: 0.08
 Nodes (10): AdvanceAndBackupState, BackupState, ExtraState, FiveNetwork, StateFlow, Uri, ViewModel, Quadruple (+2 more)
 
 ### Community 1 - "ChatViewModel"
 Cohesion: 0.08
-Nodes (20): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), ThinkingProcessCard(), TypingDotsIndicator() (+12 more)
+Nodes (21): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), TextSelectionDialog(), ThinkingProcessCard() (+13 more)
 
 ### Community 2 - "UserPersonaEntity"
 Cohesion: 0.09
@@ -187,17 +188,17 @@ Nodes (3): Context, JsonObject, MiraiToolManager
 ## Knowledge Gaps
 - **62 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `OPTIMAL`, `MODERATE` (+57 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `UserPersonaEntity`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.299) - this node is a cross-community bridge._
+  _High betweenness centrality (0.293) - this node is a cross-community bridge._
 - **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `MiraiNavGraph`, `ChatSessionDao`?**
   _High betweenness centrality (0.084) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `.startGeneration`, `MiraiApplication`, `OpenAiRepository`?**
-  _High betweenness centrality (0.079) - this node is a cross-community bridge._
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `UserPersonaEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**
   _`UserPersonaEntity` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 9 inferred relationships involving `ChatMessageEntity` (e.g. with `.startGeneration()` and `.stopGeneration()`) actually correct?**

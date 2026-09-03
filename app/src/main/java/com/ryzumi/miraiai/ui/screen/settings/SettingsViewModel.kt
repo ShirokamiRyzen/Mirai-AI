@@ -268,6 +268,16 @@ class SettingsViewModel(
         loadLocalModels()
     }
 
+    fun setActiveProfile(configId: String) {
+        viewModelScope.launch {
+            inferenceConfigDao.switchActiveProfile(configId)
+            _selectedConfigId.value = configId
+            val config = inferenceConfigDao.getConfigByIdSync(configId)
+            _statusMessage.value = "Active profile set to '${config?.name ?: "Selected Profile"}'"
+            _isError.value = false
+        }
+    }
+
     fun saveConfigProfile(config: InferenceConfigEntity) {
         viewModelScope.launch {
             val modelsJson = if (_availableModels.value.isNotEmpty()) {

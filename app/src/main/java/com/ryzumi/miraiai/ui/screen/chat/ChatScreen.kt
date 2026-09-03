@@ -3,11 +3,13 @@ package com.ryzumi.miraiai.ui.screen.chat
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -55,6 +57,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.FormatAlignLeft
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.AddPhotoAlternate
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -71,19 +74,23 @@ import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.SelectAll
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -190,12 +197,20 @@ fun ChatScreen(
     var selectedMessageIds by rememberSaveable { mutableStateOf<Set<String>>(emptySet()) }
     var showBulkDeleteMessagesDialog by remember { mutableStateOf(false) }
     var previewImageUrl by remember { mutableStateOf<String?>(null) }
+    var messageForOptions by remember { mutableStateOf<ChatMessageEntity?>(null) }
+    var textSelectionMessage by remember { mutableStateOf<ChatMessageEntity?>(null) }
     val debugLogs by DebugLogManager.logs.collectAsState()
 
     val isSelectionMode = selectedMessageIds.isNotEmpty()
 
-    BackHandler(enabled = isSelectionMode) {
-        selectedMessageIds = emptySet<String>()
+    BackHandler(enabled = isSelectionMode || messageForOptions != null || textSelectionMessage != null) {
+        if (textSelectionMessage != null) {
+            textSelectionMessage = null
+        } else if (messageForOptions != null) {
+            messageForOptions = null
+        } else {
+            selectedMessageIds = emptySet<String>()
+        }
     }
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
@@ -235,6 +250,12 @@ fun ChatScreen(
                         if (selectedMessageIds.size == 1) {
                             val singleMsg = uiState.messages.find { it.id == selectedMessageIds.first() }
                             if (singleMsg != null) {
+                                IconButton(onClick = {
+                                    textSelectionMessage = singleMsg
+                                    selectedMessageIds = emptySet<String>()
+                                }) {
+                                    Icon(Icons.AutoMirrored.Filled.FormatAlignLeft, contentDescription = "Select Text")
+                                }
                                 IconButton(onClick = {
                                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                                     clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", singleMsg.content))
@@ -634,7 +655,11 @@ fun ChatScreen(
                             }
                         },
                         onLongClick = {
-                            selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                            if (isSelectionMode) {
+                                selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                            } else {
+                                messageForOptions = msg
+                            }
                         },
                         onCopy = {
                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -858,7 +883,7 @@ fun ChatScreen(
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(450.dp),
+                            .heightIn(max = 300.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(debugLogs, key = { it.id }) { log ->
@@ -1056,6 +1081,131 @@ fun ChatScreen(
         FullScreenImagePreviewDialog(
             imageUri = previewImageUrl!!,
             onDismiss = { previewImageUrl = null }
+        )
+    }
+
+    if (messageForOptions != null) {
+        val targetMsg = messageForOptions!!
+        ModalBottomSheet(
+            onDismissRequest = { messageForOptions = null },
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 32.dp)
+            ) {
+                Text(
+                    text = "Message Options",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
+                )
+
+                // 1. Text Selection
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable {
+                            textSelectionMessage = targetMsg
+                            messageForOptions = null
+                        }
+                        .padding(horizontal = 12.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.FormatAlignLeft,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Column {
+                        Text("Select Text", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyLarge)
+                        Text(
+                            "Open plain text reader to select and copy specific parts",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                // 2. Copy Full Message
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable {
+                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", targetMsg.content))
+                            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+                            messageForOptions = null
+                        }
+                        .padding(horizontal = 12.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text("Copy Full Message", style = MaterialTheme.typography.bodyLarge)
+                }
+
+                // 3. Select Multiple Messages
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable {
+                            selectedMessageIds = setOf(targetMsg.id)
+                            messageForOptions = null
+                        }
+                        .padding(horizontal = 12.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.SelectAll,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text("Select Multiple Messages", style = MaterialTheme.typography.bodyLarge)
+                }
+
+                // 4. Delete Message
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .clickable {
+                            onDeleteMessage(targetMsg)
+                            messageForOptions = null
+                        }
+                        .padding(horizontal = 12.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text("Delete Message", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.error)
+                }
+            }
+        }
+    }
+
+    if (textSelectionMessage != null) {
+        TextSelectionDialog(
+            message = textSelectionMessage!!,
+            characterName = uiState.character?.name ?: "AI",
+            onDismiss = { textSelectionMessage = null }
         )
     }
 }
@@ -1679,3 +1829,170 @@ fun FullScreenImagePreviewDialog(
         }
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TextSelectionDialog(
+    message: ChatMessageEntity,
+    characterName: String,
+    onDismiss: () -> Unit
+) {
+    val context = LocalContext.current
+    val isUser = message.sender.equals("USER", ignoreCase = true)
+    val senderName = if (isUser) "You" else characterName
+
+    val thinkRegex = remember { Regex("<think>([\\s\\S]*?)</think>", RegexOption.IGNORE_CASE) }
+    val matchResult = remember(message.content) { thinkRegex.find(message.content) }
+    val thinkingText = remember(matchResult) { matchResult?.groupValues?.get(1)?.trim() }
+    val cleanContent = remember(message.content, matchResult) {
+        if (matchResult != null) message.content.replace(thinkRegex, "").trim() else message.content
+    }
+
+    var selectedTab by remember { mutableIntStateOf(0) } // 0: Response, 1: Thinking Process
+    val textToDisplay = if (selectedTab == 1 && !thinkingText.isNullOrBlank()) thinkingText else cleanContent
+
+    val wordCount = remember(textToDisplay) {
+        if (textToDisplay.isBlank()) 0 else textToDisplay.trim().split(Regex("\\s+")).size
+    }
+
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false,
+            dismissOnBackPress = true,
+            dismissOnClickOutside = false
+        )
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Column {
+                            Text("Text Selection", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                            Text(
+                                text = senderName,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onDismiss) {
+                            Icon(Icons.Default.Close, contentDescription = "Close")
+                        }
+                    },
+                    actions = {
+                        // Share action
+                        IconButton(onClick = {
+                            val sendIntent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, textToDisplay)
+                                type = "text/plain"
+                            }
+                            context.startActivity(Intent.createChooser(sendIntent, "Share text via"))
+                        }) {
+                            Icon(Icons.Default.Share, contentDescription = "Share Text")
+                        }
+
+                        // Copy All action
+                        IconButton(onClick = {
+                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            clipboard.setPrimaryClip(ClipData.newPlainText("Plain Text", textToDisplay))
+                            Toast.makeText(context, "All text copied to clipboard", Toast.LENGTH_SHORT).show()
+                        }) {
+                            Icon(Icons.Default.ContentCopy, contentDescription = "Copy All")
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                    )
+                )
+            },
+            bottomBar = {
+                Surface(
+                    tonalElevation = 3.dp,
+                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                    modifier = Modifier.navigationBarsPadding()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 10.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "${textToDisplay.length} chars • $wordCount words",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Button(
+                            onClick = {
+                                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                clipboard.setPrimaryClip(ClipData.newPlainText("Plain Text", textToDisplay))
+                                Toast.makeText(context, "All text copied to clipboard", Toast.LENGTH_SHORT).show()
+                            },
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Copy All")
+                        }
+                    }
+                }
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                // If message has thinking tags, allow switching between Response and Thinking
+                if (!thinkingText.isNullOrBlank()) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        FilterChip(
+                            selected = selectedTab == 0,
+                            onClick = { selectedTab = 0 },
+                            label = { Text("Response") }
+                        )
+                        FilterChip(
+                            selected = selectedTab == 1,
+                            onClick = { selectedTab = 1 },
+                            label = { Text("Thinking Process") }
+                        )
+                    }
+                }
+
+                // Plain Selectable Text inside SelectionContainer
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                ) {
+                    SelectionContainer(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        Text(
+                            text = textToDisplay,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 16.sp,
+                                lineHeight = 26.sp,
+                                letterSpacing = 0.2.sp
+                            ),
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+

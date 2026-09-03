@@ -34,8 +34,10 @@
   "32": "ModelDownloadWorker",
   "33": "RustFsUploaderTest",
   "34": "ChatNotificationHelper",
+  "35": ".startGeneration",
   "36": "DeviceContextManager",
   "37": "InferenceConfigEntity",
   "38": "MiraiToolManager",
-  "39": ".parseMarkdown"
+  "39": ".parseMarkdown",
+  "40": "MarkdownRendererTest"
 }

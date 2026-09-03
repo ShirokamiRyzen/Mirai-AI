@@ -47,6 +47,12 @@ interface InferenceConfigDao {
     @Query("UPDATE inference_configs SET isActive = 1 WHERE id = :configId")
     suspend fun setActiveFlag(configId: String)
 
+    @androidx.room.Transaction
+    suspend fun switchActiveProfile(configId: String) {
+        clearActiveFlags()
+        setActiveFlag(configId)
+    }
+
     @Query("DELETE FROM inference_configs")
     suspend fun deleteAllConfigs()
 }

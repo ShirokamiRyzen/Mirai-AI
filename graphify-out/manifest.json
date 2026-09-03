@@ -55,8 +55,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/dao/InferenceConfigDao.kt": {
-    "mtime": 1788282476.0024815,
-    "ast_hash": "0d931137f934b644da4d81dcde52ce3f",
+    "mtime": 1788416867.0157728,
+    "ast_hash": "868800f864a124ac8634726de4da3c31",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/dao/UserPersonaDao.kt": {
@@ -135,13 +135,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/util/MarkdownRenderer.kt": {
-    "mtime": 1788269437.5154445,
-    "ast_hash": "b17afbaa925ed8e6366223f2b204061a",
+    "mtime": 1788416512.9240665,
+    "ast_hash": "2930188bbefd19800984861f7e889c29",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt": {
-    "mtime": 1788338309.0802803,
-    "ast_hash": "affbeca7092531c996bd99897a866f4a",
+    "mtime": 1788417027.344776,
+    "ast_hash": "5bf4c610c370f1e4b59ca553fb7b8d7d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditScreen.kt": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt": {
-    "mtime": 1788416249.9509747,
-    "ast_hash": "80bba64d0474ed3f4c3486a6bcfadee2",
+    "mtime": 1788417434.0087018,
+    "ast_hash": "e91dcd9b02402a674ad490df14d8ec19",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt": {
@@ -200,13 +200,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt": {
-    "mtime": 1788401180.6694593,
-    "ast_hash": "cb50bb0363166282f372004e5873a2b2",
+    "mtime": 1788417072.8290102,
+    "ast_hash": "0cf173d0f57a437767db154a40df058f",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsViewModel.kt": {
-    "mtime": 1788405384.5457945,
-    "ast_hash": "236332df4ffd7cd4e135ca4d10c6a4bc",
+    "mtime": 1788416877.2007718,
+    "ast_hash": "e12831ee83ce04897a284c5cf9384ced",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/theme/Color.kt": {
@@ -442,6 +442,11 @@
   ".github/workflows/build_release_apk.yml": {
     "mtime": 1788405323.7155278,
     "ast_hash": "08677f63ac71484d1b18d9c709a8a21c",
+    "semantic_hash": ""
+  },
+  "app/src/test/java/com/ryzumi/miraiai/MarkdownRendererTest.kt": {
+    "mtime": 1788416520.76387,
+    "ast_hash": "57387b7a2b02b24ddab1cf5924fa3746",
     "semantic_hash": ""
   }
 }

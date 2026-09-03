@@ -46,9 +46,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.AutoMode
 import androidx.compose.material.icons.filled.Backup
 import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
@@ -78,10 +80,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -137,6 +141,7 @@ fun SettingsScreen(
     onToggleShowThinkingProcess: (Boolean) -> Unit = {},
     onToggleTokenCounter: (Boolean) -> Unit = {},
     onToggleAllowDeviceContext: (Boolean) -> Unit = {},
+    onSetActiveProfile: (String) -> Unit = {},
     onExportBackup: (Uri) -> Unit = {},
     onImportBackup: (Uri, Boolean) -> Unit = { _, _ -> },
     onRefreshBackupStats: () -> Unit = {},
@@ -361,7 +366,8 @@ fun SettingsScreen(
                         onToggleDebugLogging = onToggleDebugLogging,
                         onToggleShowThinkingProcess = onToggleShowThinkingProcess,
                         onToggleTokenCounter = onToggleTokenCounter,
-                        onToggleAllowDeviceContext = onToggleAllowDeviceContext
+                        onToggleAllowDeviceContext = onToggleAllowDeviceContext,
+                        onSetActiveProfile = onSetActiveProfile
                     )
                 } else {
                     // Tab 3: Backup & Restore
@@ -1131,7 +1137,8 @@ fun AdvanceSettingsView(
     onToggleDebugLogging: (Boolean) -> Unit,
     onToggleShowThinkingProcess: (Boolean) -> Unit,
     onToggleTokenCounter: (Boolean) -> Unit,
-    onToggleAllowDeviceContext: (Boolean) -> Unit = {}
+    onToggleAllowDeviceContext: (Boolean) -> Unit = {},
+    onSetActiveProfile: (String) -> Unit = {}
 ) {
     val clipboardManager = LocalClipboardManager.current
     val activeConfig = uiState.selectedConfig ?: uiState.configs.find { it.isActive } ?: uiState.configs.firstOrNull()
@@ -1145,355 +1152,414 @@ fun AdvanceSettingsView(
         }
     }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(top = 12.dp, bottom = 88.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // 1. Thinking Process Toggle Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
-                    Text(
-                        text = "Show Thinking Process",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (uiState.isShowThinkingProcess)
-                            "Thinking is displayed in real-time while streaming and auto-closes once answer begins."
-                        else
-                            "Thinking process is completely hidden from chat.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                        Text(
+                            text = "Show Thinking Process",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = if (uiState.isShowThinkingProcess)
+                                "Real-time thinking reasoning is displayed in an expandable accordion."
+                            else
+                                "Thinking process is completely hidden from chat.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isShowThinkingProcess,
+                        onCheckedChange = onToggleShowThinkingProcess
                     )
                 }
-                Switch(
-                    checked = uiState.isShowThinkingProcess,
-                    onCheckedChange = onToggleShowThinkingProcess
-                )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // 2. Enable Token Counter Toggle Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        // 2. Token Counter Toggle Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
-                    Text(
-                        text = "Enable Token Counter",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (uiState.isTokenCounterEnabled)
-                            "Context token ratio (e.g. 1,250 / 4,096) is displayed in chat header, and token count with generation speed (t/s) is shown on AI bubbles."
-                        else
-                            "Token counts and speed statistics are hidden.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                        Text(
+                            text = "Enable Token Counter",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = if (uiState.isTokenCounterEnabled)
+                                "Context token ratio and token speed (t/s) are displayed in chat."
+                            else
+                                "Context token ratio (e.g. 1,250 / 4,096) is displayed in chat header, and token count with generation speed (t/s) is shown on AI bubbles.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isTokenCounterEnabled,
+                        onCheckedChange = onToggleTokenCounter
                     )
                 }
-                Switch(
-                    checked = uiState.isTokenCounterEnabled,
-                    onCheckedChange = onToggleTokenCounter
-                )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // 3. Allow Access OS Information and Weather Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        // 3. Allow Device Context Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
-                    Text(
-                        text = "Allow access OS information and weather",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (uiState.isAllowDeviceContext)
-                            "Real-time clock, battery percentage & charging status, device model, GPS location, and live weather conditions are provided to the AI agent as a personal assistant."
-                        else
-                            "OS, battery, location, and weather information are withheld from the AI agent.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Switch(
-                    checked = uiState.isAllowDeviceContext,
-                    onCheckedChange = { enable ->
-                        if (enable) {
-                            onToggleAllowDeviceContext(true)
-                            locationPermissionLauncher.launch(
-                                arrayOf(
-                                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                        Text(
+                            text = "Allow access OS information and weather",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = if (uiState.isAllowDeviceContext)
+                                "Device info (clock, battery, GPS, weather) is automatically provided to AI personal assistant."
+                            else
+                                "Real-time clock, battery percentage & charging status, device model, GPS location, and live weather conditions are provided to the AI agent as a personal assistant.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isAllowDeviceContext,
+                        onCheckedChange = { isChecked ->
+                            if (isChecked) {
+                                locationPermissionLauncher.launch(
+                                    arrayOf(
+                                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                                    )
                                 )
-                            )
-                        } else {
-                            onToggleAllowDeviceContext(false)
+                            } else {
+                                onToggleAllowDeviceContext(false)
+                            }
+                        }
+                    )
+                }
+            }
+        }
+
+        // 4. Debug Logging Toggle Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                        Text(
+                            text = "Enable Debug Logging",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = if (uiState.isDebugLoggingEnabled)
+                                "API request payloads and responses are tracked in memory."
+                            else
+                                "Debug logging is off. No logs are saved and chat debug menu is hidden.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isDebugLoggingEnabled,
+                        onCheckedChange = onToggleDebugLogging
+                    )
+                }
+            }
+        }
+
+        // 5. Active Profile & Quick Diagnostic Action Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    var isProfilePickerExpanded by remember { mutableStateOf(false) }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Active Profile Diagnostic",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        if (uiState.configs.isNotEmpty()) {
+                            Box {
+                                FilterChip(
+                                    selected = true,
+                                    onClick = { isProfilePickerExpanded = true },
+                                    label = { Text(activeConfig?.name ?: "Select Profile", maxLines = 1) },
+                                    trailingIcon = {
+                                        Icon(
+                                            imageVector = Icons.Default.ArrowDropDown,
+                                            contentDescription = "Select Profile",
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                    }
+                                )
+
+                                DropdownMenu(
+                                    expanded = isProfilePickerExpanded,
+                                    onDismissRequest = { isProfilePickerExpanded = false }
+                                ) {
+                                    uiState.configs.forEach { cfg ->
+                                        val isSelected = cfg.id == activeConfig?.id
+                                        DropdownMenuItem(
+                                            text = {
+                                                Row(
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                                ) {
+                                                    if (isSelected) {
+                                                        Icon(
+                                                            imageVector = Icons.Default.Check,
+                                                            contentDescription = "Active",
+                                                            tint = MaterialTheme.colorScheme.primary,
+                                                            modifier = Modifier.size(16.dp)
+                                                        )
+                                                    }
+                                                    Column {
+                                                        Text(
+                                                            text = cfg.name,
+                                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                                        )
+                                                        if (cfg.baseUrl.isNotBlank()) {
+                                                            Text(
+                                                                text = cfg.baseUrl,
+                                                                style = MaterialTheme.typography.bodySmall,
+                                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            onClick = {
+                                                isProfilePickerExpanded = false
+                                                onSetActiveProfile(cfg.id)
+                                            }
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
-                )
-            }
-        }
 
-        Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
-        // 4. Master Toggle Card for Debug Logging
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
-                    Text(
-                        text = "Enable Debug Logging",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = if (uiState.isDebugLoggingEnabled)
-                            "API request payloads and responses are tracked in memory."
-                        else
-                            "Debug logging is off. No logs are saved and chat debug menu is hidden.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    if (activeConfig != null) {
+                        Text(
+                            text = "Base URL: ${activeConfig.baseUrl}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "Generate Model: ${activeConfig.generateModelId.ifBlank { "Auto / Default" }}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "Vision Model: ${activeConfig.visionModelId.ifBlank { "None (Using generate model)" }}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    } else {
+                        Text(
+                            text = "No active configuration profile found.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Button(
+                            onClick = { activeConfig?.let { onTestVisionCapability(it) } },
+                            enabled = activeConfig != null && !uiState.isTestingVision,
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            if (uiState.isTestingVision) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(16.dp),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    strokeWidth = 2.dp
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Testing...")
+                            } else {
+                                Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("Test Vision Ping")
+                            }
+                        }
+
+                        OutlinedButton(
+                            onClick = onClearDebugLogs,
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(18.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Clear")
+                        }
+                    }
+
+                    if (!uiState.visionTestResult.isNullOrBlank()) {
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = if (uiState.visionTestResult.startsWith("Vision Test Success")) {
+                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
+                                } else {
+                                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f)
+                                }
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(10.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "Vision Test Response",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    IconButton(
+                                        onClick = {
+                                            clipboardManager.setText(AnnotatedString(uiState.visionTestResult))
+                                        },
+                                        modifier = Modifier.size(24.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.ContentCopy,
+                                            contentDescription = "Copy Test Response",
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = uiState.visionTestResult,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    fontFamily = FontFamily.Monospace
+                                )
+                            }
+                        }
+                    }
                 }
-                Switch(
-                    checked = uiState.isDebugLoggingEnabled,
-                    onCheckedChange = onToggleDebugLogging
-                )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // Active Profile & Quick Diagnostic Action Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+        // 6. Request & Payload Logs Header & List
+        if (uiState.isDebugLoggingEnabled) {
+            item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Active Profile Diagnostic",
-                        style = MaterialTheme.typography.titleMedium,
+                        text = "Request & Payload Logs (${uiState.debugLogs.size})",
+                        style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Bold
                     )
-                    if (activeConfig != null) {
-                        SuggestionChip(
-                            onClick = {},
-                            label = { Text(activeConfig.name, maxLines = 1) }
+                    if (uiState.debugLogs.isNotEmpty()) {
+                        TextButton(onClick = onClearDebugLogs) {
+                            Text("Clear All")
+                        }
+                    }
+                }
+            }
+
+            if (uiState.debugLogs.isEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 24.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "No request logs recorded yet.\nSend a message in chat or click 'Test Vision Ping' above to inspect live payloads.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
                     }
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                if (activeConfig != null) {
-                    Text(
-                        text = "Base URL: ${activeConfig.baseUrl}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = "Generate Model: ${activeConfig.generateModelId.ifBlank { "Auto / Default" }}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = "Vision Model: ${activeConfig.visionModelId.ifBlank { "None (Using generate model)" }}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                } else {
-                    Text(
-                        text = "No active configuration profile found.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        onClick = { activeConfig?.let { onTestVisionCapability(it) } },
-                        enabled = activeConfig != null && !uiState.isTestingVision,
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        if (uiState.isTestingVision) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(16.dp),
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                strokeWidth = 2.dp
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Testing...")
-                        } else {
-                            Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(18.dp))
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text("Test Vision Ping")
-                        }
-                    }
-
-                    OutlinedButton(
-                        onClick = onClearDebugLogs,
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Clear")
-                    }
-                }
-
-                if (!uiState.visionTestResult.isNullOrBlank()) {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = if (uiState.visionTestResult.startsWith("Vision Test Success")) {
-                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
-                            } else {
-                                MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f)
-                            }
-                        ),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Column(modifier = Modifier.padding(10.dp)) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = "Vision Test Response",
-                                    style = MaterialTheme.typography.labelMedium,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                IconButton(
-                                    onClick = {
-                                        clipboardManager.setText(AnnotatedString(uiState.visionTestResult))
-                                    },
-                                    modifier = Modifier.size(24.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.ContentCopy,
-                                        contentDescription = "Copy Test Response",
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = uiState.visionTestResult,
-                                style = MaterialTheme.typography.bodySmall,
-                                fontFamily = FontFamily.Monospace
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Request & Payload Logs (${uiState.debugLogs.size})",
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        if (uiState.debugLogs.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "No request logs recorded yet.\nSend a message in chat or click 'Test Vision Ping' above to inspect live payloads.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                )
-            }
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
+            } else {
                 items(uiState.debugLogs, key = { it.id }) { log ->
                     DebugLogCardItem(log = log)
                 }

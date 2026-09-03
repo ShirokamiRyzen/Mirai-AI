@@ -38,5 +38,6 @@
   "36": "DeviceContextManager",
   "37": "InferenceConfigEntity",
   "38": "MiraiToolManager",
-  "39": ".parseMarkdown"
+  "39": ".parseMarkdown",
+  "40": "MarkdownRendererTest"
 }
