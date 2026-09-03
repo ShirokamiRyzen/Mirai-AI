@@ -222,17 +222,20 @@ class ChatViewModel(
         }
 
         val isUsingLocal = (currentConfig?.useLocalGenModel == true) || (currentConfig?.useLocalVisionModel == true)
+        val maxTokens = currentConfig?.maxTokens ?: 2048
 
-        // Calculate total estimated context tokens
-        val historyTokens = core.messages.sumOf {
-            if (it.tokensCount > 0) it.tokensCount else TokenUtils.estimateTokenCount(it.content)
-        }
+        // Calculate estimated context tokens based on active context budget
         val systemPromptTokens = TokenUtils.estimateTokenCount(character?.description ?: "") +
                 TokenUtils.estimateTokenCount(character?.personality ?: "") +
                 TokenUtils.estimateTokenCount(character?.scenario ?: "") +
                 TokenUtils.estimateTokenCount(character?.impression ?: "") +
                 TokenUtils.estimateTokenCount(persona?.personaDescription ?: "") + 35
-        val totalContextTokens = historyTokens + systemPromptTokens
+
+        val (_, totalContextTokens) = TokenUtils.trimHistoryToFitBudget(
+            chatHistory = core.messages,
+            systemPromptTokens = systemPromptTokens,
+            maxContextTokens = maxTokens
+        )
 
         ChatUiState(
             session = core.session,

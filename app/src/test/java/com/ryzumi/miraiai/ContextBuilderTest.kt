@@ -133,4 +133,61 @@ class ContextBuilderTest {
             assertTrue(msg.content is String)
         }
     }
+
+    @Test
+    fun testTrimHistoryToFitBudgetDoesNotExceedLimit() {
+        val history = (1..20).map { i ->
+            ChatMessageEntity(
+                sessionId = "sess1",
+                sender = if (i % 2 == 0) "CHARACTER" else "USER",
+                content = "Message turn $i with detailed explanations and long context text to take up token space.",
+                tokensCount = 200
+            )
+        }
+        val systemPromptTokens = 300
+        val maxContextTokens = 1000
+
+        val (pruned, totalTokens) = com.ryzumi.miraiai.domain.util.TokenUtils.trimHistoryToFitBudget(
+            chatHistory = history,
+            systemPromptTokens = systemPromptTokens,
+            maxContextTokens = maxContextTokens
+        )
+
+        // 300 system prompt tokens + 204 msg tokens (200 + 4 overhead) * 3 = 912 tokens <= 1000
+        assertTrue("Total tokens ($totalTokens) must be <= maxContextTokens ($maxContextTokens)", totalTokens <= maxContextTokens)
+        assertTrue("Pruned messages count should be less than original history", pruned.size < history.size)
+        // Must preserve the latest message
+        assertEquals("Message turn 20 with detailed explanations and long context text to take up token space.", pruned.last().content)
+    }
+
+    @Test
+    fun testBuildOpenAiMessagesWithMaxContextTokensPruning() {
+        val character = CharacterEntity(name = "Aria")
+        val persona = UserPersonaEntity(name = "Fatih")
+
+        val history = (1..10).map { i ->
+            ChatMessageEntity(
+                sessionId = "sess1",
+                sender = if (i % 2 == 0) "CHARACTER" else "USER",
+                content = "Message turn $i content with multiple sentences to test context budget trimming.",
+                tokensCount = 300
+            )
+        }
+
+        // Limit context to 800 tokens. System prompt is ~70 tokens.
+        // Each msg is ~304 tokens. Only the 2 most recent messages should fit.
+        val messages = kotlinx.coroutines.runBlocking {
+            ContextBuilder.buildOpenAiMessages(
+                character = character,
+                persona = persona,
+                chatHistory = history,
+                maxContextTokens = 800
+            )
+        }
+
+        // 1 system message + at most 2 pruned messages = 3 messages
+        assertTrue("Expected pruned messages to fit budget, got ${messages.size}", messages.size <= 3)
+        assertEquals("system", messages.first().role)
+        assertEquals(history.last().content, messages.last().content)
+    }
 }

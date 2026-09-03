@@ -133,10 +133,15 @@ object ChatGenerationManager {
             } else null
 
             val streamFlow = if (isLocalNeeded) {
+                val (prunedHistory, _) = TokenUtils.trimHistoryToFitBudget(
+                    chatHistory = history,
+                    systemPromptTokens = 350,
+                    maxContextTokens = config.maxTokens
+                )
                 LocalModelManager.streamLocalInference(
                     character = character,
                     persona = persona,
-                    chatHistory = history,
+                    chatHistory = prunedHistory,
                     hasImage = hasImage,
                     modelName = chosenModel,
                     deviceContext = liveDeviceContext
@@ -148,7 +153,8 @@ object ChatGenerationManager {
                     chatHistory = history,
                     context = context,
                     includeImages = hasImage,
-                    deviceContext = liveDeviceContext
+                    deviceContext = liveDeviceContext,
+                    maxContextTokens = config.maxTokens
                 )
 
                 val tools = if (isAllowDeviceContext) {

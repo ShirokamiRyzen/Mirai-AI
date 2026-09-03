@@ -10,6 +10,7 @@ import com.ryzumi.miraiai.domain.model.OpenAiContentPart
 import com.ryzumi.miraiai.domain.model.OpenAiImageUrl
 import com.ryzumi.miraiai.domain.model.OpenAiMessage
 import com.ryzumi.miraiai.domain.util.ImageUtils
+import com.ryzumi.miraiai.domain.util.TokenUtils
 import java.util.concurrent.ConcurrentHashMap
 
 object ContextBuilder {
@@ -73,7 +74,8 @@ object ContextBuilder {
         chatHistory: List<ChatMessageEntity>,
         context: Context? = null,
         includeImages: Boolean = true,
-        deviceContext: String? = null
+        deviceContext: String? = null,
+        maxContextTokens: Int? = null
     ): List<OpenAiMessage> {
         val charName = character.name.ifBlank { "Character" }
         val userName = persona?.name?.ifBlank { "User" } ?: "User"
@@ -85,15 +87,33 @@ object ContextBuilder {
         result.add(OpenAiMessage(role = "system", content = systemPrompt))
 
         // 2. First Message (greeting) if configured and chat history doesn't already contain it
-        if (character.firstMessage.isNotBlank()) {
-            val processedFirstMsg = MacroEngine.processMacros(character.firstMessage, charName, userName)
-            if (chatHistory.isEmpty() || chatHistory.firstOrNull()?.content != processedFirstMsg) {
-                result.add(OpenAiMessage(role = "assistant", content = processedFirstMsg))
-            }
+        val hasGreeting = character.firstMessage.isNotBlank()
+        val processedFirstMsg = if (hasGreeting) {
+            MacroEngine.processMacros(character.firstMessage, charName, userName)
+        } else ""
+
+        val shouldAddGreeting = hasGreeting && (chatHistory.isEmpty() || chatHistory.firstOrNull()?.content != processedFirstMsg)
+        if (shouldAddGreeting) {
+            result.add(OpenAiMessage(role = "assistant", content = processedFirstMsg))
         }
 
-        // 3. Chat Messages History
-        for (msg in chatHistory) {
+        // 3. Chat Messages History - pruned to fit maxContextTokens budget if specified
+        val effectiveHistory = if (maxContextTokens != null && maxContextTokens > 0) {
+            var systemPromptTokens = TokenUtils.estimateTokenCount(systemPrompt) + 4
+            if (shouldAddGreeting) {
+                systemPromptTokens += TokenUtils.estimateTokenCount(processedFirstMsg) + 4
+            }
+            val (pruned, _) = TokenUtils.trimHistoryToFitBudget(
+                chatHistory = chatHistory,
+                systemPromptTokens = systemPromptTokens,
+                maxContextTokens = maxContextTokens
+            )
+            pruned
+        } else {
+            chatHistory
+        }
+
+        for (msg in effectiveHistory) {
             val role = when (msg.sender.uppercase()) {
                 "USER" -> "user"
                 "CHARACTER", "ASSISTANT" -> "assistant"

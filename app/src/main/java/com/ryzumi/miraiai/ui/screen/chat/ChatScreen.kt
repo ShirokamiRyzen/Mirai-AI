@@ -9,12 +9,20 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+import kotlinx.coroutines.delay
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -86,6 +94,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -319,7 +328,8 @@ fun ChatScreen(
                                 // Token Counter Context Ratio Badge
                                 if (uiState.isTokenCounterEnabled) {
                                     val maxTokens = uiState.activeConfig?.maxTokens ?: 2048
-                                    val ratio = uiState.estimatedContextTokens.toFloat() / maxTokens.coerceAtLeast(1)
+                                    val currentTokens = minOf(uiState.estimatedContextTokens, maxTokens)
+                                    val ratio = (currentTokens.toFloat() / maxTokens.coerceAtLeast(1)).coerceIn(0f, 1f)
                                     val tokenColor = if (ratio > 0.9f) {
                                         MaterialTheme.colorScheme.error
                                     } else if (ratio > 0.75f) {
@@ -343,7 +353,7 @@ fun ChatScreen(
                                         )
                                         Spacer(modifier = Modifier.width(3.dp))
                                         Text(
-                                            text = "${uiState.estimatedContextTokens} / $maxTokens",
+                                            text = "$currentTokens / $maxTokens",
                                             style = MaterialTheme.typography.labelSmall,
                                             color = tokenColor,
                                             fontWeight = FontWeight.Bold,
@@ -611,7 +621,7 @@ fun ChatScreen(
                 }
 
                 if (uiState.isStreaming) {
-                    item {
+                    item(key = "streaming_bubble") {
                         StreamingBubbleItem(
                             streamingThinking = uiState.streamingThinking,
                             streamingText = uiState.streamingText,
@@ -1026,6 +1036,7 @@ fun ChatScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChatBubbleItem(
+    modifier: Modifier = Modifier,
     message: ChatMessageEntity,
     characterName: String,
     isShowThinkingEnabled: Boolean = false,
@@ -1072,7 +1083,7 @@ fun ChatBubbleItem(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
         contentAlignment = alignment
@@ -1219,6 +1230,7 @@ fun ChatBubbleItem(
 
 @Composable
 fun StreamingBubbleItem(
+    modifier: Modifier = Modifier,
     streamingThinking: String = "",
     streamingText: String,
     streamingModelName: String = "",
@@ -1230,8 +1242,50 @@ fun StreamingBubbleItem(
     onToggleThinking: () -> Unit = {},
     characterName: String
 ) {
+    // Smooth typewriter catch-up effect for streaming text
+    var displayedLength by remember { mutableIntStateOf(if (streamingText.isNotEmpty()) 1 else 0) }
+
+    LaunchedEffect(streamingText) {
+        if (streamingText.isEmpty()) {
+            displayedLength = 0
+        } else {
+            if (displayedLength == 0) {
+                displayedLength = 1
+            }
+            while (displayedLength < streamingText.length) {
+                val diff = streamingText.length - displayedLength
+                val step = when {
+                    diff > 80 -> 8
+                    diff > 40 -> 4
+                    diff > 15 -> 2
+                    else -> 1
+                }
+                displayedLength = (displayedLength + step).coerceAtMost(streamingText.length)
+                delay(if (diff > 25) 8L else 14L)
+            }
+        }
+    }
+
+    val visibleText = if (streamingText.isEmpty()) {
+        ""
+    } else {
+        val len = displayedLength.coerceIn(1, streamingText.length)
+        streamingText.substring(0, len)
+    }
+
+    val infiniteTransition = rememberInfiniteTransition(label = "streamingEffects")
+    val cursorAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1.0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(450, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "cursorAlpha"
+    )
+
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
         contentAlignment = Alignment.CenterStart
@@ -1260,20 +1314,31 @@ fun StreamingBubbleItem(
                         thinkingText = streamingThinking,
                         isExpanded = isThinkingExpanded,
                         onToggle = onToggleThinking,
-                        isStreaming = streamingText.isBlank()
+                        isStreaming = visibleText.isBlank()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                if (streamingText.isBlank() && (!isShowThinkingEnabled || streamingThinking.isBlank())) {
+                if (visibleText.isBlank() && (!isShowThinkingEnabled || streamingThinking.isBlank())) {
                     // Animated 3 Dots Typing Indicator
                     TypingDotsIndicator()
-                } else if (streamingText.isNotBlank()) {
-                    val parsedStreamingContent = remember(streamingText) {
-                        com.ryzumi.miraiai.domain.util.MarkdownRenderer.parseMarkdown(
-                            text = streamingText,
+                } else if (visibleText.isNotBlank()) {
+                    val parsedStreamingContent = remember(visibleText, cursorAlpha) {
+                        val baseAnnotated = com.ryzumi.miraiai.domain.util.MarkdownRenderer.parseMarkdown(
+                            text = visibleText,
                             actionColor = Color(0xFFB4BEFF)
                         )
+                        buildAnnotatedString {
+                            append(baseAnnotated)
+                            withStyle(
+                                SpanStyle(
+                                    color = Color(0xFFA5B4FC).copy(alpha = cursorAlpha),
+                                    fontWeight = FontWeight.Black
+                                )
+                            ) {
+                                append(" ▍")
+                            }
+                        }
                     }
                     Text(
                         text = parsedStreamingContent,
