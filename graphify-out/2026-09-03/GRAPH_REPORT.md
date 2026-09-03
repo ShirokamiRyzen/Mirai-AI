@@ -1,7 +1,7 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 68 files · ~51,750 words
+- 68 files · ~51,692 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 68 files · ~51,692 words
+- 68 files · ~51,829 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 604 nodes · 916 edges · 39 communities (30 shown, 9 thin omitted)
+- 606 nodes · 920 edges · 40 communities (31 shown, 9 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6a8f6901`
+- Built from commit: `10b58a59`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,6 +45,7 @@
 - ModelDownloadWorker
 - RustFsUploaderTest
 - ChatNotificationHelper
+- .startGeneration
 - DeviceContextManager
 - InferenceConfigEntity
 - MiraiToolManager
@@ -77,7 +78,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (39 total, 9 thin omitted)
+## Communities (40 total, 9 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.09
@@ -85,11 +86,11 @@ Nodes (10): AdvanceAndBackupState, BackupState, ExtraState, FiveNetwork, StateFl
 
 ### Community 1 - "ChatViewModel"
 Cohesion: 0.08
-Nodes (18): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, StreamingBubbleItem(), ThinkingProcessCard(), TypingDotsIndicator(), ChatUiState (+10 more)
+Nodes (20): ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), ThinkingProcessCard(), TypingDotsIndicator() (+12 more)
 
 ### Community 2 - "UserPersonaEntity"
-Cohesion: 0.05
-Nodes (17): CharacterDao, Flow, Flow, UserPersonaDao, CharacterEntity, UserPersonaEntity, Flow, CharacterCardItem() (+9 more)
+Cohesion: 0.09
+Nodes (12): Flow, UserPersonaDao, UserPersonaEntity, CharacterCardItem(), ManagementPersonaCardItem(), ManagementScreen(), PersonaCardItem(), PersonaEditDialog() (+4 more)
 
 ### Community 3 - "ModelHubViewModel"
 Cohesion: 0.06
@@ -124,8 +125,8 @@ Cohesion: 0.31
 Nodes (6): DataUrlFetcher, Factory, ImageLoader, Fetcher, FetchResult, Options
 
 ### Community 11 - "ChatMessageEntity"
-Cohesion: 0.06
-Nodes (14): ChatMessageDao, Flow, ChatMessageEntity, getInstance(), Context, migrate(), MiraiDatabase, ChatGenerationManager (+6 more)
+Cohesion: 0.07
+Nodes (9): CharacterDao, Flow, ChatMessageDao, Flow, CharacterEntity, ChatMessageEntity, Flow, TokenUtils (+1 more)
 
 ### Community 12 - "ImageUtils"
 Cohesion: 0.25
@@ -167,6 +168,10 @@ Nodes (3): Result, ModelDownloadWorker, CoroutineWorker
 Cohesion: 0.44
 Nodes (3): ChatNotificationHelper, Bitmap, Context
 
+### Community 35 - ".startGeneration"
+Cohesion: 0.11
+Nodes (10): getInstance(), Context, migrate(), MiraiDatabase, ChatGenerationManager, GenerationStreamState, Context, StateFlow (+2 more)
+
 ### Community 36 - "DeviceContextManager"
 Cohesion: 0.24
 Nodes (5): DeviceContextManager, Context, ResolvedLocation, WeatherCache, Location
@@ -188,10 +193,10 @@ Nodes (3): Context, JsonObject, MiraiToolManager
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `UserPersonaEntity`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.297) - this node is a cross-community bridge._
-- **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `UserPersonaEntity`, `OpenAiRepository`, `MiraiNavGraph`, `ChatSessionDao`?**
+  _High betweenness centrality (0.299) - this node is a cross-community bridge._
+- **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `MiraiNavGraph`, `ChatSessionDao`?**
   _High betweenness centrality (0.084) - this node is a cross-community bridge._
-- **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `MiraiApplication`, `OpenAiRepository`?**
+- **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `.startGeneration`, `MiraiApplication`, `OpenAiRepository`?**
   _High betweenness centrality (0.079) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `UserPersonaEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**
   _`UserPersonaEntity` has 6 INFERRED edges - model-reasoned connections that need verification._

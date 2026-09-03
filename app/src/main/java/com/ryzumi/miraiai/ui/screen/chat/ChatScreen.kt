@@ -29,6 +29,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,6 +46,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -132,6 +134,33 @@ import java.util.Locale
 
 import com.ryzumi.miraiai.domain.model.LocalModelStatus
 
+private suspend fun LazyListState.scrollToBottom() {
+    val totalItems = layoutInfo.totalItemsCount
+    if (totalItems <= 0) return
+
+    val lastIndex = totalItems - 1
+    val visibleItems = layoutInfo.visibleItemsInfo
+    val lastVisible = visibleItems.lastOrNull { it.index == lastIndex }
+
+    if (lastVisible == null) {
+        scrollToItem(lastIndex)
+        val updatedLast = layoutInfo.visibleItemsInfo.lastOrNull { it.index == lastIndex }
+        if (updatedLast != null) {
+            val viewportBottom = layoutInfo.viewportEndOffset - layoutInfo.afterContentPadding
+            val delta = (updatedLast.offset + updatedLast.size) - viewportBottom
+            if (delta > 0) {
+                scrollBy(delta.toFloat())
+            }
+        }
+    } else {
+        val viewportBottom = layoutInfo.viewportEndOffset - layoutInfo.afterContentPadding
+        val delta = (lastVisible.offset + lastVisible.size) - viewportBottom
+        if (delta > 0) {
+            scrollBy(delta.toFloat())
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
@@ -186,12 +215,9 @@ fun ChatScreen(
         }
     }
 
-    // Auto-scroll to bottom on new messages or streaming tokens (text or thinking)
-    LaunchedEffect(uiState.messages.size, uiState.streamingText, uiState.streamingThinking, uiState.isStreaming) {
-        val totalCount = uiState.messages.size + if (uiState.isStreaming) 1 else 0
-        if (totalCount > 0) {
-            listState.scrollToItem(totalCount - 1)
-        }
+    // Auto-scroll to bottom on new messages or streaming status change
+    LaunchedEffect(uiState.messages.size, uiState.isStreaming, uiState.streamingThinking) {
+        listState.scrollToBottom()
     }
 
     Scaffold(
@@ -632,7 +658,8 @@ fun ChatScreen(
                             streamingTokensCount = uiState.streamingTokensCount,
                             streamingSpeedTps = uiState.streamingSpeedTps,
                             onToggleThinking = onToggleLiveThinkingExpanded,
-                            characterName = uiState.character?.name ?: "AI"
+                            characterName = uiState.character?.name ?: "AI",
+                            listState = listState
                         )
                     }
                 }
@@ -1240,7 +1267,8 @@ fun StreamingBubbleItem(
     streamingTokensCount: Int = 0,
     streamingSpeedTps: Double = 0.0,
     onToggleThinking: () -> Unit = {},
-    characterName: String
+    characterName: String,
+    listState: LazyListState? = null
 ) {
     // Smooth typewriter catch-up effect for streaming text
     var displayedLength by remember { mutableIntStateOf(if (streamingText.isNotEmpty()) 1 else 0) }
@@ -1271,6 +1299,19 @@ fun StreamingBubbleItem(
     } else {
         val len = displayedLength.coerceIn(1, streamingText.length)
         streamingText.substring(0, len)
+    }
+
+    // Auto-scroll to bottom as typewriter reveals newly typed lines to keep bottom/cursor in view
+    LaunchedEffect(visibleText) {
+        if (visibleText.isNotEmpty() && listState != null) {
+            val totalCount = listState.layoutInfo.totalItemsCount
+            val isNearBottom = listState.layoutInfo.visibleItemsInfo.any {
+                it.index >= totalCount - 2
+            }
+            if (isNearBottom) {
+                listState.scrollToBottom()
+            }
+        }
     }
 
     val infiniteTransition = rememberInfiniteTransition(label = "streamingEffects")
