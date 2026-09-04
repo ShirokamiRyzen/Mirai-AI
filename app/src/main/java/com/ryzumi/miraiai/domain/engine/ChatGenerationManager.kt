@@ -117,6 +117,7 @@ object ChatGenerationManager {
                 }
             }
 
+            val requestStartTime = System.currentTimeMillis()
             val thinkingSb = StringBuilder()
             val contentSb = StringBuilder()
             var firstTokenTime = 0L
@@ -222,7 +223,7 @@ object ChatGenerationManager {
                         Pair(tokens, elapsed)
                     }
 
-                    if (elapsedSec >= 0.25 && currentTokens >= 2) {
+                    if (elapsedSec > 0.05 && currentTokens >= 1) {
                         val instantSpeed = currentTokens / elapsedSec
                         smoothedSpeed = if (smoothedSpeed <= 0.0) {
                             instantSpeed
@@ -235,7 +236,7 @@ object ChatGenerationManager {
                         thinking = thinkingSb.toString(),
                         text = contentSb.toString(),
                         tokensCount = currentTokens,
-                        speedTps = smoothedSpeed
+                        speedTps = if (smoothedSpeed > 0.0) smoothedSpeed else 0.0
                     )
                 }
 
@@ -261,8 +262,16 @@ object ChatGenerationManager {
                     if (startTime > 0L) (System.currentTimeMillis() - startTime) / 1000.0 else 0.0
                 }
 
-                val finalSpeed = if (totalDurationSec > 0.1 && finalTokens > 0) {
-                    finalTokens / totalDurationSec
+                val durationSec = if (totalDurationSec > 0.05) {
+                    totalDurationSec
+                } else {
+                    val fromRequest = (System.currentTimeMillis() - requestStartTime) / 1000.0
+                    fromRequest.coerceAtLeast(0.05)
+                }
+
+                val finalSpeed = if (finalTokens > 0 && durationSec > 0) {
+                    val calc = finalTokens / durationSec
+                    if (calc > 0.0) calc else smoothedSpeed
                 } else {
                     smoothedSpeed
                 }

@@ -70,20 +70,24 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.DataUsage
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -91,6 +95,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -585,7 +590,7 @@ fun ChatScreen(
                 }
             }
 
-            // Error Message Banner (Dismissible & Compact)
+            // Error Message Banner (Dismissible & Compact with Retry)
             uiState.errorMessage?.let { errorMsg ->
                 Surface(
                     color = MaterialTheme.colorScheme.errorContainer,
@@ -597,27 +602,52 @@ fun ChatScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 8.dp),
+                            .padding(start = 12.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Close,
+                            imageVector = Icons.Default.ErrorOutline,
                             contentDescription = "Error",
                             tint = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = errorMsg,
                             color = MaterialTheme.colorScheme.onErrorContainer,
                             style = MaterialTheme.typography.bodySmall,
-                            maxLines = 4,
+                            maxLines = 3,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier.weight(1f)
                         )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        FilledTonalButton(
+                            onClick = {
+                                onDismissError()
+                                onRegenerateResponse()
+                            },
+                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp),
+                            modifier = Modifier.height(30.dp),
+                            colors = ButtonDefaults.filledTonalButtonColors(
+                                containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.15f),
+                                contentColor = MaterialTheme.colorScheme.error
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Retry",
+                                modifier = Modifier.size(14.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "Retry",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
                         IconButton(
                             onClick = onDismissError,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(28.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
@@ -672,6 +702,42 @@ fun ChatScreen(
                         onDelete = { onDeleteMessage(msg) },
                         onImageClick = { previewImageUrl = it }
                     )
+                }
+
+                // Retry prompt action button if the last message in chat is from USER and not currently streaming
+                val lastMsg = uiState.messages.lastOrNull()
+                if (lastMsg != null && lastMsg.sender.equals("USER", ignoreCase = true) && !uiState.isStreaming) {
+                    item(key = "retry_prompt_button") {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            OutlinedButton(
+                                onClick = onRegenerateResponse,
+                                shape = RoundedCornerShape(16.dp),
+                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    contentColor = MaterialTheme.colorScheme.primary
+                                ),
+                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                modifier = Modifier.height(32.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Refresh,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Retry response",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                        }
+                    }
                 }
 
                 if (uiState.isStreaming) {
@@ -1202,6 +1268,38 @@ fun ChatScreen(
                     Text("Select Multiple Messages", style = MaterialTheme.typography.bodyLarge)
                 }
 
+                // 4. Retry / Regenerate (for latest message)
+                val isLastMessage = uiState.messages.lastOrNull()?.id == targetMsg.id
+                if (isLastMessage && !uiState.isStreaming) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                messageForOptions = null
+                                onRegenerateResponse()
+                            }
+                            .padding(horizontal = 12.dp, vertical = 14.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Column {
+                            Text("Retry / Regenerate", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyLarge)
+                            Text(
+                                "Generate a new response from the AI",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+
                 // 4. Delete Message
                 Row(
                     modifier = Modifier
@@ -1395,8 +1493,9 @@ fun ChatBubbleItem(
                                 modifier = Modifier.size(12.dp)
                             )
                             val modelPrefix = if (!message.modelName.isNullOrBlank()) "${message.modelName} • " else ""
+                            val speedStr = if (message.generationSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", message.generationSpeedTps)} t/s" else ""
                             Text(
-                                text = "$modelPrefix${message.tokensCount} tokens • ${String.format(Locale.US, "%.1f", message.generationSpeedTps)} t/s",
+                                text = "$modelPrefix${message.tokensCount} tokens$speedStr",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = Color.White.copy(alpha = 0.6f),
                                 fontSize = 11.sp,
@@ -1593,8 +1692,9 @@ fun StreamingBubbleItem(
                             modifier = Modifier.size(12.dp)
                         )
                         val modelPrefix = if (streamingModelName.isNotBlank()) "$streamingModelName • " else ""
+                        val speedStr = if (streamingSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s" else ""
                         Text(
-                            text = "$modelPrefix$streamingTokensCount tokens • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s",
+                            text = "$modelPrefix$streamingTokensCount tokens$speedStr",
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White.copy(alpha = 0.6f),
                             fontSize = 11.sp,

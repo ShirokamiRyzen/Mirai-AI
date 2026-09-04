@@ -420,9 +420,11 @@ class ChatViewModel(
             }
 
             val history = chatMessageDao.getMessagesForSessionSync(sessionId)
-            val latestUserMsg = history.lastOrNull { it.sender.equals("USER", ignoreCase = true) }
-            val hasImage = !latestUserMsg?.imageUri.isNullOrBlank()
+            val latestUserMsg = history.lastOrNull { it.sender.equals("USER", ignoreCase = true) } ?: return@launch
+            val hasImage = !latestUserMsg.imageUri.isNullOrBlank()
             val config = currentState.activeConfig ?: InferenceConfigEntity()
+
+            dismissError()
 
             ChatGenerationManager.startGeneration(
                 context = context.applicationContext,

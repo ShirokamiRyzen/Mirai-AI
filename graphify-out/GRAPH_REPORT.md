@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-04)
 
 ## Corpus Check
-- 69 files · ~54,795 words
+- 69 files · ~55,142 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 624 nodes · 952 edges · 42 communities (32 shown, 10 thin omitted)
+- 624 nodes · 953 edges · 42 communities (32 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `05c69505`
+- Built from commit: `d1838b0c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
