@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-04)
 
 ## Corpus Check
-- 69 files · ~54,795 words
+- 69 files · ~55,275 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 624 nodes · 952 edges · 42 communities (32 shown, 10 thin omitted)
+- 626 nodes · 956 edges · 42 communities (32 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `05c69505`
+- Built from commit: `d1145a74`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -99,16 +99,16 @@ Cohesion: 0.06
 Nodes (35): HuggingFaceModel, ModelCompatibility, LOW_MEMORY, MODERATE, OPTIMAL, IndicatorBadge(), Color, LocalFileCardItem() (+27 more)
 
 ### Community 4 - "MiraiApplication"
-Cohesion: 0.29
-Nodes (4): ImageLoader, MiraiApplication, Application, ImageLoaderFactory
+Cohesion: 0.24
+Nodes (5): Context, ImageLoader, MiraiApplication, Application, ImageLoaderFactory
 
 ### Community 5 - "CharacterEditViewModel"
 Cohesion: 0.12
 Nodes (7): AvatarCropDialog(), CharacterEditScreen(), CharacterEditUiState, CharacterEditViewModel, Context, StateFlow, ViewModel
 
 ### Community 6 - "OpenAiRepository"
-Cohesion: 0.10
-Nodes (20): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+12 more)
+Cohesion: 0.08
+Nodes (21): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+13 more)
 
 ### Community 7 - "SettingsRepository"
 Cohesion: 0.07
@@ -127,8 +127,8 @@ Cohesion: 0.31
 Nodes (6): DataUrlFetcher, Factory, ImageLoader, Fetcher, FetchResult, Options
 
 ### Community 11 - "ChatMessageEntity"
-Cohesion: 0.06
-Nodes (9): CharacterDao, Flow, ChatMessageDao, Flow, CharacterEntity, ChatMessageEntity, Flow, TokenUtils (+1 more)
+Cohesion: 0.07
+Nodes (8): CharacterDao, Flow, ChatMessageDao, Flow, CharacterEntity, ChatMessageEntity, Flow, ContextBuilderTest
 
 ### Community 12 - "ImageUtils"
 Cohesion: 0.23
@@ -199,11 +199,11 @@ Nodes (3): HuggingFacePageResult, HuggingFaceRepository, Result
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MiraiNavGraph()` connect `UserPersonaEntity` to `SettingsViewModel`, `ChatViewModel`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `SettingsRepository`, `HuggingFaceRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.292) - this node is a cross-community bridge._
+  _High betweenness centrality (0.291) - this node is a cross-community bridge._
 - **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`?**
   _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `.startGeneration`, `MiraiApplication`, `OpenAiRepository`?**
-  _High betweenness centrality (0.076) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **Are the 9 inferred relationships involving `ChatMessageEntity` (e.g. with `.startGeneration()` and `.stopGeneration()`) actually correct?**
   _`ChatMessageEntity` has 9 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `UserPersonaEntity` (e.g. with `.seedInitialDataIfNeeded()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**

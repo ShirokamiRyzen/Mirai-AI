@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/MiraiApplication.kt": {
-    "mtime": 1788334494.9443295,
-    "ast_hash": "df13a9d6997876e5b4eb2c70e2839795",
+    "mtime": 1788514267.5146217,
+    "ast_hash": "41d1d8d0907db47c74ba9762ad865bab",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/datastore/AppSettings.kt": {
@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt": {
-    "mtime": 1788511516.5829787,
-    "ast_hash": "a59c4097f63885ddbace0e67492b2f94",
+    "mtime": 1788512955.8449786,
+    "ast_hash": "318436841079364058bb6bd13976f28f",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt": {
-    "mtime": 1788511469.3948586,
-    "ast_hash": "5b5e27490ec6c94e4dc667a092d6f0d2",
+    "mtime": 1788512838.6511602,
+    "ast_hash": "2fae0359741885d602c552cd5eb9170d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/management/ManagementScreen.kt": {
@@ -365,8 +365,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt": {
-    "mtime": 1788511459.843207,
-    "ast_hash": "8b4c024b201ba382358889fe4a9fd102",
+    "mtime": 1788512799.0125103,
+    "ast_hash": "4e9a31dbe019bd0af274984672f56f01",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/util/ChatNotificationHelper.kt": {

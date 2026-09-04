@@ -291,9 +291,27 @@ fun ChatScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        if (!uiState.character?.avatarUri.isNullOrBlank()) {
+                        val avatarModel = remember(uiState.character?.avatarUri) {
+                            val uriStr = uiState.character?.avatarUri
+                            if (uriStr.isNullOrBlank()) null else {
+                                if (uriStr.startsWith("data:image/")) {
+                                    val base64Part = uriStr.substringAfter("base64,")
+                                    try {
+                                        android.util.Base64.decode(base64Part, android.util.Base64.DEFAULT)
+                                    } catch (e: Exception) {
+                                        uriStr
+                                    }
+                                } else if (uriStr.startsWith("/")) {
+                                    java.io.File(uriStr)
+                                } else {
+                                    uriStr
+                                }
+                            }
+                        }
+
+                        if (avatarModel != null) {
                             AsyncImage(
-                                model = uiState.character?.avatarUri,
+                                model = avatarModel,
                                 contentDescription = uiState.character?.name,
                                 modifier = Modifier
                                     .size(36.dp)
