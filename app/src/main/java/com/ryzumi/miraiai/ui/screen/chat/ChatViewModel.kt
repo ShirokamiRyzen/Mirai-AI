@@ -87,7 +87,7 @@ class ChatViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        ChatGenerationManager.setActiveVisibleSession(null)
+        ChatGenerationManager.clearActiveVisibleSession(sessionId)
     }
 
     private data class DbData(

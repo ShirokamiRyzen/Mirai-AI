@@ -56,7 +56,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MiraiNavGraph(initialSessionId = targetSessionId)
+                    MiraiNavGraph(
+                        initialSessionId = targetSessionId,
+                        onSessionHandled = { targetSessionId = null }
+                    )
                 }
             }
         }

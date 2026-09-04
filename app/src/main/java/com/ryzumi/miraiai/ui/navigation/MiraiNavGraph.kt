@@ -46,7 +46,8 @@ object MiraiDestinations {
 @Composable
 fun MiraiNavGraph(
     navController: NavHostController = rememberNavController(),
-    initialSessionId: String? = null
+    initialSessionId: String? = null,
+    onSessionHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -59,7 +60,24 @@ fun MiraiNavGraph(
 
     androidx.compose.runtime.LaunchedEffect(initialSessionId) {
         if (!initialSessionId.isNullOrBlank()) {
-            navController.navigate("chat/$initialSessionId")
+            val currentRoute = navController.currentBackStackEntry?.destination?.route
+            val currentSessionId = navController.currentBackStackEntry?.arguments?.getString("sessionId")
+
+            // Always dismiss notification and ensure active visible session
+            com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, initialSessionId)
+            com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setActiveVisibleSession(initialSessionId)
+
+            if (currentRoute == MiraiDestinations.CHAT && currentSessionId == initialSessionId) {
+                // User is ALREADY in this exact chat session! Do NOT push a duplicate ChatScreen layer!
+            } else {
+                navController.navigate("chat/$initialSessionId") {
+                    popUpTo(MiraiDestinations.CHARACTER_LIST) {
+                        saveState = false
+                    }
+                    launchSingleTop = true
+                }
+            }
+            onSessionHandled()
         }
     }
 
@@ -84,14 +102,18 @@ fun MiraiNavGraph(
                 uiState = uiState,
                 onSearchQueryChanged = viewModel::onSearchQueryChanged,
                 onSessionClick = { sessionId ->
-                    navController.navigate("chat/$sessionId")
+                    navController.navigate("chat/$sessionId") {
+                        launchSingleTop = true
+                    }
                 },
                 onDeleteSession = viewModel::deleteSession,
                 onDeleteSessions = viewModel::deleteSessions,
                 onStartNewChatClick = { charId, configId, personaId ->
                     scope.launch {
                         val sessionId = viewModel.createNewChatSession(charId, configId, personaId)
-                        navController.navigate("chat/$sessionId")
+                        navController.navigate("chat/$sessionId") {
+                            launchSingleTop = true
+                        }
                     }
                 },
                 onNavigateToManagement = { navController.navigate(MiraiDestinations.MANAGEMENT) },

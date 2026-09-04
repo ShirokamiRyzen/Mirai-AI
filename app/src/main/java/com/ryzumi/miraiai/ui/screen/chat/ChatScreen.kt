@@ -227,7 +227,9 @@ fun ChatScreen(
             com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, sessionId)
         }
         onDispose {
-            com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setActiveVisibleSession(null)
+            if (!sessionId.isNullOrBlank()) {
+                com.ryzumi.miraiai.domain.engine.ChatGenerationManager.clearActiveVisibleSession(sessionId)
+            }
         }
     }
 
@@ -1475,14 +1477,14 @@ fun StreamingBubbleItem(
         streamingText.substring(0, len)
     }
 
-    // Auto-scroll to bottom as typewriter reveals newly typed lines to keep bottom/cursor in view
-    LaunchedEffect(visibleText) {
-        if (visibleText.isNotEmpty() && listState != null) {
+    // Auto-scroll to bottom as typewriter reveals newly typed lines or reasoning tokens arrive
+    LaunchedEffect(visibleText, streamingThinking) {
+        if (listState != null && (visibleText.isNotEmpty() || streamingThinking.isNotEmpty())) {
             val totalCount = listState.layoutInfo.totalItemsCount
             val isNearBottom = listState.layoutInfo.visibleItemsInfo.any {
                 it.index >= totalCount - 2
             }
-            if (isNearBottom) {
+            if (isNearBottom || listState.firstVisibleItemIndex >= totalCount - 3) {
                 listState.scrollToBottom()
             }
         }
@@ -1534,10 +1536,25 @@ fun StreamingBubbleItem(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                if (visibleText.isBlank() && (!isShowThinkingEnabled || streamingThinking.isBlank())) {
-                    // Animated 3 Dots Typing Indicator
-                    TypingDotsIndicator()
-                } else if (visibleText.isNotBlank()) {
+                if (visibleText.isBlank()) {
+                    // Active typing / working indicator to visibly follow stream response from the start
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.padding(vertical = 4.dp)
+                    ) {
+                        TypingDotsIndicator()
+                        if (isShowThinkingEnabled && streamingThinking.isNotBlank()) {
+                            Text(
+                                text = "Menyusun respon...",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color.White.copy(alpha = 0.5f),
+                                fontSize = 11.sp
+                            )
+                        }
+                    }
+                } else {
                     val parsedStreamingContent = remember(visibleText, cursorAlpha) {
                         val baseAnnotated = com.ryzumi.miraiai.domain.util.MarkdownRenderer.parseMarkdown(
                             text = visibleText,
@@ -1560,28 +1577,29 @@ fun StreamingBubbleItem(
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White
                     )
+                }
 
-                    if (isTokenCounterEnabled && (streamingTokensCount > 0 || streamingModelName.isNotBlank())) {
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Bolt,
-                                contentDescription = null,
-                                tint = Color(0xFFFFD54F),
-                                modifier = Modifier.size(12.dp)
-                            )
-                            val modelPrefix = if (streamingModelName.isNotBlank()) "$streamingModelName • " else ""
-                            Text(
-                                text = "$modelPrefix$streamingTokensCount tokens • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = Color.White.copy(alpha = 0.6f),
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
+                // Live Token Counter & Speed Footer (Persistently visible from start to finish)
+                if (isTokenCounterEnabled && (streamingTokensCount > 0 || streamingSpeedTps > 0.0 || streamingModelName.isNotBlank())) {
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Bolt,
+                            contentDescription = null,
+                            tint = Color(0xFFFFD54F),
+                            modifier = Modifier.size(12.dp)
+                        )
+                        val modelPrefix = if (streamingModelName.isNotBlank()) "$streamingModelName • " else ""
+                        Text(
+                            text = "$modelPrefix$streamingTokensCount tokens • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(alpha = 0.6f),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium
+                        )
                     }
                 }
             }

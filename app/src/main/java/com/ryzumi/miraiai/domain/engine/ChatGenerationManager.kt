@@ -56,6 +56,12 @@ object ChatGenerationManager {
         activeVisibleSessionId.value = sessionId
     }
 
+    fun clearActiveVisibleSession(sessionId: String) {
+        if (activeVisibleSessionId.value == sessionId) {
+            activeVisibleSessionId.value = null
+        }
+    }
+
     fun setAppForeground(isForeground: Boolean) {
         isAppInForeground.value = isForeground
     }
@@ -113,7 +119,9 @@ object ChatGenerationManager {
 
             val thinkingSb = StringBuilder()
             val contentSb = StringBuilder()
-            val streamStartTime = System.currentTimeMillis()
+            var firstTokenTime = 0L
+            var contentFirstTokenTime = 0L
+            var smoothedSpeed = 0.0
 
             val history = database.chatMessageDao().getMessagesForSessionSync(sessionId)
 
@@ -183,25 +191,54 @@ object ChatGenerationManager {
 
             try {
                 streamFlow.collect { chunk ->
+                    var hasNewToken = false
                     if (chunk.thinking.isNotEmpty()) {
                         thinkingSb.append(chunk.thinking)
+                        hasNewToken = true
                     }
                     if (chunk.content.isNotEmpty()) {
                         contentSb.append(chunk.content)
+                        hasNewToken = true
+                        if (contentFirstTokenTime == 0L) {
+                            contentFirstTokenTime = System.currentTimeMillis()
+                        }
                     }
-                    val elapsedSec = (System.currentTimeMillis() - streamStartTime) / 1000.0
-                    val currentTokens = TokenUtils.estimateTokenCount(contentSb.toString())
-                    val speed = if (elapsedSec > 0.05) currentTokens / elapsedSec else 0.0
+
+                    if (hasNewToken && firstTokenTime == 0L) {
+                        firstTokenTime = System.currentTimeMillis()
+                    }
+
+                    val thinkingTokens = TokenUtils.estimateTokenCount(thinkingSb.toString())
+                    val contentTokens = TokenUtils.estimateTokenCount(contentSb.toString())
+
+                    val (currentTokens, elapsedSec) = if (isShowThinking) {
+                        val tokens = thinkingTokens + contentTokens
+                        val elapsed = if (firstTokenTime > 0L) (System.currentTimeMillis() - firstTokenTime) / 1000.0 else 0.0
+                        Pair(tokens, elapsed)
+                    } else {
+                        val tokens = contentTokens
+                        val startTime = if (contentFirstTokenTime > 0L) contentFirstTokenTime else firstTokenTime
+                        val elapsed = if (startTime > 0L) (System.currentTimeMillis() - startTime) / 1000.0 else 0.0
+                        Pair(tokens, elapsed)
+                    }
+
+                    if (elapsedSec >= 0.25 && currentTokens >= 2) {
+                        val instantSpeed = currentTokens / elapsedSec
+                        smoothedSpeed = if (smoothedSpeed <= 0.0) {
+                            instantSpeed
+                        } else {
+                            0.80 * smoothedSpeed + 0.20 * instantSpeed
+                        }
+                    }
 
                     stateFlow.value = stateFlow.value.copy(
                         thinking = thinkingSb.toString(),
                         text = contentSb.toString(),
                         tokensCount = currentTokens,
-                        speedTps = speed
+                        speedTps = smoothedSpeed
                     )
                 }
 
-                val totalDurationSec = (System.currentTimeMillis() - streamStartTime) / 1000.0
                 val cleanContent = MacroEngine.stripThinking(contentSb.toString()).trim()
                 val cleanThinking = thinkingSb.toString().trim()
 
@@ -211,8 +248,24 @@ object ChatGenerationManager {
                     cleanContent
                 }
 
-                val finalTokens = TokenUtils.estimateTokenCount(cleanContent)
-                val finalSpeed = if (totalDurationSec > 0.05) finalTokens / totalDurationSec else 0.0
+                val finalTokens = if (isShowThinking && cleanThinking.isNotBlank()) {
+                    TokenUtils.estimateTokenCount(cleanThinking) + TokenUtils.estimateTokenCount(cleanContent)
+                } else {
+                    TokenUtils.estimateTokenCount(cleanContent)
+                }
+
+                val totalDurationSec = if (isShowThinking && cleanThinking.isNotBlank()) {
+                    if (firstTokenTime > 0L) (System.currentTimeMillis() - firstTokenTime) / 1000.0 else 0.0
+                } else {
+                    val startTime = if (contentFirstTokenTime > 0L) contentFirstTokenTime else firstTokenTime
+                    if (startTime > 0L) (System.currentTimeMillis() - startTime) / 1000.0 else 0.0
+                }
+
+                val finalSpeed = if (totalDurationSec > 0.1 && finalTokens > 0) {
+                    finalTokens / totalDurationSec
+                } else {
+                    smoothedSpeed
+                }
 
                 if (finalOutput.isNotBlank()) {
                     val charMsg = ChatMessageEntity(
@@ -272,17 +325,25 @@ object ChatGenerationManager {
 
         val stateFlow = streamStates[sessionId] ?: return
         val currentText = stateFlow.value.text.trim()
+        val currentThinking = stateFlow.value.thinking.trim()
         val currentModel = stateFlow.value.modelName.ifBlank { null }
         val currentSpeed = stateFlow.value.speedTps
+        val currentTokens = stateFlow.value.tokensCount
 
-        if (currentText.isNotBlank()) {
+        val finalOutput = if (currentThinking.isNotBlank()) {
+            "<think>\n$currentThinking\n</think>\n\n$currentText"
+        } else {
+            currentText
+        }
+
+        if (finalOutput.isNotBlank()) {
             scope.launch {
-                val tokenCount = TokenUtils.estimateTokenCount(currentText)
+                val tokenCount = if (currentTokens > 0) currentTokens else TokenUtils.estimateTokenCount(finalOutput)
                 val charMsg = ChatMessageEntity(
                     id = UUID.randomUUID().toString(),
                     sessionId = sessionId,
                     sender = "CHARACTER",
-                    content = currentText,
+                    content = finalOutput,
                     tokensCount = tokenCount,
                     generationSpeedTps = currentSpeed,
                     modelName = currentModel

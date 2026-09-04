@@ -1,16 +1,16 @@
-# Graph Report - MiraiAI  (2026-09-04)
+# Graph Report - MiraiAI  (2026-09-03)
 
 ## Corpus Check
-- 69 files · ~54,795 words
+- 69 files · ~54,421 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 624 nodes · 952 edges · 42 communities (32 shown, 10 thin omitted)
+- 623 nodes · 951 edges · 42 communities (32 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `05c69505`
+- Built from commit: `5a6249e7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -107,8 +107,8 @@ Cohesion: 0.12
 Nodes (7): AvatarCropDialog(), CharacterEditScreen(), CharacterEditUiState, CharacterEditViewModel, Context, StateFlow, ViewModel
 
 ### Community 6 - "OpenAiRepository"
-Cohesion: 0.10
-Nodes (20): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+12 more)
+Cohesion: 0.08
+Nodes (21): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+13 more)
 
 ### Community 7 - "SettingsRepository"
 Cohesion: 0.07
@@ -127,8 +127,8 @@ Cohesion: 0.31
 Nodes (6): DataUrlFetcher, Factory, ImageLoader, Fetcher, FetchResult, Options
 
 ### Community 11 - "ChatMessageEntity"
-Cohesion: 0.06
-Nodes (9): CharacterDao, Flow, ChatMessageDao, Flow, CharacterEntity, ChatMessageEntity, Flow, TokenUtils (+1 more)
+Cohesion: 0.07
+Nodes (8): CharacterDao, Flow, ChatMessageDao, Flow, CharacterEntity, ChatMessageEntity, Flow, ContextBuilderTest
 
 ### Community 12 - "ImageUtils"
 Cohesion: 0.23
