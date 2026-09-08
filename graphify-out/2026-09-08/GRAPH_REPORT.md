@@ -1,7 +1,7 @@
-# Graph Report - MiraiAI  (2026-09-04)
+# Graph Report - MiraiAI  (2026-09-08)
 
 ## Corpus Check
-- 69 files · ~55,444 words
+- 69 files · ~55,484 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d1145a74`
+- Built from commit: `c8d3aa77`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

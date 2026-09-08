@@ -1501,6 +1501,7 @@ fun ChatBubbleItem(
                 ) {
                     if (!isUser && isTokenCounterEnabled && (message.tokensCount > 0 || message.generationSpeedTps > 0 || !message.modelName.isNullOrBlank())) {
                         Row(
+                            modifier = Modifier.weight(1f, fill = false),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
@@ -1510,19 +1511,46 @@ fun ChatBubbleItem(
                                 tint = Color(0xFFFFD54F),
                                 modifier = Modifier.size(12.dp)
                             )
-                            val modelPrefix = if (!message.modelName.isNullOrBlank()) "${message.modelName} • " else ""
-                            val speedStr = if (message.generationSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", message.generationSpeedTps)} t/s" else ""
-                            Text(
-                                text = "$modelPrefix${message.tokensCount} tokens$speedStr",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = Color.White.copy(alpha = 0.6f),
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium
-                            )
+                            val hasStats = message.tokensCount > 0 || message.generationSpeedTps > 0.05
+                            if (!message.modelName.isNullOrBlank()) {
+                                Text(
+                                    text = message.modelName,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color.White.copy(alpha = 0.6f),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.weight(1f, fill = false)
+                                )
+                                if (hasStats) {
+                                    Text(
+                                        text = "•",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = Color.White.copy(alpha = 0.4f),
+                                        fontSize = 11.sp
+                                    )
+                                }
+                            }
+                            if (hasStats) {
+                                val speedStr = if (message.generationSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", message.generationSpeedTps)} t/s" else ""
+                                val tokensStr = if (message.tokensCount > 0) "${message.tokensCount} tokens" else ""
+                                val statsCombined = if (tokensStr.isNotEmpty()) "$tokensStr$speedStr" else speedStr.removePrefix(" • ")
+                                Text(
+                                    text = statsCombined,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color.White.copy(alpha = 0.6f),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    maxLines = 1
+                                )
+                            }
                         }
                     } else {
                         Spacer(modifier = Modifier.weight(1f))
                     }
+
+                    Spacer(modifier = Modifier.width(8.dp))
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -1531,7 +1559,9 @@ fun ChatBubbleItem(
                         Text(
                             text = formattedTime,
                             style = MaterialTheme.typography.labelSmall,
-                            color = Color.White.copy(alpha = 0.5f)
+                            color = Color.White.copy(alpha = 0.5f),
+                            maxLines = 1,
+                            softWrap = false
                         )
                         if (isSelected) {
                             Icon(
@@ -1700,6 +1730,7 @@ fun StreamingBubbleItem(
                 if (isTokenCounterEnabled && (streamingTokensCount > 0 || streamingSpeedTps > 0.0 || streamingModelName.isNotBlank())) {
                     Spacer(modifier = Modifier.height(6.dp))
                     Row(
+                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
@@ -1709,15 +1740,40 @@ fun StreamingBubbleItem(
                             tint = Color(0xFFFFD54F),
                             modifier = Modifier.size(12.dp)
                         )
-                        val modelPrefix = if (streamingModelName.isNotBlank()) "$streamingModelName • " else ""
-                        val speedStr = if (streamingSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s" else ""
-                        Text(
-                            text = "$modelPrefix$streamingTokensCount tokens$speedStr",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = Color.White.copy(alpha = 0.6f),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium
-                        )
+                        val hasStats = streamingTokensCount > 0 || streamingSpeedTps > 0.05
+                        if (streamingModelName.isNotBlank()) {
+                            Text(
+                                text = streamingModelName,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = Color.White.copy(alpha = 0.6f),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f, fill = false)
+                            )
+                            if (hasStats) {
+                                Text(
+                                    text = "•",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color.White.copy(alpha = 0.4f),
+                                    fontSize = 11.sp
+                                )
+                            }
+                        }
+                        if (hasStats) {
+                            val speedStr = if (streamingSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s" else ""
+                            val tokensStr = if (streamingTokensCount > 0) "$streamingTokensCount tokens" else ""
+                            val statsCombined = if (tokensStr.isNotEmpty()) "$tokensStr$speedStr" else speedStr.removePrefix(" • ")
+                            Text(
+                                text = statsCombined,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = Color.White.copy(alpha = 0.6f),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                maxLines = 1
+                            )
+                        }
                     }
                 }
             }
