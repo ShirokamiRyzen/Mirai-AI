@@ -1019,7 +1019,7 @@ fun ConfigEditorForm(
         }
         Slider(
             value = temperature,
-            onValueChange = { temperature = it },
+            onValueChange = { temperature = Math.round(it * 100f) / 100f },
             valueRange = 0.0f..2.0f,
             modifier = Modifier.padding(bottom = 8.dp)
         )
@@ -1035,7 +1035,7 @@ fun ConfigEditorForm(
         }
         Slider(
             value = topP,
-            onValueChange = { topP = it },
+            onValueChange = { topP = Math.round(it * 100f) / 100f },
             valueRange = 0.0f..1.0f,
             modifier = Modifier.padding(bottom = 8.dp)
         )
@@ -1067,7 +1067,7 @@ fun ConfigEditorForm(
         }
         Slider(
             value = repetitionPenalty,
-            onValueChange = { repetitionPenalty = it },
+            onValueChange = { repetitionPenalty = Math.round(it * 100f) / 100f },
             valueRange = 1.0f..2.0f,
             modifier = Modifier.padding(bottom = 12.dp)
         )
@@ -1109,10 +1109,10 @@ fun ConfigEditorForm(
                         visionModelId = visionModelId,
                         useLocalVisionModel = useLocalVisionModel,
                         imageGenModelId = imageGenModelId,
-                        temperature = temperature,
-                        topP = topP,
+                        temperature = Math.round(temperature * 100f) / 100f,
+                        topP = Math.round(topP * 100f) / 100f,
                         maxTokens = maxTokens,
-                        repetitionPenalty = repetitionPenalty,
+                        repetitionPenalty = Math.round(repetitionPenalty * 100f) / 100f,
                         customHeaders = customHeaders
                     )
                     onSave(updated)

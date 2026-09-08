@@ -252,11 +252,14 @@ class OpenAiRepository {
         val hasVisionMessage = messages.any { it.content is List<*> }
         val isCloudOpenAi = baseUrl.contains("openrouter.ai", ignoreCase = true) || baseUrl.contains("api.openai.com", ignoreCase = true)
 
+        val sanitizedTemperature = (Math.round(temperature * 100f) / 100f)
+        val sanitizedTopP = (Math.round(topP * 100f) / 100f)
+
         val requestBodyJson = JsonObject().apply {
             addProperty("model", modelId)
             add("messages", gson.toJsonTree(messages))
-            addProperty("temperature", temperature)
-            addProperty("top_p", topP)
+            addProperty("temperature", sanitizedTemperature)
+            addProperty("top_p", sanitizedTopP)
             addProperty("max_tokens", maxTokens)
             addProperty("stream", true)
             if (!tools.isNullOrEmpty()) {
