@@ -18,6 +18,7 @@ import com.ryzumi.miraiai.data.local.MiraiDatabase
 import com.ryzumi.miraiai.data.network.HuggingFaceRepository
 import com.ryzumi.miraiai.data.network.OpenAiRepository
 import com.ryzumi.miraiai.domain.backup.BackupRepository
+import com.ryzumi.miraiai.ui.screen.about.AboutScreen
 import com.ryzumi.miraiai.ui.screen.character.CharacterEditScreen
 import com.ryzumi.miraiai.ui.screen.character.CharacterEditViewModel
 import com.ryzumi.miraiai.ui.screen.character.CharacterListScreen
@@ -41,6 +42,7 @@ object MiraiDestinations {
     const val SETTINGS = "settings"
     const val MODEL_HUB = "model_hub"
     const val PERSONA_LIST = "persona_list"
+    const val ABOUT = "about"
 }
 
 @Composable
@@ -118,7 +120,8 @@ fun MiraiNavGraph(
                 },
                 onNavigateToManagement = { navController.navigate(MiraiDestinations.MANAGEMENT) },
                 onNavigateToSettings = { navController.navigate(MiraiDestinations.SETTINGS) },
-                onNavigateToModelHub = { navController.navigate(MiraiDestinations.MODEL_HUB) }
+                onNavigateToModelHub = { navController.navigate(MiraiDestinations.MODEL_HUB) },
+                onNavigateToAbout = { navController.navigate(MiraiDestinations.ABOUT) }
             )
         }
 
@@ -309,6 +312,13 @@ fun MiraiNavGraph(
                 onSavePersona = viewModel::savePersona,
                 onSetDefault = viewModel::setDefault,
                 onDeletePersona = viewModel::deletePersona,
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        // 8. About App Screen
+        composable(MiraiDestinations.ABOUT) {
+            AboutScreen(
                 onBackClick = { navController.popBackStack() }
             )
         }

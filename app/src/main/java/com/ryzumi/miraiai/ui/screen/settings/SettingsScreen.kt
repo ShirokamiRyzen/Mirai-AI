@@ -64,6 +64,7 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.FolderOpen
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.PlayArrow
@@ -97,6 +98,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
@@ -120,6 +122,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ryzumi.miraiai.data.local.entity.InferenceConfigEntity
+import com.ryzumi.miraiai.ui.screen.about.AboutAppView
 import com.ryzumi.miraiai.data.network.DebugLogEntry
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -241,14 +244,16 @@ fun SettingsScreen(
                 .padding(paddingValues)
         ) {
             if (editingConfig == null) {
-                PrimaryTabRow(selectedTabIndex = selectedMainTab) {
+                PrimaryTabRow(
+                    selectedTabIndex = selectedMainTab
+                ) {
                     Tab(
                         selected = selectedMainTab == 0,
                         onClick = {
                             selectedMainTab = 0
                             selectedConfigIds = emptySet<String>()
                         },
-                        text = { Text("Inference") },
+                        text = { Text("Inference", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.SettingsInputComponent, contentDescription = null) }
                     )
                     Tab(
@@ -257,7 +262,7 @@ fun SettingsScreen(
                             selectedMainTab = 1
                             selectedConfigIds = emptySet<String>()
                         },
-                        text = { Text("Themes") },
+                        text = { Text("Themes", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Palette, contentDescription = null) }
                     )
                     Tab(
@@ -266,7 +271,7 @@ fun SettingsScreen(
                             selectedMainTab = 2
                             selectedConfigIds = emptySet<String>()
                         },
-                        text = { Text("Advance") },
+                        text = { Text("Advance", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Tune, contentDescription = null) }
                     )
                     Tab(
@@ -275,8 +280,17 @@ fun SettingsScreen(
                             selectedMainTab = 3
                             selectedConfigIds = emptySet<String>()
                         },
-                        text = { Text("Backup") },
+                        text = { Text("Backup", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Backup, contentDescription = null) }
+                    )
+                    Tab(
+                        selected = selectedMainTab == 4,
+                        onClick = {
+                            selectedMainTab = 4
+                            selectedConfigIds = emptySet<String>()
+                        },
+                        text = { Text("About", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
+                        icon = { Icon(Icons.Default.Info, contentDescription = null) }
                     )
                 }
             }
@@ -371,7 +385,7 @@ fun SettingsScreen(
                         onToggleUploadAsBase64 = onToggleUploadAsBase64,
                         onSetActiveProfile = onSetActiveProfile
                     )
-                } else {
+                } else if (tabIndex == 3) {
                     // Tab 3: Backup & Restore
                     BackupSettingsView(
                         uiState = uiState,
@@ -380,6 +394,9 @@ fun SettingsScreen(
                         onRefreshStats = onRefreshBackupStats,
                         onClearBackupMessage = onClearBackupMessage
                     )
+                } else {
+                    // Tab 4: About App
+                    AboutAppView()
                 }
             }
         }

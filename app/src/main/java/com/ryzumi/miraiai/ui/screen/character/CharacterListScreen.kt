@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.ModelTraining
 import androidx.compose.material.icons.filled.Person
@@ -84,7 +85,8 @@ fun CharacterListScreen(
     onStartNewChatClick: (characterId: String, configId: String, personaId: String) -> Unit,
     onNavigateToManagement: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToModelHub: () -> Unit
+    onNavigateToModelHub: () -> Unit,
+    onNavigateToAbout: () -> Unit = {}
 ) {
     var selectedSessionIds by rememberSaveable { mutableStateOf(setOf<String>()) }
     var showBulkDeleteDialog by remember { mutableStateOf(false) }
@@ -171,6 +173,12 @@ fun CharacterListScreen(
                             Icon(
                                 imageVector = Icons.Default.Settings,
                                 contentDescription = "Settings"
+                            )
+                        }
+                        IconButton(onClick = onNavigateToAbout) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = "About App"
                             )
                         }
                     },
