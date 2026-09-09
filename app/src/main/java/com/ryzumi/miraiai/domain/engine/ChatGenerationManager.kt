@@ -133,6 +133,12 @@ object ChatGenerationManager {
                 false
             }
 
+            val isUploadAsBase64 = try {
+                settingsRepo.uploadAsBase64Flow.first()
+            } catch (e: Exception) {
+                true
+            }
+
             val liveDeviceContext = if (isAllowDeviceContext) {
                 try {
                     DeviceContextManager.getLiveDeviceContext(context)
@@ -163,7 +169,8 @@ object ChatGenerationManager {
                     context = context,
                     includeImages = hasImage,
                     deviceContext = liveDeviceContext,
-                    maxContextTokens = config.maxTokens
+                    maxContextTokens = config.maxTokens,
+                    uploadAsBase64 = isUploadAsBase64
                 )
 
                 val tools = if (isAllowDeviceContext) {

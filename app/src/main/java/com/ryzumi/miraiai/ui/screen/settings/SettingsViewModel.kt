@@ -39,6 +39,7 @@ data class SettingsUiState(
     val isShowThinkingProcess: Boolean = false,
     val isTokenCounterEnabled: Boolean = false,
     val isAllowDeviceContext: Boolean = false,
+    val isUploadAsBase64: Boolean = true,
     val debugLogs: List<DebugLogEntry> = emptyList(),
     val backupStats: BackupStats = BackupStats(),
     val isExportingBackup: Boolean = false,
@@ -177,7 +178,16 @@ class SettingsViewModel(
         val isShowThinking: Boolean,
         val isTokenCounter: Boolean,
         val isAllowDeviceContext: Boolean,
+        val isUploadAsBase64: Boolean,
         val backup: BackupState
+    )
+
+    private data class AdvanceToggles(
+        val isDebugEnabled: Boolean,
+        val isShowThinking: Boolean,
+        val isTokenCounter: Boolean,
+        val isAllowDeviceContext: Boolean,
+        val isUploadAsBase64: Boolean
     )
 
     private val advanceAndBackupFlow = combine(
@@ -185,16 +195,22 @@ class SettingsViewModel(
             settingsRepository.debugLoggingEnabledFlow,
             settingsRepository.showThinkingProcessFlow,
             settingsRepository.tokenCounterEnabledFlow,
-            settingsRepository.allowDeviceContextFlow
-        ) { isDebug, isShowThinking, isTokenCounter, isAllowDeviceContext ->
-            Quadruple(isDebug, isShowThinking, isTokenCounter, isAllowDeviceContext)
+            settingsRepository.allowDeviceContextFlow,
+            settingsRepository.uploadAsBase64Flow
+        ) { isDebug, isShowThinking, isTokenCounter, isAllowDeviceContext, isUploadAsBase64 ->
+            AdvanceToggles(isDebug, isShowThinking, isTokenCounter, isAllowDeviceContext, isUploadAsBase64)
         },
         backupStateFlow
-    ) { quad, backup ->
-        AdvanceAndBackupState(quad.first, quad.second, quad.third, quad.fourth, backup)
+    ) { toggles, backup ->
+        AdvanceAndBackupState(
+            toggles.isDebugEnabled,
+            toggles.isShowThinking,
+            toggles.isTokenCounter,
+            toggles.isAllowDeviceContext,
+            toggles.isUploadAsBase64,
+            backup
+        )
     }
-
-    private data class Quadruple<A, B, C, D>(val first: A, val second: B, val third: C, val fourth: D)
 
     val uiState: StateFlow<SettingsUiState> = combine(
         inferenceConfigDao.getAllConfigs(),
@@ -236,6 +252,7 @@ class SettingsViewModel(
             isShowThinkingProcess = advanceState.isShowThinking,
             isTokenCounterEnabled = advanceState.isTokenCounter,
             isAllowDeviceContext = advanceState.isAllowDeviceContext,
+            isUploadAsBase64 = advanceState.isUploadAsBase64,
             debugLogs = logs,
             backupStats = advanceState.backup.stats,
             isExportingBackup = advanceState.backup.isExporting,
@@ -258,6 +275,12 @@ class SettingsViewModel(
     fun updateAllowDeviceContext(enabled: Boolean) {
         viewModelScope.launch {
             settingsRepository.updateAllowDeviceContext(enabled)
+        }
+    }
+
+    fun updateUploadAsBase64(enabled: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.updateUploadAsBase64(enabled)
         }
     }
 

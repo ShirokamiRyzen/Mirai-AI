@@ -75,7 +75,8 @@ object ContextBuilder {
         context: Context? = null,
         includeImages: Boolean = true,
         deviceContext: String? = null,
-        maxContextTokens: Int? = null
+        maxContextTokens: Int? = null,
+        uploadAsBase64: Boolean = true
     ): List<OpenAiMessage> {
         val charName = character.name.ifBlank { "Character" }
         val userName = persona?.name?.ifBlank { "User" } ?: "User"
@@ -125,32 +126,46 @@ object ContextBuilder {
             if (includeImages && !msg.imageUri.isNullOrBlank()) {
                 val rawUri = msg.imageUri
 
-                // Upload to RustFS S3 so AI receives presigned image URL instead of heavy base64
-                val finalImageUrl = if (rawUri.startsWith("http://") || rawUri.startsWith("https://")) {
-                    RustFsUploader.signUrlIfNeeded(rawUri)
-                } else {
-                    s3UrlCache[rawUri] ?: run {
-                        val bytes = ImageUtils.getImageBytesForUpload(context, rawUri)
-                        if (bytes != null && bytes.isNotEmpty()) {
-                            val processed = ImageUtils.processImageBytes(bytes, maxDimension = 1024, quality = 85)
-                            if (processed != null) {
-                                val uploadResult = RustFsUploader.uploadImageBytes(
-                                    imageBytes = processed.bytes,
-                                    contentType = processed.contentType,
-                                    extension = processed.extension
-                                )
-                                uploadResult.getOrNull()?.also { signedUrl ->
-                                    s3UrlCache[rawUri] = signedUrl
-                                }
-                            } else null
-                        } else null
-                    } ?: if (rawUri.startsWith("data:image/")) {
+                // Determine image format based on uploadAsBase64 preference
+                val finalImageUrl = if (uploadAsBase64) {
+                    // Upload as Base64 (default ON): compress and send directly as data URI base64
+                    if (rawUri.startsWith("data:image/")) {
                         rawUri
                     } else {
                         try {
                             ImageUtils.processAndEncodeImage(context, rawUri, maxDimension = 1024, quality = 85)
                         } catch (e: Exception) {
                             null
+                        }
+                    }
+                } else {
+                    // Upload to RustFS S3 storage so AI receives presigned image URL instead of base64
+                    if (rawUri.startsWith("http://") || rawUri.startsWith("https://")) {
+                        RustFsUploader.signUrlIfNeeded(rawUri)
+                    } else {
+                        s3UrlCache[rawUri] ?: run {
+                            val bytes = ImageUtils.getImageBytesForUpload(context, rawUri)
+                            if (bytes != null && bytes.isNotEmpty()) {
+                                val processed = ImageUtils.processImageBytes(bytes, maxDimension = 1024, quality = 85)
+                                if (processed != null) {
+                                    val uploadResult = RustFsUploader.uploadImageBytes(
+                                        imageBytes = processed.bytes,
+                                        contentType = processed.contentType,
+                                        extension = processed.extension
+                                    )
+                                    uploadResult.getOrNull()?.also { signedUrl ->
+                                        s3UrlCache[rawUri] = signedUrl
+                                    }
+                                } else null
+                            } else null
+                        } ?: if (rawUri.startsWith("data:image/")) {
+                            rawUri
+                        } else {
+                            try {
+                                ImageUtils.processAndEncodeImage(context, rawUri, maxDimension = 1024, quality = 85)
+                            } catch (e: Exception) {
+                                null
+                            }
                         }
                     }
                 }

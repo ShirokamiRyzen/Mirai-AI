@@ -190,4 +190,32 @@ class ContextBuilderTest {
         assertEquals("system", messages.first().role)
         assertEquals(history.last().content, messages.last().content)
     }
+
+    @Test
+    fun testUploadAsBase64FlagHonored() {
+        val character = CharacterEntity(name = "Aria")
+        val persona = UserPersonaEntity(name = "Fatih")
+        val dummyDataUrl = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        val history = listOf(
+            ChatMessageEntity(
+                sessionId = "sess1",
+                sender = "USER",
+                content = "Check this",
+                imageUri = dummyDataUrl
+            )
+        )
+
+        // uploadAsBase64 = true (default)
+        val messagesBase64 = kotlinx.coroutines.runBlocking {
+            ContextBuilder.buildOpenAiMessages(
+                character = character,
+                persona = persona,
+                chatHistory = history,
+                uploadAsBase64 = true
+            )
+        }
+        @Suppress("UNCHECKED_CAST")
+        val parts = messagesBase64[1].content as List<com.ryzumi.miraiai.domain.model.OpenAiContentPart>
+        assertEquals(dummyDataUrl, parts[1].image_url?.url)
+    }
 }

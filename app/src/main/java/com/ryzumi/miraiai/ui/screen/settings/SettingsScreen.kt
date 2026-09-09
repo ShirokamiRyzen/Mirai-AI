@@ -141,6 +141,7 @@ fun SettingsScreen(
     onToggleShowThinkingProcess: (Boolean) -> Unit = {},
     onToggleTokenCounter: (Boolean) -> Unit = {},
     onToggleAllowDeviceContext: (Boolean) -> Unit = {},
+    onToggleUploadAsBase64: (Boolean) -> Unit = {},
     onSetActiveProfile: (String) -> Unit = {},
     onExportBackup: (Uri) -> Unit = {},
     onImportBackup: (Uri, Boolean) -> Unit = { _, _ -> },
@@ -367,6 +368,7 @@ fun SettingsScreen(
                         onToggleShowThinkingProcess = onToggleShowThinkingProcess,
                         onToggleTokenCounter = onToggleTokenCounter,
                         onToggleAllowDeviceContext = onToggleAllowDeviceContext,
+                        onToggleUploadAsBase64 = onToggleUploadAsBase64,
                         onSetActiveProfile = onSetActiveProfile
                     )
                 } else {
@@ -1138,6 +1140,7 @@ fun AdvanceSettingsView(
     onToggleShowThinkingProcess: (Boolean) -> Unit,
     onToggleTokenCounter: (Boolean) -> Unit,
     onToggleAllowDeviceContext: (Boolean) -> Unit = {},
+    onToggleUploadAsBase64: (Boolean) -> Unit = {},
     onSetActiveProfile: (String) -> Unit = {}
 ) {
     val clipboardManager = LocalClipboardManager.current
@@ -1287,7 +1290,46 @@ fun AdvanceSettingsView(
             }
         }
 
-        // 4. Debug Logging Toggle Card
+        // 4. Upload as Base64 Toggle Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                        Text(
+                            text = "Upload as Base64",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = if (uiState.isUploadAsBase64)
+                                "Vision images are compressed and sent directly to the AI model as Base64 data URLs."
+                            else
+                                "Vision images are compressed and uploaded to S3 storage service, sending presigned URLs to the AI model.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isUploadAsBase64,
+                        onCheckedChange = onToggleUploadAsBase64
+                    )
+                }
+            }
+        }
+
+        // 5. Debug Logging Toggle Card
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),

@@ -41,6 +41,17 @@ class SettingsRepository(private val context: Context) {
         val KEY_SHOW_THINKING_PROCESS = booleanPreferencesKey("show_thinking_process")
         val KEY_TOKEN_COUNTER_ENABLED = booleanPreferencesKey("token_counter_enabled")
         val KEY_ALLOW_DEVICE_CONTEXT = booleanPreferencesKey("allow_device_context")
+        val KEY_UPLOAD_AS_BASE64 = booleanPreferencesKey("upload_as_base64")
+    }
+
+    val uploadAsBase64Flow: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[KEY_UPLOAD_AS_BASE64] ?: true // default on
+    }
+
+    suspend fun updateUploadAsBase64(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_UPLOAD_AS_BASE64] = enabled
+        }
     }
 
     val allowDeviceContextFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->

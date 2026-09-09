@@ -260,6 +260,7 @@ fun MiraiNavGraph(
                 onToggleShowThinkingProcess = viewModel::updateShowThinkingProcess,
                 onToggleTokenCounter = viewModel::updateTokenCounterEnabled,
                 onToggleAllowDeviceContext = viewModel::updateAllowDeviceContext,
+                onToggleUploadAsBase64 = viewModel::updateUploadAsBase64,
                 onSetActiveProfile = viewModel::setActiveProfile,
                 onExportBackup = viewModel::exportBackup,
                 onImportBackup = viewModel::importBackup,
