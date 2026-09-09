@@ -55,7 +55,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "mainactivity.kt"
     },
     {
@@ -66,7 +66,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "mainactivity"
     },
     {
@@ -77,7 +77,7 @@
       "_origin": "ast",
       "id": "componentactivity",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "componentactivity"
     },
     {
@@ -88,7 +88,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity_oncreate",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".oncreate()"
     },
     {
@@ -99,7 +99,7 @@
       "_origin": "ast",
       "id": "bundle",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "bundle"
     },
     {
@@ -110,7 +110,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity_onnewintent",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".onnewintent()"
     },
     {
@@ -121,7 +121,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_kt_intent",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "intent"
     },
     {
@@ -231,7 +231,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_appsettings",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "appsettings.kt"
     },
     {
@@ -242,7 +242,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_appsettings_appsettings",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "appsettings"
     },
     {
@@ -253,7 +253,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "settingsrepository.kt"
     },
     {
@@ -264,7 +264,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_themesettings",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "themesettings"
     },
     {
@@ -275,7 +275,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "settingsrepository"
     },
     {
@@ -286,7 +286,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_kt_flow",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "flow"
     },
     {
@@ -297,7 +297,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updateallowdevicecontext",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updateallowdevicecontext()"
     },
     {
@@ -308,7 +308,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updatedebugloggingenabled",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updatedebugloggingenabled()"
     },
     {
@@ -319,7 +319,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updateshowthinkingprocess",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updateshowthinkingprocess()"
     },
     {
@@ -330,7 +330,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updatetokencounterenabled",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updatetokencounterenabled()"
     },
     {
@@ -341,7 +341,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updatethemesettings",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updatethemesettings()"
     },
     {
@@ -352,7 +352,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updatesettings",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updatesettings()"
     },
     {
@@ -363,7 +363,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updateavailablemodels",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updateavailablemodels()"
     },
     {
@@ -374,7 +374,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_datastore_settingsrepository_settingsrepository_updateselectedmodel",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".updateselectedmodel()"
     },
     {
@@ -1726,7 +1726,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "huggingfacerepository.kt"
     },
@@ -1737,7 +1737,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_huggingfacepageresult",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "huggingfacepageresult"
     },
@@ -1748,7 +1748,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_huggingfacerepository",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "huggingfacerepository"
     },
@@ -1759,7 +1759,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_huggingfacerepository_getsystemraminfo",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": ".getsystemraminfo()"
     },
@@ -1770,7 +1770,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_huggingfacerepository_searchmodels",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": ".searchmodels()"
     },
@@ -1781,7 +1781,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_kt_result",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "result"
     },
@@ -1792,7 +1792,7 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_huggingfacerepository_huggingfacerepository_getdownloadedmodels",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": ".getdownloadedmodels()"
     },
@@ -3124,7 +3124,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "notificationreplyreceiver.kt"
     },
     {
@@ -3135,7 +3135,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "notificationreplyreceiver"
     },
     {
@@ -3146,7 +3146,7 @@
       "_origin": "ast",
       "id": "broadcastreceiver",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "broadcastreceiver"
     },
     {
@@ -3157,7 +3157,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver_onreceive",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": ".onreceive()"
     },
     {
@@ -3168,7 +3168,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_context",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "context"
     },
     {
@@ -3179,7 +3179,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_intent",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "intent"
     },
     {
@@ -3395,7 +3395,7 @@
       "label": "DeviceContextManager",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L40",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
       "community": 36,
@@ -3406,7 +3406,7 @@
       "label": "WeatherCache",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L42",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_weathercache",
       "community": 36,
@@ -3417,7 +3417,7 @@
       "label": "ResolvedLocation",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L47",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_resolvedlocation",
       "community": 36,
@@ -3428,7 +3428,7 @@
       "label": ".getClockStatus()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L60",
+      "source_location": "L62",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getclockstatus",
       "community": 36,
@@ -3439,7 +3439,7 @@
       "label": ".getHardwareAndBatteryStatus()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L69",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_gethardwareandbatterystatus",
       "community": 36,
@@ -3461,7 +3461,7 @@
       "label": ".getLocationAndWeatherStatus()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L78",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlocationandweatherstatus",
       "community": 36,
@@ -3472,7 +3472,7 @@
       "label": ".getLiveDeviceContext()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L92",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlivedevicecontext",
       "community": 36,
@@ -3483,7 +3483,7 @@
       "label": ".resolveBestLocation()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L147",
+      "source_location": "L152",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
       "community": 36,
@@ -3494,7 +3494,7 @@
       "label": ".requestSingleFreshLocation()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L199",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_requestsinglefreshlocation",
       "community": 36,
@@ -3516,7 +3516,7 @@
       "label": ".fetchIpGeolocation()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L246",
+      "source_location": "L251",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchipgeolocation",
       "community": 36,
@@ -3527,7 +3527,7 @@
       "label": ".getBatteryInfo()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L294",
+      "source_location": "L299",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getbatteryinfo",
       "community": 36,
@@ -3538,7 +3538,7 @@
       "label": "PublicIpCache",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L331",
+      "source_location": "L336",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_publicipcache",
       "community": 36,
@@ -3549,7 +3549,7 @@
       "label": ".fetchPublicIpInfo()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L341",
+      "source_location": "L346",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchpublicipinfo",
       "community": 36,
@@ -3560,7 +3560,7 @@
       "label": ".getLocalNetworkInfo()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L387",
+      "source_location": "L392",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlocalnetworkinfo",
       "community": 36,
@@ -3571,7 +3571,7 @@
       "label": ".getWifiDetails()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L429",
+      "source_location": "L434",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getwifidetails",
       "community": 36,
@@ -3582,7 +3582,7 @@
       "label": ".getCellularDetails()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L506",
+      "source_location": "L511",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getcellulardetails",
       "community": 36,
@@ -3593,7 +3593,7 @@
       "label": ".getDetailedNetworkSummary()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L567",
+      "source_location": "L572",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getdetailednetworksummary",
       "community": 36,
@@ -3604,7 +3604,7 @@
       "label": ".hasLocationPermission()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L621",
+      "source_location": "L626",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_haslocationpermission",
       "community": 36,
@@ -3615,7 +3615,7 @@
       "label": ".getBestLastKnownLocation()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L627",
+      "source_location": "L632",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getbestlastknownlocation",
       "community": 36,
@@ -3626,7 +3626,7 @@
       "label": ".reverseGeocodeLocation()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L650",
+      "source_location": "L655",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_reversegeocodelocation",
       "community": 36,
@@ -3637,7 +3637,7 @@
       "label": ".fetchLiveWeather()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L676",
+      "source_location": "L681",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchliveweather",
       "community": 36,
@@ -3645,10 +3645,65 @@
       "norm_label": ".fetchliveweather()"
     },
     {
+      "label": ".fetchWeatherForecast()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L718",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchweatherforecast",
+      "community": 36,
+      "community_name": "DeviceContextManager",
+      "norm_label": ".fetchweatherforecast()"
+    },
+    {
+      "label": ".fetchAirQuality()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L843",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchairquality",
+      "community": 36,
+      "community_name": "DeviceContextManager",
+      "norm_label": ".fetchairquality()"
+    },
+    {
+      "label": ".mapAqiToCategory()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L915",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapaqitocategory",
+      "community": 36,
+      "community_name": "DeviceContextManager",
+      "norm_label": ".mapaqitocategory()"
+    },
+    {
+      "label": ".mapUvIndexToCategory()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L926",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapuvindextocategory",
+      "community": 36,
+      "community_name": "DeviceContextManager",
+      "norm_label": ".mapuvindextocategory()"
+    },
+    {
+      "label": ".mapDegreesToCardinal()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L936",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapdegreestocardinal",
+      "community": 36,
+      "community_name": "DeviceContextManager",
+      "norm_label": ".mapdegreestocardinal()"
+    },
+    {
       "label": ".mapWeatherCodeToDescription()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L722",
+      "source_location": "L950",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapweathercodetodescription",
       "community": 36,
@@ -4124,7 +4179,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "mirainavgraph.kt"
     },
@@ -4135,7 +4190,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_miraidestinations",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "miraidestinations"
     },
@@ -4146,7 +4201,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_mirainavgraph",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "mirainavgraph()"
     },
@@ -4157,7 +4212,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "navhostcontroller",
-      "community": 7,
+      "community": 5,
       "community_name": "MiraiNavGraph",
       "norm_label": "navhostcontroller"
     },
@@ -4169,7 +4224,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_avatarcropdialog",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "avatarcropdialog.kt"
     },
     {
@@ -4180,7 +4235,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_avatarcropdialog_avatarcropdialog",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "avatarcropdialog()"
     },
     {
@@ -4191,7 +4246,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditscreen",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "charactereditscreen.kt"
     },
     {
@@ -4202,7 +4257,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditscreen_charactereditscreen",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "charactereditscreen()"
     },
     {
@@ -4213,7 +4268,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "charactereditviewmodel.kt"
     },
     {
@@ -4224,7 +4279,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_characteredituistate",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "characteredituistate"
     },
     {
@@ -4235,7 +4290,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "charactereditviewmodel"
     },
     {
@@ -4246,7 +4301,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_kt_viewmodel",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "viewmodel"
     },
     {
@@ -4257,7 +4312,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_kt_stateflow",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "stateflow"
     },
     {
@@ -4268,7 +4323,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_loadcharacter",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".loadcharacter()"
     },
     {
@@ -4279,7 +4334,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onnamechanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onnamechanged()"
     },
     {
@@ -4290,7 +4345,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onavatarurichanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onavatarurichanged()"
     },
     {
@@ -4301,7 +4356,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_ondescriptionchanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".ondescriptionchanged()"
     },
     {
@@ -4312,7 +4367,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onpersonalitychanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onpersonalitychanged()"
     },
     {
@@ -4323,7 +4378,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onscenariochanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onscenariochanged()"
     },
     {
@@ -4334,7 +4389,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onimpressionchanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onimpressionchanged()"
     },
     {
@@ -4345,7 +4400,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_ontagsinputchanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".ontagsinputchanged()"
     },
     {
@@ -4356,7 +4411,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_onfirstmessagechanged",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onfirstmessagechanged()"
     },
     {
@@ -4367,7 +4422,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_savecharacter",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".savecharacter()"
     },
     {
@@ -4378,7 +4433,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_kt_context",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "context"
     },
     {
@@ -4389,7 +4444,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_charactereditviewmodel_charactereditviewmodel_saveavatarlocally",
       "community": 5,
-      "community_name": "CharacterEditViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".saveavatarlocally()"
     },
     {
@@ -6160,7 +6215,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_theme_theme",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "theme.kt"
     },
     {
@@ -6171,7 +6226,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_theme_theme_miraiaitheme",
       "community": 7,
-      "community_name": "MiraiNavGraph",
+      "community_name": "SettingsRepository",
       "norm_label": "miraiaitheme()"
     },
     {
@@ -12820,7 +12875,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager",
@@ -12831,7 +12886,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L246",
+      "source_location": "L843",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchairquality",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12842,7 +12908,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L676",
+      "source_location": "L681",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12853,7 +12919,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L341",
+      "source_location": "L346",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12864,7 +12930,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L294",
+      "source_location": "L718",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchweatherforecast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L299",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12875,7 +12952,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L627",
+      "source_location": "L632",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12886,7 +12963,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L506",
+      "source_location": "L511",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12897,7 +12974,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L60",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12908,7 +12985,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L567",
+      "source_location": "L572",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12919,7 +12996,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12930,7 +13007,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L92",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12941,7 +13018,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L387",
+      "source_location": "L392",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12952,7 +13029,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L78",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12963,7 +13040,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L429",
+      "source_location": "L434",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12974,7 +13051,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L621",
+      "source_location": "L626",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12985,7 +13062,40 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L722",
+      "source_location": "L915",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapaqitocategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L936",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapdegreestocardinal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L926",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapuvindextocategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L950",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -12996,7 +13106,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L199",
+      "source_location": "L204",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -13007,7 +13117,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L147",
+      "source_location": "L152",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -13018,7 +13128,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L650",
+      "source_location": "L655",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -13029,7 +13139,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L338",
+      "source_location": "L343",
       "weight": 1.0,
       "_origin": "ast",
       "context": "field",
@@ -13041,7 +13151,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L56",
+      "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
       "context": "field",
@@ -13053,7 +13163,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager",
@@ -13065,7 +13175,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L713",
+      "source_location": "L711",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchliveweather",
@@ -13077,7 +13187,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L246",
+      "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchipgeolocation",
@@ -13089,7 +13199,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L147",
+      "source_location": "L152",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13101,7 +13211,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_gethardwareandbatterystatus",
@@ -13113,7 +13223,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L74",
+      "source_location": "L76",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_gethardwareandbatterystatus",
@@ -13124,7 +13234,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13136,7 +13246,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L294",
+      "source_location": "L299",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13148,7 +13258,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L627",
+      "source_location": "L632",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13160,7 +13270,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L506",
+      "source_location": "L511",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13172,7 +13282,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L567",
+      "source_location": "L572",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13184,7 +13294,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L92",
+      "source_location": "L94",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13196,7 +13306,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L387",
+      "source_location": "L392",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13208,7 +13318,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L78",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13220,7 +13330,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L429",
+      "source_location": "L434",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13232,7 +13342,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L621",
+      "source_location": "L626",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13244,7 +13354,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L199",
+      "source_location": "L204",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13256,7 +13366,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L147",
+      "source_location": "L152",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13268,7 +13378,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L650",
+      "source_location": "L655",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -13281,7 +13391,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L81",
+      "source_location": "L83",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlocationandweatherstatus",
@@ -13293,7 +13403,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L79",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlocationandweatherstatus",
@@ -13305,7 +13415,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L127",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlivedevicecontext",
@@ -13317,7 +13427,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L113",
+      "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlivedevicecontext",
@@ -13329,7 +13439,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L117",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlivedevicecontext",
@@ -13341,7 +13451,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L124",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getlivedevicecontext",
@@ -13353,7 +13463,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L188",
+      "source_location": "L193",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13365,7 +13475,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L155",
+      "source_location": "L160",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13377,7 +13487,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L169",
+      "source_location": "L174",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13389,7 +13499,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L171",
+      "source_location": "L176",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13401,7 +13511,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L157",
+      "source_location": "L162",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_resolvebestlocation",
@@ -13412,7 +13522,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L199",
+      "source_location": "L204",
       "weight": 1.0,
       "context": "return_type",
       "_origin": "ast",
@@ -13424,7 +13534,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L627",
+      "source_location": "L632",
       "weight": 1.0,
       "context": "return_type",
       "_origin": "ast",
@@ -13437,7 +13547,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L341",
+      "source_location": "L346",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchpublicipinfo",
@@ -13449,7 +13559,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L583",
+      "source_location": "L588",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getdetailednetworksummary",
@@ -13461,7 +13571,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L581",
+      "source_location": "L586",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getdetailednetworksummary",
@@ -13473,7 +13583,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L584",
+      "source_location": "L589",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getdetailednetworksummary",
@@ -13485,7 +13595,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L585",
+      "source_location": "L590",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_getdetailednetworksummary",
@@ -13497,11 +13607,71 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
-      "source_location": "L706",
+      "source_location": "L691",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchliveweather",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchairquality",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L690",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchliveweather",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchweatherforecast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L821",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchweatherforecast",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapdegreestocardinal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L752",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchweatherforecast",
       "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapweathercodetodescription",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L875",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchairquality",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapaqitocategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/DeviceContextManager.kt",
+      "source_location": "L888",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_fetchairquality",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_devicecontextmanager_devicecontextmanager_mapuvindextocategory",
       "confidence_score": 1.0
     },
     {
@@ -18135,5 +18305,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "29164e98a8fcdb6218f3adf99fd6d18195d7afef"
+  "built_at_commit": "fa464c55cb8b01436af2f29641dd4030b1df0d9a"
 }

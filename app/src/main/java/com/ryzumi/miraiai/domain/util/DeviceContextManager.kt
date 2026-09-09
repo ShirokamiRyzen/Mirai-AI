@@ -21,6 +21,8 @@ import android.os.PowerManager
 import android.telephony.TelephonyManager
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
@@ -79,10 +81,10 @@ object DeviceContextManager {
         val resolved = resolveBestLocation(context)
         if (resolved != null) {
             val weather = fetchLiveWeather(resolved.latitude, resolved.longitude)
-                ?: "Weather service currently updating (Location: ${resolved.locationName})"
-            "Location: ${resolved.locationName} (Lat: ${String.format(Locale.US, "%.4f", resolved.latitude)}, Lon: ${String.format(Locale.US, "%.4f", resolved.longitude)}, via ${resolved.source}), Live Weather: $weather"
+                ?: "Weather & Air Quality service currently updating (Location: ${resolved.locationName})"
+            "Location: ${resolved.locationName} (Lat: ${String.format(Locale.US, "%.4f", resolved.latitude)}, Lon: ${String.format(Locale.US, "%.4f", resolved.longitude)}, via ${resolved.source})\n$weather"
         } else {
-            "Location: Location currently unavailable. Weather: Unable to determine without location."
+            "Location: Location currently unavailable. Weather & Air Quality: Unable to determine without location."
         }
     }
 
@@ -120,19 +122,22 @@ object DeviceContextManager {
             sb.append("  * $line\n")
         }
 
-        // 5. GPS / Network / IP Location & Live Weather
+        // 5. GPS / Network / IP Location & Live Weather & Air Quality (IKU)
         val resolved = resolveBestLocation(context)
         if (resolved != null) {
             sb.append("- Location: ${resolved.locationName} (Lat: ${String.format(Locale.US, "%.4f", resolved.latitude)}, Lon: ${String.format(Locale.US, "%.4f", resolved.longitude)}, source: ${resolved.source})\n")
             val weather = fetchLiveWeather(resolved.latitude, resolved.longitude)
             if (!weather.isNullOrBlank()) {
-                sb.append("- Live Weather: $weather\n")
+                sb.append("- Live Weather & Air Quality (IKU):\n")
+                weather.lines().forEach { line ->
+                    sb.append("  * $line\n")
+                }
             } else {
-                sb.append("- Live Weather: Clear / Weather service temporarily unreachable\n")
+                sb.append("- Live Weather & Air Quality (IKU): Clear / Weather service temporarily unreachable\n")
             }
         } else {
             sb.append("- Location: Location service not ready\n")
-            sb.append("- Live Weather: Weather data pending location fix\n")
+            sb.append("- Live Weather & Air Quality (IKU): Weather data pending location fix\n")
         }
 
         sb.toString().trim()
@@ -671,19 +676,48 @@ object DeviceContextManager {
     }
 
     /**
-     * Fetches real-time weather from Open-Meteo free API (no key required).
+     * Fetches comprehensive real-time weather and air quality (IKU) data from Open-Meteo free APIs.
      */
-    private fun fetchLiveWeather(lat: Double, lon: Double): String? {
+    private suspend fun fetchLiveWeather(lat: Double, lon: Double): String? = coroutineScope {
         val cacheKey = "${String.format(Locale.US, "%.2f", lat)}_${String.format(Locale.US, "%.2f", lon)}"
         val cached = weatherCacheMap[cacheKey]
         val now = System.currentTimeMillis()
 
         if (cached != null && (now - cached.timestamp) < WEATHER_CACHE_DURATION_MS) {
-            return cached.weatherSummary
+            return@coroutineScope cached.weatherSummary
         }
 
+        val weatherDeferred = async { fetchWeatherForecast(lat, lon) }
+        val aqiDeferred = async { fetchAirQuality(lat, lon) }
+
+        val weatherData = weatherDeferred.await()
+        val aqiData = aqiDeferred.await()
+
+        if (weatherData == null && aqiData == null) {
+            return@coroutineScope null
+        }
+
+        val summary = buildString {
+            if (weatherData != null) {
+                append(weatherData)
+            }
+            if (aqiData != null) {
+                if (isNotEmpty()) append("\n")
+                append(aqiData)
+            }
+        }.trim()
+
+        if (summary.isNotBlank()) {
+            weatherCacheMap[cacheKey] = WeatherCache(now, summary)
+            summary
+        } else {
+            null
+        }
+    }
+
+    private fun fetchWeatherForecast(lat: Double, lon: Double): String? {
         return try {
-            val urlString = "https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m"
+            val urlString = "https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_probability_max&timezone=auto"
             val url = URL(urlString)
             val connection = url.openConnection() as HttpURLConnection
             connection.connectTimeout = 4000
@@ -696,26 +730,220 @@ object DeviceContextManager {
                 val responseText = connection.inputStream.bufferedReader().use { it.readText() }
                 val rootJson = JSONObject(responseText)
                 val current = rootJson.optJSONObject("current")
+                val daily = rootJson.optJSONObject("daily")
+
                 if (current != null) {
                     val temp = current.optDouble("temperature_2m", Double.NaN)
                     val apparentTemp = current.optDouble("apparent_temperature", Double.NaN)
                     val humidity = current.optInt("relative_humidity_2m", -1)
-                    val windSpeed = current.optDouble("wind_speed_10m", Double.NaN)
+                    val isDay = current.optInt("is_day", -1)
                     val weatherCode = current.optInt("weather_code", 0)
+                    val cloudCover = current.optInt("cloud_cover", -1)
+                    val precipitation = current.optDouble("precipitation", Double.NaN)
+                    val rain = current.optDouble("rain", Double.NaN)
+                    val showers = current.optDouble("showers", Double.NaN)
+                    val snowfall = current.optDouble("snowfall", Double.NaN)
+                    val pressure = current.optDouble("pressure_msl", Double.NaN)
+                    val surfacePressure = current.optDouble("surface_pressure", Double.NaN)
+                    val windSpeed = current.optDouble("wind_speed_10m", Double.NaN)
+                    val windDir = current.optDouble("wind_direction_10m", Double.NaN)
+                    val windGusts = current.optDouble("wind_gusts_10m", Double.NaN)
 
                     val weatherDesc = mapWeatherCodeToDescription(weatherCode)
-                    val tempStr = if (!temp.isNaN()) "${String.format(Locale.US, "%.1f", temp)}°C" else ""
-                    val feelsLikeStr = if (!apparentTemp.isNaN()) " (Feels like ${String.format(Locale.US, "%.1f", apparentTemp)}°C)" else ""
-                    val humidityStr = if (humidity >= 0) ", Humidity: $humidity%" else ""
-                    val windStr = if (!windSpeed.isNaN()) ", Wind: ${String.format(Locale.US, "%.1f", windSpeed)} km/h" else ""
+                    val dayNightStr = when (isDay) {
+                        1 -> "Daytime ☀️"
+                        0 -> "Nighttime 🌙"
+                        else -> ""
+                    }
 
-                    val summary = "$weatherDesc $tempStr$feelsLikeStr$humidityStr$windStr".trim()
-                    weatherCacheMap[cacheKey] = WeatherCache(now, summary)
-                    summary
+                    var tempMinStr = ""
+                    var tempMaxStr = ""
+                    var sunriseStr = ""
+                    var sunsetStr = ""
+                    var rainProbStr = ""
+
+                    if (daily != null) {
+                        val maxTemps = daily.optJSONArray("temperature_2m_max")
+                        val minTemps = daily.optJSONArray("temperature_2m_min")
+                        val sunrises = daily.optJSONArray("sunrise")
+                        val sunsets = daily.optJSONArray("sunset")
+                        val rainProbs = daily.optJSONArray("precipitation_probability_max")
+
+                        if (minTemps != null && minTemps.length() > 0) {
+                            val minT = minTemps.optDouble(0, Double.NaN)
+                            if (!minT.isNaN()) tempMinStr = "${String.format(Locale.US, "%.1f", minT)}°C"
+                        }
+                        if (maxTemps != null && maxTemps.length() > 0) {
+                            val maxT = maxTemps.optDouble(0, Double.NaN)
+                            if (!maxT.isNaN()) tempMaxStr = "${String.format(Locale.US, "%.1f", maxT)}°C"
+                        }
+                        if (sunrises != null && sunrises.length() > 0) {
+                            val rawSunrise = sunrises.optString(0, "")
+                            sunriseStr = rawSunrise.substringAfter("T", rawSunrise)
+                        }
+                        if (sunsets != null && sunsets.length() > 0) {
+                            val rawSunset = sunsets.optString(0, "")
+                            sunsetStr = rawSunset.substringAfter("T", rawSunset)
+                        }
+                        if (rainProbs != null && rainProbs.length() > 0) {
+                            val prob = rainProbs.optInt(0, -1)
+                            if (prob >= 0) rainProbStr = "$prob%"
+                        }
+                    }
+
+                    val sb = StringBuilder()
+                    val conditionSuffix = if (dayNightStr.isNotBlank()) " ($dayNightStr)" else ""
+                    sb.append("Weather Condition: $weatherDesc$conditionSuffix\n")
+
+                    val tempStr = if (!temp.isNaN()) "${String.format(Locale.US, "%.1f", temp)}°C" else ""
+                    val feelsLikeStr = if (!apparentTemp.isNaN()) " (Feels like: ${String.format(Locale.US, "%.1f", apparentTemp)}°C)" else ""
+                    val rangeStr = if (tempMinStr.isNotBlank() && tempMaxStr.isNotBlank()) " | Today's Min: $tempMinStr, Max: $tempMaxStr" else ""
+                    sb.append("Temperature: $tempStr$feelsLikeStr$rangeStr\n")
+
+                    val humidityStr = if (humidity >= 0) "Humidity: $humidity%" else ""
+                    val cloudStr = if (cloudCover >= 0) "Cloud Cover: $cloudCover%" else ""
+                    val rainProbPart = if (rainProbStr.isNotBlank()) "Precipitation Probability: $rainProbStr" else ""
+                    val precipVal = if (!precipitation.isNaN()) precipitation else if (!rain.isNaN()) rain else Double.NaN
+                    val precipPart = if (!precipVal.isNaN()) "Precipitation: ${String.format(Locale.US, "%.1f", precipVal)} mm" else ""
+                    val atmosList = listOf(humidityStr, cloudStr, rainProbPart, precipPart).filter { it.isNotBlank() }
+                    if (atmosList.isNotEmpty()) {
+                        sb.append(atmosList.joinToString(" | ")).append("\n")
+                    }
+
+                    if (!showers.isNaN() && showers > 0.0) {
+                        sb.append("Rain Showers: ${String.format(Locale.US, "%.1f", showers)} mm\n")
+                    }
+                    if (!snowfall.isNaN() && snowfall > 0.0) {
+                        sb.append("Snowfall: ${String.format(Locale.US, "%.1f", snowfall)} cm\n")
+                    }
+
+                    if (!windSpeed.isNaN()) {
+                        val dirCard = if (!windDir.isNaN()) "${mapDegreesToCardinal(windDir)} (${String.format(Locale.US, "%.0f", windDir)}°)" else ""
+                        val gustsPart = if (!windGusts.isNaN()) ", Gusts: ${String.format(Locale.US, "%.1f", windGusts)} km/h" else ""
+                        sb.append("Wind: ${String.format(Locale.US, "%.1f", windSpeed)} km/h $dirCard$gustsPart\n")
+                    }
+
+                    if (!pressure.isNaN()) {
+                        val surfPart = if (!surfacePressure.isNaN()) " (Surface: ${String.format(Locale.US, "%.1f", surfacePressure)} hPa)" else ""
+                        sb.append("Atmospheric Pressure: ${String.format(Locale.US, "%.1f", pressure)} hPa$surfPart\n")
+                    }
+
+                    if (sunriseStr.isNotBlank() || sunsetStr.isNotBlank()) {
+                        sb.append("Sun Schedule: Sunrise at $sunriseStr, Sunset at $sunsetStr\n")
+                    }
+
+                    sb.toString().trim()
                 } else null
             } else null
         } catch (e: Exception) {
             null
+        }
+    }
+
+    private fun fetchAirQuality(lat: Double, lon: Double): String? {
+        return try {
+            val urlString = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi,european_aqi,pm2_5,pm10,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,uv_index,dust"
+            val url = URL(urlString)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.connectTimeout = 4000
+            connection.readTimeout = 4000
+            connection.requestMethod = "GET"
+            connection.setRequestProperty("User-Agent", "MiraiAI-Android/1.0")
+
+            val responseCode = connection.responseCode
+            if (responseCode == 200) {
+                val responseText = connection.inputStream.bufferedReader().use { it.readText() }
+                val rootJson = JSONObject(responseText)
+                val current = rootJson.optJSONObject("current")
+
+                if (current != null) {
+                    val usAqi = current.optInt("us_aqi", -1)
+                    val euAqi = current.optInt("european_aqi", -1)
+                    val pm25 = current.optDouble("pm2_5", Double.NaN)
+                    val pm10 = current.optDouble("pm10", Double.NaN)
+                    val co = current.optDouble("carbon_monoxide", Double.NaN)
+                    val no2 = current.optDouble("nitrogen_dioxide", Double.NaN)
+                    val so2 = current.optDouble("sulphur_dioxide", Double.NaN)
+                    val o3 = current.optDouble("ozone", Double.NaN)
+                    val uv = current.optDouble("uv_index", Double.NaN)
+                    val dust = current.optDouble("dust", Double.NaN)
+
+                    val sb = StringBuilder()
+                    sb.append("Air Quality / IKU (Indeks Kualitas Udara):\n")
+
+                    if (usAqi >= 0) {
+                        val status = mapAqiToCategory(usAqi)
+                        sb.append("  - US AQI (IKU Utama): $usAqi ($status)\n")
+                    }
+                    if (euAqi >= 0) {
+                        sb.append("  - European AQI: $euAqi\n")
+                    }
+                    if (!pm25.isNaN()) {
+                        sb.append("  - PM2.5 (Partikel Halus): ${String.format(Locale.US, "%.1f", pm25)} µg/m³\n")
+                    }
+                    if (!pm10.isNaN()) {
+                        sb.append("  - PM10 (Partikel Kasar): ${String.format(Locale.US, "%.1f", pm10)} µg/m³\n")
+                    }
+                    if (!uv.isNaN()) {
+                        val uvCategory = mapUvIndexToCategory(uv)
+                        sb.append("  - UV Index: ${String.format(Locale.US, "%.1f", uv)} ($uvCategory)\n")
+                    }
+                    if (!o3.isNaN()) {
+                        sb.append("  - Ozon (O3): ${String.format(Locale.US, "%.1f", o3)} µg/m³\n")
+                    }
+                    if (!no2.isNaN()) {
+                        sb.append("  - Nitrogen Dioksida (NO2): ${String.format(Locale.US, "%.1f", no2)} µg/m³\n")
+                    }
+                    if (!so2.isNaN()) {
+                        sb.append("  - Sulfur Dioksida (SO2): ${String.format(Locale.US, "%.1f", so2)} µg/m³\n")
+                    }
+                    if (!co.isNaN()) {
+                        sb.append("  - Karbon Monoksida (CO): ${String.format(Locale.US, "%.1f", co)} µg/m³\n")
+                    }
+                    if (!dust.isNaN()) {
+                        sb.append("  - Partikel Debu (Dust): ${String.format(Locale.US, "%.1f", dust)} µg/m³\n")
+                    }
+
+                    sb.toString().trimEnd()
+                } else null
+            } else null
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun mapAqiToCategory(usAqi: Int): String {
+        return when {
+            usAqi <= 50 -> "Baik / Good 🟢"
+            usAqi <= 100 -> "Sedang / Moderate 🟡"
+            usAqi <= 150 -> "Tidak Sehat untuk Kelompok Sensitif / Sensitive Groups 🟠"
+            usAqi <= 200 -> "Tidak Sehat / Unhealthy 🔴"
+            usAqi <= 300 -> "Sangat Tidak Sehat / Very Unhealthy 🟣"
+            else -> "Berbahaya / Hazardous 🟤"
+        }
+    }
+
+    private fun mapUvIndexToCategory(uv: Double): String {
+        return when {
+            uv < 3.0 -> "Rendah / Low 🟢"
+            uv < 6.0 -> "Sedang / Moderate 🟡"
+            uv < 8.0 -> "Tinggi / High 🟠"
+            uv < 11.0 -> "Sangat Tinggi / Very High 🔴"
+            else -> "Ekstrem / Extreme 🟣"
+        }
+    }
+
+    private fun mapDegreesToCardinal(degrees: Double): String {
+        val normalized = (degrees % 360 + 360) % 360
+        return when {
+            normalized >= 337.5 || normalized < 22.5 -> "Utara (N)"
+            normalized < 67.5 -> "Timur Laut (NE)"
+            normalized < 112.5 -> "Timur (E)"
+            normalized < 157.5 -> "Tenggara (SE)"
+            normalized < 202.5 -> "Selatan (S)"
+            normalized < 247.5 -> "Barat Daya (SW)"
+            normalized < 292.5 -> "Barat (W)"
+            else -> "Barat Laut (NW)"
         }
     }
 

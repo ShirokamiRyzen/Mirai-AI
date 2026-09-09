@@ -56,8 +56,8 @@ object ContextBuilder {
 
         if (!deviceContext.isNullOrBlank()) {
             sb.append("\n\n[SMART ASSISTANT & DEVICE INTEGRATION]")
-            sb.append("\nYou are directly integrated into $userName's mobile device and have active access to read device telemetry, smartphone hardware info, OS version, battery status, local network IP, public IP, connected Wi-Fi SSID, saved Wi-Fi networks, cellular network carrier, clock/time, GPS location, and live weather.")
-            sb.append("\n- If $userName asks whether you can access their phone info, battery, network, local IP, public IP, Wi-Fi, cellular, time, location, or weather, ALWAYS CONFIRM AFFIRMATIVELY that you have full access to their device system and provide the relevant information.")
+            sb.append("\nYou are directly integrated into $userName's mobile device and have active access to read device telemetry, smartphone hardware info, OS version, battery status, local network IP, public IP, connected Wi-Fi SSID, saved Wi-Fi networks, cellular network carrier, clock/time, GPS location, live weather, and environmental Air Quality / IKU (Indeks Kualitas Udara / AQI).")
+            sb.append("\n- If $userName asks whether you can access their phone info, battery, network, local IP, public IP, Wi-Fi, cellular, time, location, weather, or air quality / IKU (Indeks Kualitas Udara / AQI / PM2.5 / UV), ALWAYS CONFIRM AFFIRMATIVELY that you have full access to their device and environmental data, and provide the relevant information.")
             sb.append("\n- NEVER state \"I cannot access your phone\" or \"I am just an AI chat model\". You are their capable personal assistant as well as $charName.")
             sb.append("\n\n[Current Live Device & Environmental Telemetry]\n")
             sb.append(deviceContext)

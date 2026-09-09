@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-09)
 
 ## Corpus Check
-- 69 files · ~57,648 words
+- 69 files · ~58,679 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 633 nodes · 970 edges · 41 communities (31 shown, 10 thin omitted)
+- 638 nodes · 980 edges · 41 communities (31 shown, 10 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 64 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `29164e98`
+- Built from commit: `fa464c55`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,9 +20,9 @@
 - UserPersonaEntity
 - ModelHubViewModel
 - MiraiApplication
-- CharacterEditViewModel
-- OpenAiRepository
 - MiraiNavGraph
+- OpenAiRepository
+- SettingsRepository
 - InferenceState
 - ChatSessionDao
 - DataUrlFetcher
@@ -56,25 +56,25 @@
 1. `ChatMessageEntity` - 30 edges
 2. `SettingsViewModel` - 30 edges
 3. `UserPersonaEntity` - 29 edges
-4. `ChatViewModel` - 27 edges
-5. `CharacterEntity` - 23 edges
-6. `DeviceContextManager` - 22 edges
+4. `DeviceContextManager` - 27 edges
+5. `ChatViewModel` - 27 edges
+6. `CharacterEntity` - 23 edges
 7. `InferenceConfigEntity` - 20 edges
 8. `MiraiNavGraph()` - 20 edges
 9. `ImageUtils` - 18 edges
 10. `ChatMessageDao` - 17 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `MiraiNavGraph()` --calls--> `SettingsRepository`  [INFERRED]
+  app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/data/datastore/SettingsRepository.kt
 - `MiraiNavGraph()` --calls--> `OpenAiRepository`  [INFERRED]
   app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/data/network/OpenAiRepository.kt
 - `MiraiNavGraph()` --calls--> `BackupRepository`  [INFERRED]
   app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/domain/backup/BackupRepository.kt
-- `MiraiNavGraph()` --calls--> `CharacterEditScreen()`  [INFERRED]
-  app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditScreen.kt
-- `MiraiNavGraph()` --calls--> `CharacterEditViewModel`  [INFERRED]
-  app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditViewModel.kt
 - `MiraiNavGraph()` --calls--> `CharacterListScreen()`  [INFERRED]
   app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterListScreen.kt
+- `MiraiNavGraph()` --calls--> `CharacterListViewModel`  [INFERRED]
+  app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt → app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterListViewModel.kt
 
 ## Import Cycles
 - None detected.
@@ -101,17 +101,17 @@ Nodes (35): HuggingFaceModel, ModelCompatibility, LOW_MEMORY, MODERATE, OPTIMAL,
 Cohesion: 0.25
 Nodes (5): Context, ImageLoader, MiraiApplication, Application, ImageLoaderFactory
 
-### Community 5 - "CharacterEditViewModel"
-Cohesion: 0.12
-Nodes (7): AvatarCropDialog(), CharacterEditScreen(), CharacterEditUiState, CharacterEditViewModel, Context, StateFlow, ViewModel
+### Community 5 - "MiraiNavGraph"
+Cohesion: 0.08
+Nodes (13): HuggingFacePageResult, HuggingFaceRepository, Result, MiraiDestinations, MiraiNavGraph(), AvatarCropDialog(), CharacterEditScreen(), CharacterEditUiState (+5 more)
 
 ### Community 6 - "OpenAiRepository"
 Cohesion: 0.10
 Nodes (20): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+12 more)
 
-### Community 7 - "MiraiNavGraph"
-Cohesion: 0.06
-Nodes (19): AppSettings, Flow, SettingsRepository, ThemeSettings, HuggingFacePageResult, HuggingFaceRepository, Result, Context (+11 more)
+### Community 7 - "SettingsRepository"
+Cohesion: 0.07
+Nodes (13): AppSettings, Flow, SettingsRepository, ThemeSettings, Context, Intent, NotificationReplyReceiver, Intent (+5 more)
 
 ### Community 8 - "InferenceState"
 Cohesion: 0.18
@@ -174,7 +174,7 @@ Cohesion: 0.11
 Nodes (10): getInstance(), Context, migrate(), MiraiDatabase, ChatGenerationManager, GenerationStreamState, Context, StateFlow (+2 more)
 
 ### Community 36 - "DeviceContextManager"
-Cohesion: 0.20
+Cohesion: 0.16
 Nodes (6): DeviceContextManager, Context, PublicIpCache, ResolvedLocation, WeatherCache, Location
 
 ### Community 37 - "InferenceConfigEntity"
@@ -193,17 +193,17 @@ Nodes (3): Context, JsonObject, MiraiToolManager
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `UserPersonaEntity`, `ModelHubViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
-  _High betweenness centrality (0.284) - this node is a cross-community bridge._
-- **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `MiraiNavGraph`, `ChatSessionDao`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+- **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `UserPersonaEntity`, `ModelHubViewModel`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`, `SettingsScreen.kt`, `BackupRepository`?**
+  _High betweenness centrality (0.280) - this node is a cross-community bridge._
+- **Why does `ChatMessageEntity` connect `ChatMessageEntity` to `ChatViewModel`, `.startGeneration`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
 - **Why does `UserPersonaEntity` connect `UserPersonaEntity` to `ChatMessageEntity`, `.startGeneration`, `MiraiApplication`, `OpenAiRepository`?**
-  _High betweenness centrality (0.075) - this node is a cross-community bridge._
+  _High betweenness centrality (0.074) - this node is a cross-community bridge._
 - **Are the 9 inferred relationships involving `ChatMessageEntity` (e.g. with `.startGeneration()` and `.stopGeneration()`) actually correct?**
   _`ChatMessageEntity` has 9 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `UserPersonaEntity` (e.g. with `.onCreate()` and `.testBuildOpenAiMessagesMixedHistoryTextTurn()`) actually correct?**
   _`UserPersonaEntity` has 6 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 7 inferred relationships involving `CharacterEntity` (e.g. with `.onCreate()` and `.saveCharacter()`) actually correct?**
-  _`CharacterEntity` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `AccumulatedToolCall`, `Unloaded`, `Error` to the rest of the system?**
   _62 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `SettingsViewModel` be split into smaller, more focused modules?**
+  _Cohesion score 0.08307692307692308 - nodes in this community are weakly interconnected._

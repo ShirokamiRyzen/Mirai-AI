@@ -51,7 +51,7 @@ object MiraiToolManager {
             addProperty("type", "function")
             val fn = JsonObject().apply {
                 addProperty("name", "get_location_and_weather")
-                addProperty("description", "Query current GPS coordinates, city/country location name, and real-time live weather conditions (temperature, humidity, condition, wind speed).")
+                addProperty("description", "Query current GPS coordinates, city/country location name, live weather conditions (temperature, feels like, min/max, humidity, wind, pressure, cloud cover, rain probability, sunrise/sunset), and complete Air Quality Index / IKU (Indeks Kualitas Udara: US AQI, European AQI, PM2.5, PM10, UV Index, O3, NO2, SO2, CO, Dust).")
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     add("properties", JsonObject())
