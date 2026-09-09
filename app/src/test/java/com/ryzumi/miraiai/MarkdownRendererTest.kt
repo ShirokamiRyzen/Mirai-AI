@@ -5,7 +5,51 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.buildAnnotatedString
+
+import androidx.compose.ui.text.LinkInteractionListener
+import androidx.compose.ui.text.SpanStyle
+
 class MarkdownRendererTest {
+
+    @Test
+    fun testMarkdownLinkParsing() {
+        val input = "Silakan klik [Google](https://google.com) untuk info."
+        val parsed = MarkdownRenderer.parseMarkdown(input)
+        val plainText = parsed.text
+
+        assertTrue(plainText.contains("Silakan klik Google untuk info."))
+        val linkAnnotations = parsed.getLinkAnnotations(0, parsed.length)
+        assertTrue(linkAnnotations.isNotEmpty())
+        val url = (linkAnnotations.first().item as LinkAnnotation.Url).url
+        assertTrue(url == "https://google.com")
+    }
+
+    @Test
+    fun testPlainUrlParsing() {
+        val input = "Cek repository di https://github.com/ShirokamiRyzen/Mirai-AI ya!"
+        val parsed = MarkdownRenderer.parseMarkdown(input)
+        val plainText = parsed.text
+
+        assertTrue(plainText.contains("https://github.com/ShirokamiRyzen/Mirai-AI"))
+        val linkAnnotations = parsed.getLinkAnnotations(0, parsed.length)
+        assertTrue(linkAnnotations.isNotEmpty())
+        val url = (linkAnnotations.first().item as LinkAnnotation.Url).url
+        assertTrue(url == "https://github.com/ShirokamiRyzen/Mirai-AI")
+    }
+
+    @Test
+    fun testLightModeParsing() {
+        val input = "# Judul\n**Tebal** dan *miring* serta [Link](https://example.com)"
+        val parsed = MarkdownRenderer.parseMarkdown(input, isDark = false)
+        assertTrue(parsed.text.contains("Judul"))
+        assertTrue(parsed.text.contains("Tebal"))
+    }
+
+
 
     @Test
     fun testHeadingsParsing() {

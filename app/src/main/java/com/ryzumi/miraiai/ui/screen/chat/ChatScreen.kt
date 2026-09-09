@@ -21,9 +21,14 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import com.ryzumi.miraiai.ui.theme.CharBubbleDark
+import com.ryzumi.miraiai.ui.theme.CharBubbleLight
+import com.ryzumi.miraiai.ui.theme.UserBubbleDark
+import com.ryzumi.miraiai.ui.theme.UserBubbleLight
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -194,6 +199,25 @@ fun ChatScreen(
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
+    val onOpenUrl: (String) -> Unit = remember(context) {
+        { rawUrl ->
+            try {
+                val targetUrl = if (!rawUrl.startsWith("http://", ignoreCase = true) &&
+                    !rawUrl.startsWith("https://", ignoreCase = true)
+                ) {
+                    "https://$rawUrl"
+                } else {
+                    rawUrl
+                }
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(context, "Tidak dapat membuka tautan: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     val listState = rememberLazyListState()
     var isModelPickerExpanded by remember { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
@@ -718,7 +742,8 @@ fun ChatScreen(
                             Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
                         },
                         onDelete = { onDeleteMessage(msg) },
-                        onImageClick = { previewImageUrl = it }
+                        onImageClick = { previewImageUrl = it },
+                        onOpenUrl = onOpenUrl
                     )
                 }
 
@@ -771,7 +796,8 @@ fun ChatScreen(
                             streamingSpeedTps = uiState.streamingSpeedTps,
                             onToggleThinking = onToggleLiveThinkingExpanded,
                             characterName = uiState.character?.name ?: "AI",
-                            listState = listState
+                            listState = listState,
+                            onOpenUrl = onOpenUrl
                         )
                     }
                 }
@@ -1366,7 +1392,8 @@ fun ChatBubbleItem(
     onLongClick: () -> Unit = {},
     onCopy: () -> Unit,
     onDelete: () -> Unit,
-    onImageClick: (String) -> Unit = {}
+    onImageClick: (String) -> Unit = {},
+    onOpenUrl: (String) -> Unit = {}
 ) {
     val isUser = message.sender.equals("USER", ignoreCase = true)
     val alignment = if (isUser) Alignment.CenterEnd else Alignment.CenterStart
@@ -1374,13 +1401,15 @@ fun ChatBubbleItem(
         SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(message.timestamp))
     }
 
+    val isDark = MaterialTheme.colorScheme.surface.luminance() < 0.5f
+
     // Distinct Colors & Tail Shapes for User and Character
     val bubbleColor = if (isSelected) {
         MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.85f)
     } else if (isUser) {
-        Color(0xFF3B3E70) // Soft deep indigo for user
+        if (isDark) UserBubbleDark else MaterialTheme.colorScheme.primary
     } else {
-        Color(0xFF232638) // Dark slate container for character
+        if (isDark) CharBubbleDark else CharBubbleLight
     }
 
     // Tails: small radius on bottom-right for User, small radius on bottom-left for Character
@@ -1410,7 +1439,11 @@ fun ChatBubbleItem(
         Surface(
             shape = bubbleShape,
             color = bubbleColor,
-            border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
+            border = if (isSelected) {
+                BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+            } else if (!isDark && !isUser) {
+                BorderStroke(1.dp, Color(0xFFE2E4EC))
+            } else null,
             tonalElevation = 2.dp,
             modifier = Modifier
                 .fillMaxWidth(0.85f)
@@ -1478,18 +1511,33 @@ fun ChatBubbleItem(
                     Spacer(modifier = Modifier.height(6.dp))
                 }
 
-                val actionColor = if (isUser) Color(0xFFD3CBFF) else Color(0xFFB4BEFF)
-                val parsedContent = remember(cleanContentText, isUser) {
+                val isDarkBubble = isDark || isUser
+                val textColor = if (isUser) Color.White else if (isDark) Color.White else Color(0xFF1E1E28)
+                val actionColor = if (isUser) {
+                    if (isDark) Color(0xFFD3CBFF) else Color(0xFFE9D5FF)
+                } else {
+                    if (isDark) Color(0xFFB4BEFF) else Color(0xFF6366F1)
+                }
+                val linkColor = if (isUser) {
+                    if (isDark) Color(0xFF93C5FD) else Color(0xFFDDD6FE)
+                } else {
+                    if (isDark) Color(0xFF93C5FD) else Color(0xFF2563EB)
+                }
+
+                val parsedContent = remember(cleanContentText, isUser, isDark, linkColor, actionColor) {
                     com.ryzumi.miraiai.domain.util.MarkdownRenderer.parseMarkdown(
                         text = cleanContentText,
-                        actionColor = actionColor
+                        actionColor = actionColor,
+                        isDark = isDarkBubble,
+                        linkColor = linkColor,
+                        onLinkClick = onOpenUrl
                     )
                 }
 
                 Text(
                     text = parsedContent,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White
+                    color = textColor
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -1499,6 +1547,32 @@ fun ChatBubbleItem(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    val metaColor = if (isUser) {
+                        Color.White.copy(alpha = 0.7f)
+                    } else if (isDark) {
+                        Color.White.copy(alpha = 0.6f)
+                    } else {
+                        Color(0xFF1E1E28).copy(alpha = 0.65f)
+                    }
+
+                    val bulletColor = if (isUser) {
+                        Color.White.copy(alpha = 0.4f)
+                    } else if (isDark) {
+                        Color.White.copy(alpha = 0.4f)
+                    } else {
+                        Color(0xFF1E1E28).copy(alpha = 0.4f)
+                    }
+
+                    val boltTint = if (isDark) Color(0xFFFFD54F) else Color(0xFFF59E0B)
+
+                    val timeColor = if (isUser) {
+                        Color.White.copy(alpha = 0.7f)
+                    } else if (isDark) {
+                        Color.White.copy(alpha = 0.5f)
+                    } else {
+                        Color(0xFF1E1E28).copy(alpha = 0.55f)
+                    }
+
                     if (!isUser && isTokenCounterEnabled && (message.tokensCount > 0 || message.generationSpeedTps > 0 || !message.modelName.isNullOrBlank())) {
                         Row(
                             modifier = Modifier.weight(1f, fill = false),
@@ -1508,7 +1582,7 @@ fun ChatBubbleItem(
                             Icon(
                                 imageVector = Icons.Default.Bolt,
                                 contentDescription = null,
-                                tint = Color(0xFFFFD54F),
+                                tint = boltTint,
                                 modifier = Modifier.size(12.dp)
                             )
                             val hasStats = message.tokensCount > 0 || message.generationSpeedTps > 0.05
@@ -1516,7 +1590,7 @@ fun ChatBubbleItem(
                                 Text(
                                     text = message.modelName,
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = Color.White.copy(alpha = 0.6f),
+                                    color = metaColor,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Medium,
                                     maxLines = 1,
@@ -1527,7 +1601,7 @@ fun ChatBubbleItem(
                                     Text(
                                         text = "•",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = Color.White.copy(alpha = 0.4f),
+                                        color = bulletColor,
                                         fontSize = 11.sp
                                     )
                                 }
@@ -1539,7 +1613,7 @@ fun ChatBubbleItem(
                                 Text(
                                     text = statsCombined,
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = Color.White.copy(alpha = 0.6f),
+                                    color = metaColor,
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Medium,
                                     maxLines = 1
@@ -1559,7 +1633,7 @@ fun ChatBubbleItem(
                         Text(
                             text = formattedTime,
                             style = MaterialTheme.typography.labelSmall,
-                            color = Color.White.copy(alpha = 0.5f),
+                            color = timeColor,
                             maxLines = 1,
                             softWrap = false
                         )
@@ -1567,7 +1641,7 @@ fun ChatBubbleItem(
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,
                                 contentDescription = "Selected",
-                                tint = MaterialTheme.colorScheme.primary,
+                                tint = if (isUser && !isDark) Color.White else MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(14.dp)
                             )
                         }
@@ -1591,7 +1665,8 @@ fun StreamingBubbleItem(
     streamingSpeedTps: Double = 0.0,
     onToggleThinking: () -> Unit = {},
     characterName: String,
-    listState: LazyListState? = null
+    listState: LazyListState? = null,
+    onOpenUrl: (String) -> Unit = {}
 ) {
     // Smooth typewriter catch-up effect for streaming text
     var displayedLength by remember { mutableIntStateOf(if (streamingText.isNotEmpty()) 1 else 0) }
@@ -1637,6 +1712,15 @@ fun StreamingBubbleItem(
         }
     }
 
+    val isDark = MaterialTheme.colorScheme.surface.luminance() < 0.5f
+    val bubbleColor = if (isDark) CharBubbleDark else CharBubbleLight
+    val textColor = if (isDark) Color.White else Color(0xFF1E1E28)
+    val actionColor = if (isDark) Color(0xFFB4BEFF) else Color(0xFF6366F1)
+    val linkColor = if (isDark) Color(0xFF93C5FD) else Color(0xFF2563EB)
+    val metaColor = if (isDark) Color.White.copy(alpha = 0.6f) else Color(0xFF1E1E28).copy(alpha = 0.65f)
+    val bulletColor = if (isDark) Color.White.copy(alpha = 0.4f) else Color(0xFF1E1E28).copy(alpha = 0.4f)
+    val boltTint = if (isDark) Color(0xFFFFD54F) else Color(0xFFF59E0B)
+
     val infiniteTransition = rememberInfiniteTransition(label = "streamingEffects")
     val cursorAlpha by infiniteTransition.animateFloat(
         initialValue = 0.2f,
@@ -1656,7 +1740,8 @@ fun StreamingBubbleItem(
     ) {
         Surface(
             shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp, bottomStart = 4.dp, bottomEnd = 18.dp),
-            color = Color(0xFF232638),
+            color = bubbleColor,
+            border = if (isDark) null else BorderStroke(1.dp, Color(0xFFE2E4EC)),
             tonalElevation = 2.dp,
             modifier = Modifier.fillMaxWidth(0.85f)
         ) {
@@ -1696,22 +1781,26 @@ fun StreamingBubbleItem(
                                 text = "Menyusun respon...",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontFamily = FontFamily.Monospace,
-                                color = Color.White.copy(alpha = 0.5f),
+                                color = textColor.copy(alpha = 0.55f),
                                 fontSize = 11.sp
                             )
                         }
                     }
                 } else {
-                    val parsedStreamingContent = remember(visibleText, cursorAlpha) {
+                    val primaryColor = MaterialTheme.colorScheme.primary
+                    val parsedStreamingContent = remember(visibleText, cursorAlpha, isDark, linkColor, actionColor, primaryColor) {
                         val baseAnnotated = com.ryzumi.miraiai.domain.util.MarkdownRenderer.parseMarkdown(
                             text = visibleText,
-                            actionColor = Color(0xFFB4BEFF)
+                            actionColor = actionColor,
+                            isDark = isDark,
+                            linkColor = linkColor,
+                            onLinkClick = onOpenUrl
                         )
                         buildAnnotatedString {
                             append(baseAnnotated)
                             withStyle(
                                 SpanStyle(
-                                    color = Color(0xFFA5B4FC).copy(alpha = cursorAlpha),
+                                    color = if (isDark) Color(0xFFA5B4FC).copy(alpha = cursorAlpha) else primaryColor.copy(alpha = cursorAlpha),
                                     fontWeight = FontWeight.Black
                                 )
                             ) {
@@ -1722,7 +1811,7 @@ fun StreamingBubbleItem(
                     Text(
                         text = parsedStreamingContent,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White
+                        color = textColor
                     )
                 }
 
@@ -1737,7 +1826,7 @@ fun StreamingBubbleItem(
                         Icon(
                             imageVector = Icons.Default.Bolt,
                             contentDescription = null,
-                            tint = Color(0xFFFFD54F),
+                            tint = boltTint,
                             modifier = Modifier.size(12.dp)
                         )
                         val hasStats = streamingTokensCount > 0 || streamingSpeedTps > 0.05
@@ -1745,7 +1834,7 @@ fun StreamingBubbleItem(
                             Text(
                                 text = streamingModelName,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = Color.White.copy(alpha = 0.6f),
+                                color = metaColor,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Medium,
                                 maxLines = 1,
@@ -1756,7 +1845,7 @@ fun StreamingBubbleItem(
                                 Text(
                                     text = "•",
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = Color.White.copy(alpha = 0.4f),
+                                    color = bulletColor,
                                     fontSize = 11.sp
                                 )
                             }
@@ -1768,7 +1857,7 @@ fun StreamingBubbleItem(
                             Text(
                                 text = statsCombined,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = Color.White.copy(alpha = 0.6f),
+                                color = metaColor,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Medium,
                                 maxLines = 1
@@ -1797,11 +1886,13 @@ fun ThinkingProcessCard(
         }
     }
 
+    val isDark = MaterialTheme.colorScheme.surface.luminance() < 0.5f
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
-        color = Color(0xFF201B30),
-        border = BorderStroke(1.dp, Color(0xFF8B5CF6).copy(alpha = 0.35f))
+        color = if (isDark) Color(0xFF201B30) else Color(0xFFF5F3FF),
+        border = BorderStroke(1.dp, if (isDark) Color(0xFF8B5CF6).copy(alpha = 0.35f) else Color(0xFFDDD6FE))
     ) {
         Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)) {
             Row(
@@ -1818,7 +1909,7 @@ fun ThinkingProcessCard(
                     Icon(
                         imageVector = Icons.Default.Memory,
                         contentDescription = null,
-                        tint = Color(0xFFC084FC),
+                        tint = if (isDark) Color(0xFFC084FC) else Color(0xFF7C3AED),
                         modifier = Modifier.size(15.dp)
                     )
                     Text(
@@ -1826,7 +1917,7 @@ fun ThinkingProcessCard(
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
-                        color = Color(0xFFC084FC)
+                        color = if (isDark) Color(0xFFC084FC) else Color(0xFF7C3AED)
                     )
                 }
 
@@ -1839,7 +1930,7 @@ fun ThinkingProcessCard(
                             text = "// reasoning...",
                             style = MaterialTheme.typography.labelSmall,
                             fontFamily = FontFamily.Monospace,
-                            color = Color.White.copy(alpha = 0.5f),
+                            color = if (isDark) Color.White.copy(alpha = 0.5f) else Color(0xFF7C3AED).copy(alpha = 0.7f),
                             fontSize = 9.sp
                         )
                     }
@@ -1847,7 +1938,7 @@ fun ThinkingProcessCard(
                         text = if (isExpanded) "[hide]" else "[show]",
                         style = MaterialTheme.typography.labelSmall,
                         fontFamily = FontFamily.Monospace,
-                        color = Color.White.copy(alpha = 0.6f),
+                        color = if (isDark) Color.White.copy(alpha = 0.6f) else Color(0xFF6D28D9),
                         fontSize = 10.sp
                     )
                 }
@@ -1857,7 +1948,7 @@ fun ThinkingProcessCard(
                 Column {
                     HorizontalDivider(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        color = Color(0xFF8B5CF6).copy(alpha = 0.2f)
+                        color = if (isDark) Color(0xFF8B5CF6).copy(alpha = 0.2f) else Color(0xFFDDD6FE)
                     )
                     val preventParentScroll = remember {
                         object : NestedScrollConnection {
@@ -1881,7 +1972,7 @@ fun ThinkingProcessCard(
                             text = thinkingText,
                             style = MaterialTheme.typography.bodySmall,
                             fontFamily = FontFamily.Monospace,
-                            color = Color.White.copy(alpha = 0.85f),
+                            color = if (isDark) Color.White.copy(alpha = 0.85f) else Color(0xFF1E1B4B),
                             fontSize = 11.sp,
                             lineHeight = 16.sp,
                             modifier = Modifier.fillMaxWidth()
