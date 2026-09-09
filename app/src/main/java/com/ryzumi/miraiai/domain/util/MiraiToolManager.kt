@@ -61,7 +61,22 @@ object MiraiToolManager {
             }
             add("function", fn)
         }
-        tools.add(weatherTool)
+        // 4. get_network_details
+        val networkTool = JsonObject().apply {
+            addProperty("type", "function")
+            val fn = JsonObject().apply {
+                addProperty("name", "get_network_details")
+                addProperty("description", "Query complete real-time network details including local IP address, public IP address, ISP, connected Wi-Fi SSID, signal strength, saved Wi-Fi networks, and cellular carrier.")
+                val params = JsonObject().apply {
+                    addProperty("type", "object")
+                    add("properties", JsonObject())
+                    add("required", JsonArray())
+                }
+                add("parameters", params)
+            }
+            add("function", fn)
+        }
+        tools.add(networkTool)
 
         return tools
     }
@@ -75,6 +90,7 @@ object MiraiToolManager {
                 "get_device_os_status" -> DeviceContextManager.getHardwareAndBatteryStatus(context)
                 "get_realtime_clock" -> DeviceContextManager.getClockStatus()
                 "get_location_and_weather" -> DeviceContextManager.getLocationAndWeatherStatus(context)
+                "get_network_details" -> DeviceContextManager.getDetailedNetworkSummary(context)
                 else -> DeviceContextManager.getLiveDeviceContext(context)
             }
         } catch (e: Exception) {

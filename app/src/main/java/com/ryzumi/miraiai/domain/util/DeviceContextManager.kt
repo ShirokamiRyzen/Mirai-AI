@@ -11,11 +11,14 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.os.PowerManager
+import android.telephony.TelephonyManager
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -23,6 +26,8 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import org.json.JSONObject
 import java.net.HttpURLConnection
+import java.net.Inet4Address
+import java.net.NetworkInterface
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -61,13 +66,13 @@ object DeviceContextManager {
         return "Current Date & Time: $dateStr, Timezone: $tzStr"
     }
 
-    fun getHardwareAndBatteryStatus(context: Context): String {
+    suspend fun getHardwareAndBatteryStatus(context: Context): String {
         val manufacturer = Build.MANUFACTURER.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         val model = Build.MODEL
         val androidVersion = "Android ${Build.VERSION.RELEASE} (API Level ${Build.VERSION.SDK_INT})"
         val battery = getBatteryInfo(context)
-        val network = getNetworkStatus(context)
-        return "Device: $manufacturer $model, OS: $androidVersion, Battery: $battery, Network: $network"
+        val network = getDetailedNetworkSummary(context)
+        return "Device: $manufacturer $model, OS: $androidVersion, Battery: $battery\nNetwork:\n$network"
     }
 
     suspend fun getLocationAndWeatherStatus(context: Context): String = withContext(Dispatchers.IO) {
@@ -108,9 +113,12 @@ object DeviceContextManager {
         val batteryStatus = getBatteryInfo(context)
         sb.append("- Battery: $batteryStatus\n")
 
-        // 4. Network Status
-        val networkStatus = getNetworkStatus(context)
-        sb.append("- Network: $networkStatus\n")
+        // 4. Detailed Network Status (Local IP, Public IP, Wi-Fi SSID, Cellular)
+        val networkStatus = getDetailedNetworkSummary(context)
+        sb.append("- Network:\n")
+        networkStatus.lines().forEach { line ->
+            sb.append("  * $line\n")
+        }
 
         // 5. GPS / Network / IP Location & Live Weather
         val resolved = resolveBestLocation(context)
@@ -320,23 +328,294 @@ object DeviceContextManager {
         }
     }
 
-    private fun getNetworkStatus(context: Context): String {
-        return try {
-            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-                ?: return "Connected"
-            val activeNetwork = connectivityManager.activeNetwork ?: return "Offline / No Connection"
-            val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return "Connected"
+    private data class PublicIpCache(
+        val timestamp: Long,
+        val ip: String,
+        val isp: String?,
+        val location: String?
+    )
 
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "Wi-Fi Connected"
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Cellular Mobile Data (4G/5G)"
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> "Ethernet Connected"
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> "VPN Connection"
-                else -> "Online"
+    private var publicIpCache: PublicIpCache? = null
+    private const val PUBLIC_IP_CACHE_DURATION_MS = 10 * 60 * 1000L // 10 Minutes
+
+    private suspend fun fetchPublicIpInfo(): PublicIpCache? = withContext(Dispatchers.IO) {
+        val now = System.currentTimeMillis()
+        val cached = publicIpCache
+        if (cached != null && (now - cached.timestamp) < PUBLIC_IP_CACHE_DURATION_MS) {
+            return@withContext cached
+        }
+
+        val endpoints = listOf(
+            "https://api.ipify.org?format=json",
+            "http://ip-api.com/json/?fields=query,status,country,regionName,city,isp,org",
+            "https://ipapi.co/json/"
+        )
+
+        for (endpoint in endpoints) {
+            try {
+                val url = URL(endpoint)
+                val conn = url.openConnection() as HttpURLConnection
+                conn.connectTimeout = 3000
+                conn.readTimeout = 3000
+                conn.requestMethod = "GET"
+                conn.setRequestProperty("User-Agent", "MiraiAI-Android/1.0")
+
+                if (conn.responseCode == 200) {
+                    val text = conn.inputStream.bufferedReader().use { it.readText() }
+                    val json = JSONObject(text)
+                    val ip = json.optString("ip").ifBlank { json.optString("query") }
+                    if (ip.isNotBlank()) {
+                        val isp = json.optString("isp").ifBlank { json.optString("org") }.ifBlank { null }
+                        val city = json.optString("city").ifBlank { null }
+                        val region = json.optString("regionName").ifBlank { json.optString("region") }.ifBlank { null }
+                        val country = json.optString("country").ifBlank { json.optString("country_name") }.ifBlank { null }
+                        val locParts = listOfNotNull(city, region, country).filter { it.isNotBlank() }
+                        val locStr = if (locParts.isNotEmpty()) locParts.joinToString(", ") else null
+
+                        val result = PublicIpCache(now, ip, isp, locStr)
+                        publicIpCache = result
+                        return@withContext result
+                    }
+                }
+            } catch (e: Exception) {
+                // Fallback to next endpoint
+            }
+        }
+        null
+    }
+
+    private fun getLocalNetworkInfo(context: Context): Triple<String?, String?, Pair<String?, List<String>>> {
+        var localIpv4: String? = null
+        var interfaceName: String? = null
+        var gateway: String? = null
+        val dnsList = mutableListOf<String>()
+
+        try {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+            val activeNetwork = connectivityManager?.activeNetwork
+            if (activeNetwork != null) {
+                val linkProps = connectivityManager.getLinkProperties(activeNetwork)
+                interfaceName = linkProps?.interfaceName
+                dnsList.addAll(linkProps?.dnsServers?.mapNotNull { it.hostAddress } ?: emptyList())
+                gateway = linkProps?.routes?.firstOrNull { it.isDefaultRoute }?.gateway?.hostAddress
+
+                localIpv4 = linkProps?.linkAddresses?.map { it.address }
+                    ?.filterIsInstance<Inet4Address>()
+                    ?.firstOrNull { !it.isLoopbackAddress }
+                    ?.hostAddress
+            }
+
+            if (localIpv4 == null) {
+                val interfaces = NetworkInterface.getNetworkInterfaces()
+                while (interfaces.hasMoreElements()) {
+                    val iface = interfaces.nextElement()
+                    if (iface.isLoopback || !iface.isUp) continue
+                    for (addr in iface.inetAddresses) {
+                        if (!addr.isLoopbackAddress && addr is Inet4Address) {
+                            localIpv4 = addr.hostAddress
+                            if (interfaceName == null) interfaceName = iface.name
+                            break
+                        }
+                    }
+                    if (localIpv4 != null) break
+                }
             }
         } catch (e: Exception) {
-            "Connected"
+            // Ignored
         }
+        return Triple(localIpv4, interfaceName, Pair(gateway, dnsList))
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getWifiDetails(context: Context): Pair<String, List<String>> {
+        var connectedSummary = "Not connected"
+        val savedSsids = mutableListOf<String>()
+
+        try {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+            val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+            val activeNetwork = connectivityManager?.activeNetwork
+            val caps = connectivityManager?.getNetworkCapabilities(activeNetwork)
+
+            val isWifi = caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+
+            if (isWifi && wifiManager != null) {
+                val wifiInfo: WifiInfo? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    (caps?.transportInfo as? WifiInfo) ?: wifiManager.connectionInfo
+                } else {
+                    wifiManager.connectionInfo
+                }
+
+                var ssid = wifiInfo?.ssid?.removeSurrounding("\"")
+                if (ssid == null || ssid == "<unknown ssid>" || ssid == "0x") {
+                    val connInfo = wifiManager.connectionInfo
+                    val altSsid = connInfo?.ssid?.removeSurrounding("\"")
+                    if (!altSsid.isNullOrBlank() && altSsid != "<unknown ssid>" && altSsid != "0x") {
+                        ssid = altSsid
+                    }
+                }
+
+                val rssi = wifiInfo?.rssi ?: -127
+                val linkSpeed = wifiInfo?.linkSpeed ?: -1
+                val freq = wifiInfo?.frequency ?: 0
+                val bandStr = when {
+                    freq in 2400..2500 -> "2.4 GHz"
+                    freq in 4900..5900 -> "5 GHz"
+                    freq in 5925..7125 -> "6 GHz (Wi-Fi 6E/7)"
+                    freq > 0 -> "$freq MHz"
+                    else -> null
+                }
+
+                val detailsList = mutableListOf<String>()
+                if (linkSpeed > 0) detailsList.add("Speed: $linkSpeed Mbps")
+                if (rssi > -120) detailsList.add("Signal: $rssi dBm")
+                if (bandStr != null) detailsList.add("Band: $bandStr")
+
+                val metaSuffix = if (detailsList.isNotEmpty()) " (${detailsList.joinToString(", ")})" else ""
+
+                connectedSummary = if (!ssid.isNullOrBlank() && ssid != "<unknown ssid>" && ssid != "0x") {
+                    "SSID: \"$ssid\"$metaSuffix"
+                } else {
+                    "Connected (SSID hidden by Android OS - requires Location toggle & permission)$metaSuffix"
+                }
+            }
+
+            try {
+                @Suppress("DEPRECATION")
+                val configured = wifiManager?.configuredNetworks
+                if (!configured.isNullOrEmpty()) {
+                    for (config in configured) {
+                        val name = config.SSID?.removeSurrounding("\"")
+                        if (!name.isNullOrBlank() && name != "<unknown ssid>" && name != "0x") {
+                            if (!savedSsids.contains(name)) {
+                                savedSsids.add(name)
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Ignored
+            }
+        } catch (e: Exception) {
+            // Ignored
+        }
+
+        return Pair(connectedSummary, savedSsids)
+    }
+
+    private fun getCellularDetails(context: Context): String {
+        return try {
+            val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+                ?: return "Telephony service unavailable"
+
+            val carrierName = telephonyManager.networkOperatorName.ifBlank {
+                telephonyManager.simOperatorName.ifBlank { "Unknown Carrier" }
+            }
+
+            val countryIso = telephonyManager.networkCountryIso.uppercase().ifBlank {
+                telephonyManager.simCountryIso.uppercase().ifBlank { "Unknown" }
+            }
+
+            val simStateStr = when (telephonyManager.simState) {
+                TelephonyManager.SIM_STATE_READY -> "Ready"
+                TelephonyManager.SIM_STATE_ABSENT -> "No SIM"
+                TelephonyManager.SIM_STATE_PIN_REQUIRED -> "PIN Required"
+                TelephonyManager.SIM_STATE_PUK_REQUIRED -> "PUK Required"
+                else -> "Active"
+            }
+
+            val isRoaming = telephonyManager.isNetworkRoaming
+            val roamingStr = if (isRoaming) "Roaming: Yes" else "Roaming: No"
+
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+            val activeNetwork = connectivityManager?.activeNetwork
+            val caps = connectivityManager?.getNetworkCapabilities(activeNetwork)
+            val isCellularActive = caps?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true
+
+            val typeStr = if (isCellularActive) {
+                val netType = try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        telephonyManager.dataNetworkType
+                    } else {
+                        @Suppress("DEPRECATION")
+                        telephonyManager.networkType
+                    }
+                } catch (e: SecurityException) {
+                    TelephonyManager.NETWORK_TYPE_UNKNOWN
+                }
+
+                when (netType) {
+                    TelephonyManager.NETWORK_TYPE_NR -> "5G NR"
+                    TelephonyManager.NETWORK_TYPE_LTE -> "4G LTE"
+                    TelephonyManager.NETWORK_TYPE_HSPAP,
+                    TelephonyManager.NETWORK_TYPE_HSPA,
+                    TelephonyManager.NETWORK_TYPE_UMTS -> "3G HSPA/UMTS"
+                    TelephonyManager.NETWORK_TYPE_EDGE,
+                    TelephonyManager.NETWORK_TYPE_GPRS -> "2G EDGE/GPRS"
+                    else -> "Mobile Data Active"
+                }
+            } else {
+                "Standby / Mobile Data Inactive"
+            }
+
+            "Carrier: $carrierName, Network: $typeStr, SIM: $simStateStr ($countryIso), $roamingStr"
+        } catch (e: Exception) {
+            "Cellular info unavailable"
+        }
+    }
+
+    suspend fun getDetailedNetworkSummary(context: Context): String = withContext(Dispatchers.IO) {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+        val activeNetwork = connectivityManager?.activeNetwork
+        val caps = connectivityManager?.getNetworkCapabilities(activeNetwork)
+
+        val connectionType = when {
+            caps == null -> "Disconnected / Offline"
+            caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "Wi-Fi"
+            caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Cellular Mobile Data"
+            caps.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> "Ethernet"
+            caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> "VPN Active"
+            else -> "Connected"
+        }
+
+        val (localIp, iface, gatewayDns) = getLocalNetworkInfo(context)
+        val (gateway, dnsList) = gatewayDns
+        val publicIpInfo = fetchPublicIpInfo()
+        val (wifiConnected, savedSsids) = getWifiDetails(context)
+        val cellularInfo = getCellularDetails(context)
+
+        val sb = StringBuilder()
+        sb.append("Connection Type: $connectionType\n")
+
+        if (localIp != null) {
+            val ifaceStr = if (iface != null) " (Interface: $iface)" else ""
+            sb.append("Local IP: $localIp$ifaceStr\n")
+        }
+        if (gateway != null) {
+            sb.append("Gateway / Router: $gateway\n")
+        }
+        if (dnsList.isNotEmpty()) {
+            sb.append("DNS Servers: ${dnsList.joinToString(", ")}\n")
+        }
+
+        if (publicIpInfo != null) {
+            val ispStr = if (publicIpInfo.isp != null) " (ISP: ${publicIpInfo.isp})" else ""
+            val locStr = if (publicIpInfo.location != null) " [Location: ${publicIpInfo.location}]" else ""
+            sb.append("Public IP: ${publicIpInfo.ip}$ispStr$locStr\n")
+        } else {
+            sb.append("Public IP: Query unavailable / Offline\n")
+        }
+
+        sb.append("Wi-Fi Connection: $wifiConnected\n")
+        if (savedSsids.isNotEmpty()) {
+            sb.append("Saved Wi-Fi Networks: ${savedSsids.joinToString(", ")}\n")
+        } else {
+            sb.append("Saved Wi-Fi Networks: Restricted by Android OS (available on Android 9 or system apps)\n")
+        }
+
+        sb.append("Cellular Network: $cellularInfo")
+
+        sb.toString().trim()
     }
 
     fun hasLocationPermission(context: Context): Boolean {
