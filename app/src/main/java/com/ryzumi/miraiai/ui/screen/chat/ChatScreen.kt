@@ -148,8 +148,10 @@ import androidx.compose.ui.window.DialogProperties
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
 import com.ryzumi.miraiai.domain.model.LocalModelStatus
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 
 private suspend fun LazyListState.scrollToBottom() {
     val totalItems = layoutInfo.totalItemsCount
@@ -181,6 +183,7 @@ private suspend fun LazyListState.scrollToBottom() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
+    sessionId: String = "",
     uiState: ChatUiState,
     onInputTextChanged: (String) -> Unit,
     onImageSelected: (String?) -> Unit,
@@ -249,22 +252,41 @@ fun ChatScreen(
         uri?.let { onImageSelected(it.toString()) }
     }
 
-    val sessionId = uiState.session?.id
-    androidx.compose.runtime.DisposableEffect(sessionId) {
-        if (!sessionId.isNullOrBlank()) {
-            com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setActiveVisibleSession(sessionId)
-            com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, sessionId)
+    val resolvedSessionId = sessionId.ifBlank { uiState.session?.id.orEmpty() }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val activity = context as? android.app.Activity
+
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner, resolvedSessionId) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                if (resolvedSessionId.isNotBlank()) {
+                    com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setActiveVisibleSession(resolvedSessionId)
+                    com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, resolvedSessionId)
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        if (resolvedSessionId.isNotBlank()) {
+            com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setActiveVisibleSession(resolvedSessionId)
+            com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, resolvedSessionId)
         }
         onDispose {
-            if (!sessionId.isNullOrBlank()) {
-                com.ryzumi.miraiai.domain.engine.ChatGenerationManager.clearActiveVisibleSession(sessionId)
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            val isChangingConfig = activity?.isChangingConfigurations == true
+            // If the activity is merely rotating or changing configuration, DO NOT clear activeVisibleSessionId!
+            // Only clear when actually navigating away.
+            if (!isChangingConfig && resolvedSessionId.isNotBlank()) {
+                com.ryzumi.miraiai.domain.engine.ChatGenerationManager.clearActiveVisibleSession(resolvedSessionId)
             }
         }
     }
 
-    // Auto-scroll to bottom on new messages or streaming status change
+    // Auto-scroll to bottom on new messages or streaming status change & ensure notification is cancelled
     LaunchedEffect(uiState.messages.size, uiState.isStreaming, uiState.streamingThinking) {
         listState.scrollToBottom()
+        if (resolvedSessionId.isNotBlank()) {
+            com.ryzumi.miraiai.domain.util.ChatNotificationHelper.cancelNotification(context, resolvedSessionId)
+        }
     }
 
     Scaffold(

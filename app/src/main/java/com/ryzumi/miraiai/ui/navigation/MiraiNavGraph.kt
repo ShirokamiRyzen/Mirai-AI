@@ -218,6 +218,7 @@ fun MiraiNavGraph(
             val uiState by viewModel.uiState.collectAsState()
 
             ChatScreen(
+                sessionId = sessionId,
                 uiState = uiState,
                 onInputTextChanged = viewModel::onInputTextChanged,
                 onImageSelected = { uri -> viewModel.processImageAttachment(context, uri) },

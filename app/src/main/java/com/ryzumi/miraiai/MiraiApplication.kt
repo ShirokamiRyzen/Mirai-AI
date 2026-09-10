@@ -18,6 +18,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import java.io.File
 import java.io.FileOutputStream
 
@@ -53,28 +56,13 @@ class MiraiApplication : Application(), ImageLoaderFactory {
         super.onCreate()
         com.ryzumi.miraiai.domain.util.ChatNotificationHelper.createNotificationChannel(this)
 
-        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-            private var activityReferences = 0
-            private var isActivityChangingConfigurations = false
-
-            override fun onActivityStarted(activity: android.app.Activity) {
-                if (++activityReferences == 1 && !isActivityChangingConfigurations) {
-                    com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setAppForeground(true)
-                }
+        ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setAppForeground(true)
             }
 
-            override fun onActivityStopped(activity: android.app.Activity) {
-                if (--activityReferences == 0 && !isActivityChangingConfigurations) {
-                    com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setAppForeground(false)
-                }
-            }
-
-            override fun onActivityCreated(activity: android.app.Activity, savedInstanceState: android.os.Bundle?) {}
-            override fun onActivityResumed(activity: android.app.Activity) {}
-            override fun onActivityPaused(activity: android.app.Activity) {}
-            override fun onActivitySaveInstanceState(activity: android.app.Activity, outState: android.os.Bundle) {}
-            override fun onActivityDestroyed(activity: android.app.Activity) {
-                isActivityChangingConfigurations = activity.isChangingConfigurations
+            override fun onStop(owner: LifecycleOwner) {
+                com.ryzumi.miraiai.domain.engine.ChatGenerationManager.setAppForeground(false)
             }
         })
 

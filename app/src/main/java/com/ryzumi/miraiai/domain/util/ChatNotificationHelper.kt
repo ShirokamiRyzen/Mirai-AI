@@ -19,6 +19,7 @@ import androidx.core.app.Person
 import androidx.core.app.RemoteInput
 import androidx.core.graphics.drawable.IconCompat
 import com.ryzumi.miraiai.MainActivity
+import com.ryzumi.miraiai.domain.engine.ChatGenerationManager
 import com.ryzumi.miraiai.domain.macro.MacroEngine
 import com.ryzumi.miraiai.domain.receiver.NotificationReplyReceiver
 import kotlinx.coroutines.Dispatchers
@@ -181,6 +182,13 @@ object ChatNotificationHelper {
 
         if (charBitmap != null) {
             builder.setLargeIcon(charBitmap)
+        }
+
+        // Before dispatching, double check if user is currently looking at this chat session.
+        // If they entered the chat while bitmaps were loading asynchronously, do NOT notify.
+        if (ChatGenerationManager.isSessionCurrentlyVisible(sessionId)) {
+            cancelNotification(context, sessionId)
+            return@withContext
         }
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager

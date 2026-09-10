@@ -1,7 +1,7 @@
 {
   "app/build.gradle.kts": {
-    "mtime": 1789042101.8127196,
-    "ast_hash": "d6b2fe68895051152be01d98a19d9e2e",
+    "mtime": 1788937505.741474,
+    "ast_hash": "e60eea393d2939627e8fd2c2591886d9",
     "semantic_hash": ""
   },
   "app/src/androidTest/java/com/ryzumi/miraiai/ExampleInstrumentedTest.kt": {
@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/MiraiApplication.kt": {
-    "mtime": 1789042215.5991938,
-    "ast_hash": "a8c7a9d312075df84e5d03d912686eea",
+    "mtime": 1788514689.6274283,
+    "ast_hash": "1affc3d03c32c60a4608d5af3cfdcdb1",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/datastore/AppSettings.kt": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt": {
-    "mtime": 1789042277.9795134,
-    "ast_hash": "a0e8a9be4db6de903ddb951dc7f5068c",
+    "mtime": 1788939380.5084114,
+    "ast_hash": "05b84d06f7cbd79910731e89262349c8",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditScreen.kt": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt": {
-    "mtime": 1789042328.2109382,
-    "ast_hash": "2776b237642fcf229045e02c7f82baa2",
+    "mtime": 1788938016.1338303,
+    "ast_hash": "0b391b3eaf0cdc55a11158447151ff08",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt": {
@@ -365,13 +365,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt": {
-    "mtime": 1789042237.957143,
-    "ast_hash": "db4076d79beafae87b44b7af6b610ea7",
+    "mtime": 1788939015.476005,
+    "ast_hash": "faf0f85ea8e7bab0ac81cc65dd650f94",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/util/ChatNotificationHelper.kt": {
-    "mtime": 1789042258.255926,
-    "ast_hash": "b037a8dff703eeaa275d4071a583b4ea",
+    "mtime": 1788337776.6753461,
+    "ast_hash": "0f7756499a05edda736825f19171ed86",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/receiver/NotificationReplyReceiver.kt": {

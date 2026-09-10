@@ -66,6 +66,10 @@ object ChatGenerationManager {
         isAppInForeground.value = isForeground
     }
 
+    fun isSessionCurrentlyVisible(sessionId: String): Boolean {
+        return isAppInForeground.value && (activeVisibleSessionId.value == sessionId)
+    }
+
     fun startGeneration(
         context: Context,
         sessionId: String,
@@ -296,7 +300,7 @@ object ChatGenerationManager {
                     database.chatMessageDao().insertMessage(charMsg)
 
                     // Check if notification is needed (user closed chat or app in background)
-                    val isViewingSession = isAppInForeground.value && (activeVisibleSessionId.value == sessionId)
+                    val isViewingSession = isSessionCurrentlyVisible(sessionId)
                     if (!isViewingSession) {
                         ChatNotificationHelper.showResponseNotification(
                             context = context,
@@ -307,6 +311,9 @@ object ChatGenerationManager {
                             userName = persona?.name?.ifBlank { "You" } ?: "You",
                             userAvatarUri = persona?.avatarUri
                         )
+                    } else {
+                        // User is actively in this chat session, dismiss any lingering notification
+                        ChatNotificationHelper.cancelNotification(context, sessionId)
                     }
                 }
             } catch (e: Exception) {
