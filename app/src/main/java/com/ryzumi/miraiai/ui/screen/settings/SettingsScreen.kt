@@ -2260,8 +2260,8 @@ fun BackupSettingsView(
                         modifier = Modifier.weight(1f)
                     )
                     StatBadgeItem(
-                        label = "Configs",
-                        count = uiState.backupStats.configCount,
+                        label = "Live2D Models",
+                        count = uiState.backupStats.live2dModelCount,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -2283,7 +2283,20 @@ fun BackupSettingsView(
                         modifier = Modifier.weight(1f)
                     )
                     StatBadgeItem(
-                        label = "Assets",
+                        label = "Configs",
+                        count = uiState.backupStats.configCount,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    StatBadgeItem(
+                        label = "Assets (Images & Live2D)",
                         count = uiState.backupStats.assetCount,
                         modifier = Modifier.weight(1f)
                     )
@@ -2361,7 +2374,7 @@ fun BackupSettingsView(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "Save all your characters, user personas, avatar images, chat sessions, message histories, and inference configurations into a single portable .miraidb backup file.",
+                    text = "Save all your characters, user personas, avatar images, Live2D models, chat sessions, message histories, and inference configurations into a single portable .miraidb backup file.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -2422,7 +2435,7 @@ fun BackupSettingsView(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "Restore chats, characters, persona images, and settings from a previously exported MiraiAI (.miraidb) backup file.",
+                    text = "Restore chats, characters, persona images, Live2D models, and settings from a previously exported MiraiAI (.miraidb) backup file.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

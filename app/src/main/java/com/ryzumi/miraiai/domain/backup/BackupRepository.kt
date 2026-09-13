@@ -95,8 +95,16 @@ class BackupRepository(
         val chatImagesDir = File(context.filesDir, "chat_images")
         val chatImageFiles = chatImagesDir.listFiles()?.filter { it.isFile } ?: emptyList()
 
-        val assetCount = avatarFiles.size + chatImageFiles.size
-        val assetSizeBytes = avatarFiles.sumOf { it.length() } + chatImageFiles.sumOf { it.length() }
+        val live2dDir = File(context.filesDir, "live2d")
+        val live2dFiles = if (live2dDir.exists() && live2dDir.isDirectory) {
+            live2dDir.walkTopDown().filter { it.isFile }.toList()
+        } else emptyList()
+        val live2dModelCount = if (live2dDir.exists() && live2dDir.isDirectory) {
+            live2dDir.listFiles()?.filter { it.isDirectory }?.size ?: 0
+        } else 0
+
+        val assetCount = avatarFiles.size + chatImageFiles.size + live2dFiles.size
+        val assetSizeBytes = avatarFiles.sumOf { it.length() } + chatImageFiles.sumOf { it.length() } + live2dFiles.sumOf { it.length() }
 
         val dbFile = context.getDatabasePath("mirai_database")
         val walFile = File(dbFile.path + "-wal")
@@ -115,6 +123,7 @@ class BackupRepository(
             messageCount = messages,
             configCount = configs,
             assetCount = assetCount,
+            live2dModelCount = live2dModelCount,
             totalSizeBytes = totalSizeBytes,
             formattedDataSize = formattedSize
         )
@@ -128,6 +137,48 @@ class BackupRepository(
         return "%.1f %s".format(java.util.Locale.US, value, units[digitGroups])
     }
 
+    private fun zipDirectoryToBytes(directory: File): ByteArray {
+        if (!directory.exists() || !directory.isDirectory) return ByteArray(0)
+        val baos = java.io.ByteArrayOutputStream()
+        ZipOutputStream(baos).use { zos ->
+            directory.walkTopDown().forEach { file ->
+                if (file.isFile) {
+                    val relPath = file.relativeTo(directory).path.replace('\\', '/')
+                    val entry = ZipEntry(relPath)
+                    zos.putNextEntry(entry)
+                    file.inputStream().use { input ->
+                        input.copyTo(zos)
+                    }
+                    zos.closeEntry()
+                }
+            }
+            zos.finish()
+        }
+        return baos.toByteArray()
+    }
+
+    private fun restoreLive2dFromZipBytes(charId: String, zipBytes: ByteArray) {
+        if (zipBytes.isEmpty()) return
+        val targetCharDir = File(context.filesDir, "live2d/$charId")
+        targetCharDir.mkdirs()
+        ZipInputStream(ByteArrayInputStream(zipBytes)).use { zIn ->
+            var entry = zIn.nextEntry
+            while (entry != null) {
+                if (!entry.isDirectory && entry.name.isNotBlank()) {
+                    val file = File(targetCharDir, entry.name)
+                    if (file.canonicalPath.startsWith(targetCharDir.canonicalPath)) {
+                        file.parentFile?.mkdirs()
+                        FileOutputStream(file).use { out ->
+                            zIn.copyTo(out)
+                        }
+                    }
+                }
+                zIn.closeEntry()
+                entry = zIn.nextEntry
+            }
+        }
+    }
+
     suspend fun exportBackupToJson(): String = withContext(Dispatchers.IO) {
         val characters = database.characterDao().getAllCharactersSync()
         val personas = database.userPersonaDao().getAllPersonasSync()
@@ -137,6 +188,9 @@ class BackupRepository(
         val theme = settingsRepository.themeSettingsFlow.first()
         val showThinking = settingsRepository.showThinkingProcessFlow.first()
         val debugLogging = settingsRepository.debugLoggingEnabledFlow.first()
+        val tokenCounter = settingsRepository.tokenCounterEnabledFlow.first()
+        val allowDevice = settingsRepository.allowDeviceContextFlow.first()
+        val uploadB64 = settingsRepository.uploadAsBase64Flow.first()
 
         val charBase64Map = mutableMapOf<String, String>()
         for (char in characters) {
@@ -174,8 +228,22 @@ class BackupRepository(
             }
         }
 
+        val live2dBase64Map = mutableMapOf<String, String>()
+        val live2dBaseDir = File(context.filesDir, "live2d")
+        if (live2dBaseDir.exists() && live2dBaseDir.isDirectory) {
+            for (char in characters) {
+                val charDir = File(live2dBaseDir, char.id)
+                if (charDir.exists() && charDir.isDirectory) {
+                    val zipBytes = zipDirectoryToBytes(charDir)
+                    if (zipBytes.isNotEmpty()) {
+                        live2dBase64Map[char.id] = ImageUtils.safeBase64Encode(zipBytes)
+                    }
+                }
+            }
+        }
+
         val backup = MiraiBackupData(
-            version = 2,
+            version = 3,
             appName = "MiraiAI",
             exportedAt = System.currentTimeMillis(),
             characters = characters,
@@ -186,9 +254,13 @@ class BackupRepository(
             themeSettings = theme,
             showThinkingProcess = showThinking,
             debugLoggingEnabled = debugLogging,
+            tokenCounterEnabled = tokenCounter,
+            allowDeviceContext = allowDevice,
+            uploadAsBase64 = uploadB64,
             characterAvatars = charBase64Map.ifEmpty { null },
             personaAvatars = personaBase64Map.ifEmpty { null },
-            messageImages = chatImageBase64Map.ifEmpty { null }
+            messageImages = chatImageBase64Map.ifEmpty { null },
+            live2dModels = live2dBase64Map.ifEmpty { null }
         )
         gson.toJson(backup)
     }
@@ -203,6 +275,9 @@ class BackupRepository(
             val theme = settingsRepository.themeSettingsFlow.first()
             val showThinking = settingsRepository.showThinkingProcessFlow.first()
             val debugLogging = settingsRepository.debugLoggingEnabledFlow.first()
+            val tokenCounter = settingsRepository.tokenCounterEnabledFlow.first()
+            val allowDevice = settingsRepository.allowDeviceContextFlow.first()
+            val uploadB64 = settingsRepository.uploadAsBase64Flow.first()
 
             val charWebpMap = mutableMapOf<String, ByteArray>()
             val charBase64Map = mutableMapOf<String, String>()
@@ -247,7 +322,7 @@ class BackupRepository(
             }
 
             val backup = MiraiBackupData(
-                version = 2,
+                version = 3,
                 appName = "MiraiAI",
                 exportedAt = System.currentTimeMillis(),
                 characters = characters,
@@ -258,6 +333,9 @@ class BackupRepository(
                 themeSettings = theme,
                 showThinkingProcess = showThinking,
                 debugLoggingEnabled = debugLogging,
+                tokenCounterEnabled = tokenCounter,
+                allowDeviceContext = allowDevice,
+                uploadAsBase64 = uploadB64,
                 characterAvatars = charBase64Map.ifEmpty { null },
                 personaAvatars = personaBase64Map.ifEmpty { null },
                 messageImages = chatImageBase64Map.ifEmpty { null }
@@ -298,6 +376,22 @@ class BackupRepository(
                         zipOut.closeEntry()
                     }
 
+                    // 5. Write Live2D model assets
+                    val live2dDir = File(context.filesDir, "live2d")
+                    if (live2dDir.exists() && live2dDir.isDirectory) {
+                        live2dDir.walkTopDown().forEach { file ->
+                            if (file.isFile) {
+                                val relPath = file.relativeTo(live2dDir).path.replace('\\', '/')
+                                val entry = ZipEntry("live2d/$relPath")
+                                zipOut.putNextEntry(entry)
+                                file.inputStream().use { input ->
+                                    input.copyTo(zipOut)
+                                }
+                                zipOut.closeEntry()
+                            }
+                        }
+                    }
+
                     zipOut.finish()
                 }
             } ?: return@withContext Result.failure(Exception("Failed to open destination file"))
@@ -318,6 +412,7 @@ class BackupRepository(
             if (isZip) {
                 val avatarsDir = File(context.filesDir, "avatars").apply { if (!exists()) mkdirs() }
                 val chatImagesDir = File(context.filesDir, "chat_images").apply { if (!exists()) mkdirs() }
+                val live2dBaseDir = File(context.filesDir, "live2d").apply { if (!exists()) mkdirs() }
                 var jsonContent: String? = null
                 val extractedCharAvatars = mutableMapOf<String, String>()
                 val extractedPersonaAvatars = mutableMapOf<String, String>()
@@ -347,6 +442,17 @@ class BackupRepository(
                             val targetFile = File(chatImagesDir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
                             FileOutputStream(targetFile).use { it.write(entryBytes) }
                             extractedChatImages[msgId] = targetFile.absolutePath
+                        } else if (name.startsWith("live2d/") && !entry.isDirectory) {
+                            val relPath = name.removePrefix("live2d/")
+                            if (relPath.isNotBlank()) {
+                                val targetFile = File(live2dBaseDir, relPath)
+                                if (targetFile.canonicalPath.startsWith(live2dBaseDir.canonicalPath)) {
+                                    targetFile.parentFile?.mkdirs()
+                                    FileOutputStream(targetFile).use { out ->
+                                        zipIn.copyTo(out)
+                                    }
+                                }
+                            }
                         }
                         zipIn.closeEntry()
                         entry = zipIn.nextEntry
@@ -396,6 +502,16 @@ class BackupRepository(
                     }
                 }
 
+                // If backup also had live2dModels base64 map (e.g. from JSON), restore any missing ones
+                rawBackup.live2dModels?.forEach { (charId, base64Zip) ->
+                    try {
+                        val zipBytes = ImageUtils.safeBase64Decode(base64Zip)
+                        restoreLive2dFromZipBytes(charId, zipBytes)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
                 val finalBackup = rawBackup.copy(
                     characters = updatedCharacters,
                     personas = updatedPersonas,
@@ -438,6 +554,16 @@ class BackupRepository(
                         msg.copy(imageUri = localPath)
                     } else {
                         msg
+                    }
+                }
+
+                // Restore Live2D models from JSON backup if present
+                rawBackup.live2dModels?.forEach { (charId, base64Zip) ->
+                    try {
+                        val zipBytes = ImageUtils.safeBase64Decode(base64Zip)
+                        restoreLive2dFromZipBytes(charId, zipBytes)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -495,6 +621,13 @@ class BackupRepository(
                 database.characterDao().deleteAllCharacters()
                 database.userPersonaDao().deleteAllPersonas()
                 database.inferenceConfigDao().deleteAllConfigs()
+                try {
+                    File(context.filesDir, "live2d").deleteRecursively()
+                    File(context.filesDir, "avatars").deleteRecursively()
+                    File(context.filesDir, "chat_images").deleteRecursively()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
             if (backup.characters.isNotEmpty()) {
@@ -522,6 +655,25 @@ class BackupRepository(
             }
             backup.debugLoggingEnabled?.let {
                 settingsRepository.updateDebugLoggingEnabled(it)
+            }
+            backup.tokenCounterEnabled?.let {
+                settingsRepository.updateTokenCounterEnabled(it)
+            }
+            backup.allowDeviceContext?.let {
+                settingsRepository.updateAllowDeviceContext(it)
+            }
+            backup.uploadAsBase64?.let {
+                settingsRepository.updateUploadAsBase64(it)
+            }
+
+            // Also restore live2d if in live2dModels map (for JSON backups)
+            backup.live2dModels?.forEach { (charId, base64Zip) ->
+                try {
+                    val zipBytes = ImageUtils.safeBase64Decode(base64Zip)
+                    restoreLive2dFromZipBytes(charId, zipBytes)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
             val stats = getBackupStats()

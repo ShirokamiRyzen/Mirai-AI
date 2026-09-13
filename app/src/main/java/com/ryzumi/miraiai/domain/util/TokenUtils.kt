@@ -7,6 +7,20 @@ import com.ryzumi.miraiai.domain.model.OpenAiMessage
 object TokenUtils {
 
     /**
+     * Formats token count to compact 'K' unit (e.g. 1067 -> "1.1K", 8192 -> "8.2K").
+     */
+    fun formatTokensK(tokens: Int): String {
+        if (tokens <= 0) return "0K"
+        val k = tokens / 1000.0
+        return if (k < 1.0) {
+            String.format(java.util.Locale.US, "%.1fK", k)
+        } else {
+            val s = String.format(java.util.Locale.US, "%.1fK", k)
+            if (s.endsWith(".0K")) "${k.toInt()}K" else s
+        }
+    }
+
+    /**
      * Estimates the number of tokens for a given string using standard BPE heuristic.
      */
     fun estimateTokenCount(text: String?): Int {

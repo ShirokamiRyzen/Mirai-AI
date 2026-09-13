@@ -409,56 +409,83 @@ object TtsManager {
             try {
                 val baseUrl = config?.baseUrl ?: "https://api.openai.com/v1"
                 val endpoint = if (!config?.ttsApiEndpoint.isNullOrBlank()) {
-                    config!!.ttsApiEndpoint
+                    config!!.ttsApiEndpoint.trim()
                 } else {
                     "${baseUrl.trimEnd('/')}/audio/speech"
                 }
 
                 val apiKey = if (!config?.ttsApiKey.isNullOrBlank()) {
-                    config!!.ttsApiKey
+                    config!!.ttsApiKey.trim()
                 } else {
-                    config?.apiKey ?: ""
+                    config?.apiKey?.trim() ?: ""
                 }
 
                 val model = if (!config?.ttsApiModel.isNullOrBlank()) {
-                    config!!.ttsApiModel
+                    config!!.ttsApiModel.trim()
                 } else {
                     "kokoro"
                 }
 
-                val voice = character?.voiceId?.ifBlank { "af_heart" } ?: "af_heart"
+                val voice = character?.voiceId?.trim()?.ifBlank { "af_heart" } ?: "af_heart"
                 val speed = character?.voiceSpeed ?: 1.0f
 
-                val jsonBody = JSONObject().apply {
-                    put("model", model)
-                    put("input", cleanText)
-                    put("voice", voice)
-                    put("speed", speed.toDouble())
-                    put("response_format", "mp3")
+                val isFishAudio = endpoint.contains("fish.audio", ignoreCase = true)
+
+                val jsonBody = if (isFishAudio) {
+                    JSONObject().apply {
+                        put("text", cleanText)
+                        // If voice is provided and not generic placeholder, use as reference_id
+                        if (voice.isNotBlank() && voice != "system") {
+                            put("reference_id", voice)
+                        }
+                        put("format", "mp3")
+                        val prosody = JSONObject().apply {
+                            put("speed", speed.toDouble())
+                        }
+                        put("prosody", prosody)
+                    }
+                } else {
+                    JSONObject().apply {
+                        put("model", model)
+                        put("input", cleanText)
+                        put("voice", voice)
+                        put("speed", speed.toDouble())
+                        put("response_format", "mp3")
+                    }
                 }
 
                 val reqBuilder = Request.Builder()
                     .url(endpoint)
-                    .post(jsonBody.toString().toRequestBody("application/json".toMediaType()))
+                    .post(jsonBody.toString().toRequestBody("application/json; charset=utf-8".toMediaType()))
 
                 if (apiKey.isNotBlank()) {
                     reqBuilder.header("Authorization", "Bearer $apiKey")
+                    if (isFishAudio) {
+                        reqBuilder.header("api-key", apiKey)
+                    }
                 }
 
                 val response = httpClient.newCall(reqBuilder.build()).execute()
                 if (!response.isSuccessful) {
-                    val err = "TTS API error HTTP ${response.code}: ${response.body?.string()?.take(200)}"
-                    Log.w(TAG, "$err. Falling back to local TTS.")
+                    val errBody = try { response.body?.string()?.take(300) } catch (_: Exception) { "" }
+                    val err = "TTS API error HTTP ${response.code}${if (!errBody.isNullOrBlank()) ": $errBody" else ""}"
+                    Log.e(TAG, err)
                     withContext(Dispatchers.Main) {
-                        speakViaLocal(context, cleanText, config, character, onStart, onDone, onError)
+                        _isPlaying.value = false
+                        onError(err)
+                        Toast.makeText(context, err, Toast.LENGTH_LONG).show()
                     }
                     return@launch
                 }
 
                 val bytes = response.body?.bytes()
                 if (bytes == null || bytes.isEmpty()) {
+                    val err = "Empty audio received from TTS API"
+                    Log.e(TAG, err)
                     withContext(Dispatchers.Main) {
-                        onError("Empty audio received from TTS API")
+                        _isPlaying.value = false
+                        onError(err)
+                        Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
@@ -467,13 +494,15 @@ object TtsManager {
                 cacheAudioFile.writeBytes(bytes)
 
                 withContext(Dispatchers.Main) {
-                    playAudioFile(cacheAudioFile, onStart, onDone)
+                    playAudioFile(context, cacheAudioFile, onStart, onDone, onError)
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to speak via TTS API", e)
+                val err = "TTS API error: ${e.localizedMessage ?: "Unknown network error"}"
+                Log.e(TAG, err, e)
                 withContext(Dispatchers.Main) {
-                    // Fallback to local system TTS
-                    speakViaLocal(context, cleanText, config, character, onStart, onDone, onError)
+                    _isPlaying.value = false
+                    onError(err)
+                    Toast.makeText(context, err, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -781,7 +810,13 @@ object TtsManager {
         playNext()
     }
 
-    private fun playAudioFile(file: File, onStart: () -> Unit, onDone: () -> Unit) {
+    private fun playAudioFile(
+        context: Context,
+        file: File,
+        onStart: () -> Unit,
+        onDone: () -> Unit,
+        onError: (String) -> Unit = {}
+    ) {
         try {
             stop()
             activeAudioFiles.add(file)
@@ -795,11 +830,13 @@ object TtsManager {
                 activeAudioFiles.remove(file)
                 onDone()
             }
-            mp.setOnErrorListener { _, _, _ ->
+            mp.setOnErrorListener { _, what, extra ->
                 _isPlaying.value = false
                 try { file.delete() } catch (_: Exception) {}
                 activeAudioFiles.remove(file)
-                onDone()
+                val err = "Audio player error ($what, $extra)"
+                onError(err)
+                Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
                 true
             }
             mp.prepare()
@@ -811,7 +848,9 @@ object TtsManager {
             _isPlaying.value = false
             try { file.delete() } catch (_: Exception) {}
             activeAudioFiles.remove(file)
-            onDone()
+            val err = "Failed to play audio: ${e.localizedMessage}"
+            onError(err)
+            Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
         }
     }
 

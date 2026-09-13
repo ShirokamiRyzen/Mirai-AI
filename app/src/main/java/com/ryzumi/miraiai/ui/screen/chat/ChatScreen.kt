@@ -55,6 +55,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -91,6 +92,7 @@ import com.ryzumi.miraiai.ui.component.live2d.Live2dViewerController
 import com.ryzumi.miraiai.domain.live2d.Live2dModelCapabilities
 import com.ryzumi.miraiai.domain.live2d.Live2dModelFile
 import com.ryzumi.miraiai.domain.live2d.cleanLive2dControlTags
+import com.ryzumi.miraiai.domain.util.TokenUtils
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Switch
@@ -508,11 +510,13 @@ fun ChatScreen(
                                         )
                                         Spacer(modifier = Modifier.width(3.dp))
                                         Text(
-                                            text = "$currentTokens / $maxTokens",
+                                            text = "${TokenUtils.formatTokensK(currentTokens)} / ${TokenUtils.formatTokensK(maxTokens)}",
                                             style = MaterialTheme.typography.labelSmall,
                                             color = tokenColor,
                                             fontWeight = FontWeight.Bold,
-                                            fontSize = 10.sp
+                                            fontSize = 10.sp,
+                                            maxLines = 1,
+                                            softWrap = false
                                         )
                                     }
                                 }
@@ -903,7 +907,7 @@ fun ChatScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(if (isChatPanelOpen) 360.dp else 180.dp)
+                            .height(if (isChatPanelOpen) 220.dp else 120.dp)
                             .align(Alignment.BottomCenter)
                             .background(
                                 Brush.verticalGradient(
@@ -1038,11 +1042,12 @@ fun ChatScreen(
                             shadowElevation = 10.dp,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .heightIn(min = 180.dp, max = 340.dp)
+                                .heightIn(min = 70.dp, max = 200.dp)
                         ) {
                             Column(
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxWidth()
+                                    .wrapContentHeight()
                                     .padding(horizontal = 14.dp, vertical = 4.dp)
                             ) {
                                 // Sleek drag handle indicator (tap to collapse)
@@ -1050,7 +1055,7 @@ fun ChatScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .clickable { isChatPanelOpen = false }
-                                        .padding(top = 8.dp, bottom = 8.dp),
+                                        .padding(top = 6.dp, bottom = 4.dp),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Box(
@@ -1067,9 +1072,9 @@ fun ChatScreen(
                                     state = listState,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .weight(1f),
-                                    contentPadding = PaddingValues(vertical = 4.dp),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                        .weight(1f, fill = false),
+                                    contentPadding = PaddingValues(vertical = 2.dp),
+                                    verticalArrangement = Arrangement.spacedBy(6.dp)
                                 ) {
                                     items(
                                         items = uiState.messages,
@@ -2662,7 +2667,7 @@ fun ChatBubbleItem(
                             }
                             if (hasStats) {
                                 val speedStr = if (message.generationSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", message.generationSpeedTps)} t/s" else ""
-                                val tokensStr = if (message.tokensCount > 0) "${message.tokensCount} tokens" else ""
+                                val tokensStr = if (message.tokensCount > 0) "${TokenUtils.formatTokensK(message.tokensCount)} tokens" else ""
                                 val statsCombined = if (tokensStr.isNotEmpty()) "$tokensStr$speedStr" else speedStr.removePrefix(" • ")
                                 Text(
                                     text = statsCombined,
@@ -2929,7 +2934,7 @@ fun StreamingBubbleItem(
                         }
                         if (hasStats) {
                             val speedStr = if (streamingSpeedTps > 0.05) " • ${String.format(Locale.US, "%.1f", streamingSpeedTps)} t/s" else ""
-                            val tokensStr = if (streamingTokensCount > 0) "$streamingTokensCount tokens" else ""
+                            val tokensStr = if (streamingTokensCount > 0) "${TokenUtils.formatTokensK(streamingTokensCount)} tokens" else ""
                             val statsCombined = if (tokensStr.isNotEmpty()) "$tokensStr$speedStr" else speedStr.removePrefix(" • ")
                             Text(
                                 text = statsCombined,

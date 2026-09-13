@@ -8,7 +8,7 @@ import com.ryzumi.miraiai.data.local.entity.InferenceConfigEntity
 import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
 
 data class MiraiBackupData(
-    val version: Int = 2,
+    val version: Int = 3,
     val appName: String = "MiraiAI",
     val exportedAt: Long = System.currentTimeMillis(),
     val characters: List<CharacterEntity> = emptyList(),
@@ -19,9 +19,13 @@ data class MiraiBackupData(
     val themeSettings: ThemeSettings? = null,
     val showThinkingProcess: Boolean? = null,
     val debugLoggingEnabled: Boolean? = null,
+    val tokenCounterEnabled: Boolean? = null,
+    val allowDeviceContext: Boolean? = null,
+    val uploadAsBase64: Boolean? = null,
     val characterAvatars: Map<String, String>? = null,
     val personaAvatars: Map<String, String>? = null,
-    val messageImages: Map<String, String>? = null
+    val messageImages: Map<String, String>? = null,
+    val live2dModels: Map<String, String>? = null
 )
 
 data class BackupStats(
@@ -31,6 +35,7 @@ data class BackupStats(
     val messageCount: Int = 0,
     val configCount: Int = 0,
     val assetCount: Int = 0,
+    val live2dModelCount: Int = 0,
     val totalSizeBytes: Long = 0L,
     val formattedDataSize: String = "0 B"
 )
