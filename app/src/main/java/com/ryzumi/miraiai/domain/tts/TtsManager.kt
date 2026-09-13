@@ -342,9 +342,27 @@ object TtsManager {
         clean = clean.replace(Regex("https?://\\S+"), " link ")
         // 6. Remove roleplay asterisks like *smiles warmly* if desired, or speak without asterisks
         clean = clean.replace(Regex("\\*([^*]+)\\*"), "$1")
-        // 7. Remove markdown headers, bold, italics markup
+        // 7. Remove zero-width characters (e.g. \u200B, \u2060, \uFEFF)
+        clean = clean.replace(Regex("[\\u200B-\\u200D\\u2060\\uFEFF]"), "")
+        // 8. Remove parenthesized kaomoji with optional arms and accessories (e.g. ٩(ˊᗜˋ*)و, (๑>ᴗ<๑), (´ω｀*), (*^▽^*), (¬‿¬), (^з^)-☆)
+        clean = clean.replace(
+            Regex("""[٩۶ᕗᕤᕙᕦงヽﾉノ凸\\/]*\s*[（(][^()（）]*[\^~_><*+xX•°º●・゜дДωᗜ๑ᴗ¬з☆★♥♡✿❀◕≧▽≦罒益﹏︿﹀T;´｀vVwW\u0250-\u02AF\u02B0-\u02FF\u0300-\u036F\u1500-\u154F\u2200-\u22FF\u2500-\u25FF\u2600-\u26FF\u2700-\u27BF\u3000-\u303F\uFF00-\uFFEF][^()（）]*[)）]\s*[-~]*[و٩۶ᕗᕤᕙᕦงヽﾉノ凸\\/★☆♥♡]*"""),
+            " "
+        )
+        // 9. Remove standalone ASCII/Unicode kaomoji without parentheses (e.g. >_<, T_T, -_-, ^_^, >w<, ^^, UwU, OwO, :3, XD)
+        clean = clean.replace(
+            Regex("""\b[oO0]_[oO0]\b|\b[uU]_[uU]\b|\b[xX]_[xX]\b|\b[tT]_[tT]\b|\b[qQ]_[qQ]\b|\b[uU][wW][uU]\b|\b[oO][wW][oO]\b|[><][:;^~*_-]+[><]|>[_.-]<|[~^_-]{2,}|;\s*[-_]\s*;|\b[xX][dD]\b|;[;_-]+|:[3DPOpP)\(]\b"""),
+            " "
+        )
+        // 10. Remove decorative symbols and arrows
+        clean = clean.replace(Regex("""[★☆♥♡✿❀♪♫✧✦†‡✓✔✕✖~→←↑↓]"""), " ")
+        // 11. Remove Unicode emojis
+        clean = clean.replace(Regex("""[\uD83C-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]|[\u2300-\u23FF]|[\u2B50\u2B55]|[\uFE00-\uFE0F]"""), " ")
+        // 12. Remove markdown headers, bold, italics markup
         clean = clean.replace(Regex("[#*_~>]+"), " ")
-        // 8. Normalize multiple spaces and linebreaks
+        // 13. Remove spaces before punctuation
+        clean = clean.replace(Regex("\\s+([.,!?:;])"), "$1")
+        // 14. Normalize multiple spaces and linebreaks
         clean = clean.replace(Regex("\\s+"), " ").trim()
         return clean
     }

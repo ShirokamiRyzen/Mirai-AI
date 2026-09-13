@@ -1,7 +1,7 @@
 # Graph Report - MiraiAI  (2026-09-13)
 
 ## Corpus Check
-- 78 files · ~93,979 words
+- 78 files · ~94,014 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -72,7 +72,7 @@
 - pixi.min.js
 - ChatScreen
 - at
-- ze
+- tt
 - ke
 - pt
 - PersonaViewModel
@@ -82,13 +82,13 @@
 - TokenUtils
 - pe
 - AvatarCropDialog
+- TtsDownloadState
 - Live2dViewerController
 - Ct
 - .onCreate
 - _
 - ce
 - ut
-- Live2dViewer.kt
 - De
 - Context
 - MiraiNavGraph
@@ -241,7 +241,7 @@ Nodes (10): AboutAppView(), AboutScreen(), AppIconImage(), AppVersionInfo, Compo
 
 ### Community 43 - "index.min.js"
 Cohesion: 0.04
-Nodes (28): ai(), cardanoAlgorithmForBezier(), cbrt(), createInternalModel(), directionToDegrees(), directionToRadian(), E, ge (+20 more)
+Nodes (25): ai(), cardanoAlgorithmForBezier(), cbrt(), createInternalModel(), directionToDegrees(), directionToRadian(), ge, Gt (+17 more)
 
 ### Community 44 - "x"
 Cohesion: 0.18
@@ -260,8 +260,8 @@ Cohesion: 0.14
 Nodes (17): da(), bi(), ci(), di(), gi(), Ji(), Ki(), li() (+9 more)
 
 ### Community 50 - "TtsManager"
-Cohesion: 0.13
-Nodes (12): Completed, Downloading, Error, Idle, Context, StateFlow, TtsDownloadState, TtsManager (+4 more)
+Cohesion: 0.18
+Nodes (6): Context, StateFlow, TtsManager, Job, MediaPlayer, TextToSpeech
 
 ### Community 51 - "m"
 Cohesion: 0.23
@@ -276,8 +276,8 @@ Cohesion: 0.16
 Nodes (24): k(), w(), at(), ct(), dt(), et(), ft(), ht() (+16 more)
 
 ### Community 58 - "ie"
-Cohesion: 0.09
-Nodes (5): createXHR(), ie, loadMotion(), v, warn()
+Cohesion: 0.08
+Nodes (8): createXHR(), E, ie, L(), loadMotion(), setupLive2DModel(), v, warn()
 
 ### Community 60 - "h"
 Cohesion: 0.10
@@ -307,9 +307,13 @@ Nodes (4): CharacterDao, Flow, CharacterEntity, ContextBuilderTest
 Cohesion: 0.17
 Nodes (3): pe, fe(), ve()
 
+### Community 75 - "TtsDownloadState"
+Cohesion: 0.29
+Nodes (6): Completed, Downloading, Error, Idle, TtsDownloadState, VoicePreset
+
 ### Community 76 - "Live2dViewerController"
-Cohesion: 0.20
-Nodes (5): com, Modifier, Live2dViewer(), Live2dViewerController, WebView
+Cohesion: 0.12
+Nodes (11): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), com, Context, Modifier, Live2dJsBridge, Live2dViewer() (+3 more)
 
 ### Community 80 - "Ct"
 Cohesion: 0.13
@@ -324,12 +328,8 @@ Cohesion: 0.08
 Nodes (3): ce, le, me
 
 ### Community 84 - "ut"
-Cohesion: 0.15
-Nodes (8): cos(), degreesToRadian(), ii(), radianToDirection(), si(), sin(), te(), ut
-
-### Community 85 - "Live2dViewer.kt"
-Cohesion: 0.28
-Nodes (6): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), Context, Live2dJsBridge, WebResourceResponse
+Cohesion: 0.12
+Nodes (9): cos(), degreesToRadian(), ii(), radianToDirection(), si(), sin(), te(), ut (+1 more)
 
 ### Community 86 - "De"
 Cohesion: 0.22

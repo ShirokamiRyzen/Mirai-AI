@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-13)
 
 ## Corpus Check
-- 78 files · ~94,014 words
+- 78 files · ~94,109 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1537 nodes · 2703 edges · 90 communities (64 shown, 26 thin omitted)
+- 1537 nodes · 2703 edges · 91 communities (65 shown, 26 thin omitted)
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 203 edges (avg confidence: 0.67)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `63b5698a`
+- Built from commit: `a5da9abb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -84,6 +84,7 @@
 - AvatarCropDialog
 - TtsDownloadState
 - Live2dViewerController
+- Live2dViewer.kt
 - Ct
 - .onCreate
 - _
@@ -125,7 +126,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (90 total, 26 thin omitted)
+## Communities (91 total, 26 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.08
@@ -312,8 +313,12 @@ Cohesion: 0.29
 Nodes (6): Completed, Downloading, Error, Idle, TtsDownloadState, VoicePreset
 
 ### Community 76 - "Live2dViewerController"
-Cohesion: 0.12
-Nodes (11): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), com, Context, Modifier, Live2dJsBridge, Live2dViewer() (+3 more)
+Cohesion: 0.20
+Nodes (5): com, Modifier, Live2dViewer(), Live2dViewerController, WebView
+
+### Community 77 - "Live2dViewer.kt"
+Cohesion: 0.28
+Nodes (6): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), Context, Live2dJsBridge, WebResourceResponse
 
 ### Community 80 - "Ct"
 Cohesion: 0.13
