@@ -30,6 +30,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.UUID
+import com.ryzumi.miraiai.domain.macro.MacroEngine
+import com.ryzumi.miraiai.domain.tts.TtsManager
 
 data class ChatUiState(
     val session: ChatSessionEntity? = null,
@@ -60,6 +62,9 @@ data class ChatUiState(
     val localModelMemoryMb: Double = 0.0,
     val localModelLoadingProgress: Float = 0f,
     val isLive2dMode: Boolean = false,
+    val isVoiceMode: Boolean = false,
+    val isVoicePlaying: Boolean = false,
+    val currentlyPlayingMessageId: String? = null,
     val currentEmotion: String = "neutral",
     val currentMotion: String? = null,
     val motionTrigger: Long = 0L,
@@ -76,13 +81,15 @@ class ChatViewModel(
     private val userPersonaDao: UserPersonaDao = database.userPersonaDao(),
     private val inferenceConfigDao: InferenceConfigDao = database.inferenceConfigDao(),
     private val openAiRepository: OpenAiRepository,
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    private val appContext: Context? = null
 ) : ViewModel() {
 
     private val _inputText = MutableStateFlow("")
     private val _selectedImageUri = MutableStateFlow<String?>(null)
     private val _isProcessingImage = MutableStateFlow(false)
     private val _isLiveThinkingExpanded = MutableStateFlow(true)
+    private val _currentlyPlayingMessageId = MutableStateFlow<String?>(null)
     private val _localError = MutableStateFlow<String?>(null)
     private val _manualEmotion = MutableStateFlow<String?>(null)
     private val _currentMotion = MutableStateFlow<String?>(null)
@@ -100,6 +107,52 @@ class ChatViewModel(
     override fun onCleared() {
         super.onCleared()
         ChatGenerationManager.clearActiveVisibleSession(sessionId)
+        touchReactionJob?.cancel()
+        stopVoice()
+    }
+
+    fun toggleVoiceMode() {
+        viewModelScope.launch {
+            val session = chatSessionDao.getSessionByIdSync(sessionId) ?: return@launch
+            val newMode = !session.isVoiceMode
+            chatSessionDao.updateSession(session.copy(isVoiceMode = newMode))
+            if (!newMode) {
+                stopVoice()
+            }
+        }
+    }
+
+    fun playMessageVoice(context: Context, messageId: String, text: String) {
+        val currentState = uiState.value
+        val character = currentState.character
+        val config = currentState.activeConfig
+
+        _currentlyPlayingMessageId.value = messageId
+        TtsManager.speak(
+            context = context,
+            text = text,
+            config = config,
+            character = character,
+            onStart = {
+                _currentlyPlayingMessageId.value = messageId
+            },
+            onDone = {
+                if (_currentlyPlayingMessageId.value == messageId) {
+                    _currentlyPlayingMessageId.value = null
+                }
+            },
+            onError = { errMsg ->
+                if (_currentlyPlayingMessageId.value == messageId) {
+                    _currentlyPlayingMessageId.value = null
+                }
+                _localError.value = errMsg
+            }
+        )
+    }
+
+    fun stopVoice() {
+        TtsManager.stop()
+        _currentlyPlayingMessageId.value = null
     }
 
     private data class DbData(
@@ -217,14 +270,17 @@ class ChatViewModel(
         val touchReactionText: String?,
         val touchReactionZone: String?,
         val motion: String?,
-        val motionTrigger: Long
+        val motionTrigger: Long,
+        val isVoicePlaying: Boolean,
+        val currentlyPlayingMessageId: String?
     )
 
     private val uiAuxStateFlow = combine(
         combine(_localError, _manualEmotion, _touchReactionText) { err, emo, txt -> Triple(err, emo, txt) },
-        combine(_touchReactionZone, _currentMotion, _motionTrigger) { zone, mot, trg -> Triple(zone, mot, trg) }
-    ) { (err, emo, txt), (zone, mot, trg) ->
-        UiAuxState(err, emo, txt, zone, mot, trg)
+        combine(_touchReactionZone, _currentMotion, _motionTrigger) { zone, mot, trg -> Triple(zone, mot, trg) },
+        combine(TtsManager.isPlaying, _currentlyPlayingMessageId) { isPlaying, msgId -> Pair(isPlaying, msgId) }
+    ) { (err, emo, txt), (zone, mot, trg), (isPlaying, msgId) ->
+        UiAuxState(err, emo, txt, zone, mot, trg, isPlaying, msgId)
     }
 
     val uiState: StateFlow<ChatUiState> = combine(
@@ -302,6 +358,9 @@ class ChatViewModel(
             localModelMemoryMb = localState.memoryMb,
             localModelLoadingProgress = localState.progress,
             isLive2dMode = core.session?.isLive2dMode ?: false,
+            isVoiceMode = core.session?.isVoiceMode ?: false,
+            isVoicePlaying = auxState.isVoicePlaying,
+            currentlyPlayingMessageId = auxState.currentlyPlayingMessageId,
             currentEmotion = resolvedEmotion,
             currentMotion = auxState.motion,
             motionTrigger = auxState.motionTrigger,
@@ -316,33 +375,44 @@ class ChatViewModel(
 
     init {
         viewModelScope.launch {
+            var isInitialized = false
             var lastEvaluatedMsgId: String? = null
-            var currentStreamEvaluated = false
+            var lastSpokenMsgId: String? = null
 
             coreDataFlow.collect { core ->
-                if (core.streamState.isStreaming) {
-                    val streamText = core.streamState.text
-                    if (streamText.isNotBlank() && !currentStreamEvaluated) {
+                val isStreaming = core.streamState.isStreaming
+                val streamText = core.streamState.text
+
+                if (isStreaming) {
+                    if (streamText.isNotBlank()) {
                         val motion = detectMotionFromText(streamText)
                         if (motion != null) {
-                            currentStreamEvaluated = true
                             _currentMotion.value = motion
                             _motionTrigger.value = System.currentTimeMillis()
                         }
                     }
                 } else {
                     val lastMsg = core.messages.lastOrNull { it.sender.equals("CHARACTER", ignoreCase = true) }
-                    if (currentStreamEvaluated) {
-                        currentStreamEvaluated = false
-                        if (lastMsg != null) {
+                    if (!isInitialized) {
+                        isInitialized = true
+                        lastEvaluatedMsgId = lastMsg?.id
+                        lastSpokenMsgId = lastMsg?.id
+                    } else if (lastMsg != null) {
+                        if (lastMsg.id != lastEvaluatedMsgId) {
                             lastEvaluatedMsgId = lastMsg.id
+                            val motion = detectMotionFromText(lastMsg.content)
+                            if (motion != null) {
+                                _currentMotion.value = motion
+                                _motionTrigger.value = System.currentTimeMillis()
+                            }
                         }
-                    } else if (lastMsg != null && lastMsg.id != lastEvaluatedMsgId) {
-                        lastEvaluatedMsgId = lastMsg.id
-                        val motion = detectMotionFromText(lastMsg.content)
-                        if (motion != null) {
-                            _currentMotion.value = motion
-                            _motionTrigger.value = System.currentTimeMillis()
+
+                        if (lastMsg.id != lastSpokenMsgId) {
+                            lastSpokenMsgId = lastMsg.id
+                            if (core.session?.isVoiceMode == true && lastMsg.content.isNotBlank()) {
+                                val targetCtx = appContext ?: com.ryzumi.miraiai.MiraiApplication.instance
+                                playMessageVoice(targetCtx, lastMsg.id, lastMsg.content)
+                            }
                         }
                     }
                 }
@@ -781,14 +851,17 @@ class ChatViewModel(
                 chatMessageDao.deleteMessage(it)
             }
 
-            // Re-seed character's firstMessage greeting if available
+            // Re-seed character's firstMessage greeting if available with macros resolved
             val char = characterDao.getCharacterByIdSync(uiState.value.character?.id ?: "")
             val defaultGreeting = char?.firstMessage
             if (!defaultGreeting.isNullOrBlank()) {
+                val charName = char.name.ifBlank { "Character" }
+                val userName = uiState.value.persona?.name?.ifBlank { "User" } ?: "User"
+                val processedGreeting = MacroEngine.processMacros(defaultGreeting, charName, userName)
                 val greetingMsg = ChatMessageEntity(
                     sessionId = sessionId,
                     sender = "CHARACTER",
-                    content = defaultGreeting
+                    content = processedGreeting
                 )
                 chatMessageDao.insertMessage(greetingMsg)
             }

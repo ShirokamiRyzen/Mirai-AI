@@ -1106,24 +1106,34 @@
         // Global functions called from Android
         window.setSpeaking = function(speaking) {
             isSpeaking = Boolean(speaking);
+            if (!isSpeaking) {
+                paramState.ParamMouthOpenY = 0;
+                try {
+                    setParam('ParamMouthOpenY', 0);
+                    setParam('PARAM_MOUTH_OPEN_Y', 0);
+                    setParam('ParamA', 0);
+                    setParam('ParamO', 0);
+                    setParam('ParamI', 0);
+                } catch (e) {}
+            }
             console.log('setSpeaking: ' + isSpeaking);
         };
 
         window.setEmotion = function(emotion, durationMs = 0) {
             console.log('setEmotion: ' + emotion + ', duration=' + durationMs);
-            if (!emotionPresets[emotion]) {
-                currentEmotion = 'neutral';
-            } else {
-                currentEmotion = emotion;
+            const targetEmotion = emotionPresets[emotion] ? emotion : 'neutral';
+            if (targetEmotion === currentEmotion) {
+                return;
             }
+            currentEmotion = targetEmotion;
 
             // Also trigger native expression if mapped
-            const nativeExp = emotionToNativeMap[emotion];
+            const nativeExp = emotionToNativeMap[targetEmotion];
             if (nativeExp && currentModel) {
                 try {
                     window.setExpression(nativeExp);
                 } catch (e) {}
-            } else if (emotion === 'neutral') {
+            } else if (targetEmotion === 'neutral') {
                 try {
                     window.resetExpression();
                 } catch (e) {}

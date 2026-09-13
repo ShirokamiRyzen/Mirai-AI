@@ -35,6 +35,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
+import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Slider
+import androidx.compose.material3.TextButton
+import androidx.compose.foundation.horizontalScroll
+import com.ryzumi.miraiai.domain.tts.TtsManager
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -67,6 +77,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Surface
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -84,6 +98,12 @@ fun CharacterEditScreen(
     onImpressionChanged: (String) -> Unit,
     onTagsInputChanged: (String) -> Unit,
     onFirstMessageChanged: (String) -> Unit,
+    onVoiceIdChanged: (String) -> Unit = {},
+    onVoicePitchChanged: (Float) -> Unit = {},
+    onVoiceSpeedChanged: (Float) -> Unit = {},
+    onConfigSelected: (String) -> Unit = {},
+    onTestVoice: () -> Unit = {},
+    onStopTestVoice: () -> Unit = {},
     onImportLive2d: (Uri) -> Unit = {},
     onRemoveLive2d: () -> Unit = {},
     onDismissLive2dMessages: () -> Unit = {},
@@ -589,9 +609,193 @@ fun CharacterEditScreen(
                 placeholder = { Text("anime, sci-fi, assistant") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 24.dp),
+                    .padding(bottom = 16.dp),
                 singleLine = true
             )
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+            // Voice Settings (TTS)
+            Text(
+                text = "Character Voice Settings (TTS)",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = "Configure the voice preset, pitch, and speed used in Voice Mode",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "Voice Preset",
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                TtsManager.KOKORO_VOICE_PRESETS.forEach { preset ->
+                    FilterChip(
+                        selected = uiState.voiceId.equals(preset.id, ignoreCase = true),
+                        onClick = { onVoiceIdChanged(preset.id) },
+                        label = { Text(preset.name, style = MaterialTheme.typography.labelSmall) },
+                        leadingIcon = {
+                            Icon(Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(14.dp))
+                        }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Custom Voice ID input
+            OutlinedTextField(
+                value = uiState.voiceId,
+                onValueChange = onVoiceIdChanged,
+                label = { Text("Voice Identifier") },
+                placeholder = { Text("e.g. af_heart, jf_alpha, or system") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 12.dp),
+                singleLine = true
+            )
+
+            // Pitch Slider
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Voice Pitch: ${String.format(java.util.Locale.US, "%.2fx", uiState.voicePitch)}",
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium
+                )
+                TextButton(onClick = { onVoicePitchChanged(1.0f) }) {
+                    Text("Reset", style = MaterialTheme.typography.labelSmall)
+                }
+            }
+            Slider(
+                value = uiState.voicePitch,
+                onValueChange = { onVoicePitchChanged(Math.round(it * 100f) / 100f) },
+                valueRange = 0.5f..2.0f,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            // Speed Slider
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Voice Speed: ${String.format(java.util.Locale.US, "%.2fx", uiState.voiceSpeed)}",
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium
+                )
+                TextButton(onClick = { onVoiceSpeedChanged(1.0f) }) {
+                    Text("Reset", style = MaterialTheme.typography.labelSmall)
+                }
+            }
+            Slider(
+                value = uiState.voiceSpeed,
+                onValueChange = { onVoiceSpeedChanged(Math.round(it * 100f) / 100f) },
+                valueRange = 0.5f..2.0f,
+                modifier = Modifier.padding(bottom = 14.dp)
+            )
+
+            // Inference Config Selector for Testing
+            if (uiState.configs.isNotEmpty()) {
+                var isConfigDropdownExpanded by remember { mutableStateOf(false) }
+                val selectedConfig = uiState.configs.find { it.id == uiState.selectedConfigId }
+                    ?: uiState.configs.find { it.isActive }
+                    ?: uiState.configs.firstOrNull()
+
+                Text(
+                    text = "Inference Config Profile (TTS Engine)",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+
+                ExposedDropdownMenuBox(
+                    expanded = isConfigDropdownExpanded,
+                    onExpandedChange = { isConfigDropdownExpanded = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 14.dp)
+                ) {
+                    OutlinedTextField(
+                        value = selectedConfig?.let { "${it.name}${if (it.isActive) " (Active)" else ""} [${it.ttsEngine.uppercase()}]" } ?: "Default Profile",
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text("Profile for Voice Test") },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isConfigDropdownExpanded) },
+                        modifier = Modifier
+                            .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                            .fillMaxWidth()
+                    )
+
+                    ExposedDropdownMenu(
+                        expanded = isConfigDropdownExpanded,
+                        onDismissRequest = { isConfigDropdownExpanded = false }
+                    ) {
+                        uiState.configs.forEach { cfg ->
+                            DropdownMenuItem(
+                                text = {
+                                    Column {
+                                        Text(
+                                            text = "${cfg.name}${if (cfg.isActive) " (Active)" else ""}",
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            fontWeight = if (cfg.id == selectedConfig?.id) FontWeight.Bold else FontWeight.Normal
+                                        )
+                                        Text(
+                                            text = "Engine: ${cfg.ttsEngine.uppercase()}${if (cfg.ttsEngine == "api") " (${cfg.ttsApiModel})" else " (${cfg.ttsLocalModel})"}",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                },
+                                onClick = {
+                                    onConfigSelected(cfg.id)
+                                    isConfigDropdownExpanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Test Voice Button
+            FilledTonalButton(
+                onClick = {
+                    if (uiState.isTestingVoice) {
+                        onStopTestVoice()
+                    } else {
+                        onTestVoice()
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 24.dp)
+            ) {
+                Icon(
+                    imageVector = if (uiState.isTestingVoice) Icons.Default.Stop else Icons.Default.PlayArrow,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(if (uiState.isTestingVoice) "Stop Voice Sample" else "Test Voice Sample")
+            }
         }
     }
 }

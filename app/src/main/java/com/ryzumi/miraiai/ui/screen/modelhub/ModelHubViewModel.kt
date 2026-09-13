@@ -22,6 +22,7 @@ enum class ModelHubFilter(val label: String) {
     TEXT_GGUF("Text / GGUF"),
     VISION("Vision (VLM)"),
     IMAGE_GEN("Image Gen"),
+    VOICE_TTS("Voice (TTS)"),
     DOWNLOADED("Downloaded")
 }
 
@@ -91,10 +92,17 @@ class ModelHubViewModel(
 
     fun searchModels(query: String = _uiState.value.searchQuery) {
         viewModelScope.launch {
+            val currentFilter = _uiState.value.selectedFilter
+            val targetFilter = if (query.isNotBlank() && currentFilter != ModelHubFilter.DOWNLOADED) {
+                ModelHubFilter.ALL
+            } else {
+                currentFilter
+            }
             _uiState.value = _uiState.value.copy(
                 isSearching = true,
                 errorMessage = null,
-                nextPageUrl = null
+                nextPageUrl = null,
+                selectedFilter = targetFilter
             )
             val result = repository.searchModels(query)
             result.onSuccess { pageResult ->

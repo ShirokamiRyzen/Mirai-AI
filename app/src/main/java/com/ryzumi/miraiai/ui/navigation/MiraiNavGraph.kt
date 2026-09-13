@@ -176,6 +176,7 @@ fun MiraiNavGraph(
             val viewModel: CharacterEditViewModel = viewModel {
                 CharacterEditViewModel(
                     characterDao = database.characterDao(),
+                    inferenceConfigDao = database.inferenceConfigDao(),
                     characterId = charId
                 )
             }
@@ -191,6 +192,12 @@ fun MiraiNavGraph(
                 onImpressionChanged = viewModel::onImpressionChanged,
                 onTagsInputChanged = viewModel::onTagsInputChanged,
                 onFirstMessageChanged = viewModel::onFirstMessageChanged,
+                onVoiceIdChanged = viewModel::onVoiceIdChanged,
+                onVoicePitchChanged = viewModel::onVoicePitchChanged,
+                onVoiceSpeedChanged = viewModel::onVoiceSpeedChanged,
+                onConfigSelected = viewModel::onConfigSelected,
+                onTestVoice = { viewModel.testVoice(context) },
+                onStopTestVoice = viewModel::stopTestVoice,
                 onImportLive2d = { uri -> viewModel.importLive2dArchive(context, uri) },
                 onRemoveLive2d = { viewModel.removeLive2d(context) },
                 onDismissLive2dMessages = viewModel::dismissLive2dMessages,
@@ -215,7 +222,8 @@ fun MiraiNavGraph(
                     userPersonaDao = database.userPersonaDao(),
                     inferenceConfigDao = database.inferenceConfigDao(),
                     openAiRepository = openAiRepo,
-                    settingsRepository = settingsRepo
+                    settingsRepository = settingsRepo,
+                    appContext = context.applicationContext
                 )
             }
             val uiState by viewModel.uiState.collectAsState()
@@ -239,6 +247,9 @@ fun MiraiNavGraph(
                 onUpdateSessionSettings = viewModel::updateChatSessionSettings,
                 onToggleLive2dMode = viewModel::toggleLive2dMode,
                 onModelTouched = viewModel::onLive2dTouched,
+                onToggleVoiceMode = viewModel::toggleVoiceMode,
+                onPlayMessageVoice = { id, text -> viewModel.playMessageVoice(context, id, text) },
+                onStopVoice = viewModel::stopVoice,
                 onBackClick = { navController.popBackStack() }
             )
         }

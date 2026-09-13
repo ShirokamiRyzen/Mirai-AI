@@ -20,6 +20,7 @@ data class HuggingFaceModel(
     val formattedSize: String = "Unknown",
     val hasVisionCapability: Boolean = false,
     val hasImageGenCapability: Boolean = false,
+    val hasVoiceCapability: Boolean = false,
     val requiredRamGb: Double = 0.0,
     val compatibility: ModelCompatibility = ModelCompatibility.MODERATE,
     val downloadUrl: String? = null,

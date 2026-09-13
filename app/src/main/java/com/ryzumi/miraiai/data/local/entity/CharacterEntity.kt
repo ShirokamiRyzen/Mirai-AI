@@ -17,5 +17,8 @@ data class CharacterEntity(
     val tags: List<String> = emptyList(),
     val firstMessage: String = "",
     val createdAt: Long = System.currentTimeMillis(),
-    val live2dPath: String? = null
+    val live2dPath: String? = null,
+    val voiceId: String = "af_heart",
+    val voicePitch: Float = 1.0f,
+    val voiceSpeed: Float = 1.0f
 )

@@ -27,8 +27,10 @@ class ModelDownloadWorker(
     }
 
     private val client = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS)
+        .followRedirects(true)
+        .followSslRedirects(true)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(180, TimeUnit.SECONDS)
         .build()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
@@ -52,7 +54,9 @@ class ModelDownloadWorker(
 
             var existingBytes = if (tempFile.exists()) tempFile.length() else 0L
 
-            val requestBuilder = Request.Builder().url(downloadUrl)
+            val requestBuilder = Request.Builder()
+                .url(downloadUrl)
+                .header("User-Agent", "Mozilla/5.0 (Android; MiraiAI)")
             if (existingBytes > 0L) {
                 requestBuilder.addHeader("Range", "bytes=$existingBytes-")
             }

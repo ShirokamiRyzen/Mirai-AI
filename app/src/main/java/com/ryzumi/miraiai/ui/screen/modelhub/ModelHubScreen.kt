@@ -23,9 +23,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Clear
@@ -104,6 +109,7 @@ fun ModelHubScreen(
     var selectedModelForDetails by remember { mutableStateOf<HuggingFaceModel?>(null) }
     var fileToDelete by remember { mutableStateOf<File?>(null) }
     val listState = rememberLazyListState()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(uiState.searchQuery) {
         if (uiState.searchQuery != localSearchText) {
@@ -126,13 +132,22 @@ fun ModelHubScreen(
         }
     }
 
-    val displayModels = remember(uiState.models, uiState.selectedFilter) {
+    val displayModels = remember(uiState.models, uiState.selectedFilter, localSearchText) {
+        val query = localSearchText.trim()
         uiState.models.filter { model ->
+            val matchesQuery = query.isEmpty() ||
+                    model.modelName.contains(query, ignoreCase = true) ||
+                    model.author.contains(query, ignoreCase = true) ||
+                    model.tags.any { it.contains(query, ignoreCase = true) }
+
+            if (!matchesQuery) return@filter false
+
             when (uiState.selectedFilter) {
                 ModelHubFilter.ALL -> true
-                ModelHubFilter.TEXT_GGUF -> !model.hasVisionCapability && !model.hasImageGenCapability
+                ModelHubFilter.TEXT_GGUF -> !model.hasVisionCapability && !model.hasImageGenCapability && !model.hasVoiceCapability
                 ModelHubFilter.VISION -> model.hasVisionCapability
                 ModelHubFilter.IMAGE_GEN -> model.hasImageGenCapability
+                ModelHubFilter.VOICE_TTS -> model.hasVoiceCapability
                 ModelHubFilter.DOWNLOADED -> model.isDownloaded
             }
         }
@@ -235,6 +250,8 @@ fun ModelHubScreen(
                             IconButton(onClick = {
                                 localSearchText = ""
                                 onSearchQueryChanged("")
+                                keyboardController?.hide()
+                                onSearchClick()
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -243,6 +260,15 @@ fun ModelHubScreen(
                             }
                         }
                     },
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Search
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onSearch = {
+                            keyboardController?.hide()
+                            onSearchClick()
+                        }
+                    ),
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp),
@@ -251,7 +277,10 @@ fun ModelHubScreen(
                 )
 
                 IconButton(
-                    onClick = onSearchClick,
+                    onClick = {
+                        keyboardController?.hide()
+                        onSearchClick()
+                    },
                     modifier = Modifier.size(48.dp)
                 ) {
                     Icon(
@@ -328,11 +357,27 @@ fun ModelHubScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = "No models match the selected filter",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Text(
+                            text = if (uiState.selectedFilter != ModelHubFilter.ALL) {
+                                "No models match '${uiState.selectedFilter.label}'"
+                            } else {
+                                "No models found"
+                            },
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        if (uiState.selectedFilter != ModelHubFilter.ALL && uiState.models.isNotEmpty()) {
+                            Button(
+                                onClick = { onFilterSelected(ModelHubFilter.ALL) }
+                            ) {
+                                Text("View in All Models (${uiState.models.size})")
+                            }
+                        }
+                    }
                 }
             } else {
                 LazyColumn(
@@ -634,6 +679,16 @@ fun ModelCardItem(
                     )
                 }
 
+                // 3b. Voice Capabilities Indicator
+                if (model.hasVoiceCapability) {
+                    IndicatorBadge(
+                        icon = Icons.AutoMirrored.Filled.VolumeUp,
+                        label = "Voice: Yes",
+                        containerColor = Color(0xFF004D40),
+                        contentColor = Color(0xFF80CBC4)
+                    )
+                }
+
                 // 4. Device RAM & Compatibility Indicator
                 when (model.compatibility) {
                     ModelCompatibility.OPTIMAL -> {
@@ -764,6 +819,15 @@ fun ModelDetailDialog(
                         containerColor = if (model.hasImageGenCapability) Color(0xFF4A148C) else MaterialTheme.colorScheme.surfaceVariant,
                         contentColor = if (model.hasImageGenCapability) Color(0xFFCE93D8) else MaterialTheme.colorScheme.onSurfaceVariant
                     )
+
+                    if (model.hasVoiceCapability) {
+                        IndicatorBadge(
+                            icon = Icons.AutoMirrored.Filled.VolumeUp,
+                            label = "Voice: Yes",
+                            containerColor = Color(0xFF004D40),
+                            contentColor = Color(0xFF80CBC4)
+                        )
+                    }
                 }
 
                 // Device Feasibility Section

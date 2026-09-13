@@ -102,6 +102,8 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Stop
+import androidx.compose.material.icons.filled.VolumeOff
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -220,6 +222,9 @@ fun ChatScreen(
     onUpdateSessionSettings: (title: String, personaId: String, configId: String) -> Unit = { _, _, _ -> },
     onToggleLive2dMode: () -> Unit = {},
     onModelTouched: (String) -> Unit = {},
+    onToggleVoiceMode: () -> Unit = {},
+    onPlayMessageVoice: (String, String) -> Unit = { _, _ -> },
+    onStopVoice: () -> Unit = {},
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -546,6 +551,16 @@ fun ChatScreen(
                         )
                     }
 
+                    IconButton(
+                        onClick = onToggleVoiceMode
+                    ) {
+                        Icon(
+                            imageVector = if (uiState.isVoiceMode) Icons.Default.VolumeUp else Icons.Default.VolumeOff,
+                            contentDescription = if (uiState.isVoiceMode) "Voice Mode (TTS Active)" else "Chat Mode (Silent)",
+                            tint = if (uiState.isVoiceMode) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                        )
+                    }
+
                     IconButton(onClick = { isTopMenuExpanded = true }) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
@@ -557,6 +572,26 @@ fun ChatScreen(
                         expanded = isTopMenuExpanded,
                         onDismissRequest = { isTopMenuExpanded = false }
                     ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    if (uiState.isVoiceMode) "Audio Mode: Voice"
+                                    else "Audio Mode: Chat"
+                                )
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = if (uiState.isVoiceMode) Icons.Default.VolumeUp else Icons.Default.VolumeOff,
+                                    contentDescription = null,
+                                    tint = if (uiState.isVoiceMode) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            },
+                            onClick = {
+                                isTopMenuExpanded = false
+                                onToggleVoiceMode()
+                            }
+                        )
+
                         DropdownMenuItem(
                             text = {
                                 Text(
@@ -815,11 +850,17 @@ fun ChatScreen(
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
+                    val isCharacterSpeaking = if (uiState.isVoiceMode) {
+                        uiState.isVoicePlaying
+                    } else {
+                        (uiState.isStreaming && uiState.streamingText.isNotBlank()) || uiState.isVoicePlaying
+                    }
+
                     // 1. Live2D Character Canvas (Fills full background)
                     Live2dViewer(
                         characterId = character.id,
                         modelRelativePath = currentLive2dModelPath.ifBlank { character.live2dPath ?: "" },
-                        isSpeaking = uiState.isStreaming && uiState.streamingText.isNotBlank(),
+                        isSpeaking = isCharacterSpeaking,
                         emotion = uiState.currentEmotion,
                         motion = uiState.currentMotion,
                         motionTrigger = uiState.motionTrigger,
@@ -1042,6 +1083,9 @@ fun ChatScreen(
                                             isTokenCounterEnabled = uiState.isTokenCounterEnabled,
                                             isSelected = isMsgSelected,
                                             isSelectionMode = isSelectionMode,
+                                            onPlayVoice = { onPlayMessageVoice(msg.id, msg.content) },
+                                            isVoicePlaying = uiState.isVoicePlaying && uiState.currentlyPlayingMessageId == msg.id,
+                                            onStopVoice = onStopVoice,
                                             onClick = {
                                                 if (isSelectionMode) {
                                                     selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
@@ -1160,6 +1204,59 @@ fun ChatScreen(
                             overflow = TextOverflow.Ellipsis
                         )
                     }
+
+                    // Floating Voice Playback Pill Overlay (Inside Live2D viewport so it never resizes the canvas)
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = uiState.isVoicePlaying,
+                        enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { -it },
+                        exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { -it },
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(top = 10.dp, start = 16.dp, end = 16.dp)
+                    ) {
+                        Surface(
+                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.94f),
+                            shape = RoundedCornerShape(16.dp),
+                            shadowElevation = 6.dp
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 14.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.VolumeUp,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Text(
+                                        text = "Speaking audio...",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
+                                IconButton(
+                                    onClick = onStopVoice,
+                                    modifier = Modifier.size(24.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Stop,
+                                        contentDescription = "Stop Voice",
+                                        tint = MaterialTheme.colorScheme.error,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 // --- STANDARD FULL CHAT MESSAGES HISTORY (TEXT ONLY MODE) ---
@@ -1184,6 +1281,9 @@ fun ChatScreen(
                             isTokenCounterEnabled = uiState.isTokenCounterEnabled,
                             isSelected = isMsgSelected,
                             isSelectionMode = isSelectionMode,
+                            onPlayVoice = { onPlayMessageVoice(msg.id, msg.content) },
+                            isVoicePlaying = uiState.isVoicePlaying && uiState.currentlyPlayingMessageId == msg.id,
+                            onStopVoice = onStopVoice,
                             onClick = {
                                 if (isSelectionMode) {
                                     selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
@@ -1259,6 +1359,61 @@ fun ChatScreen(
                                 listState = listState,
                                 onOpenUrl = onOpenUrl
                             )
+                        }
+                    }
+                }
+            }
+
+            // Voice Playback Pill Indicator (for non-Live2D text mode)
+            if (!hasLive2d) {
+                androidx.compose.animation.AnimatedVisibility(
+                    visible = uiState.isVoicePlaying,
+                    enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.expandVertically(),
+                    exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.shrinkVertically()
+                ) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        shape = RoundedCornerShape(16.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 4.dp),
+                        shadowElevation = 3.dp
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 14.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.VolumeUp,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Text(
+                                    text = "Speaking audio...",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                            IconButton(
+                                onClick = onStopVoice,
+                                modifier = Modifier.size(24.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Stop,
+                                    contentDescription = "Stop Voice",
+                                    tint = MaterialTheme.colorScheme.error,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
                         }
                     }
                 }
@@ -2283,6 +2438,9 @@ fun ChatBubbleItem(
     isTokenCounterEnabled: Boolean = false,
     isSelected: Boolean = false,
     isSelectionMode: Boolean = false,
+    onPlayVoice: (() -> Unit)? = null,
+    isVoicePlaying: Boolean = false,
+    onStopVoice: (() -> Unit)? = null,
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = {},
     onCopy: () -> Unit,
@@ -2533,6 +2691,25 @@ fun ChatBubbleItem(
                             maxLines = 1,
                             softWrap = false
                         )
+                        if (!isUser && onPlayVoice != null) {
+                            IconButton(
+                                onClick = {
+                                    if (isVoicePlaying) {
+                                        onStopVoice?.invoke()
+                                    } else {
+                                        onPlayVoice()
+                                    }
+                                },
+                                modifier = Modifier.size(20.dp)
+                            ) {
+                                Icon(
+                                    imageVector = if (isVoicePlaying) Icons.Default.Stop else Icons.Default.VolumeUp,
+                                    contentDescription = if (isVoicePlaying) "Stop audio" else "Play voice",
+                                    tint = if (isVoicePlaying) MaterialTheme.colorScheme.primary else timeColor,
+                                    modifier = Modifier.size(13.dp)
+                                )
+                            }
+                        }
                         if (isSelected) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,

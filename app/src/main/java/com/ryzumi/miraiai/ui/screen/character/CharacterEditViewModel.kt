@@ -20,6 +20,9 @@ import com.ryzumi.miraiai.domain.live2d.Live2dImportResult
 import com.ryzumi.miraiai.domain.live2d.Live2dManager
 import com.ryzumi.miraiai.domain.util.ImageUtils
 
+import com.ryzumi.miraiai.data.local.dao.InferenceConfigDao
+import com.ryzumi.miraiai.data.local.entity.InferenceConfigEntity
+
 data class CharacterEditUiState(
     val id: String = UUID.randomUUID().toString(),
     val name: String = "",
@@ -37,11 +40,18 @@ data class CharacterEditUiState(
     val live2dModelName: String? = null,
     val isImportingLive2d: Boolean = false,
     val live2dImportError: String? = null,
-    val live2dImportSuccessMsg: String? = null
+    val live2dImportSuccessMsg: String? = null,
+    val voiceId: String = "id_kawaii",
+    val voicePitch: Float = 1.0f,
+    val voiceSpeed: Float = 1.0f,
+    val isTestingVoice: Boolean = false,
+    val configs: List<InferenceConfigEntity> = emptyList(),
+    val selectedConfigId: String? = null
 )
 
 class CharacterEditViewModel(
     private val characterDao: CharacterDao,
+    private val inferenceConfigDao: InferenceConfigDao,
     private val characterId: String?
 ) : ViewModel() {
 
@@ -49,6 +59,14 @@ class CharacterEditViewModel(
     val uiState: StateFlow<CharacterEditUiState> = _uiState.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            inferenceConfigDao.getAllConfigs().collect { cfgList ->
+                _uiState.value = _uiState.value.copy(
+                    configs = cfgList,
+                    selectedConfigId = _uiState.value.selectedConfigId ?: cfgList.find { it.isActive }?.id ?: cfgList.firstOrNull()?.id
+                )
+            }
+        }
         if (!characterId.isNullOrBlank() && characterId != "new") {
             loadCharacter(characterId)
         }
@@ -57,7 +75,7 @@ class CharacterEditViewModel(
     private fun loadCharacter(id: String) {
         viewModelScope.launch {
             characterDao.getCharacterByIdSync(id)?.let { char ->
-                _uiState.value = CharacterEditUiState(
+                _uiState.value = _uiState.value.copy(
                     id = char.id,
                     name = char.name,
                     avatarUri = char.avatarUri,
@@ -69,7 +87,10 @@ class CharacterEditViewModel(
                     firstMessage = char.firstMessage,
                     isEditingExisting = true,
                     live2dPath = char.live2dPath,
-                    live2dModelName = char.live2dPath?.substringAfterLast('/')?.substringBefore(".model")
+                    live2dModelName = char.live2dPath?.substringAfterLast('/')?.substringBefore(".model"),
+                    voiceId = char.voiceId,
+                    voicePitch = char.voicePitch,
+                    voiceSpeed = char.voiceSpeed
                 )
             }
         }
@@ -83,6 +104,43 @@ class CharacterEditViewModel(
     fun onImpressionChanged(v: String) { _uiState.value = _uiState.value.copy(impression = v) }
     fun onTagsInputChanged(v: String) { _uiState.value = _uiState.value.copy(tagsInput = v) }
     fun onFirstMessageChanged(v: String) { _uiState.value = _uiState.value.copy(firstMessage = v) }
+    fun onVoiceIdChanged(v: String) { _uiState.value = _uiState.value.copy(voiceId = v) }
+    fun onVoicePitchChanged(v: Float) { _uiState.value = _uiState.value.copy(voicePitch = v) }
+    fun onVoiceSpeedChanged(v: Float) { _uiState.value = _uiState.value.copy(voiceSpeed = v) }
+    fun onConfigSelected(id: String) { _uiState.value = _uiState.value.copy(selectedConfigId = id) }
+
+    fun testVoice(context: Context) {
+        val state = _uiState.value
+        _uiState.value = state.copy(isTestingVoice = true, errorMessage = null)
+        val chosenConfig = state.configs.find { it.id == state.selectedConfigId }
+            ?: state.configs.find { it.isActive }
+            ?: state.configs.firstOrNull()
+        com.ryzumi.miraiai.domain.tts.TtsManager.testVoice(
+            context = context,
+            voiceId = state.voiceId,
+            pitch = state.voicePitch,
+            speed = state.voiceSpeed,
+            config = chosenConfig,
+            characterName = state.name.ifBlank { "Character" },
+            onStart = {
+                _uiState.value = _uiState.value.copy(isTestingVoice = true)
+            },
+            onDone = {
+                _uiState.value = _uiState.value.copy(isTestingVoice = false)
+            },
+            onError = { errMsg ->
+                _uiState.value = _uiState.value.copy(
+                    isTestingVoice = false,
+                    errorMessage = errMsg
+                )
+            }
+        )
+    }
+
+    fun stopTestVoice() {
+        com.ryzumi.miraiai.domain.tts.TtsManager.stop()
+        _uiState.value = _uiState.value.copy(isTestingVoice = false)
+    }
 
     fun importLive2dArchive(context: Context, zipUri: Uri) {
         val charId = _uiState.value.id
@@ -154,7 +212,10 @@ class CharacterEditViewModel(
                 impression = state.impression.trim(),
                 tags = parsedTags,
                 firstMessage = state.firstMessage.trim(),
-                live2dPath = state.live2dPath
+                live2dPath = state.live2dPath,
+                voiceId = state.voiceId,
+                voicePitch = state.voicePitch,
+                voiceSpeed = state.voiceSpeed
             )
 
             characterDao.insertCharacter(entity)

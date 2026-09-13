@@ -26,6 +26,11 @@ import java.io.FileOutputStream
 
 class MiraiApplication : Application(), ImageLoaderFactory {
 
+    companion object {
+        lateinit var instance: MiraiApplication
+            private set
+    }
+
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this)
             .memoryCache {
@@ -54,6 +59,8 @@ class MiraiApplication : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
+        com.ryzumi.miraiai.domain.tts.TtsManager.initSystemTts(this)
         com.ryzumi.miraiai.domain.util.ChatNotificationHelper.createNotificationChannel(this)
 
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {

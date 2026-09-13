@@ -274,9 +274,16 @@ fun Live2dViewer(
         )
     }
 
-    LaunchedEffect(isSpeaking, emotion) {
+    LaunchedEffect(isSpeaking) {
         webViewRef?.evaluateJavascript(
-            "if (window.setSpeaking) { window.setSpeaking($isSpeaking); } if (window.setEmotion) { window.setEmotion('$emotion'); }",
+            "if (window.setSpeaking) { window.setSpeaking($isSpeaking); }",
+            null
+        )
+    }
+
+    LaunchedEffect(emotion) {
+        webViewRef?.evaluateJavascript(
+            "if (window.setEmotion) { window.setEmotion('$emotion'); }",
             null
         )
     }
@@ -352,10 +359,6 @@ fun Live2dViewer(
         update = { wv ->
             webViewRef = wv
             controller.webView = wv
-            wv.evaluateJavascript(
-                "if (window.setSpeaking) { window.setSpeaking($isSpeaking); } if (window.setEmotion) { window.setEmotion('$emotion'); }",
-                null
-            )
         }
     )
 }

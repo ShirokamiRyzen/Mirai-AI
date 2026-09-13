@@ -38,6 +38,107 @@ class HuggingFaceRepository(private val context: Context) {
         }
     }
 
+    fun getFeaturedVoiceModels(): List<HuggingFaceModel> {
+        val modelsDir = File(context.filesDir, "models")
+
+        val hexgradFile = File(modelsDir, "hexgrad_Kokoro-82M_kokoro-v0_19.onnx")
+        val isHexgradDownloaded = hexgradFile.exists() && hexgradFile.length() > 5 * 1024 * 1024
+
+        val onnxFile = File(modelsDir, "onnx-community_Kokoro-82M-ONNX_model_quantized.onnx")
+        val kokoroTtsFile = File(File(context.filesDir, "models/tts/kokoro"), "kokoro-82m.onnx")
+        val isOnnxDownloaded = (onnxFile.exists() && onnxFile.length() > 5 * 1024 * 1024) ||
+                (kokoroTtsFile.exists() && kokoroTtsFile.length() > 5 * 1024 * 1024)
+
+        val piperFile = File(modelsDir, "rhasspy_piper-voices_en_US-lessac-medium.onnx")
+        val isPiperDownloaded = piperFile.exists() && piperFile.length() > 5 * 1024 * 1024
+
+        val audioCppFile = File(modelsDir, "audio-cpp_audio.cpp-gguf_model.gguf")
+        val isAudioCppDownloaded = audioCppFile.exists() && audioCppFile.length() > 5 * 1024 * 1024
+
+        return listOf(
+            HuggingFaceModel(
+                id = "hexgrad/Kokoro-82M",
+                modelName = "Kokoro-82M",
+                author = "hexgrad",
+                downloads = 3450000,
+                likes = 4200,
+                tags = listOf("tts", "text-to-speech", "voice", "audio"),
+                pipelineTag = "text-to-speech",
+                isDownloaded = isHexgradDownloaded,
+                localFilePath = if (isHexgradDownloaded) hexgradFile.absolutePath else null,
+                estimatedSizeGb = 0.082,
+                formattedSize = "82 MB",
+                hasVisionCapability = false,
+                hasImageGenCapability = false,
+                hasVoiceCapability = true,
+                requiredRamGb = 0.5,
+                compatibility = ModelCompatibility.OPTIMAL,
+                downloadUrl = "https://huggingface.co/hexgrad/Kokoro-82M/resolve/main/kokoro-v0_19.onnx",
+                selectedFileName = "kokoro-v0_19.onnx"
+            ),
+            HuggingFaceModel(
+                id = "onnx-community/Kokoro-82M-ONNX",
+                modelName = "Kokoro-82M-ONNX",
+                author = "onnx-community",
+                downloads = 1200000,
+                likes = 1850,
+                tags = listOf("tts", "text-to-speech", "onnx", "web", "mobile"),
+                pipelineTag = "text-to-speech",
+                isDownloaded = isOnnxDownloaded,
+                localFilePath = if (isOnnxDownloaded) (if (onnxFile.exists()) onnxFile.absolutePath else kokoroTtsFile.absolutePath) else null,
+                estimatedSizeGb = 0.086,
+                formattedSize = "86 MB",
+                hasVisionCapability = false,
+                hasImageGenCapability = false,
+                hasVoiceCapability = true,
+                requiredRamGb = 0.5,
+                compatibility = ModelCompatibility.OPTIMAL,
+                downloadUrl = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/onnx/model_quantized.onnx",
+                selectedFileName = "model_quantized.onnx"
+            ),
+            HuggingFaceModel(
+                id = "rhasspy/piper-voices",
+                modelName = "Piper-TTS-Voice",
+                author = "rhasspy",
+                downloads = 2100000,
+                likes = 2950,
+                tags = listOf("tts", "text-to-speech", "piper", "onnx", "voice"),
+                pipelineTag = "text-to-speech",
+                isDownloaded = isPiperDownloaded,
+                localFilePath = if (isPiperDownloaded) piperFile.absolutePath else null,
+                estimatedSizeGb = 0.065,
+                formattedSize = "65 MB",
+                hasVisionCapability = false,
+                hasImageGenCapability = false,
+                hasVoiceCapability = true,
+                requiredRamGb = 0.4,
+                compatibility = ModelCompatibility.OPTIMAL,
+                downloadUrl = "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+                selectedFileName = "en_US-lessac-medium.onnx"
+            ),
+            HuggingFaceModel(
+                id = "audio-cpp/audio.cpp-gguf",
+                modelName = "audio.cpp-gguf",
+                author = "audio-cpp",
+                downloads = 3256160,
+                likes = 121,
+                tags = listOf("tts", "audio", "gguf", "voice"),
+                pipelineTag = "text-to-speech",
+                isDownloaded = isAudioCppDownloaded,
+                localFilePath = if (isAudioCppDownloaded) audioCppFile.absolutePath else null,
+                estimatedSizeGb = 0.084,
+                formattedSize = "84 MB",
+                hasVisionCapability = false,
+                hasImageGenCapability = false,
+                hasVoiceCapability = true,
+                requiredRamGb = 0.5,
+                compatibility = ModelCompatibility.OPTIMAL,
+                downloadUrl = "https://huggingface.co/audio-cpp/audio.cpp-gguf/resolve/main/audio-base.gguf",
+                selectedFileName = "audio-base.gguf"
+            )
+        )
+    }
+
     suspend fun searchModels(query: String, pageUrl: String? = null): Result<HuggingFacePageResult> = withContext(Dispatchers.IO) {
         try {
             val cleanQuery = query.trim()
@@ -77,6 +178,19 @@ class HuggingFaceRepository(private val context: Context) {
                 val resultList = mutableListOf<HuggingFaceModel>()
                 val localModelsDir = File(context.filesDir, "models")
 
+                if (pageUrl == null) {
+                    val voiceModels = getFeaturedVoiceModels().filter { m ->
+                        cleanQuery.isEmpty() ||
+                                m.modelName.contains(cleanQuery, ignoreCase = true) ||
+                                m.author.contains(cleanQuery, ignoreCase = true) ||
+                                m.tags.any { it.contains(cleanQuery, ignoreCase = true) } ||
+                                cleanQuery.contains("voice", ignoreCase = true) ||
+                                cleanQuery.contains("tts", ignoreCase = true) ||
+                                cleanQuery.contains("kokoro", ignoreCase = true)
+                    }
+                    resultList.addAll(voiceModels)
+                }
+
                 for (element in jsonArray) {
                     if (element.isJsonObject) {
                         val obj = element.asJsonObject
@@ -98,36 +212,42 @@ class HuggingFaceRepository(private val context: Context) {
                             }
                         }
 
-                        // Collect all valid GGUF files in the repository siblings
-                        val ggufFiles = mutableListOf<Pair<String, Long>>()
+                        val isVoiceRepo = (pipelineTag in listOf("text-to-speech", "audio-to-audio", "voice-conversion")) ||
+                                tagsList.any { it.contains("tts", ignoreCase = true) || it.contains("voice", ignoreCase = true) || it.contains("speech", ignoreCase = true) } ||
+                                id.contains("kokoro", ignoreCase = true) || id.contains("tts", ignoreCase = true) || id.contains("piper", ignoreCase = true)
+
+                        // Collect all valid GGUF or ONNX (for voice models) files in the repository siblings
+                        val modelFiles = mutableListOf<Pair<String, Long>>()
                         obj.getAsJsonArray("siblings")?.let { siblings ->
                             for (sib in siblings) {
                                 if (sib.isJsonObject) {
                                     val sibObj = sib.asJsonObject
                                     val rfilename = sibObj.get("rfilename")?.asString ?: ""
                                     val sizeBytes = sibObj.get("size")?.asLong ?: 0L
-                                    if (rfilename.endsWith(".gguf", ignoreCase = true) && !rfilename.contains("imatrix", ignoreCase = true)) {
-                                        ggufFiles.add(Pair(rfilename, sizeBytes))
+                                    val isGguf = rfilename.endsWith(".gguf", ignoreCase = true) && !rfilename.contains("imatrix", ignoreCase = true)
+                                    val isOnnx = isVoiceRepo && rfilename.endsWith(".onnx", ignoreCase = true)
+                                    if (isGguf || isOnnx) {
+                                        modelFiles.add(Pair(rfilename, sizeBytes))
                                     }
                                 }
                             }
                         }
 
-                        // STRICT FILTER: Only include if the repo contains runnable GGUF files or is a known GGUF repo
-                        val isGgufRepo = ggufFiles.isNotEmpty() || tagsList.any { it.equals("gguf", ignoreCase = true) } || id.contains("gguf", ignoreCase = true)
-                        if (!isGgufRepo) {
+                        // Filter: include if contains runnable GGUF/ONNX files or is known GGUF/Voice repo
+                        val isRunnableRepo = modelFiles.isNotEmpty() || isVoiceRepo || tagsList.any { it.equals("gguf", ignoreCase = true) } || id.contains("gguf", ignoreCase = true)
+                        if (!isRunnableRepo) {
                             continue
                         }
 
-                        // Pick the best default quantization file (Priority: Q4_K_M > Q4_K_S > Q4_0 > Q5_K_M > Q8_0 > first .gguf)
-                        val bestGgufPair = ggufFiles.firstOrNull { it.first.contains("q4_k_m", ignoreCase = true) }
-                            ?: ggufFiles.firstOrNull { it.first.contains("q4_k_s", ignoreCase = true) || it.first.contains("q4_0", ignoreCase = true) }
-                            ?: ggufFiles.firstOrNull { it.first.contains("q5_k_m", ignoreCase = true) || it.first.contains("q5_0", ignoreCase = true) }
-                            ?: ggufFiles.firstOrNull { it.first.contains("q8_0", ignoreCase = true) }
-                            ?: ggufFiles.firstOrNull()
+                        val bestFilePair = modelFiles.firstOrNull { it.first.contains("q4_k_m", ignoreCase = true) }
+                            ?: modelFiles.firstOrNull { it.first.contains("q4_k_s", ignoreCase = true) || it.first.contains("q4_0", ignoreCase = true) }
+                            ?: modelFiles.firstOrNull { it.first.contains("q5_k_m", ignoreCase = true) || it.first.contains("q5_0", ignoreCase = true) }
+                            ?: modelFiles.firstOrNull { it.first.contains("q8_0", ignoreCase = true) }
+                            ?: modelFiles.firstOrNull { it.first.endsWith(".onnx", ignoreCase = true) }
+                            ?: modelFiles.firstOrNull()
 
-                        val selectedFileName = bestGgufPair?.first ?: "model.gguf"
-                        val directSizeBytes = bestGgufPair?.second ?: 0L
+                        val selectedFileName = bestFilePair?.first ?: if (isVoiceRepo) "model.onnx" else "model.gguf"
+                        val directSizeBytes = bestFilePair?.second ?: 0L
 
                         val downloadUrl = "https://huggingface.co/$id/resolve/main/$selectedFileName"
 
@@ -159,6 +279,8 @@ class HuggingFaceRepository(private val context: Context) {
                         // 3. Size calculation
                         val estimatedSizeGb = if (directSizeBytes > 0L) {
                             directSizeBytes.toDouble() / (1024.0 * 1024.0 * 1024.0)
+                        } else if (isVoiceRepo) {
+                            0.082
                         } else {
                             val lowerName = "$id $modelName ${tagsList.joinToString(" ")}".lowercase(Locale.ROOT)
                             val pattern = Pattern.compile("(\\d+(\\.\\d+)?)[bB]")
@@ -194,7 +316,7 @@ class HuggingFaceRepository(private val context: Context) {
                         }
 
                         // 4. Calculate RAM Requirement & Device Compatibility
-                        val requiredRamGb = (estimatedSizeGb * 1.25) + 0.8
+                        val requiredRamGb = if (isVoiceRepo) 0.5 else ((estimatedSizeGb * 1.25) + 0.8)
                         val compatibility = when {
                             systemTotalRamGb >= requiredRamGb + 1.5 -> ModelCompatibility.OPTIMAL
                             systemTotalRamGb >= requiredRamGb -> ModelCompatibility.MODERATE
@@ -205,27 +327,30 @@ class HuggingFaceRepository(private val context: Context) {
                         val targetFile = File(localModelsDir, safeName)
                         val isDownloaded = targetFile.exists() && targetFile.length() > 0
 
-                        resultList.add(
-                            HuggingFaceModel(
-                                id = id,
-                                modelName = modelName,
-                                author = author,
-                                downloads = downloads,
-                                likes = likes,
-                                tags = tagsList,
-                                pipelineTag = pipelineTag,
-                                isDownloaded = isDownloaded,
-                                localFilePath = if (isDownloaded) targetFile.absolutePath else null,
-                                estimatedSizeGb = estimatedSizeGb,
-                                formattedSize = formattedSize,
-                                hasVisionCapability = hasVision,
-                                hasImageGenCapability = hasImageGen,
-                                requiredRamGb = requiredRamGb,
-                                compatibility = compatibility,
-                                downloadUrl = downloadUrl,
-                                selectedFileName = selectedFileName
+                        if (resultList.none { it.id.equals(id, ignoreCase = true) }) {
+                            resultList.add(
+                                HuggingFaceModel(
+                                    id = id,
+                                    modelName = modelName,
+                                    author = author,
+                                    downloads = downloads,
+                                    likes = likes,
+                                    tags = tagsList,
+                                    pipelineTag = pipelineTag,
+                                    isDownloaded = isDownloaded,
+                                    localFilePath = if (isDownloaded) targetFile.absolutePath else null,
+                                    estimatedSizeGb = estimatedSizeGb,
+                                    formattedSize = formattedSize,
+                                    hasVisionCapability = hasVision,
+                                    hasImageGenCapability = hasImageGen,
+                                    hasVoiceCapability = isVoiceRepo,
+                                    requiredRamGb = requiredRamGb,
+                                    compatibility = compatibility,
+                                    downloadUrl = downloadUrl,
+                                    selectedFileName = selectedFileName
+                                )
                             )
-                        )
+                        }
                     }
                 }
 
@@ -237,8 +362,15 @@ class HuggingFaceRepository(private val context: Context) {
     }
 
     fun getDownloadedModels(): List<File> {
+        val list = mutableListOf<File>()
         val modelsDir = File(context.filesDir, "models")
-        if (!modelsDir.exists()) return emptyList()
-        return modelsDir.listFiles()?.filter { it.isFile && it.length() > 0 } ?: emptyList()
+        if (modelsDir.exists()) {
+            modelsDir.listFiles()?.filter { it.isFile && it.length() > 0 }?.let { list.addAll(it) }
+        }
+        val ttsDir = File(context.filesDir, "models/tts/kokoro")
+        if (ttsDir.exists()) {
+            ttsDir.listFiles()?.filter { it.isFile && it.length() > 0 }?.let { list.addAll(it) }
+        }
+        return list.distinctBy { it.name }
     }
 }

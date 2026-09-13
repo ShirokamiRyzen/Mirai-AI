@@ -54,6 +54,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.ContentCopy
@@ -74,6 +75,16 @@ import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.SettingsInputComponent
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.collectAsState
+import com.ryzumi.miraiai.domain.tts.TtsDownloadState
+import com.ryzumi.miraiai.domain.tts.TtsManager
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
@@ -81,6 +92,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -734,6 +746,14 @@ fun ConfigEditorForm(
     var maxTokens by remember(config.id) { mutableIntStateOf(config.maxTokens) }
     var repetitionPenalty by remember(config.id) { mutableFloatStateOf(config.repetitionPenalty) }
     var customHeaders by remember(config.id) { mutableStateOf(config.customHeaders) }
+    var ttsEngine by remember(config.id) { mutableStateOf(config.ttsEngine) }
+    var ttsLocalModel by remember(config.id) { mutableStateOf(config.ttsLocalModel) }
+    var isTtsLocalModelDropdownExpanded by remember { mutableStateOf(false) }
+    var ttsApiEndpoint by remember(config.id) { mutableStateOf(config.ttsApiEndpoint) }
+    var ttsApiKey by remember(config.id) { mutableStateOf(config.ttsApiKey) }
+    var ttsApiModel by remember(config.id) { mutableStateOf(config.ttsApiModel) }
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -1103,6 +1123,167 @@ fun ConfigEditorForm(
             minLines = 2
         )
 
+        HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
+
+        // Text-to-Speech (TTS) Configuration
+        Text(
+            text = "Voice & Speech Synthesis (TTS)",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = "Configure speech generation for characters when Voice Mode is active",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // Engine Selector
+        Text(
+            text = "TTS Engine Source",
+            style = MaterialTheme.typography.labelMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+        Spacer(modifier = Modifier.height(6.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            FilterChip(
+                selected = ttsEngine == "local",
+                onClick = { ttsEngine = "local" },
+                label = { Text("Local Voice Model") },
+                leadingIcon = { Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp)) }
+            )
+            FilterChip(
+                selected = ttsEngine == "api",
+                onClick = { ttsEngine = "api" },
+                label = { Text("Endpoint API") },
+                leadingIcon = { Icon(Icons.Default.Cloud, contentDescription = null, modifier = Modifier.size(16.dp)) }
+            )
+            FilterChip(
+                selected = ttsEngine == "system",
+                onClick = { ttsEngine = "system" },
+                label = { Text("System TTS") },
+                leadingIcon = { Icon(Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(16.dp)) }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        when (ttsEngine) {
+            "local" -> {
+                Text(
+                    text = "Local Voice Model",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Select a downloaded voice model for speech synthesis (Kokoro, Piper, ONNX)",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                ExposedDropdownMenuBox(
+                    expanded = isTtsLocalModelDropdownExpanded,
+                    onExpandedChange = { isTtsLocalModelDropdownExpanded = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 12.dp)
+                ) {
+                    OutlinedTextField(
+                        value = if (ttsLocalModel.isBlank() || ttsLocalModel == "none") "none (System Default)" else ttsLocalModel,
+                        onValueChange = { },
+                        readOnly = true,
+                        label = { Text("Local Voice Model") },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isTtsLocalModelDropdownExpanded) },
+                        modifier = Modifier
+                            .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                            .fillMaxWidth()
+                    )
+
+                    val downloadedVoices = remember(uiState.localModels) {
+                        val list = mutableListOf("none (System Default)")
+                        list.addAll(uiState.localModels.filter { it != "None (Download via Model Hub)" })
+                        list.distinct()
+                    }
+
+                    ExposedDropdownMenu(
+                        expanded = isTtsLocalModelDropdownExpanded,
+                        onDismissRequest = { isTtsLocalModelDropdownExpanded = false }
+                    ) {
+                        downloadedVoices.forEach { model ->
+                            DropdownMenuItem(
+                                text = { Text(model) },
+                                onClick = {
+                                    ttsLocalModel = if (model.startsWith("none")) "none" else model
+                                    isTtsLocalModelDropdownExpanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+            "api" -> {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    OutlinedTextField(
+                        value = ttsApiEndpoint,
+                        onValueChange = { ttsApiEndpoint = it },
+                        label = { Text("TTS Endpoint URL") },
+                        placeholder = { Text("http://localhost:8880/v1/audio/speech") },
+                        supportingText = { Text("Leave blank to use Base Endpoint URL + /audio/speech") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
+
+                    OutlinedTextField(
+                        value = ttsApiKey,
+                        onValueChange = { ttsApiKey = it },
+                        label = { Text("TTS API Key (Optional)") },
+                        placeholder = { Text("Leave blank to use profile API key") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
+
+                    OutlinedTextField(
+                        value = ttsApiModel,
+                        onValueChange = { ttsApiModel = it },
+                        label = { Text("TTS Model Name") },
+                        placeholder = { Text("kokoro, tts-1, or tts-1-hd") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
+                }
+            }
+            "system" -> {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(14.dp)) {
+                        Text(
+                            text = "Android System TTS",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Uses your device's built-in Text-To-Speech engine. Fast, lightweight, and works offline immediately.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         // Action Buttons
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -1132,7 +1313,12 @@ fun ConfigEditorForm(
                         topP = Math.round(topP * 100f) / 100f,
                         maxTokens = maxTokens,
                         repetitionPenalty = Math.round(repetitionPenalty * 100f) / 100f,
-                        customHeaders = customHeaders
+                        customHeaders = customHeaders,
+                        ttsEngine = ttsEngine,
+                        ttsLocalModel = ttsLocalModel,
+                        ttsApiEndpoint = ttsApiEndpoint,
+                        ttsApiKey = ttsApiKey,
+                        ttsApiModel = ttsApiModel
                     )
                     onSave(updated)
                 },

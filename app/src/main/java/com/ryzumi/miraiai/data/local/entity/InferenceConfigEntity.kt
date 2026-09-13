@@ -21,5 +21,10 @@ data class InferenceConfigEntity(
     val maxTokens: Int = 2048,
     val customHeaders: String = "",
     val availableModelsJson: String = "[]",
-    val isActive: Boolean = false
+    val isActive: Boolean = false,
+    val ttsEngine: String = "local",
+    val ttsLocalModel: String = "kokoro-82m",
+    val ttsApiEndpoint: String = "",
+    val ttsApiKey: String = "",
+    val ttsApiModel: String = "kokoro"
 )

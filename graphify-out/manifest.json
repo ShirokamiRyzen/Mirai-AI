@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/MiraiApplication.kt": {
-    "mtime": 1789042215.5991938,
-    "ast_hash": "a8c7a9d312075df84e5d03d912686eea",
+    "mtime": 1789308196.0330408,
+    "ast_hash": "555aba8d6cbb4c0496eb3dbf6baed3b1",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/datastore/AppSettings.kt": {
@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/MiraiDatabase.kt": {
-    "mtime": 1789293878.186293,
-    "ast_hash": "afe10ee2e0184a96a7507117b62a2180",
+    "mtime": 1789306017.0497446,
+    "ast_hash": "c5b5f7ef6fa8164814b57d42b7bb9d4d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/dao/CharacterDao.kt": {
@@ -65,8 +65,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/entity/CharacterEntity.kt": {
-    "mtime": 1789293854.9684963,
-    "ast_hash": "6530abfcfbcdd75b2952b02d3589c5ab",
+    "mtime": 1789305997.9307463,
+    "ast_hash": "a41ca4bbf07879db94737d98f49277f1",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/entity/ChatMessageEntity.kt": {
@@ -75,13 +75,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/entity/ChatSessionEntity.kt": {
-    "mtime": 1789293861.1097753,
-    "ast_hash": "c72f1a83e07deec6689f5979e126ac13",
+    "mtime": 1789306005.450964,
+    "ast_hash": "4541e8f32fe0fa4e84aaafcc2307d46d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/entity/InferenceConfigEntity.kt": {
-    "mtime": 1788274504.1169608,
-    "ast_hash": "6be9e34e4367d4fee23a909551c0414a",
+    "mtime": 1789305990.033694,
+    "ast_hash": "9cd2da7f698f3f09d4f3d9ece2c062c8",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/local/entity/UserPersonaEntity.kt": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/network/HuggingFaceRepository.kt": {
-    "mtime": 1788318216.6424677,
-    "ast_hash": "789c4be306bd5222f66d35478ff1b039",
+    "mtime": 1789308479.7252326,
+    "ast_hash": "df1ad0e588b9206c491edc82818d55d5",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/network/OpenAiRepository.kt": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/data/worker/ModelDownloadWorker.kt": {
-    "mtime": 1788318592.990052,
-    "ast_hash": "c7e8aa72a2281cf75135da54c0e65f4b",
+    "mtime": 1789307711.8627799,
+    "ast_hash": "1a5117408078235a558be8e128663c02",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/model/HuggingFaceModel.kt": {
-    "mtime": 1788317746.4964921,
-    "ast_hash": "5b989046d6c857d072043d43fc5f62b0",
+    "mtime": 1789307143.1677415,
+    "ast_hash": "000aaa2038a134f950840845b1ca672d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/model/OpenAiMessage.kt": {
@@ -140,18 +140,18 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt": {
-    "mtime": 1789303849.6629083,
-    "ast_hash": "960f68edd4adfadc147e041455a69f07",
+    "mtime": 1789310363.1130195,
+    "ast_hash": "ce585ab406dd29957985e279f61a4c83",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditScreen.kt": {
-    "mtime": 1789294217.5501049,
-    "ast_hash": "2f0ea9f6c8b86b8d2f82f5cc23bec105",
+    "mtime": 1789310389.4768066,
+    "ast_hash": "3fdc44ef19df2cbbf7419ae1d38cdbb9",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterEditViewModel.kt": {
-    "mtime": 1789294195.1088328,
-    "ast_hash": "d7093a76bc76c35a0d5c19002e69af01",
+    "mtime": 1789310328.9460094,
+    "ast_hash": "df3e24860b5029c2a1d63dd845a24320",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/CharacterListScreen.kt": {
@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt": {
-    "mtime": 1789305146.5813868,
-    "ast_hash": "16129e1d2f2cab24455f1265e23944eb",
+    "mtime": 1789310796.369438,
+    "ast_hash": "892be09087d26ea2d94df6254b0e0178",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt": {
-    "mtime": 1789303450.8462267,
-    "ast_hash": "2ae15729a753ab104c3e0b459e3cfc9b",
+    "mtime": 1789310106.2259846,
+    "ast_hash": "748ed4d701be21806f4d46f9d4d7245a",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/management/ManagementScreen.kt": {
@@ -180,13 +180,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt": {
-    "mtime": 1789303874.3335788,
-    "ast_hash": "b7b82e68695a432fac64d62349b18f66",
+    "mtime": 1789307937.9563835,
+    "ast_hash": "38e8448bdeda434f261bb521faef3c94",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt": {
-    "mtime": 1789303861.344879,
-    "ast_hash": "4e5d6b88c9e65269628c0fa3c50b1548",
+    "mtime": 1789307947.9669728,
+    "ast_hash": "a94f5eeb906af79a6f4536bfd070fc5d",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/persona/PersonaListScreen.kt": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt": {
-    "mtime": 1788939662.9627452,
-    "ast_hash": "b173de282db747305f63039ee4ee210f",
+    "mtime": 1789309484.187245,
+    "ast_hash": "a6f62e59e52f875ccaf9fb89d70189a1",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsViewModel.kt": {
@@ -480,18 +480,23 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/component/live2d/Live2dViewer.kt": {
-    "mtime": 1789305130.4395177,
-    "ast_hash": "9b5f671085ceccafbec5d6d8996027e3",
+    "mtime": 1789310165.2500145,
+    "ast_hash": "b964e0f67bd1c6e90ed7da531a01daae",
     "semantic_hash": ""
   },
   "app/src/main/assets/live2d/viewer.html": {
-    "mtime": 1789305123.3518863,
-    "ast_hash": "b0bf716df7ed8da697d903f2e529ec86",
+    "mtime": 1789310770.5090075,
+    "ast_hash": "7356065647fbce20a4eefc7507820c32",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/live2d/Live2dModelData.kt": {
     "mtime": 1789300066.1864285,
     "ast_hash": "210ff5e6c31fa4c11ed74ca1c2a3fa9f",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt": {
+    "mtime": 1789310288.713476,
+    "ast_hash": "ce5591bfee2b5e52478e3b09a6615f92",
     "semantic_hash": ""
   }
 }
