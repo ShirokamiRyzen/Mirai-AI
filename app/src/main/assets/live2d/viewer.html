@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+    <title>Mirai Live2D Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            min-height: 100vh;
+            overflow: hidden;
+            background: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            touch-action: none;
+        }
+        #status-msg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 13px;
+            text-align: center;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 12px;
+            pointer-events: none;
+            max-width: 85%;
+            display: block;
+            z-index: 10;
+        }
+    </style>
+    <script src="live2d.min.js"></script>
+    <script src="live2dcubismcore.min.js"></script>
+    <script src="pixi.min.js"></script>
+    <script src="index.min.js"></script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="status-msg">Loading Live2D...</div>
+
+    <script>
+        let app = null;
+        let currentModel = null;
+        let isSpeaking = false;
+        let currentEmotion = 'neutral';
+        let emotionTimer = null;
+        let allDiscoveredMotions = [];
+
+        // Pointer tracking target values (-1 to +1)
+        let targetLookX = 0;
+        let targetLookY = 0;
+        let currentLookX = 0;
+        let currentLookY = 0;
+        let isTrackingTouch = false;
+        let lastTouchTime = 0;
+
+        // Dynamic physics burst (e.g. chest bounce, skirt sway)
+        let chestBounceVal = 0;
+        let skirtSwayVal = 0;
+        let headTiltOffset = 0;
+        let mouthGaspOffset = 0;
+
+        // Arm and hand gesture targets
+        let armCoverVal = 0;
+        let armCoverTarget = 0;
+        let armCoverTimer = null;
+        let armChestVal = 0;
+        let armChestTarget = 0;
+        let armChestTimer = null;
+
+        // Current parameter interpolation state
+        const paramState = {
+            ParamMouthOpenY: 0,
+            ParamMouthForm: 0,
+            ParamCheek: 0,
+            ParamCheek2: 0,
+            Param79: 0, // Heart eyes
+            Param13: 0, // Star eyes
+            Param14: 0, // Dark/angry shadow face
+            Param12: 0, // Tears/crying
+            Param1: 0,  // Tongue out
+            Param81: 0, // >< eyes
+            Param80: 0, // Smug grin
+            ParamBrowLY: 0,
+            ParamBrowRY: 0,
+            ParamBrowLForm: 0,
+            ParamBrowRForm: 0,
+            ParamEyeForm: 0,
+            ParamEyeForm2: 0,
+            Paramxiong: 0,
+            Paramxiongx: 0,
+            Paramxiongy: 0,
+            Param40: 0,
+            Param6: 0
+        };
+
+        // Target parameter values per emotion
+        const emotionPresets = {
+            neutral: {
+                ParamMouthForm: 0.1,
+                ParamCheek: 0,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: 0,
+                ParamBrowRY: 0,
+                ParamBrowLForm: 0,
+                ParamBrowRForm: 0,
+                ParamEyeForm: 0,
+                ParamEyeForm2: 0
+            },
+            happy: {
+                ParamMouthForm: 1.0,
+                ParamCheek: 0.5,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 1.0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: 0.4,
+                ParamBrowRY: 0.4,
+                ParamBrowLForm: 0.5,
+                ParamBrowRForm: 0.5,
+                ParamEyeForm: 1.0,
+                ParamEyeForm2: 1.0
+            },
+            love: {
+                ParamMouthForm: 0.9,
+                ParamCheek: 1.0,
+                ParamCheek2: 0.6,
+                Param79: 1.0, // Heart eyes!
+                Param13: 0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: 0.2,
+                ParamBrowRY: 0.2,
+                ParamBrowLForm: 0.3,
+                ParamBrowRForm: 0.3,
+                ParamEyeForm: 0.7,
+                ParamEyeForm2: 0.7
+            },
+            shy: {
+                ParamMouthForm: 0.4,
+                ParamCheek: 1.0,
+                ParamCheek2: 0.9,
+                Param79: 0,
+                Param13: 0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0.6,
+                Param80: 0,
+                ParamBrowLY: 0.1,
+                ParamBrowRY: 0.1,
+                ParamBrowLForm: 0.6,
+                ParamBrowRForm: 0.6,
+                ParamEyeForm: 0.5,
+                ParamEyeForm2: 0.5
+            },
+            blush: {
+                ParamMouthForm: 0.6,
+                ParamCheek: 1.0,
+                ParamCheek2: 1.0,
+                Param79: 0.5,
+                Param13: 0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0.8,
+                Param80: 0,
+                ParamBrowLY: 0.1,
+                ParamBrowRY: 0.1,
+                ParamBrowLForm: 0.5,
+                ParamBrowRForm: 0.5,
+                ParamEyeForm: 0.6,
+                ParamEyeForm2: 0.6
+            },
+            angry: {
+                ParamMouthForm: -1.0,
+                ParamCheek: 0.6,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 0,
+                Param14: 0.8, // Dark angry face
+                Param12: 0,
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: -0.8,
+                ParamBrowRY: -0.8,
+                ParamBrowLForm: -1.0,
+                ParamBrowRForm: -1.0,
+                ParamEyeForm: -0.4,
+                ParamEyeForm2: -0.4
+            },
+            sad: {
+                ParamMouthForm: -0.8,
+                ParamCheek: 0.3,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 0,
+                Param14: 0.3,
+                Param12: 1.0, // Tears crying
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: 0.8,
+                ParamBrowRY: 0.8,
+                ParamBrowLForm: 1.0,
+                ParamBrowRForm: 1.0,
+                ParamEyeForm: -0.5,
+                ParamEyeForm2: -0.5
+            },
+            surprised: {
+                ParamMouthForm: 0.2,
+                ParamCheek: 0.3,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 0.5,
+                Param14: 0,
+                Param12: 0,
+                Param1: 0,
+                Param81: 0,
+                Param80: 0,
+                ParamBrowLY: 0.9,
+                ParamBrowRY: 0.9,
+                ParamBrowLForm: 0.2,
+                ParamBrowRForm: 0.2,
+                ParamEyeForm: 0,
+                ParamEyeForm2: 0
+            },
+            playful: {
+                ParamMouthForm: 0.8,
+                ParamCheek: 0.5,
+                ParamCheek2: 0,
+                Param79: 0,
+                Param13: 0,
+                Param14: 0,
+                Param12: 0,
+                Param1: 1.0,  // Tongue out
+                Param81: 0,
+                Param80: 1.0, // Smug grin
+                ParamBrowLY: 0.3,
+                ParamBrowRY: -0.2,
+                ParamBrowLForm: 0.4,
+                ParamBrowRForm: 0.2,
+                ParamEyeForm: 0.6,
+                ParamEyeForm2: 0.3
+            }
+        };
+
+        function showStatus(text) {
+            const el = document.getElementById('status-msg');
+            if (el) {
+                el.innerText = text;
+                el.style.display = 'block';
+            }
+        }
+
+        function hideStatus() {
+            const el = document.getElementById('status-msg');
+            if (el) el.style.display = 'none';
+        }
+
+        function init() {
+            console.log('Live2D init() called. href=' + window.location.href);
+            const canvas = document.getElementById('canvas');
+
+            if (typeof PIXI === 'undefined') {
+                console.error('PixiJS engine not defined.');
+                showStatus('PixiJS engine failed to initialize.');
+                return;
+            }
+
+            window.PIXI = PIXI;
+            if (PIXI.live2d && PIXI.live2d.Live2DModel && PIXI.Ticker) {
+                PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
+            }
+
+            if (PIXI.settings) {
+                PIXI.settings.PREFER_ENV = PIXI.ENV.WEBGL2;
+                PIXI.settings.WRAP_MODE = PIXI.WRAP_MODES.CLAMP;
+                PIXI.settings.MIPMAP_TEXTURES = PIXI.MIPMAP_MODES.OFF;
+            }
+            
+            try {
+                app = new PIXI.Application({
+                    view: canvas,
+                    transparent: true,
+                    backgroundAlpha: 0,
+                    resizeTo: window,
+                    antialias: true,
+                    autoDensity: true,
+                    preserveDrawingBuffer: true,
+                    powerPreference: 'high-performance',
+                    resolution: Math.min(window.devicePixelRatio || 1, 2)
+                });
+                console.log('Pixi Application created. screen=' + app.screen.width + 'x' + app.screen.height);
+            } catch (e) {
+                console.error('Failed to create PIXI Application:', e);
+                showStatus('WebGL initialization failed: ' + e.message);
+                return;
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const charId = params.get('charId');
+            const modelFile = params.get('model');
+
+            console.log('URL params: charId=' + charId + ', model=' + modelFile);
+
+            if (!charId || !modelFile) {
+                showStatus('Live2D model parameters not found.');
+                return;
+            }
+
+            const modelUrl = '/model/' + encodeURIComponent(charId) + '/' + encodeURI(modelFile);
+            console.log('Constructed modelUrl=' + modelUrl);
+            loadLive2dModel(modelUrl);
+            setupGestures(canvas);
+        }
+
+        let customPartOpacities = {};
+        let customParamValues = {};
+        let nativeExpressions = [];
+        let emotionToNativeMap = {};
+
+        function loadLive2dModel(url) {
+            showStatus('Loading Live2D model...');
+            console.log('loadLive2dModel invoked with: ' + url);
+
+            if (!PIXI.live2d || !PIXI.live2d.Live2DModel) {
+                console.error('PIXI.live2d or Live2DModel not found!');
+                showStatus('Live2D runtime module not found.');
+                return;
+            }
+
+            // Clean up previous model if any
+            if (currentModel && app) {
+                try {
+                    app.stage.removeChild(currentModel);
+                    currentModel.destroy();
+                } catch (e) {}
+                currentModel = null;
+            }
+
+            customPartOpacities = {};
+            customParamValues = {};
+            nativeExpressions = [];
+            emotionToNativeMap = {};
+            allDiscoveredMotions = [];
+
+            PIXI.live2d.Live2DModel.from(url, {
+                autoInteract: true
+            }).then(model => {
+                console.log('Live2DModel.from resolved successfully! Model width=' + model.width + ', height=' + model.height);
+                hideStatus();
+                currentModel = model;
+
+                // Center anchor for smooth rotation & scaling
+                if (model.anchor && typeof model.anchor.set === 'function') {
+                    model.anchor.set(0.5, 0.5);
+                }
+
+                app.stage.addChild(model);
+                fitModel();
+
+                // Scan & initialize model capabilities (Expressions, Parts, Parameters, Motions)
+                scanAndReportCapabilities();
+
+                // Start active animation and parameter interpolation ticker loop
+                setupAnimationLoop();
+
+                window.addEventListener('resize', fitModel);
+            }).catch(err => {
+                console.error('Live2D Error in Live2DModel.from:', err);
+                showStatus('Failed to load Live2D model: ' + (err.message || 'Unsupported format or corrupted files'));
+            });
+        }
+
+        function scanAndReportCapabilities() {
+            if (!currentModel || !currentModel.internalModel) return;
+            const internal = currentModel.internalModel;
+            const settings = internal.settings || {};
+            const core = internal.coreModel;
+
+            const detectedExpressions = [];
+            const detectedParts = [];
+            const detectedParams = [];
+            const detectedMotions = [];
+
+            // 1. Scan Expressions
+            try {
+                const rawExpList = [];
+                if (Array.isArray(settings.expressions)) {
+                    settings.expressions.forEach((exp, i) => {
+                        const name = exp.Name || exp.name || (exp.File || exp.file || '').replace(/\.exp3?\.json$/i, '').split('/').pop() || ('Exp ' + (i + 1));
+                        rawExpList.push({ id: name, name: name, file: exp.File || exp.file || '' });
+                    });
+                } else if (internal.motionManager && internal.motionManager.expressionManager) {
+                    const defs = internal.motionManager.expressionManager.definitions;
+                    if (Array.isArray(defs)) {
+                        defs.forEach((d, i) => {
+                            const name = d.name || (d.file || '').replace(/\.exp3?\.json$/i, '').split('/').pop() || ('Exp ' + (i + 1));
+                            rawExpList.push({ id: name, name: name, file: d.file || '' });
+                        });
+                    }
+                }
+
+                rawExpList.forEach(item => {
+                    detectedExpressions.push({
+                        id: item.id,
+                        name: item.name,
+                        isPreset: false
+                    });
+                    nativeExpressions.push(item.id);
+                });
+
+                // Build smart emotion mapping
+                const mapEmotion = (emotion, keywords) => {
+                    for (const exp of rawExpList) {
+                        const low = (exp.name + ' ' + exp.file).toLowerCase();
+                        if (keywords.some(kw => low.includes(kw))) {
+                            emotionToNativeMap[emotion] = exp.id;
+                            break;
+                        }
+                    }
+                };
+
+                mapEmotion('happy', ['happy', 'smile', 'warai', 'senang', 'joy', 'wink']);
+                mapEmotion('shy', ['shy', 'blush', 'terere', 'hazukashii', 'malu', 'tere']);
+                mapEmotion('love', ['love', 'heart', 'suki', 'doki', 'cinta']);
+                mapEmotion('angry', ['angry', 'ikari', 'marah', 'odoroki', 'fukure']);
+                mapEmotion('sad', ['sad', 'cry', 'namida', 'sedih', 'blue']);
+                mapEmotion('surprised', ['surprise', 'shock', 'odoroki', 'kaget']);
+                mapEmotion('playful', ['playful', 'smug', 'tongue', 'bero', 'jidori']);
+            } catch (e) {
+                console.warn('Error scanning expressions:', e);
+            }
+
+            // 2. Scan Parts
+            try {
+                if (core) {
+                    const partCount = typeof core.getPartCount === 'function' ? core.getPartCount() : (core._model && core._model.parts ? core._model.parts.count : 0);
+                    for (let i = 0; i < partCount; i++) {
+                        let id = typeof core.getPartId === 'function' ? core.getPartId(i) : (core._model && core._model.parts && core._model.parts.ids ? core._model.parts.ids[i] : ('Part' + i));
+                        let opacity = 1.0;
+                        if (typeof core.getPartOpacityByIndex === 'function') {
+                            opacity = core.getPartOpacityByIndex(i);
+                        } else if (core.getPartOpacityById) {
+                            opacity = core.getPartOpacityById(id);
+                        }
+                        detectedParts.push({
+                            id: id,
+                            name: id,
+                            opacity: Number(opacity)
+                        });
+                    }
+                }
+            } catch (e) {
+                console.warn('Error scanning parts:', e);
+            }
+
+            // 3. Scan Parameters
+            try {
+                if (core) {
+                    const paramCount = typeof core.getParameterCount === 'function' ? core.getParameterCount() : (core._model && core._model.parameters ? core._model.parameters.count : 0);
+                    const costumeRegex = /cloth|costume|dress|coat|hat|glass|megane|mimi|ear|tail|acc|ribbon|wing|skirt|pant|shoe|sock|jacket|baju|topi|jaket|sayap|kacamata|rambut|bra|pan|under|acc|item/i;
+                    for (let i = 0; i < paramCount; i++) {
+                        const id = typeof core.getParameterId === 'function' ? core.getParameterId(i) : (core._model && core._model.parameters && core._model.parameters.ids ? core._model.parameters.ids[i] : ('Param' + i));
+                        const min = typeof core.getParameterMinimumValue === 'function' ? core.getParameterMinimumValue(i) : 0;
+                        const max = typeof core.getParameterMaximumValue === 'function' ? core.getParameterMaximumValue(i) : 1;
+                        const def = typeof core.getParameterDefaultValue === 'function' ? core.getParameterDefaultValue(i) : 0;
+                        const val = typeof core.getParameterValueByIndex === 'function' ? core.getParameterValueByIndex(i) : def;
+
+                        // Include all costume/accessory matching params or boolean toggles (0 to 1)
+                        if (costumeRegex.test(id) || (min === 0 && max === 1 && !id.startsWith('ParamEye') && !id.startsWith('ParamMouth') && !id.startsWith('ParamBrow'))) {
+                            detectedParams.push({
+                                id: id,
+                                name: id,
+                                min: min,
+                                max: max,
+                                defaultValue: def,
+                                currentValue: val
+                            });
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn('Error scanning parameters:', e);
+            }
+
+            // 4. Scan Motions
+            try {
+                const addMotion = (grp, idx, file) => {
+                    const groupStr = (grp !== undefined && grp !== null) ? String(grp) : '';
+                    const cleanName = file ? file.replace(/\.motion3?\.json$/i, '').split('/').pop() : (groupStr ? groupStr + ' ' + (idx + 1) : 'Motion ' + (idx + 1));
+                    if (!detectedMotions.some(dm => dm.group === groupStr && dm.index === idx)) {
+                        detectedMotions.push({
+                            group: groupStr,
+                            index: idx,
+                            name: cleanName
+                        });
+                    }
+                };
+
+                if (settings.motions) {
+                    for (const [group, items] of Object.entries(settings.motions)) {
+                        if (Array.isArray(items)) {
+                            items.forEach((m, idx) => {
+                                const file = m.File || m.file || '';
+                                addMotion(group, idx, file);
+                            });
+                        }
+                    }
+                }
+
+                if (internal.motionManager && internal.motionManager.motionGroups) {
+                    for (const [group, items] of Object.entries(internal.motionManager.motionGroups)) {
+                        if (Array.isArray(items)) {
+                            items.forEach((m, idx) => {
+                                const file = m.file || m.File || '';
+                                addMotion(group, idx, file);
+                            });
+                        }
+                    }
+                }
+
+                allDiscoveredMotions = detectedMotions.map(m => {
+                    const grp = m.group || '';
+                    const nm = m.name || '';
+                    const isIdle = grp.toLowerCase() === 'idle' || nm.toLowerCase().includes('idle');
+                    return {
+                        group: grp,
+                        index: Number(m.index) || 0,
+                        name: nm,
+                        isIdle: isIdle
+                    };
+                });
+            } catch (e) {
+                console.warn('Error scanning motions:', e);
+            }
+
+            const capabilities = {
+                expressions: detectedExpressions,
+                parts: detectedParts,
+                parameters: detectedParams,
+                motions: detectedMotions
+            };
+
+            console.log('Model capabilities discovered:', JSON.stringify(capabilities));
+
+            if (window.AndroidBridge && typeof window.AndroidBridge.onModelCapabilitiesLoaded === 'function') {
+                try {
+                    window.AndroidBridge.onModelCapabilitiesLoaded(JSON.stringify(capabilities));
+                } catch (e) {
+                    console.warn('AndroidBridge error sending capabilities:', e);
+                }
+            }
+        }
+
+        function fitModel() {
+            if (!currentModel || !app) return;
+            const w = app.screen.width;
+            const h = app.screen.height;
+
+            const mw = (currentModel.internalModel && currentModel.internalModel.width) || currentModel.width || 1000;
+            const mh = (currentModel.internalModel && currentModel.internalModel.height) || currentModel.height || 1000;
+            console.log('fitModel called: screen=' + w + 'x' + h + ', model=' + mw + 'x' + mh);
+
+            if (mw <= 0 || mh <= 0) return;
+
+            // Fit full character slightly larger (~9-10% bigger) so she fills the frame nicely
+            // while keeping head accessories and shoes/feet fully visible inside screen
+            const baseScale = Math.min((w * 0.96) / mw, (h * 0.96) / mh);
+            const scale = baseScale * 1.09;
+            currentModel.scale.set(scale);
+
+            currentModel.x = w / 2;
+            // Center model vertically with comfortable clearance at top and bottom
+            currentModel.y = 16 + (mh * scale) * 0.5;
+            console.log('fitModel completed: scale=' + scale + ', x=' + currentModel.x + ', y=' + currentModel.y);
+        }
+
+        function setParam(id, val, weight = 1.0) {
+            if (!currentModel || !currentModel.internalModel) return;
+            const internal = currentModel.internalModel;
+            const core = internal.coreModel;
+            if (!core) return;
+            try {
+                if (typeof core.setParameterValueById === 'function') {
+                    core.setParameterValueById(id, val, weight);
+                    return;
+                }
+            } catch (e) {}
+            try {
+                if (typeof core.setParamFloat === 'function') {
+                    core.setParamFloat(id, val, weight);
+                    return;
+                }
+            } catch (e) {}
+            try {
+                if (core._model && core._model.parameters) {
+                    const p = core._model.parameters;
+                    const idx = p.ids ? p.ids.indexOf(id) : -1;
+                    if (idx >= 0 && p.values) {
+                        p.values[idx] = val;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        let currentHeadAngleX = 0;
+        let currentHeadAngleY = 0;
+        let currentHeadAngleZ = 0;
+        let currentBodyAngleX = 0;
+
+        function updateDynamics(delta) {
+            const now = Date.now();
+
+            // 1. Smooth look/gaze interpolation
+            if (!isTrackingTouch && (now - lastTouchTime > 2000)) {
+                // Idle gentle look around
+                targetLookX = Math.sin(now / 2600) * 0.25;
+                targetLookY = Math.cos(now / 3400) * 0.15;
+            }
+            currentLookX += (targetLookX - currentLookX) * 0.14;
+            currentLookY += (targetLookY - currentLookY) * 0.14;
+
+            let hAngleX = currentLookX * 28;
+            let hAngleY = currentLookY * 20;
+            let hAngleZ = (currentLookX * -10) + headTiltOffset;
+            let bAngleX = currentLookX * 10;
+
+            // Decay temporary offsets
+            headTiltOffset += (0 - headTiltOffset) * 0.08;
+            mouthGaspOffset += (0 - mouthGaspOffset) * 0.1;
+
+            // 2. Speaking animation & lip sync
+            let targetMouthOpen = 0;
+            if (isSpeaking) {
+                // Dynamic multi-harmonic speech cadence mimicking real speech syllables
+                const wave1 = Math.sin(now / 75) * 0.45;
+                const wave2 = Math.sin(now / 140) * 0.25;
+                const wave3 = Math.cos(now / 210) * 0.15;
+                targetMouthOpen = Math.max(0, Math.min(1.0, wave1 + wave2 + wave3 + 0.35));
+
+                // Natural head nod & body gestures when speaking
+                hAngleY += Math.sin(now / 180) * 4.5;
+                hAngleX += Math.sin(now / 360) * 2.5;
+                hAngleZ += Math.sin(now / 450) * 2.0;
+                bAngleX += Math.sin(now / 360) * 1.8;
+            } else if (currentEmotion === 'surprised') {
+                targetMouthOpen = 0.4 + mouthGaspOffset;
+            } else {
+                targetMouthOpen = mouthGaspOffset;
+            }
+
+            paramState.ParamMouthOpenY += (targetMouthOpen - paramState.ParamMouthOpenY) * 0.28;
+
+            // Interpolate arm gestures smoothly
+            armCoverVal += (armCoverTarget - armCoverVal) * 0.10;
+            armChestVal += (armChestTarget - armChestVal) * 0.10;
+
+            // Subtle, cute shy recoil instead of brutal violent shake
+            if (armCoverVal > 0.01) {
+                bAngleX += -2.5 * armCoverVal;
+                hAngleY += -3.0 * armCoverVal;
+            }
+
+            currentHeadAngleX = hAngleX;
+            currentHeadAngleY = hAngleY;
+            currentHeadAngleZ = hAngleZ;
+            currentBodyAngleX = bAngleX;
+
+            // 4. Chest physics decay
+            if (chestBounceVal > 0.005) {
+                chestBounceVal *= 0.93;
+            } else {
+                chestBounceVal = 0;
+            }
+
+            // 5. Skirt sway decay
+            if (skirtSwayVal > 0.005) {
+                skirtSwayVal *= 0.94;
+            } else {
+                skirtSwayVal = 0;
+            }
+
+            // 6. Emotion parameter smoothing
+            const preset = emotionPresets[currentEmotion] || emotionPresets.neutral;
+            for (const [key, targetVal] of Object.entries(preset)) {
+                if (paramState[key] !== undefined) {
+                    paramState[key] += (targetVal - paramState[key]) * 0.16;
+                }
+            }
+        }
+
+        const paramRangeCache = {};
+        function getParamRange(id) {
+            if (paramRangeCache[id]) return paramRangeCache[id];
+            if (!currentModel || !currentModel.internalModel) return { min: -1, max: 1, def: 0 };
+            const core = currentModel.internalModel.coreModel;
+            if (!core) return { min: -1, max: 1, def: 0 };
+            try {
+                const idx = core.getParameterIndex(id);
+                if (idx >= 0) {
+                    const min = typeof core.getParameterMinimumValue === 'function' ? core.getParameterMinimumValue(idx) : -1;
+                    const max = typeof core.getParameterMaximumValue === 'function' ? core.getParameterMaximumValue(idx) : 1;
+                    const def = typeof core.getParameterDefaultValue === 'function' ? core.getParameterDefaultValue(idx) : 0;
+                    const range = { min, max, def };
+                    paramRangeCache[id] = range;
+                    return range;
+                }
+            } catch (e) {}
+            return { min: -1, max: 1, def: 0 };
+        }
+
+        function applyLive2dParameters() {
+            if (!currentModel || !currentModel.internalModel) return;
+
+            // Gaze
+            setParam('ParamEyeBallX', currentLookX);
+            setParam('ParamEyeBallY', currentLookY);
+
+            // Head & Body angles
+            setParam('ParamAngleX', currentHeadAngleX);
+            setParam('ParamAngleY', currentHeadAngleY);
+            setParam('ParamAngleZ', currentHeadAngleZ);
+            setParam('ParamBodyAngleX', currentBodyAngleX);
+
+            // Universal Mouth / Lip sync for standard Cubism and Japanese phoneme models (like Mao)
+            const mouthVal = paramState.ParamMouthOpenY;
+            setParam('ParamMouthOpenY', mouthVal);
+            setParam('PARAM_MOUTH_OPEN_Y', mouthVal);
+            setParam('ParamA', mouthVal); // Mao Pro mouth open ("Ah")
+            if (isSpeaking) {
+                const nowMs = Date.now();
+                const phonemeWave = Math.sin(nowMs / 95);
+                setParam('ParamO', Math.max(0, mouthVal * 0.45 * phonemeWave));
+                setParam('ParamI', Math.max(0, mouthVal * 0.35 * (0 - phonemeWave)));
+            } else {
+                setParam('ParamO', 0);
+                setParam('ParamI', 0);
+            }
+
+            // Chest physics
+            if (chestBounceVal > 0.005) {
+                const bounceWave = Math.sin(Date.now() / 45) * chestBounceVal;
+                setParam('Paramxiong', bounceWave);
+                setParam('Paramxiongx', bounceWave * 0.8);
+                setParam('Paramxiongy', bounceWave * 0.8);
+            }
+
+            // Skirt sway physics
+            if (skirtSwayVal > 0.005) {
+                const swayWave = Math.sin(Date.now() / 60) * skirtSwayVal;
+                setParam('Param40', swayWave);
+                setParam('Param6', swayWave);
+            }
+
+            // Arms and Hands Animations
+            if (armCoverVal > 0.005) {
+                // Defensive/shy covering gesture: hands move inward to protect skirt/groin
+                const r30 = getParamRange('Param30');
+                const r31 = getParamRange('Param31');
+                const r32 = getParamRange('Param32');
+                const r33 = getParamRange('Param33');
+                const r36 = getParamRange('Param36');
+                const r37 = getParamRange('Param37');
+                const r38 = getParamRange('Param38');
+                const r39 = getParamRange('Param39');
+
+                // Left arm & hand moves inward
+                setParam('Param30', r30.min + (r30.max - r30.min) * 0.85 * armCoverVal);
+                setParam('Param31', r31.min + (r31.max - r31.min) * 0.80 * armCoverVal);
+                setParam('Param32', r32.min + (r32.max - r32.min) * 0.65 * armCoverVal);
+                setParam('Param33', r33.min + (r33.max - r33.min) * 0.70 * armCoverVal);
+                setParam('Param74', 0.5 * armCoverVal);
+
+                // Right arm & hand moves inward
+                setParam('Param36', r36.max - (r36.max - r36.min) * 0.85 * armCoverVal);
+                setParam('Param37', r37.max - (r37.max - r37.min) * 0.80 * armCoverVal);
+                setParam('Param38', r38.max - (r38.max - r38.min) * 0.65 * armCoverVal);
+                setParam('Param39', r39.max - (r39.max - r39.min) * 0.70 * armCoverVal);
+                setParam('Param77', 0.5 * armCoverVal);
+            } else if (armChestVal > 0.005) {
+                // Hand to chest/heart gesture
+                const r30 = getParamRange('Param30');
+                const r31 = getParamRange('Param31');
+                const r32 = getParamRange('Param32');
+                setParam('Param30', r30.min + (r30.max - r30.min) * 0.90 * armChestVal);
+                setParam('Param31', r31.min + (r31.max - r31.min) * 0.85 * armChestVal);
+                setParam('Param32', r32.min + (r32.max - r32.min) * 0.70 * armChestVal);
+            } else {
+                // Natural gentle idle arm sway with breathing
+                const breathWave = Math.sin(Date.now() / 1500);
+                const r30 = getParamRange('Param30');
+                const r36 = getParamRange('Param36');
+                setParam('Param30', r30.def + (r30.max - r30.min) * 0.03 * breathWave);
+                setParam('Param36', r36.def - (r36.max - r36.min) * 0.03 * breathWave);
+            }
+
+            // Emotions
+            const preset = emotionPresets[currentEmotion] || emotionPresets.neutral;
+            for (const [key, targetVal] of Object.entries(preset)) {
+                if (paramState[key] !== undefined) {
+                    setParam(key, paramState[key]);
+                }
+            }
+
+            // Apply custom parameter overrides (clothing toggles, accessories, etc.)
+            for (const [paramId, val] of Object.entries(customParamValues)) {
+                setParam(paramId, val);
+            }
+
+            // Apply custom part opacities (outfits, wings, ribbons, hat, coat, etc.)
+            if (currentModel && currentModel.internalModel && currentModel.internalModel.coreModel) {
+                const core = currentModel.internalModel.coreModel;
+                for (const [partId, opacity] of Object.entries(customPartOpacities)) {
+                    try {
+                        if (typeof core.setPartOpacityById === 'function') {
+                            core.setPartOpacityById(partId, opacity);
+                        } else if (typeof core.setPartOpacityByIndex === 'function') {
+                            const idx = typeof core.getPartIndex === 'function' ? core.getPartIndex(partId) : -1;
+                            if (idx >= 0) core.setPartOpacityByIndex(idx, opacity);
+                        } else if (core._model && core._model.parts) {
+                            const p = core._model.parts;
+                            const idx = p.ids ? p.ids.indexOf(partId) : -1;
+                            if (idx >= 0 && p.opacities) p.opacities[idx] = opacity;
+                        }
+                    } catch (e) {}
+                }
+            }
+        }
+
+        function setupAnimationLoop() {
+            // 1. Hook into beforeModelUpdate so parameters apply right before drawing
+            if (currentModel.internalModel && typeof currentModel.internalModel.on === 'function') {
+                currentModel.internalModel.on('beforeModelUpdate', () => {
+                    applyLive2dParameters();
+                });
+            }
+
+            // 2. Continuous frame ticker
+            app.ticker.add((delta) => {
+                updateDynamics(delta);
+                applyLive2dParameters();
+            });
+        }
+
+        // Touch reactions based on anatomical body coordinates
+        function handleTouchZone(normX, normY) {
+            console.log('Touch hit zone check: normX=' + normX.toFixed(3) + ', normY=' + normY.toFixed(3));
+
+            // Strictly check if touch falls inside the character's interactive body outline
+            // Reject any clicks in the empty background outside the character!
+            if (normX < 0.16 || normX > 0.84 || normY < 0.05 || normY > 0.96) {
+                console.log('Tapped outside character bounds: ignoring.');
+                return;
+            }
+
+            let zone = null;
+            if (normY >= 0.05 && normY <= 0.32 && normX >= 0.22 && normX <= 0.78) {
+                // 1. Head / Kepala (Petted)
+                zone = 'head';
+                setEmotion('happy', 4000);
+                headTiltOffset = (normX < 0.5 ? -14 : 14);
+            } else if (normY > 0.32 && normY <= 0.46 && normX >= 0.28 && normX <= 0.72) {
+                // 2. Chest / Dada
+                zone = 'chest';
+                chestBounceVal = 0.8;
+                mouthGaspOffset = 0.35;
+                armChestTarget = 1.0;
+                if (armChestTimer) clearTimeout(armChestTimer);
+                armChestTimer = setTimeout(() => {
+                    armChestTarget = 0;
+                    armChestTimer = null;
+                }, 3500);
+
+                setEmotion('shy', 4500);
+            } else if (normY > 0.46 && normY <= 0.65 && normX >= 0.28 && normX <= 0.72) {
+                // 3. Groin / Selangkangan / Bawah rok
+                zone = 'groin';
+                skirtSwayVal = 0.5; // Soft gentle skirt sway
+                
+                // Animate hands & arms defensively covering herself!
+                armCoverTarget = 1.0;
+                if (armCoverTimer) clearTimeout(armCoverTimer);
+                armCoverTimer = setTimeout(() => {
+                    armCoverTarget = 0;
+                    armCoverTimer = null;
+                }, 3500);
+
+                headTiltOffset = (normX < 0.5 ? -8 : 8);
+                setEmotion('love', 5000);
+            } else if (normY >= 0.28 && normY <= 0.65 && ((normX >= 0.16 && normX < 0.28) || (normX > 0.72 && normX <= 0.84))) {
+                // 4. Arms / Hands / Tangan
+                zone = 'hands';
+                headTiltOffset = (normX < 0.5 ? -10 : 10);
+                armChestTarget = 0.4;
+                if (armChestTimer) clearTimeout(armChestTimer);
+                armChestTimer = setTimeout(() => {
+                    armChestTarget = 0;
+                    armChestTimer = null;
+                }, 3000);
+                setEmotion('love', 3500);
+            } else if (normY > 0.65 && normY <= 0.96 && normX >= 0.26 && normX <= 0.74) {
+                // 5. Legs / Kaki
+                zone = 'legs';
+                setEmotion('playful', 3500);
+            } else {
+                // Tapped in empty space between limbs: ignore completely
+                console.log('Tapped in empty space: ignoring.');
+                return;
+            }
+
+            console.log('Detected touch zone: ' + zone);
+
+            // Notify native Android bridge only for valid body zones
+            if (zone && window.AndroidBridge && typeof window.AndroidBridge.onModelTouched === 'function') {
+                try {
+                    window.AndroidBridge.onModelTouched(zone);
+                } catch (e) {
+                    console.warn('AndroidBridge error:', e);
+                }
+            }
+        }
+
+        function setupGestures(canvas) {
+            let pointerDownX = 0;
+            let pointerDownY = 0;
+            let isDown = false;
+            let initialPinchDist = 0;
+            let initialScale = 1;
+            let lastTapTime = 0;
+
+            function updatePointerLook(clientX, clientY) {
+                if (!currentModel) return;
+                const rect = canvas.getBoundingClientRect();
+                const sx = clientX - rect.left;
+                const sy = clientY - rect.top;
+
+                // Center relative (-1 to +1)
+                targetLookX = Math.max(-1, Math.min(1, (sx - rect.width / 2) / (rect.width * 0.45)));
+                targetLookY = Math.max(-1, Math.min(1, -(sy - rect.height / 2) / (rect.height * 0.45)));
+
+                if (typeof currentModel.focus === 'function') {
+                    try {
+                        currentModel.focus(clientX, clientY);
+                    } catch (e) {}
+                }
+            }
+
+            // --- Touch Event Listeners (Mobile optimized) ---
+            canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    const t = e.touches[0];
+                    if (t.clientX > window.innerWidth - 68) {
+                        return; // Let Android Compose floating buttons handle it!
+                    }
+                    isDown = true;
+                    isTrackingTouch = true;
+                    lastTouchTime = Date.now();
+                    pointerDownX = t.clientX;
+                    pointerDownY = t.clientY;
+                    updatePointerLook(t.clientX, t.clientY);
+
+                    const now = Date.now();
+                    if (now - lastTapTime < 300) {
+                        fitModel();
+                        lastTapTime = 0;
+                    } else {
+                        lastTapTime = now;
+                    }
+                } else if (e.touches.length === 2 && currentModel) {
+                    isDown = false;
+                    isTrackingTouch = false;
+                    initialPinchDist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    initialScale = currentModel.scale.x;
+                    initialPanX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                    initialPanY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                    modelStartPanX = currentModel.x;
+                    modelStartPanY = currentModel.y;
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (e.touches.length === 1 && isDown) {
+                    lastTouchTime = Date.now();
+                    const t = e.touches[0];
+                    updatePointerLook(t.clientX, t.clientY);
+                } else if (e.touches.length === 2 && currentModel && initialPinchDist > 0) {
+                    const currentDist = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    const ratio = currentDist / initialPinchDist;
+                    const newScale = Math.max(0.04, Math.min(initialScale * ratio, 4.0));
+                    currentModel.scale.set(newScale);
+
+                    const curPanX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                    const curPanY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                    currentModel.x = modelStartPanX + (curPanX - initialPanX);
+                    currentModel.y = modelStartPanY + (curPanY - initialPanY);
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', (e) => {
+                if (isDown) {
+                    isDown = false;
+                    isTrackingTouch = false;
+                    lastTouchTime = Date.now();
+
+                    const ct = e.changedTouches && e.changedTouches[0];
+                    if (ct && currentModel) {
+                        const distMoved = Math.hypot(ct.clientX - pointerDownX, ct.clientY - pointerDownY);
+                        if (distMoved < 25) {
+                            const rect = canvas.getBoundingClientRect();
+                            const local = currentModel.toLocal(new PIXI.Point(ct.clientX - rect.left, ct.clientY - rect.top));
+                            const mw = (currentModel.internalModel && currentModel.internalModel.width) || 4133;
+                            const mh = (currentModel.internalModel && currentModel.internalModel.height) || 5848;
+                            const normX = local.x / mw;
+                            const normY = local.y / mh;
+                            handleTouchZone(normX, normY);
+                        }
+                    }
+                }
+                if (e.touches.length < 2) {
+                    initialPinchDist = 0;
+                }
+            }, { passive: false });
+
+            // --- Mouse / Pointer Fallback ---
+            canvas.addEventListener('pointerdown', (e) => {
+                if (e.pointerType === 'touch') return;
+                isDown = true;
+                isTrackingTouch = true;
+                lastTouchTime = Date.now();
+                pointerDownX = e.clientX;
+                pointerDownY = e.clientY;
+                updatePointerLook(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('pointermove', (e) => {
+                if (e.pointerType === 'touch') return;
+                if (isDown) {
+                    lastTouchTime = Date.now();
+                    updatePointerLook(e.clientX, e.clientY);
+                }
+            });
+
+            window.addEventListener('pointerup', (e) => {
+                if (e.pointerType === 'touch') return;
+                if (isDown) {
+                    isDown = false;
+                    isTrackingTouch = false;
+                    lastTouchTime = Date.now();
+
+                    const distMoved = Math.hypot(e.clientX - pointerDownX, e.clientY - pointerDownY);
+                    if (distMoved < 15 && currentModel) {
+                        const rect = canvas.getBoundingClientRect();
+                        const local = currentModel.toLocal(new PIXI.Point(e.clientX - rect.left, e.clientY - rect.top));
+                        const mw = (currentModel.internalModel && currentModel.internalModel.width) || 4133;
+                        const mh = (currentModel.internalModel && currentModel.internalModel.height) || 5848;
+                        const normX = local.x / mw;
+                        const normY = local.y / mh;
+                        handleTouchZone(normX, normY);
+                    }
+                }
+            });
+        }
+
+        // Global functions called from Android
+        window.setSpeaking = function(speaking) {
+            isSpeaking = Boolean(speaking);
+            console.log('setSpeaking: ' + isSpeaking);
+        };
+
+        window.setEmotion = function(emotion, durationMs = 0) {
+            console.log('setEmotion: ' + emotion + ', duration=' + durationMs);
+            if (!emotionPresets[emotion]) {
+                currentEmotion = 'neutral';
+            } else {
+                currentEmotion = emotion;
+            }
+
+            // Also trigger native expression if mapped
+            const nativeExp = emotionToNativeMap[emotion];
+            if (nativeExp && currentModel && typeof currentModel.expression === 'function') {
+                try {
+                    currentModel.expression(nativeExp);
+                } catch (e) {}
+            } else if (emotion === 'neutral' && currentModel && typeof currentModel.expression === 'function') {
+                try {
+                    currentModel.expression(null);
+                } catch (e) {}
+            }
+
+            if (emotionTimer) {
+                clearTimeout(emotionTimer);
+                emotionTimer = null;
+            }
+
+            if (durationMs > 0) {
+                emotionTimer = setTimeout(() => {
+                    currentEmotion = 'neutral';
+                    if (currentModel && typeof currentModel.expression === 'function') {
+                        try {
+                            currentModel.expression(null);
+                        } catch (e) {}
+                    }
+                    emotionTimer = null;
+                }, durationMs);
+            }
+        };
+
+        window.setExpression = function(name) {
+            console.log('setExpression called: ' + name);
+            if (!currentModel) return false;
+
+            if (!name || name === 'reset' || name === 'default' || name === 'none') {
+                try {
+                    if (typeof currentModel.expression === 'function') {
+                        currentModel.expression(null);
+                    }
+                    return true;
+                } catch (e) {}
+            }
+
+            if (typeof currentModel.expression === 'function') {
+                try {
+                    currentModel.expression(name);
+                    return true;
+                } catch (e) {
+                    console.warn('currentModel.expression failed:', e);
+                }
+            }
+
+            return false;
+        };
+
+        window.setPartOpacity = function(partId, opacity) {
+            console.log('setPartOpacity: ' + partId + ' = ' + opacity);
+            customPartOpacities[partId] = Number(opacity);
+        };
+
+        window.setCostumeParam = function(paramId, value) {
+            console.log('setCostumeParam: ' + paramId + ' = ' + value);
+            customParamValues[paramId] = Number(value);
+        };
+
+        function executeMotion(group, index) {
+            const grp = (group !== undefined && group !== null) ? String(group) : '';
+            const idx = Number(index) || 0;
+            console.log('executeMotion: group="' + grp + '", index=' + idx);
+            if (!currentModel) return false;
+            try {
+                // Priority 3 = FORCE (interrupts idle/running motions)
+                let p = null;
+                if (typeof currentModel.motion === 'function') {
+                    p = currentModel.motion(grp, idx, 3);
+                } else if (currentModel.internalModel && currentModel.internalModel.motionManager) {
+                    p = currentModel.internalModel.motionManager.startMotion(grp, idx, 3);
+                }
+                if (p && typeof p.then === 'function') {
+                    p.then(started => {
+                        console.log('Motion started: ' + started + ' for [' + grp + ':' + idx + ']');
+                    }).catch(err => {
+                        console.warn('Motion promise error:', err);
+                    });
+                }
+                return true;
+            } catch (e) {
+                console.warn('executeMotion exception:', e);
+                return false;
+            }
+        }
+
+        window.playMotion = function(target, index) {
+            console.log('playMotion invoked with target: "' + target + '", index=' + index);
+            if (!currentModel) return false;
+
+            try {
+                // 1. Explicit group and index passed from wardrobe UI buttons
+                // target can be empty string "" (e.g. for Mao's main motions)
+                const hasExplicitIndex = index !== undefined && index !== null && !isNaN(Number(index)) && index !== '' && Number(index) >= 0;
+                if (hasExplicitIndex && target !== 'random' && target !== 'any') {
+                    const explicitTarget = (target !== undefined && target !== null) ? String(target) : '';
+                    return executeMotion(explicitTarget, Number(index));
+                }
+
+                // 2. Prepare motion candidates from all discovered motions
+                const nonIdleMotions = allDiscoveredMotions.filter(m => !m.isIdle);
+                const candidates = nonIdleMotions.length > 0 ? nonIdleMotions : allDiscoveredMotions;
+
+                if (candidates.length === 0) {
+                    return executeMotion('tap_body', 0) || executeMotion('', 0) || executeMotion('Idle', 0);
+                }
+
+                const query = (target || '').toString().trim().toLowerCase();
+
+                // If empty, random, or any -> pick random non-idle motion
+                if (!query || query === 'random' || query === 'any') {
+                    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+                    return executeMotion(picked.group, picked.index);
+                }
+
+                // 3. Exact group name match
+                const exactGroupMatches = candidates.filter(m => m.group.toLowerCase() === query);
+                if (exactGroupMatches.length > 0) {
+                    const picked = exactGroupMatches[Math.floor(Math.random() * exactGroupMatches.length)];
+                    return executeMotion(picked.group, picked.index);
+                }
+
+                // 4. Exact or partial motion name match (e.g. 'special_01', 'mtn_02')
+                const nameMatches = candidates.filter(m => m.name.toLowerCase().includes(query));
+                if (nameMatches.length > 0) {
+                    const picked = nameMatches[Math.floor(Math.random() * nameMatches.length)];
+                    return executeMotion(picked.group, picked.index);
+                }
+
+                // 5. Semantic keyword mapping to motions with emotion harmonization
+                if (query.includes('dance') || query.includes('tari') || query.includes('special')) {
+                    // Dancing is happy and energetic: harmonize facial expression to happy
+                    if (currentEmotion === 'neutral' || currentEmotion === 'angry' || currentEmotion === 'sad') {
+                        window.setEmotion('happy');
+                    }
+                    const specials = candidates.filter(m => m.name.toLowerCase().includes('special'));
+                    if (specials.length > 0) {
+                        const picked = specials[Math.floor(Math.random() * specials.length)];
+                        return executeMotion(picked.group, picked.index);
+                    }
+                }
+                if (query.includes('wave') || query.includes('sapa') || query.includes('lamba')) {
+                    if (currentEmotion === 'neutral') {
+                        window.setEmotion('happy');
+                    }
+                    const waveMatches = candidates.filter(m => m.name.toLowerCase().includes('wave') || m.name.toLowerCase().includes('hand') || m.name.toLowerCase().includes('mtn_02'));
+                    if (waveMatches.length > 0) {
+                        const picked = waveMatches[Math.floor(Math.random() * waveMatches.length)];
+                        return executeMotion(picked.group, picked.index);
+                    }
+                }
+                if (query.includes('pose') || query.includes('gaya')) {
+                    if (currentEmotion === 'neutral') {
+                        window.setEmotion('playful');
+                    }
+                    const poseMatches = candidates.filter(m => m.name.toLowerCase().includes('pose') || m.name.toLowerCase().includes('special') || m.name.toLowerCase().includes('mtn_03'));
+                    if (poseMatches.length > 0) {
+                        const picked = poseMatches[Math.floor(Math.random() * poseMatches.length)];
+                        return executeMotion(picked.group, picked.index);
+                    }
+                }
+
+                // 6. Emotion-aware fallback: if angry or sad, NEVER play cheerful spinning dances!
+                if (currentEmotion === 'angry' || currentEmotion === 'sad') {
+                    const upsetMatches = candidates.filter(m => !m.name.toLowerCase().includes('special') && !m.name.toLowerCase().includes('dance'));
+                    if (upsetMatches.length > 0) {
+                        const picked = upsetMatches[Math.floor(Math.random() * upsetMatches.length)];
+                        return executeMotion(picked.group, picked.index);
+                    }
+                }
+
+                // 7. Generic action fallback: pick a random non-idle motion!
+                const picked = candidates[Math.floor(Math.random() * candidates.length)];
+                return executeMotion(picked.group, picked.index);
+            } catch (e) {
+                console.warn('playMotion error:', e);
+            }
+            return false;
+        };
+
+        window.loadOutfit = function(modelUrl) {
+            console.log('loadOutfit: ' + modelUrl);
+            loadLive2dModel(modelUrl);
+        };
+
+        window.playRandomMotion = function() {
+            if (currentModel) {
+                window.playMotion('random');
+            }
+        };
+
+        window.resetView = function() {
+            fitModel();
+        };
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

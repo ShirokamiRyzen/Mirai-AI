@@ -14,5 +14,6 @@ data class ChatSessionEntity(
     val activeModelId: String = "",
     val configId: String = "",
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedAt: Long = System.currentTimeMillis()
+    val updatedAt: Long = System.currentTimeMillis(),
+    val isLive2dMode: Boolean = false
 )

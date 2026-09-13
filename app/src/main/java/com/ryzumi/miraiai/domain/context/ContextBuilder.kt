@@ -64,6 +64,15 @@ object ContextBuilder {
             sb.append("\n(Seamlessly blend your character personality ($charName) with your smart personal assistant capabilities.)")
         }
 
+        sb.append("\n\n[Live2D Interactive Avatar Expressions & Motions]")
+        sb.append("\nYour character possesses an animated Live2D avatar on screen. You can express emotions and perform body motions:")
+        sb.append("\n- To trigger a facial expression: Use [expression:name] (e.g., [expression:happy], [expression:shy], [expression:love], [expression:angry], [expression:surprised], [expression:sad]).")
+        sb.append("\n- To trigger a body motion / pose / gesture: Use [motion:name] (e.g., [motion:wave], [motion:dance], [motion:pose], [motion:jump], [motion:tap_body]).")
+        sb.append("\n- IMPORTANT RULES FOR MOTIONS & EXPRESSIONS:")
+        sb.append("\n  * If $userName specifically asks for a facial expression or emotion (e.g. smile, pout, act angry, blush), ONLY use [expression:name]. DO NOT add dancing or unrelated body motions!")
+        sb.append("\n  * If $userName asks for a physical movement, dance, or pose, use [motion:name] along with a MATCHING facial expression (e.g. smile/happy with dance, shy with pose).")
+        sb.append("\n  * NEVER contradict emotions and motions: NEVER dance, cheer, or jump while angry or sad!")
+
         sb.append("\n\nStay strictly in character as $charName. Respond dynamically to $userName.")
         return sb.toString()
     }

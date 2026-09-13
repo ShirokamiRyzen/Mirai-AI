@@ -16,6 +16,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
 
+import com.ryzumi.miraiai.domain.live2d.Live2dImportResult
+import com.ryzumi.miraiai.domain.live2d.Live2dManager
 import com.ryzumi.miraiai.domain.util.ImageUtils
 
 data class CharacterEditUiState(
@@ -30,7 +32,12 @@ data class CharacterEditUiState(
     val firstMessage: String = "",
     val isEditingExisting: Boolean = false,
     val isSaved: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val live2dPath: String? = null,
+    val live2dModelName: String? = null,
+    val isImportingLive2d: Boolean = false,
+    val live2dImportError: String? = null,
+    val live2dImportSuccessMsg: String? = null
 )
 
 class CharacterEditViewModel(
@@ -60,7 +67,9 @@ class CharacterEditViewModel(
                     impression = char.impression,
                     tagsInput = char.tags.joinToString(", "),
                     firstMessage = char.firstMessage,
-                    isEditingExisting = true
+                    isEditingExisting = true,
+                    live2dPath = char.live2dPath,
+                    live2dModelName = char.live2dPath?.substringAfterLast('/')?.substringBefore(".model")
                 )
             }
         }
@@ -74,6 +83,51 @@ class CharacterEditViewModel(
     fun onImpressionChanged(v: String) { _uiState.value = _uiState.value.copy(impression = v) }
     fun onTagsInputChanged(v: String) { _uiState.value = _uiState.value.copy(tagsInput = v) }
     fun onFirstMessageChanged(v: String) { _uiState.value = _uiState.value.copy(firstMessage = v) }
+
+    fun importLive2dArchive(context: Context, zipUri: Uri) {
+        val charId = _uiState.value.id
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                isImportingLive2d = true,
+                live2dImportError = null,
+                live2dImportSuccessMsg = null
+            )
+            when (val result = Live2dManager.validateAndImport(context, charId, zipUri)) {
+                is Live2dImportResult.Success -> {
+                    _uiState.value = _uiState.value.copy(
+                        isImportingLive2d = false,
+                        live2dPath = result.relativeModelPath,
+                        live2dModelName = result.modelName,
+                        live2dImportSuccessMsg = "Live2D (${result.cubismVersion}) valid and saved! (${result.textureCount} textures)"
+                    )
+                }
+                is Live2dImportResult.Error -> {
+                    _uiState.value = _uiState.value.copy(
+                        isImportingLive2d = false,
+                        live2dImportError = result.message
+                    )
+                }
+            }
+        }
+    }
+
+    fun removeLive2d(context: Context) {
+        val charId = _uiState.value.id
+        Live2dManager.deleteCharacterLive2d(context, charId)
+        _uiState.value = _uiState.value.copy(
+            live2dPath = null,
+            live2dModelName = null,
+            live2dImportError = null,
+            live2dImportSuccessMsg = null
+        )
+    }
+
+    fun dismissLive2dMessages() {
+        _uiState.value = _uiState.value.copy(
+            live2dImportError = null,
+            live2dImportSuccessMsg = null
+        )
+    }
 
     fun saveCharacter(context: Context) {
         val state = _uiState.value
@@ -99,7 +153,8 @@ class CharacterEditViewModel(
                 scenario = state.scenario.trim(),
                 impression = state.impression.trim(),
                 tags = parsedTags,
-                firstMessage = state.firstMessage.trim()
+                firstMessage = state.firstMessage.trim(),
+                live2dPath = state.live2dPath
             )
 
             characterDao.insertCharacter(entity)

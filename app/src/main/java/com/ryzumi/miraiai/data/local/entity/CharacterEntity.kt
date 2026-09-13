@@ -16,5 +16,6 @@ data class CharacterEntity(
     val impression: String = "",
     val tags: List<String> = emptyList(),
     val firstMessage: String = "",
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    val live2dPath: String? = null
 )

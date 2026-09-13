@@ -81,7 +81,11 @@ class CharacterListViewModel(
         val items = sessions.map { session ->
             val char = characterMap[session.characterId]
             val lastMsgEntity = lastMessageMap[session.id]
-            val lastMsg = lastMsgEntity?.content ?: char?.firstMessage
+            val rawContent = lastMsgEntity?.content ?: char?.firstMessage
+            val lastMsg = rawContent?.let {
+                val cleanThink = it.replace(Regex("<think>[\\s\\S]*?</think>", RegexOption.IGNORE_CASE), "").trim()
+                com.ryzumi.miraiai.domain.live2d.cleanLive2dControlTags(cleanThink)
+            }
             val time = lastMsgEntity?.timestamp ?: session.updatedAt
             ChatSessionItem(
                 session = session,

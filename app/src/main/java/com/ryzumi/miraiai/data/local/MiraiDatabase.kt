@@ -26,7 +26,7 @@ import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
         ChatMessageEntity::class,
         InferenceConfigEntity::class
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -93,6 +93,13 @@ abstract class MiraiDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `characters` ADD COLUMN `live2dPath` TEXT")
+                db.execSQL("ALTER TABLE `chat_sessions` ADD COLUMN `isLive2dMode` INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
         fun getInstance(context: Context): MiraiDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -100,7 +107,7 @@ abstract class MiraiDatabase : RoomDatabase() {
                     MiraiDatabase::class.java,
                     "mirai_ai_database"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                     .build()
                 INSTANCE = instance
                 instance

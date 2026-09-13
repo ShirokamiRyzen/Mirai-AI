@@ -62,6 +62,18 @@ class BackupRepository(
                     }
                 }
             }
+
+            val validCharacterIds = allCharacters.map { it.id }.toSet()
+            val live2dDir = File(context.filesDir, "live2d")
+            if (live2dDir.exists() && live2dDir.isDirectory) {
+                live2dDir.listFiles()?.forEach { dir ->
+                    if (dir.isDirectory && !validCharacterIds.contains(dir.name)) {
+                        if (dir.deleteRecursively()) {
+                            deletedCount++
+                        }
+                    }
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

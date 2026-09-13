@@ -191,6 +191,9 @@ fun MiraiNavGraph(
                 onImpressionChanged = viewModel::onImpressionChanged,
                 onTagsInputChanged = viewModel::onTagsInputChanged,
                 onFirstMessageChanged = viewModel::onFirstMessageChanged,
+                onImportLive2d = { uri -> viewModel.importLive2dArchive(context, uri) },
+                onRemoveLive2d = { viewModel.removeLive2d(context) },
+                onDismissLive2dMessages = viewModel::dismissLive2dMessages,
                 onSaveClick = { viewModel.saveCharacter(context) },
                 onBackClick = { navController.popBackStack() }
             )
@@ -234,6 +237,8 @@ fun MiraiNavGraph(
                 onDeleteMessages = viewModel::deleteMessages,
                 onClearHistory = viewModel::clearHistory,
                 onUpdateSessionSettings = viewModel::updateChatSessionSettings,
+                onToggleLive2dMode = viewModel::toggleLive2dMode,
+                onModelTouched = viewModel::onLive2dTouched,
                 onBackClick = { navController.popBackStack() }
             )
         }

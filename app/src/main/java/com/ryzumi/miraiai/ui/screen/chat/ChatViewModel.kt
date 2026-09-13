@@ -58,7 +58,13 @@ data class ChatUiState(
     val loadedLocalModelName: String? = null,
     val isUsingLocalModel: Boolean = false,
     val localModelMemoryMb: Double = 0.0,
-    val localModelLoadingProgress: Float = 0f
+    val localModelLoadingProgress: Float = 0f,
+    val isLive2dMode: Boolean = false,
+    val currentEmotion: String = "neutral",
+    val currentMotion: String? = null,
+    val motionTrigger: Long = 0L,
+    val touchReactionText: String? = null,
+    val touchReactionZone: String? = null
 )
 
 class ChatViewModel(
@@ -78,6 +84,12 @@ class ChatViewModel(
     private val _isProcessingImage = MutableStateFlow(false)
     private val _isLiveThinkingExpanded = MutableStateFlow(true)
     private val _localError = MutableStateFlow<String?>(null)
+    private val _manualEmotion = MutableStateFlow<String?>(null)
+    private val _currentMotion = MutableStateFlow<String?>(null)
+    private val _motionTrigger = MutableStateFlow(0L)
+    private val _touchReactionText = MutableStateFlow<String?>(null)
+    private val _touchReactionZone = MutableStateFlow<String?>(null)
+    private var touchReactionJob: kotlinx.coroutines.Job? = null
 
     private val generationStreamState = ChatGenerationManager.getStreamStateFlow(sessionId)
 
@@ -199,13 +211,29 @@ class ChatViewModel(
         LocalManagerState(status, modelName, memoryMb, progress)
     }
 
+    private data class UiAuxState(
+        val localError: String?,
+        val manualEmotion: String?,
+        val touchReactionText: String?,
+        val touchReactionZone: String?,
+        val motion: String?,
+        val motionTrigger: Long
+    )
+
+    private val uiAuxStateFlow = combine(
+        combine(_localError, _manualEmotion, _touchReactionText) { err, emo, txt -> Triple(err, emo, txt) },
+        combine(_touchReactionZone, _currentMotion, _motionTrigger) { zone, mot, trg -> Triple(zone, mot, trg) }
+    ) { (err, emo, txt), (zone, mot, trg) ->
+        UiAuxState(err, emo, txt, zone, mot, trg)
+    }
+
     val uiState: StateFlow<ChatUiState> = combine(
         coreDataFlow,
         secondaryDataFlow,
         preferencesFlow,
-        _localError,
+        uiAuxStateFlow,
         localManagerStateFlow
-    ) { core, (characters, personas), prefs, localError, localState ->
+    ) { core, (characters, personas), prefs, auxState, localState ->
         val character = characters.find { it.id == core.session?.characterId }
         val persona = if (!core.session?.personaId.isNullOrBlank()) {
             personas.find { it.id == core.session?.personaId } ?: personas.find { it.isDefault } ?: personas.firstOrNull()
@@ -237,6 +265,14 @@ class ChatViewModel(
             maxContextTokens = maxTokens
         )
 
+        val resolvedEmotion = auxState.manualEmotion
+            ?: if (core.streamState.isStreaming && core.streamState.text.isNotBlank()) {
+                detectEmotionFromText(core.streamState.text)
+            } else {
+                val lastMsg = core.messages.lastOrNull { it.sender.equals("CHARACTER", ignoreCase = true) }
+                if (lastMsg != null) detectEmotionFromText(lastMsg.content) else "neutral"
+            }
+
         ChatUiState(
             session = core.session,
             character = character,
@@ -259,18 +295,296 @@ class ChatViewModel(
             streamingTokensCount = core.streamState.tokensCount,
             streamingSpeedTps = core.streamState.speedTps,
             streamingModelName = core.streamState.modelName,
-            errorMessage = core.streamState.errorMessage ?: localError,
+            errorMessage = core.streamState.errorMessage ?: auxState.localError,
             localModelStatus = localState.status,
             loadedLocalModelName = localState.modelName,
             isUsingLocalModel = isUsingLocal,
             localModelMemoryMb = localState.memoryMb,
-            localModelLoadingProgress = localState.progress
+            localModelLoadingProgress = localState.progress,
+            isLive2dMode = core.session?.isLive2dMode ?: false,
+            currentEmotion = resolvedEmotion,
+            currentMotion = auxState.motion,
+            motionTrigger = auxState.motionTrigger,
+            touchReactionText = auxState.touchReactionText,
+            touchReactionZone = auxState.touchReactionZone
         )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = ChatUiState()
     )
+
+    init {
+        viewModelScope.launch {
+            var lastEvaluatedMsgId: String? = null
+            var currentStreamEvaluated = false
+
+            coreDataFlow.collect { core ->
+                if (core.streamState.isStreaming) {
+                    val streamText = core.streamState.text
+                    if (streamText.isNotBlank() && !currentStreamEvaluated) {
+                        val motion = detectMotionFromText(streamText)
+                        if (motion != null) {
+                            currentStreamEvaluated = true
+                            _currentMotion.value = motion
+                            _motionTrigger.value = System.currentTimeMillis()
+                        }
+                    }
+                } else {
+                    val lastMsg = core.messages.lastOrNull { it.sender.equals("CHARACTER", ignoreCase = true) }
+                    if (currentStreamEvaluated) {
+                        currentStreamEvaluated = false
+                        if (lastMsg != null) {
+                            lastEvaluatedMsgId = lastMsg.id
+                        }
+                    } else if (lastMsg != null && lastMsg.id != lastEvaluatedMsgId) {
+                        lastEvaluatedMsgId = lastMsg.id
+                        val motion = detectMotionFromText(lastMsg.content)
+                        if (motion != null) {
+                            _currentMotion.value = motion
+                            _motionTrigger.value = System.currentTimeMillis()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun onLive2dTouched(zone: String) {
+        val validZones = setOf("head", "chest", "groin", "hands", "legs")
+        if (zone !in validZones) return
+
+        viewModelScope.launch {
+            val reactionText = when (zone) {
+                "head" -> listOf(
+                    "Hehe, patting my head feels so nice...",
+                    "Being petted like this makes me feel so relaxed...",
+                    "Please pet me more~ Hehe"
+                ).random()
+                "chest" -> listOf(
+                    "Ah...! Touching there is embarrassing...",
+                    "Uh... touching my chest... please be gentle...",
+                    "My heart is beating so fast right now..."
+                ).random()
+                "groin" -> listOf(
+                    "Ah...! P-please don't touch there, it's very sensitive...",
+                    "You're being so naughty touching under my skirt...",
+                    "P-please stop... or things might get out of hand..."
+                ).random()
+                "hands" -> listOf(
+                    "Your hand is so warm... please don't let go~",
+                    "I love it when you hold my hand like this...",
+                    "Ehehe, I want to hold hands with you forever~"
+                ).random()
+                "legs" -> listOf(
+                    "Ehh, are you trying to tickle my legs? Haha~",
+                    "It tickles when you touch my legs~",
+                    "Don't tease my legs like that~ hehe"
+                ).random()
+                else -> return@launch
+            }
+
+            val touchEmotion = when (zone) {
+                "head" -> "happy"
+                "chest" -> "shy"
+                "groin" -> "love"
+                "hands" -> "love"
+                "legs" -> "playful"
+                else -> "happy"
+            }
+
+            val touchMotion = when (zone) {
+                "head" -> "happy"
+                "chest" -> "shy"
+                "groin" -> "special"
+                "hands" -> "love"
+                "legs" -> "playful"
+                else -> "tap_body"
+            }
+
+            _manualEmotion.value = touchEmotion
+            _currentMotion.value = touchMotion
+            _motionTrigger.value = System.currentTimeMillis()
+            _touchReactionText.value = reactionText
+            _touchReactionZone.value = zone
+
+            touchReactionJob?.cancel()
+            touchReactionJob = launch {
+                kotlinx.coroutines.delay(4000)
+                _touchReactionText.value = null
+                _touchReactionZone.value = null
+                _manualEmotion.value = null
+                _currentMotion.value = null
+            }
+        }
+    }
+
+    private fun detectEmotionFromText(text: String): String {
+        // 0. Explicit expression tags: [expression:name] or <expression:name> or [emotion:name]
+        val expTagRegex = Regex("""\[(?:expression|emotion)\s*[:=]\s*([a-zA-Z0-9_-]+)\s*\]|<(?:expression|emotion)\s*[:=]\s*([a-zA-Z0-9_-]+)\s*>""", RegexOption.IGNORE_CASE)
+        val expMatch = expTagRegex.find(text)
+        if (expMatch != null) {
+            val tagVal = expMatch.groupValues.drop(1).firstOrNull { it.isNotBlank() }
+            if (!tagVal.isNullOrBlank()) return tagVal
+        }
+
+        // If an explicit motion is present without an explicit expression tag, harmonize facial emotion
+        val motionTagRegex = Regex("""\[motion\s*[:=]\s*([a-zA-Z0-9_-]+)\s*\]|<motion\s*[:=]\s*([a-zA-Z0-9_-]+)\s*>""", RegexOption.IGNORE_CASE)
+        val motionMatch = motionTagRegex.find(text)
+        if (motionMatch != null) {
+            val mVal = motionMatch.groupValues.drop(1).firstOrNull { it.isNotBlank() }?.lowercase() ?: ""
+            if (mVal.contains("dance") || mVal.contains("wave") || mVal.contains("jump")) {
+                return "happy"
+            }
+            if (mVal.contains("pose")) {
+                return "playful"
+            }
+        }
+
+        val lower = text.lowercase()
+
+        // 1. Angry / Frustrated
+        if (lower.contains("marah") || lower.contains("kesal") || lower.contains("sebal") ||
+            lower.contains("ngambek") || lower.contains("jahat") || lower.contains("benci") ||
+            lower.contains("jangan begitu") || lower.contains("huff") || lower.contains("hmpf") ||
+            lower.contains("angry") || lower.contains("annoyed") || lower.contains("baka") ||
+            text.contains("😡") || text.contains("💢") || text.contains("😤") ||
+            text.contains("(¬_¬)") || text.contains("(>_<)") || text.contains("（｀ー´）")
+        ) {
+            return "angry"
+        }
+
+        // 2. Sad / Crying
+        if (lower.contains("sedih") || lower.contains("nangis") || lower.contains("menangis") ||
+            lower.contains("kecewa") || lower.contains("maaf") || lower.contains("hiks") ||
+            lower.contains("kasihan") || lower.contains("terluka") || lower.contains("sorry") ||
+            lower.contains("sad") || lower.contains("cry") || lower.contains("tears") ||
+            text.contains("😢") || text.contains("😭") || text.contains("🥺") ||
+            text.contains("(T_T)") || text.contains("(つД`)") || text.contains("(；ω；)")
+        ) {
+            return "sad"
+        }
+
+        // 3. Shy / Embarrassed
+        if (lower.contains("malu") || lower.contains("merona") || lower.contains("blush") ||
+            lower.contains("deg-degan") || lower.contains("deg degan") || lower.contains("kya") ||
+            lower.contains("shy") || lower.contains("embarrassed") ||
+            text.contains("(///)") || text.contains("(//∇//)") || text.contains("(⁄ ⁄•⁄ω⁄•⁄ ⁄)") ||
+            text.contains(">///<") || text.contains("😳") || text.contains("⁄(⁄ ⁄•⁄-⁄•⁄ ⁄)⁄")
+        ) {
+            return "shy"
+        }
+
+        // 4. Love / Affection
+        if (lower.contains("sayang") || lower.contains("suamiku") || lower.contains("cinta") ||
+            lower.contains("peluk") || lower.contains("cium") || lower.contains("muach") ||
+            lower.contains("pacar") || lower.contains("manja") || lower.contains("love") ||
+            text.contains("❤️") || text.contains("💕") || text.contains("💖") ||
+            text.contains("🥰") || text.contains("😍") || text.contains("(*´▽`*)") ||
+            text.contains("(♡)") || text.contains("(´∀｀)")
+        ) {
+            return "love"
+        }
+
+        // 5. Playful / Teasing
+        if (lower.contains("bercanda") || lower.contains("iseng") || lower.contains("jahil") ||
+            lower.contains("bleh") || lower.contains("bleeeh") || lower.contains("wkwk") ||
+            lower.contains("tebak") || lower.contains("godain") || lower.contains("playful") ||
+            text.contains("😜") || text.contains("😋") || text.contains("😏") ||
+            text.contains("(¬‿¬)") || text.contains("(^з^)-☆")
+        ) {
+            return "playful"
+        }
+
+        // 6. Surprised / Shocked
+        if (lower.contains("kaget") || lower.contains("apa?!") || lower.contains("hah?!") ||
+            lower.contains("loh?!") || lower.contains("beneran?") || lower.contains("serius?") ||
+            lower.contains("omg") || lower.contains("astaga") || lower.contains("wah") ||
+            lower.contains("surprised") || lower.contains("shock") ||
+            text.contains("😲") || text.contains("😱") || text.contains("!?!") ||
+            text.contains("(・o・)") || text.contains("(゜o゜)")
+        ) {
+            return "surprised"
+        }
+
+        // 7. Happy / Cheerful
+        if (lower.contains("senang") || lower.contains("bahagia") || lower.contains("gembira") ||
+            lower.contains("hehe") || lower.contains("ehehe") || lower.contains("yay") ||
+            lower.contains("terima kasih") || lower.contains("makasih") || lower.contains("suka") ||
+            lower.contains("happy") || lower.contains("glad") ||
+            text.contains("😊") || text.contains("😄") || text.contains("✨") ||
+            text.contains("(^o^)") || text.contains("(ﾉ◕ヮ◕)ﾉ") || text.contains("(´ω｀*)")
+        ) {
+            return "happy"
+        }
+
+        return "neutral"
+    }
+
+    private fun detectMotionFromText(text: String): String? {
+        if (text.isBlank()) return null
+
+        // 1. Explicit motion tag: [motion:group] or <motion:group>
+        val tagRegex = Regex("""\[motion\s*[:=]\s*([a-zA-Z0-9_-]+)\s*\]|<motion\s*[:=]\s*([a-zA-Z0-9_-]+)\s*>""", RegexOption.IGNORE_CASE)
+        val match = tagRegex.find(text)
+        if (match != null) {
+            val group = match.groupValues.drop(1).firstOrNull { it.isNotBlank() }
+            if (!group.isNullOrBlank()) return group
+        }
+
+        // If an explicit expression tag is present without any explicit motion tag,
+        // user/AI intended an expression only. DO NOT trigger motion!
+        val expTagRegex = Regex("""\[(?:expression|emotion)\s*[:=]\s*[^\]]+\]|<(?:expression|emotion)\s*[:=]\s*[^>]+>""", RegexOption.IGNORE_CASE)
+        if (expTagRegex.containsMatchIn(text)) {
+            return null
+        }
+
+        val lower = text.lowercase()
+
+        // 2. Action in asterisks (e.g. *melambaikan tangan*, *menari*, *dances*, *poses*)
+        val actionRegex = Regex("""\*([^*]+)\*""")
+        val actions = actionRegex.findAll(lower).map { it.groupValues[1] }.toList()
+        for (action in actions) {
+            if (action.contains("lamba") || action.contains("wave") || action.contains("sapa")) return "wave"
+            if (action.contains("tari") || action.contains("dance") || action.contains("joget") || action.contains("goyang")) return "dance"
+            if (action.contains("pose") || action.contains("gaya")) return "pose"
+            if (action.contains("angguk") || action.contains("nod")) return "nod"
+            if (action.contains("lompat") || action.contains("jump")) return "jump"
+        }
+
+        // 3. Natural conversational cues in character speech
+        if (lower.contains("melambaikan tangan") || lower.contains("lambaikan tangan") || lower.contains("waving my hand") || lower.contains("waves at you")) {
+            return "wave"
+        }
+        if (lower.contains("menari") || lower.contains("joget") || lower.contains("dancing for you") || lower.contains("goyang") || lower.contains("menari dengan")) {
+            return "dance"
+        }
+        if (lower.contains("lihat pose") || lower.contains("bergaya") || lower.contains("strike a pose")) {
+            return "pose"
+        }
+        if (lower.contains("mengangguk") || lower.contains("nodding")) {
+            return "nod"
+        }
+        if (lower.contains("melompat") || lower.contains("jumping")) {
+            return "jump"
+        }
+        if (lower.contains("ini gerakanku") || lower.contains("lihat gerakanku") || lower.contains("bergerak untukmu") || lower.contains("moving for you") || lower.contains("gerakan bebas")) {
+            return "dance"
+        }
+
+        return null
+    }
+
+    fun toggleLive2dMode() {
+        val currentSession = uiState.value.session ?: return
+        val newMode = !currentSession.isLive2dMode
+        viewModelScope.launch {
+            chatSessionDao.updateLive2dMode(
+                id = currentSession.id,
+                isLive2dMode = newMode
+            )
+        }
+    }
 
     fun updateChatSessionSettings(title: String, personaId: String, configId: String) {
         viewModelScope.launch {

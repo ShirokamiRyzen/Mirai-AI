@@ -55,4 +55,7 @@ interface ChatSessionDao {
 
     @Query("UPDATE chat_sessions SET personaId = :personaId, configId = :configId, title = :title, updatedAt = :updatedAt WHERE id = :id")
     suspend fun updateSessionSettings(id: String, personaId: String, configId: String, title: String, updatedAt: Long)
+
+    @Query("UPDATE chat_sessions SET isLive2dMode = :isLive2dMode, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun updateLive2dMode(id: String, isLive2dMode: Boolean, updatedAt: Long = System.currentTimeMillis())
 }

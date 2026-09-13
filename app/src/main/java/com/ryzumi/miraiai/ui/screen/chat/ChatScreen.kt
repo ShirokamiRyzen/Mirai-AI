@@ -31,9 +31,12 @@ import com.ryzumi.miraiai.ui.theme.UserBubbleDark
 import com.ryzumi.miraiai.ui.theme.UserBubbleLight
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.zIndex
+import androidx.compose.ui.draw.shadow
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.gestures.scrollBy
@@ -76,7 +79,23 @@ import androidx.compose.material.icons.filled.DataUsage
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ErrorOutline
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Memory
+import com.ryzumi.miraiai.ui.component.live2d.Live2dViewer
+import com.ryzumi.miraiai.ui.component.live2d.Live2dViewerController
+import com.ryzumi.miraiai.domain.live2d.Live2dModelCapabilities
+import com.ryzumi.miraiai.domain.live2d.Live2dModelFile
+import com.ryzumi.miraiai.domain.live2d.cleanLive2dControlTags
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Slider
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Refresh
@@ -199,6 +218,8 @@ fun ChatScreen(
     onDeleteMessages: (Set<String>) -> Unit = {},
     onClearHistory: () -> Unit,
     onUpdateSessionSettings: (title: String, personaId: String, configId: String) -> Unit = { _, _, _ -> },
+    onToggleLive2dMode: () -> Unit = {},
+    onModelTouched: (String) -> Unit = {},
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -232,12 +253,22 @@ fun ChatScreen(
     var previewImageUrl by remember { mutableStateOf<String?>(null) }
     var messageForOptions by remember { mutableStateOf<ChatMessageEntity?>(null) }
     var textSelectionMessage by remember { mutableStateOf<ChatMessageEntity?>(null) }
+    var isChatPanelOpen by rememberSaveable { mutableStateOf(true) }
+    val live2dController = remember { Live2dViewerController() }
+    var live2dCapabilities by remember { mutableStateOf<Live2dModelCapabilities?>(null) }
+    var showWardrobeSheet by remember { mutableStateOf(false) }
+    var currentLive2dModelPath by remember(uiState.character?.live2dPath) { mutableStateOf(uiState.character?.live2dPath ?: "") }
+    var activeExpressionId by remember { mutableStateOf<String?>(null) }
+    val partOpacities = remember { mutableStateMapOf<String, Float>() }
+    val paramValues = remember { mutableStateMapOf<String, Float>() }
     val debugLogs by DebugLogManager.logs.collectAsState()
 
     val isSelectionMode = selectedMessageIds.isNotEmpty()
 
-    BackHandler(enabled = isSelectionMode || messageForOptions != null || textSelectionMessage != null) {
-        if (textSelectionMessage != null) {
+    BackHandler(enabled = isSelectionMode || messageForOptions != null || textSelectionMessage != null || showWardrobeSheet) {
+        if (showWardrobeSheet) {
+            showWardrobeSheet = false
+        } else if (textSelectionMessage != null) {
             textSelectionMessage = null
         } else if (messageForOptions != null) {
             messageForOptions = null
@@ -312,7 +343,7 @@ fun ChatScreen(
                                 }
                                 IconButton(onClick = {
                                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                    clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", singleMsg.content))
+                                    clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", cleanLive2dControlTags(singleMsg.content)))
                                     Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
                                     selectedMessageIds = emptySet<String>()
                                 }) {
@@ -493,6 +524,28 @@ fun ChatScreen(
                     }
                 },
                 actions = {
+                    val hasLive2d = !uiState.character?.live2dPath.isNullOrBlank()
+
+                    IconButton(
+                        onClick = {
+                            if (!hasLive2d) {
+                                Toast.makeText(
+                                    context,
+                                    "Character does not have a Live2D model. Go to Character Edit to import a Live2D model.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                onToggleLive2dMode()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Face,
+                            contentDescription = if (uiState.isLive2dMode) "Switch to Text Only" else "Switch to Live2D",
+                            tint = if (uiState.isLive2dMode && hasLive2d) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = if (hasLive2d) 0.85f else 0.4f)
+                        )
+                    }
+
                     IconButton(onClick = { isTopMenuExpanded = true }) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
@@ -504,6 +557,34 @@ fun ChatScreen(
                         expanded = isTopMenuExpanded,
                         onDismissRequest = { isTopMenuExpanded = false }
                     ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    if (uiState.isLive2dMode) "View Mode: Live2D"
+                                    else "View Mode: Text Only"
+                                )
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Face,
+                                    contentDescription = null,
+                                    tint = if (uiState.isLive2dMode && hasLive2d) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            },
+                            onClick = {
+                                isTopMenuExpanded = false
+                                if (!hasLive2d) {
+                                    Toast.makeText(
+                                        context,
+                                        "Character does not have a Live2D model. Go to Character Edit to import a Live2D model.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    onToggleLive2dMode()
+                                }
+                            }
+                        )
+
                         if (uiState.isUsingLocalModel) {
                             if (uiState.localModelStatus == LocalModelStatus.LOADED) {
                                 DropdownMenuItem(
@@ -724,103 +805,461 @@ fun ChatScreen(
                 }
             }
 
-            // Chat Messages History
-            LazyColumn(
-                state = listState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1f)
-                    .padding(horizontal = 12.dp),
-                contentPadding = PaddingValues(top = 12.dp, bottom = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(
-                    items = uiState.messages,
-                    key = { it.id }
-                ) { msg ->
-                    val isMsgSelected = selectedMessageIds.contains(msg.id)
-                    ChatBubbleItem(
-                        message = msg,
-                        characterName = uiState.character?.name ?: "AI",
-                        isShowThinkingEnabled = uiState.isShowThinkingEnabled,
-                        isTokenCounterEnabled = uiState.isTokenCounterEnabled,
-                        isSelected = isMsgSelected,
-                        isSelectionMode = isSelectionMode,
-                        onClick = {
-                            if (isSelectionMode) {
-                                selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
-                            }
-                        },
-                        onLongClick = {
-                            if (isSelectionMode) {
-                                selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
-                            } else {
-                                messageForOptions = msg
-                            }
-                        },
-                        onCopy = {
-                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", msg.content))
-                            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
-                        },
-                        onDelete = { onDeleteMessage(msg) },
-                        onImageClick = { previewImageUrl = it },
-                        onOpenUrl = onOpenUrl
-                    )
-                }
+            // --- RYZA-STYLE IMMERSIVE LIVE2D VIEWPORT WITH COLLAPSIBLE CHAT PANEL ---
+            val hasLive2d = uiState.isLive2dMode && !uiState.character?.live2dPath.isNullOrBlank()
+            val character = uiState.character
 
-                // Retry prompt action button if the last message in chat is from USER and not currently streaming
-                val lastMsg = uiState.messages.lastOrNull()
-                if (lastMsg != null && lastMsg.sender.equals("USER", ignoreCase = true) && !uiState.isStreaming) {
-                    item(key = "retry_prompt_button") {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp),
-                            contentAlignment = Alignment.CenterStart
+            if (hasLive2d && character != null && !character.live2dPath.isNullOrBlank()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) {
+                    // 1. Live2D Character Canvas (Fills full background)
+                    Live2dViewer(
+                        characterId = character.id,
+                        modelRelativePath = currentLive2dModelPath.ifBlank { character.live2dPath ?: "" },
+                        isSpeaking = uiState.isStreaming && uiState.streamingText.isNotBlank(),
+                        emotion = uiState.currentEmotion,
+                        motion = uiState.currentMotion,
+                        motionTrigger = uiState.motionTrigger,
+                        controller = live2dController,
+                        onCapabilitiesLoaded = { caps ->
+                            live2dCapabilities = caps
+                            caps.parts.forEach { p ->
+                                if (!partOpacities.containsKey(p.id)) {
+                                    partOpacities[p.id] = p.opacity
+                                }
+                            }
+                            caps.parameters.forEach { param ->
+                                if (!paramValues.containsKey(param.id)) {
+                                    paramValues[param.id] = param.currentValue
+                                }
+                            }
+                        },
+                        onModelTouched = onModelTouched,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
+                    // 2. Ambient Shadow Gradients ("efek shadownya sedikit")
+                    // Top subtle shadow gradient under TopAppBar
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(64.dp)
+                            .align(Alignment.TopCenter)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Black.copy(alpha = 0.45f),
+                                        Color.Transparent
+                                    )
+                                )
+                            )
+                    )
+
+                    // Bottom smooth shadow vignette behind conversation & controls
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(if (isChatPanelOpen) 360.dp else 180.dp)
+                            .align(Alignment.BottomCenter)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        Color.Black.copy(alpha = 0.35f),
+                                        Color.Black.copy(alpha = 0.75f),
+                                        Color.Black.copy(alpha = 0.92f)
+                                    )
+                                )
+                            )
+                    )
+
+                    // 3. Floating Interactive Speech Bubble when character is touched
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = !uiState.touchReactionText.isNullOrBlank(),
+                        enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { it / 2 },
+                        exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it / 2 },
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(top = 16.dp, start = 20.dp, end = 20.dp)
+                    ) {
+                        Surface(
+                            shape = RoundedCornerShape(16.dp),
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.95f),
+                            shadowElevation = 8.dp,
+                            border = BorderStroke(
+                                1.dp,
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)
+                            )
                         ) {
-                            OutlinedButton(
-                                onClick = onRegenerateResponse,
-                                shape = RoundedCornerShape(16.dp),
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
-                                colors = ButtonDefaults.outlinedButtonColors(
-                                    contentColor = MaterialTheme.colorScheme.primary
-                                ),
-                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
-                                modifier = Modifier.height(32.dp)
+                            Row(
+                                modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Refresh,
+                                    imageVector = Icons.Default.Face,
                                     contentDescription = null,
-                                    modifier = Modifier.size(14.dp)
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(16.dp)
                                 )
-                                Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Retry response",
-                                    style = MaterialTheme.typography.labelSmall,
+                                    text = uiState.touchReactionText ?: "",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     fontWeight = FontWeight.Medium
                                 )
                             }
                         }
                     }
-                }
 
-                if (uiState.isStreaming) {
-                    item(key = "streaming_bubble") {
-                        StreamingBubbleItem(
-                            streamingThinking = uiState.streamingThinking,
-                            streamingText = uiState.streamingText,
-                            streamingModelName = uiState.streamingModelName,
-                            isThinkingExpanded = uiState.isLiveThinkingExpanded,
+                    // 4. Ryza-style Floating Action Buttons on Right Side
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 12.dp)
+                            .zIndex(30f),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // Wardrobe & Expressions Sheet Button
+                        Box(
+                            modifier = Modifier
+                                .size(46.dp)
+                                .shadow(8.dp, CircleShape)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.primaryContainer)
+                                .border(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f), CircleShape)
+                                .clickable { showWardrobeSheet = true },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Face,
+                                contentDescription = "Wardrobe & Expressions",
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+
+                        // Reset View / Camera Button
+                        Box(
+                            modifier = Modifier
+                                .size(46.dp)
+                                .shadow(8.dp, CircleShape)
+                                .clip(CircleShape)
+                                .background(Color.Black.copy(alpha = 0.75f))
+                                .border(1.dp, Color.White.copy(alpha = 0.3f), CircleShape)
+                                .clickable { live2dController.resetView() },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Reset View",
+                                tint = Color.White,
+                                modifier = Modifier.size(22.dp)
+                            )
+                        }
+
+                        // Toggle Open/Close Chat Panel
+                        Box(
+                            modifier = Modifier
+                                .size(46.dp)
+                                .shadow(8.dp, CircleShape)
+                                .clip(CircleShape)
+                                .background(Color.Black.copy(alpha = 0.75f))
+                                .border(1.dp, Color.White.copy(alpha = 0.3f), CircleShape)
+                                .clickable { isChatPanelOpen = !isChatPanelOpen },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = if (isChatPanelOpen) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                                contentDescription = if (isChatPanelOpen) "Collapse Chat" else "Expand Chat",
+                                tint = Color.White,
+                                modifier = Modifier.size(26.dp)
+                            )
+                        }
+                    }
+
+                    // 5. Layar Percakapan (Bisa Dibuka Tutup)
+                    // A. State DIBUKA (Expanded conversation panel)
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = isChatPanelOpen,
+                        enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { it },
+                        exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it },
+                        modifier = Modifier.align(Alignment.BottomCenter)
+                    ) {
+                        Surface(
+                            shape = RoundedCornerShape(topStart = 22.dp, topEnd = 22.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.88f),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.25f)),
+                            shadowElevation = 10.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 180.dp, max = 340.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(horizontal = 14.dp, vertical = 4.dp)
+                            ) {
+                                // Sleek drag handle indicator (tap to collapse)
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { isChatPanelOpen = false }
+                                        .padding(top = 8.dp, bottom = 8.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .width(36.dp)
+                                            .height(4.dp)
+                                            .clip(RoundedCornerShape(2.dp))
+                                            .background(MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f))
+                                    )
+                                }
+
+                                // Chat messages list inside panel
+                                LazyColumn(
+                                    state = listState,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .weight(1f),
+                                    contentPadding = PaddingValues(vertical = 4.dp),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    items(
+                                        items = uiState.messages,
+                                        key = { it.id }
+                                    ) { msg ->
+                                        val isMsgSelected = selectedMessageIds.contains(msg.id)
+                                        ChatBubbleItem(
+                                            message = msg,
+                                            characterName = uiState.character?.name ?: "AI",
+                                            isShowThinkingEnabled = uiState.isShowThinkingEnabled,
+                                            isTokenCounterEnabled = uiState.isTokenCounterEnabled,
+                                            isSelected = isMsgSelected,
+                                            isSelectionMode = isSelectionMode,
+                                            onClick = {
+                                                if (isSelectionMode) {
+                                                    selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                                                }
+                                            },
+                                            onLongClick = {
+                                                if (isSelectionMode) {
+                                                    selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                                                } else {
+                                                    messageForOptions = msg
+                                                }
+                                            },
+                                            onCopy = {
+                                                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                                clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", msg.content))
+                                                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+                                            },
+                                            onDelete = { onDeleteMessage(msg) },
+                                            onImageClick = { previewImageUrl = it },
+                                            onOpenUrl = onOpenUrl
+                                        )
+                                    }
+
+                                    // Retry prompt action button
+                                    val lastMsg = uiState.messages.lastOrNull()
+                                    if (lastMsg != null && lastMsg.sender.equals("USER", ignoreCase = true) && !uiState.isStreaming) {
+                                        item(key = "retry_prompt_button") {
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(vertical = 4.dp),
+                                                contentAlignment = Alignment.CenterStart
+                                            ) {
+                                                OutlinedButton(
+                                                    onClick = onRegenerateResponse,
+                                                    shape = RoundedCornerShape(16.dp),
+                                                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
+                                                    colors = ButtonDefaults.outlinedButtonColors(
+                                                        contentColor = MaterialTheme.colorScheme.primary
+                                                    ),
+                                                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                                    modifier = Modifier.height(32.dp)
+                                                ) {
+                                                    Icon(
+                                                        imageVector = Icons.Default.Refresh,
+                                                        contentDescription = null,
+                                                        modifier = Modifier.size(14.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(6.dp))
+                                                    Text(
+                                                        text = "Retry response",
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        fontWeight = FontWeight.Medium
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (uiState.isStreaming) {
+                                        item(key = "streaming_bubble") {
+                                            StreamingBubbleItem(
+                                                streamingThinking = uiState.streamingThinking,
+                                                streamingText = uiState.streamingText,
+                                                streamingModelName = uiState.streamingModelName,
+                                                isThinkingExpanded = uiState.isLiveThinkingExpanded,
+                                                isShowThinkingEnabled = uiState.isShowThinkingEnabled,
+                                                isTokenCounterEnabled = uiState.isTokenCounterEnabled,
+                                                streamingTokensCount = uiState.streamingTokensCount,
+                                                streamingSpeedTps = uiState.streamingSpeedTps,
+                                                onToggleThinking = onToggleLiveThinkingExpanded,
+                                                characterName = uiState.character?.name ?: "AI",
+                                                listState = listState,
+                                                onOpenUrl = onOpenUrl
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // B. State DITUTUP (Minimalist subtitle text floating above input bar, exactly like Ryza Screenshot 2)
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = !isChatPanelOpen,
+                        enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { it / 2 },
+                        exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it / 2 },
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .fillMaxWidth()
+                            .clickable { isChatPanelOpen = true }
+                            .padding(horizontal = 18.dp, vertical = 8.dp)
+                    ) {
+                        val latestAiText = remember(uiState.isStreaming, uiState.streamingText, uiState.messages) {
+                            val raw = if (uiState.isStreaming && uiState.streamingText.isNotBlank()) {
+                                uiState.streamingText
+                            } else {
+                                uiState.messages.lastOrNull { it.sender.equals("CHARACTER", ignoreCase = true) || it.sender.equals("ASSISTANT", ignoreCase = true) }?.content
+                                    ?: uiState.messages.lastOrNull()?.content
+                                    ?: "...Hey, you are here."
+                            }
+                            cleanLive2dControlTags(raw, isStreaming = uiState.isStreaming)
+                        }
+
+                        Text(
+                            text = latestAiText,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = Color.White.copy(alpha = 0.95f),
+                                fontWeight = FontWeight.Medium,
+                                shadow = androidx.compose.ui.graphics.Shadow(
+                                    color = Color.Black.copy(alpha = 0.90f),
+                                    blurRadius = 8f
+                                )
+                            ),
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+            } else {
+                // --- STANDARD FULL CHAT MESSAGES HISTORY (TEXT ONLY MODE) ---
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        .padding(horizontal = 12.dp),
+                    contentPadding = PaddingValues(top = 12.dp, bottom = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(
+                        items = uiState.messages,
+                        key = { it.id }
+                    ) { msg ->
+                        val isMsgSelected = selectedMessageIds.contains(msg.id)
+                        ChatBubbleItem(
+                            message = msg,
+                            characterName = uiState.character?.name ?: "AI",
                             isShowThinkingEnabled = uiState.isShowThinkingEnabled,
                             isTokenCounterEnabled = uiState.isTokenCounterEnabled,
-                            streamingTokensCount = uiState.streamingTokensCount,
-                            streamingSpeedTps = uiState.streamingSpeedTps,
-                            onToggleThinking = onToggleLiveThinkingExpanded,
-                            characterName = uiState.character?.name ?: "AI",
-                            listState = listState,
+                            isSelected = isMsgSelected,
+                            isSelectionMode = isSelectionMode,
+                            onClick = {
+                                if (isSelectionMode) {
+                                    selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                                }
+                            },
+                            onLongClick = {
+                                if (isSelectionMode) {
+                                    selectedMessageIds = if (isMsgSelected) selectedMessageIds - msg.id else selectedMessageIds + msg.id
+                                } else {
+                                    messageForOptions = msg
+                                }
+                            },
+                            onCopy = {
+                                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", msg.content))
+                                Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+                            },
+                            onDelete = { onDeleteMessage(msg) },
+                            onImageClick = { previewImageUrl = it },
                             onOpenUrl = onOpenUrl
                         )
+                    }
+
+                    // Retry prompt action button if the last message in chat is from USER and not currently streaming
+                    val lastMsg = uiState.messages.lastOrNull()
+                    if (lastMsg != null && lastMsg.sender.equals("USER", ignoreCase = true) && !uiState.isStreaming) {
+                        item(key = "retry_prompt_button") {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                OutlinedButton(
+                                    onClick = onRegenerateResponse,
+                                    shape = RoundedCornerShape(16.dp),
+                                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        contentColor = MaterialTheme.colorScheme.primary
+                                    ),
+                                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                    modifier = Modifier.height(32.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Refresh,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(14.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(
+                                        text = "Retry response",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    if (uiState.isStreaming) {
+                        item(key = "streaming_bubble") {
+                            StreamingBubbleItem(
+                                streamingThinking = uiState.streamingThinking,
+                                streamingText = uiState.streamingText,
+                                streamingModelName = uiState.streamingModelName,
+                                isThinkingExpanded = uiState.isLiveThinkingExpanded,
+                                isShowThinkingEnabled = uiState.isShowThinkingEnabled,
+                                isTokenCounterEnabled = uiState.isTokenCounterEnabled,
+                                streamingTokensCount = uiState.streamingTokensCount,
+                                streamingSpeedTps = uiState.streamingSpeedTps,
+                                onToggleThinking = onToggleLiveThinkingExpanded,
+                                characterName = uiState.character?.name ?: "AI",
+                                listState = listState,
+                                onOpenUrl = onOpenUrl
+                            )
+                        }
                     }
                 }
             }
@@ -1297,7 +1736,7 @@ fun ChatScreen(
                         .clip(RoundedCornerShape(12.dp))
                         .clickable {
                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", targetMsg.content))
+                            clipboard.setPrimaryClip(ClipData.newPlainText("Chat Message", cleanLive2dControlTags(targetMsg.content)))
                             Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
                             messageForOptions = null
                         }
@@ -1398,6 +1837,434 @@ fun ChatScreen(
             onDismiss = { textSelectionMessage = null }
         )
     }
+
+    if (showWardrobeSheet) {
+        var selectedTabIndex by remember { mutableIntStateOf(0) }
+        val caps = live2dCapabilities
+
+        ModalBottomSheet(
+            onDismissRequest = { showWardrobeSheet = false },
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 32.dp)
+            ) {
+                // Header
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = "Live2D Wardrobe & Controls",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = uiState.character?.name ?: "Character",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    IconButton(onClick = { showWardrobeSheet = false }) {
+                        Icon(Icons.Default.Close, contentDescription = "Close")
+                    }
+                }
+
+                // 3 Tabs: Costumes, Expressions, Motions
+                PrimaryTabRow(
+                    selectedTabIndex = selectedTabIndex,
+                    containerColor = Color.Transparent,
+                    contentColor = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                ) {
+                    Tab(
+                        selected = selectedTabIndex == 0,
+                        onClick = { selectedTabIndex = 0 },
+                        text = { Text("Costumes") }
+                    )
+                    Tab(
+                        selected = selectedTabIndex == 1,
+                        onClick = { selectedTabIndex = 1 },
+                        text = { Text("Expressions") }
+                    )
+                    Tab(
+                        selected = selectedTabIndex == 2,
+                        onClick = { selectedTabIndex = 2 },
+                        text = { Text("Motions") }
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 380.dp)
+                ) {
+                    when (selectedTabIndex) {
+                        0 -> {
+                            // --- TAB 1: COSTUMES & ACCESSORIES ---
+                            LazyColumn(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                // 1. Model / Costume selector
+                                item {
+                                    Text(
+                                        text = "Outfits & Models",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                    Spacer(modifier = Modifier.height(6.dp))
+
+                                    val modelList = caps?.models ?: emptyList()
+                                    if (modelList.isEmpty()) {
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Row(
+                                                modifier = Modifier.padding(12.dp),
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                Text(
+                                                    text = "Active model: ${currentLive2dModelPath.substringAfterLast('/')}",
+                                                    style = MaterialTheme.typography.bodySmall
+                                                )
+                                            }
+                                        }
+                                    } else {
+                                        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                            modelList.forEach { m ->
+                                                val isSelected = currentLive2dModelPath.equals(m.relativePath, ignoreCase = true)
+                                                Surface(
+                                                    shape = RoundedCornerShape(12.dp),
+                                                    color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                                                    border = BorderStroke(
+                                                        1.dp,
+                                                        if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent
+                                                    ),
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .clickable {
+                                                            currentLive2dModelPath = m.relativePath
+                                                            uiState.character?.id?.let { cid ->
+                                                                live2dController.loadOutfit(cid, m.relativePath)
+                                                            }
+                                                        }
+                                                ) {
+                                                    Row(
+                                                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                                                        verticalAlignment = Alignment.CenterVertically,
+                                                        horizontalArrangement = Arrangement.SpaceBetween
+                                                    ) {
+                                                        Text(
+                                                            text = m.name,
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                                            color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                                        )
+                                                        if (isSelected) {
+                                                            Icon(
+                                                                imageVector = Icons.Default.CheckCircle,
+                                                                contentDescription = "Selected",
+                                                                tint = MaterialTheme.colorScheme.primary,
+                                                                modifier = Modifier.size(18.dp)
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // 2. Parts / Accessories toggles
+                                val partsList = caps?.parts ?: emptyList()
+                                if (partsList.isNotEmpty()) {
+                                    item {
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Accessories & Parts",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
+                                    items(partsList) { part ->
+                                        val curOpacity = partOpacities[part.id] ?: part.opacity
+                                        val isChecked = curOpacity > 0.5f
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Row(
+                                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceBetween
+                                            ) {
+                                                Column(modifier = Modifier.weight(1f)) {
+                                                    Text(
+                                                        text = part.name,
+                                                        style = MaterialTheme.typography.bodyMedium,
+                                                        fontWeight = FontWeight.Medium
+                                                    )
+                                                }
+                                                Switch(
+                                                    checked = isChecked,
+                                                    onCheckedChange = { checked ->
+                                                        val targetVal = if (checked) 1f else 0f
+                                                        partOpacities[part.id] = targetVal
+                                                        live2dController.setPartOpacity(part.id, targetVal)
+                                                    }
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // 3. Costume / Custom Parameters
+                                val paramList = caps?.parameters ?: emptyList()
+                                if (paramList.isNotEmpty()) {
+                                    item {
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Costume Adjustments",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
+                                    items(paramList) { param ->
+                                        val curVal = paramValues[param.id] ?: param.currentValue
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                                                Row(
+                                                    modifier = Modifier.fillMaxWidth(),
+                                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Text(
+                                                        text = param.name,
+                                                        style = MaterialTheme.typography.bodySmall,
+                                                        fontWeight = FontWeight.Medium
+                                                    )
+                                                    Text(
+                                                        text = "%.2f".format(curVal),
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        color = MaterialTheme.colorScheme.primary
+                                                    )
+                                                }
+                                                Slider(
+                                                    value = curVal,
+                                                    onValueChange = { newVal ->
+                                                        paramValues[param.id] = newVal
+                                                        live2dController.setParamValue(param.id, newVal)
+                                                    },
+                                                    valueRange = param.min..param.max
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        1 -> {
+                            // --- TAB 2: FACIAL EXPRESSIONS ---
+                            val expList = caps?.expressions ?: emptyList()
+                            LazyColumn(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                item {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = "Expressions (${expList.size})",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                        TextButton(onClick = {
+                                            activeExpressionId = null
+                                            live2dController.setExpression("")
+                                        }) {
+                                            Text("Reset")
+                                        }
+                                    }
+                                }
+
+                                if (expList.isEmpty()) {
+                                    item {
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Column(
+                                                modifier = Modifier.padding(16.dp),
+                                                horizontalAlignment = Alignment.CenterHorizontally
+                                            ) {
+                                                Text(
+                                                    text = "No custom expressions defined in this model.",
+                                                    style = MaterialTheme.typography.bodySmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+
+                                items(expList) { exp ->
+                                    val isCurrent = activeExpressionId == exp.id
+                                    Surface(
+                                        shape = RoundedCornerShape(12.dp),
+                                        color = if (isCurrent) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
+                                        border = BorderStroke(
+                                            1.dp,
+                                            if (isCurrent) MaterialTheme.colorScheme.primary else Color.Transparent
+                                        ),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable {
+                                                activeExpressionId = exp.id
+                                                live2dController.setExpression(exp.id)
+                                            }
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.SpaceBetween
+                                        ) {
+                                            Text(
+                                                text = exp.name,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
+                                                color = if (isCurrent) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                            )
+                                            if (isCurrent) {
+                                                Icon(
+                                                    imageVector = Icons.Default.CheckCircle,
+                                                    contentDescription = "Selected",
+                                                    tint = MaterialTheme.colorScheme.primary,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        2 -> {
+                            // --- TAB 3: MOTIONS & POSES ---
+                            val motionList = caps?.motions ?: emptyList()
+                            LazyColumn(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                item {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = "Motions (${motionList.size})",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                        FilledTonalButton(onClick = {
+                                            if (motionList.isNotEmpty()) {
+                                                val rand = motionList.random()
+                                                live2dController.playMotion(rand.group, rand.index)
+                                            }
+                                        }) {
+                                            Text("Random")
+                                        }
+                                    }
+                                }
+
+                                if (motionList.isEmpty()) {
+                                    item {
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Column(
+                                                modifier = Modifier.padding(16.dp),
+                                                horizontalAlignment = Alignment.CenterHorizontally
+                                            ) {
+                                                Text(
+                                                    text = "This model moves dynamically with physics and touch interactions.",
+                                                    style = MaterialTheme.typography.bodySmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    items(motionList) { motion ->
+                                        Surface(
+                                            shape = RoundedCornerShape(12.dp),
+                                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .clickable {
+                                                    live2dController.playMotion(motion.group, motion.index)
+                                                }
+                                        ) {
+                                            Row(
+                                                modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceBetween
+                                            ) {
+                                                Column(modifier = Modifier.weight(1f)) {
+                                                    Text(
+                                                        text = motion.name,
+                                                        style = MaterialTheme.typography.bodyMedium,
+                                                        fontWeight = FontWeight.Medium
+                                                    )
+                                                    Text(
+                                                        text = "Group: ${motion.group}",
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                }
+                                                FilledTonalButton(
+                                                    onClick = {
+                                                        live2dController.playMotion(motion.group, motion.index)
+                                                    }
+                                                ) {
+                                                    Text("Play")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -1445,11 +2312,12 @@ fun ChatBubbleItem(
     val matchResult = remember(message.content) { thinkRegex.find(message.content) }
     val thinkingText = remember(matchResult) { matchResult?.groupValues?.get(1)?.trim() }
     val cleanContentText = remember(message.content, matchResult) {
-        if (matchResult != null) {
+        val raw = if (matchResult != null) {
             message.content.replace(thinkRegex, "").trim()
         } else {
             message.content
         }
+        cleanLive2dControlTags(raw, isStreaming = false)
     }
 
     Box(
@@ -1690,35 +2558,39 @@ fun StreamingBubbleItem(
     listState: LazyListState? = null,
     onOpenUrl: (String) -> Unit = {}
 ) {
-    // Smooth typewriter catch-up effect for streaming text
-    var displayedLength by remember { mutableIntStateOf(if (streamingText.isNotEmpty()) 1 else 0) }
+    val cleanedStreamingText = remember(streamingText) {
+        cleanLive2dControlTags(streamingText, isStreaming = true)
+    }
 
-    LaunchedEffect(streamingText) {
-        if (streamingText.isEmpty()) {
+    // Smooth typewriter catch-up effect for streaming text
+    var displayedLength by remember { mutableIntStateOf(if (cleanedStreamingText.isNotEmpty()) 1 else 0) }
+
+    LaunchedEffect(cleanedStreamingText) {
+        if (cleanedStreamingText.isEmpty()) {
             displayedLength = 0
         } else {
             if (displayedLength == 0) {
                 displayedLength = 1
             }
-            while (displayedLength < streamingText.length) {
-                val diff = streamingText.length - displayedLength
+            while (displayedLength < cleanedStreamingText.length) {
+                val diff = cleanedStreamingText.length - displayedLength
                 val step = when {
                     diff > 80 -> 8
                     diff > 40 -> 4
                     diff > 15 -> 2
                     else -> 1
                 }
-                displayedLength = (displayedLength + step).coerceAtMost(streamingText.length)
+                displayedLength = (displayedLength + step).coerceAtMost(cleanedStreamingText.length)
                 delay(if (diff > 25) 8L else 14L)
             }
         }
     }
 
-    val visibleText = if (streamingText.isEmpty()) {
+    val visibleText = if (cleanedStreamingText.isEmpty()) {
         ""
     } else {
-        val len = displayedLength.coerceIn(1, streamingText.length)
-        streamingText.substring(0, len)
+        val len = displayedLength.coerceIn(1, cleanedStreamingText.length)
+        cleanedStreamingText.substring(0, len)
     }
 
     // Auto-scroll to bottom as typewriter reveals newly typed lines or reasoning tokens arrive
@@ -1800,7 +2672,7 @@ fun StreamingBubbleItem(
                         TypingDotsIndicator()
                         if (isShowThinkingEnabled && streamingThinking.isNotBlank()) {
                             Text(
-                                text = "Menyusun respon...",
+                                text = "Generating response...",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontFamily = FontFamily.Monospace,
                                 color = textColor.copy(alpha = 0.55f),
@@ -2174,7 +3046,8 @@ fun TextSelectionDialog(
     val matchResult = remember(message.content) { thinkRegex.find(message.content) }
     val thinkingText = remember(matchResult) { matchResult?.groupValues?.get(1)?.trim() }
     val cleanContent = remember(message.content, matchResult) {
-        if (matchResult != null) message.content.replace(thinkRegex, "").trim() else message.content
+        val raw = if (matchResult != null) message.content.replace(thinkRegex, "").trim() else message.content
+        cleanLive2dControlTags(raw, isStreaming = false)
     }
 
     var selectedTab by remember { mutableIntStateOf(0) } // 0: Response, 1: Thinking Process
