@@ -294,7 +294,6 @@ fun MiraiNavGraph(
             ModelHubScreen(
                 uiState = uiState,
                 onFilterSelected = viewModel::selectFilter,
-                onSizeFilterSelected = viewModel::selectSizeFilter,
                 onSearchQueryChanged = viewModel::onSearchQueryChanged,
                 onSearchClick = { viewModel.searchModels() },
                 onLoadMore = viewModel::loadMore,

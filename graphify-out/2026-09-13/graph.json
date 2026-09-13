@@ -76,8 +76,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_warn",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": "warn()"
     },
     {
@@ -109,8 +109,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_d",
-      "community": 65,
-      "community_name": "ke",
+      "community": 81,
+      "community_name": "it",
       "norm_label": "d()"
     },
     {
@@ -120,8 +120,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_u",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": "u()"
     },
     {
@@ -131,8 +131,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": "c()"
     },
     {
@@ -153,8 +153,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": "m()"
     },
     {
@@ -186,8 +186,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 80,
+      "community_name": "kt",
       "norm_label": ".constructor()"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": "x"
     },
     {
@@ -340,8 +340,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_constructor",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -351,8 +351,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_resolveurl",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".resolveurl()"
     },
     {
@@ -362,8 +362,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_replacefiles",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".replacefiles()"
     },
     {
@@ -373,8 +373,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_getdefinedfiles",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".getdefinedfiles()"
     },
     {
@@ -384,8 +384,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_validatefiles",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".validatefiles()"
     },
     {
@@ -395,8 +395,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_constructor",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".constructor()"
     },
     {
@@ -406,8 +406,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_reserve",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".reserve()"
     },
     {
@@ -417,8 +417,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_start",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".start()"
     },
     {
@@ -428,8 +428,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_complete",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".complete()"
     },
     {
@@ -439,8 +439,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setcurrent",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".setcurrent()"
     },
     {
@@ -450,8 +450,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setreserved",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".setreserved()"
     },
     {
@@ -461,8 +461,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setreservedidle",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".setreservedidle()"
     },
     {
@@ -472,8 +472,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_isactive",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".isactive()"
     },
     {
@@ -483,8 +483,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_reset",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".reset()"
     },
     {
@@ -494,8 +494,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_shouldrequestidlemotion",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".shouldrequestidlemotion()"
     },
     {
@@ -505,8 +505,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_shouldoverrideexpression",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".shouldoverrideexpression()"
     },
     {
@@ -516,8 +516,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_dump",
-      "community": 60,
-      "community_name": "h",
+      "community": 59,
+      "community_name": "m",
       "norm_label": ".dump()"
     },
     {
@@ -527,8 +527,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": "v"
     },
     {
@@ -538,8 +538,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_volume",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".volume()"
     },
     {
@@ -549,8 +549,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_add",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".add()"
     },
     {
@@ -582,8 +582,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_destroy",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".destroy()"
     },
     {
@@ -593,8 +593,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_constructor",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".constructor()"
     },
     {
@@ -604,8 +604,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_init",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".init()"
     },
     {
@@ -615,8 +615,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_setupmotions",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".setupmotions()"
     },
     {
@@ -626,8 +626,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_loadmotion",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".loadmotion()"
     },
     {
@@ -648,8 +648,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_startrandommotion",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".startrandommotion()"
     },
     {
@@ -659,8 +659,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_stopallmotions",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".stopallmotions()"
     },
     {
@@ -681,8 +681,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_destroy",
-      "community": 71,
-      "community_name": "bt",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".destroy()"
     },
     {
@@ -835,8 +835,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_createxhr",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": "createxhr()"
     },
     {
@@ -869,7 +869,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_l",
       "community": 57,
-      "community_name": "L",
+      "community_name": "loadMotion",
       "norm_label": "l()"
     },
     {
@@ -880,7 +880,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e",
       "community": 57,
-      "community_name": "L",
+      "community_name": "loadMotion",
       "norm_label": "e"
     },
     {
@@ -891,7 +891,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e_load",
       "community": 57,
-      "community_name": "L",
+      "community_name": "loadMotion",
       "norm_label": ".load()"
     },
     {
@@ -924,7 +924,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_setuplive2dmodel",
       "community": 57,
-      "community_name": "L",
+      "community_name": "loadMotion",
       "norm_label": "setuplive2dmodel()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_loadmotion",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": "loadmotion()"
     },
     {
@@ -956,8 +956,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_constructor",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".constructor()"
     },
     {
@@ -967,8 +967,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_autointeract",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".autointeract()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -1055,8 +1055,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_autoupdate",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": ".autoupdate()"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_motion",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".motion()"
     },
     {
@@ -1177,7 +1177,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_ontickerupdate",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".ontickerupdate()"
     },
     {
@@ -1220,8 +1220,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_resolveurl",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": "resolveurl()"
     },
     {
@@ -1231,8 +1231,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_upload",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": "upload()"
     },
     {
@@ -1243,7 +1243,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_createsettings",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": "createsettings()"
     },
     {
@@ -1254,7 +1254,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_readtext",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": "readtext()"
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_unzip",
-      "community": 41,
-      "community_name": "x",
+      "community": 86,
+      "community_name": "e",
       "norm_label": "unzip()"
     },
     {
@@ -1330,8 +1330,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k",
-      "community": 86,
-      "community_name": "De",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": "k"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k_constructor",
-      "community": 86,
-      "community_name": "De",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k_updateparamexe",
-      "community": 86,
-      "community_name": "De",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": ".updateparamexe()"
     },
     {
@@ -1462,7 +1462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": "et"
     },
@@ -1473,8 +1473,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 86,
+      "community_name": "e",
       "norm_label": ".constructor()"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_init",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -1495,7 +1495,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_isfinished",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".isfinished()"
     },
@@ -1506,8 +1506,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_createmotion",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".createmotion()"
     },
     {
@@ -1517,7 +1517,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionfile",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getmotionfile()"
     },
@@ -1528,7 +1528,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionname",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getmotionname()"
     },
@@ -1539,7 +1539,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getsoundfile",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getsoundfile()"
     },
@@ -1550,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_startmotion",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": "._startmotion()"
     },
@@ -1561,7 +1561,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_stopallmotions",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": "._stopallmotions()"
     },
@@ -1573,7 +1573,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_updateparameters",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".updateparameters()"
     },
     {
@@ -1583,8 +1583,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 54,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -1594,8 +1594,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it",
-      "community": 65,
-      "community_name": "ke",
+      "community": 81,
+      "community_name": "it",
       "norm_label": "it"
     },
     {
@@ -1605,8 +1605,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_constructor",
-      "community": 65,
-      "community_name": "ke",
+      "community": 81,
+      "community_name": "it",
       "norm_label": ".constructor()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_seteyeparams",
-      "community": 65,
-      "community_name": "ke",
+      "community": 81,
+      "community_name": "it",
       "norm_label": ".seteyeparams()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_update",
-      "community": 65,
-      "community_name": "ke",
+      "community": 81,
+      "community_name": "it",
       "norm_label": ".update()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_init",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -1760,7 +1760,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_update",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 54,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -1814,7 +1814,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": "at"
     },
@@ -1825,8 +1825,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_constructor",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".constructor()"
     },
     {
@@ -1836,7 +1836,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isvalidjson",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".isvalidjson()"
     },
@@ -1847,8 +1847,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_copy",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".copy()"
     },
     {
@@ -1858,8 +1858,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_replacefiles",
-      "community": 41,
-      "community_name": "x",
+      "community": 84,
+      "community_name": "ut",
       "norm_label": ".replacefiles()"
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "lt"
     },
     {
@@ -1880,8 +1880,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_constructor",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -1892,7 +1892,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_update",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -2034,8 +2034,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_constructor",
-      "community": 84,
-      "community_name": "ut",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".constructor()"
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_add",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": ".add()"
     },
     {
@@ -2078,8 +2078,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_multiplybyscaler",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".multiplybyscaler()"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_sqrt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "sqrt()"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cbrt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "cbrt()"
     },
     {
@@ -2244,7 +2244,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_geteasingsine",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": "geteasingsine()"
     },
     {
@@ -2331,8 +2331,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_quadraticequation",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "quadraticequation()"
     },
     {
@@ -2342,8 +2342,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cardanoalgorithmforbezier",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "cardanoalgorithmforbezier()"
     },
     {
@@ -2353,8 +2353,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": "mt"
     },
     {
@@ -2364,8 +2364,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_constructor",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".constructor()"
     },
     {
@@ -2375,8 +2375,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_multiply",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".multiply()"
     },
     {
@@ -2386,8 +2386,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_loadidentity",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".loadidentity()"
     },
     {
@@ -2397,8 +2397,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_setmatrix",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".setmatrix()"
     },
     {
@@ -2408,8 +2408,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_getarray",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".getarray()"
     },
     {
@@ -2419,8 +2419,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_getscalex",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".getscalex()"
     },
     {
@@ -2430,8 +2430,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_getscaley",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".getscaley()"
     },
     {
@@ -2441,8 +2441,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_gettranslatex",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".gettranslatex()"
     },
     {
@@ -2452,8 +2452,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_gettranslatey",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".gettranslatey()"
     },
     {
@@ -2463,8 +2463,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_transformx",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".transformx()"
     },
     {
@@ -2474,8 +2474,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_transformy",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".transformy()"
     },
     {
@@ -2485,8 +2485,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_inverttransformx",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".inverttransformx()"
     },
     {
@@ -2496,8 +2496,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_inverttransformy",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".inverttransformy()"
     },
     {
@@ -2507,8 +2507,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_translaterelative",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".translaterelative()"
     },
     {
@@ -2518,8 +2518,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_translate",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".translate()"
     },
     {
@@ -2529,8 +2529,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_translatex",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".translatex()"
     },
     {
@@ -2540,8 +2540,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_translatey",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".translatey()"
     },
     {
@@ -2551,8 +2551,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_scalerelative",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".scalerelative()"
     },
     {
@@ -2562,8 +2562,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_scale",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".scale()"
     },
     {
@@ -2573,8 +2573,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_multiplybymatrix",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".multiplybymatrix()"
     },
     {
@@ -2584,8 +2584,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_mt_clone",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".clone()"
     },
     {
@@ -2618,7 +2618,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_drawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".drawmodel()"
     },
     {
@@ -2628,8 +2628,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_setmvpmatrix",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".setmvpmatrix()"
     },
     {
@@ -2761,7 +2761,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "ft"
     },
     {
@@ -2772,7 +2772,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_constructor",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".constructor()"
     },
     {
@@ -2782,8 +2782,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "ct"
     },
     {
@@ -2793,8 +2793,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_startup",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".startup()"
     },
     {
@@ -2804,8 +2804,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_cleanup",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".cleanup()"
     },
     {
@@ -2815,8 +2815,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_initialize",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".initialize()"
     },
     {
@@ -2826,8 +2826,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_dispose",
-      "community": 58,
-      "community_name": "ie",
+      "community": 68,
+      "community_name": "v",
       "norm_label": ".dispose()"
     },
     {
@@ -2837,8 +2837,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isstarted",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isstarted()"
     },
     {
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isinitialized",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isinitialized()"
     },
     {
@@ -2859,8 +2859,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_corelogfunction",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".corelogfunction()"
     },
     {
@@ -2870,8 +2870,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_getlogginglevel",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".getlogginglevel()"
     },
     {
@@ -2881,8 +2881,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_constructor",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -2903,8 +2903,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "wt()"
     },
     {
@@ -2914,8 +2914,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_print",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".print()"
     },
     {
@@ -2925,8 +2925,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_dumpbytes",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".dumpbytes()"
     },
     {
@@ -2936,7 +2936,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_release",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".release()"
     },
@@ -2947,7 +2947,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeintime",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".setfadeintime()"
     },
@@ -2958,7 +2958,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeouttime",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".setfadeouttime()"
     },
@@ -2969,8 +2969,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeouttime",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".getfadeouttime()"
     },
     {
@@ -2980,7 +2980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeintime",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getfadeintime()"
     },
@@ -2991,7 +2991,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setweight",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".setweight()"
     },
@@ -3002,7 +3002,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getweight",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getweight()"
     },
@@ -3013,7 +3013,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getduration",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getduration()"
     },
@@ -3024,7 +3024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getloopduration",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getloopduration()"
     },
@@ -3035,7 +3035,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setoffsettime",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".setoffsettime()"
     },
@@ -3046,7 +3046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfiredevent",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getfiredevent()"
     },
@@ -3068,7 +3068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfinishedmotionhandler",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".getfinishedmotionhandler()"
     },
@@ -3079,7 +3079,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_create",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".create()"
     },
@@ -3091,7 +3091,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_doupdateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -3101,7 +3101,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_release",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".release()"
     },
@@ -3112,8 +3112,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setfadeout",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".setfadeout()"
     },
     {
@@ -3124,7 +3124,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_startfadeout",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".startfadeout()"
     },
     {
@@ -3134,7 +3134,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isfinished",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".isfinished()"
     },
@@ -3146,7 +3146,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isstarted",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".isstarted()"
     },
     {
@@ -3156,7 +3156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstarttime",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".getstarttime()"
     },
@@ -3168,7 +3168,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getfadeinstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getfadeinstarttime()"
     },
     {
@@ -3179,7 +3179,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getendtime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getendtime()"
     },
     {
@@ -3190,7 +3190,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setstarttime()"
     },
     {
@@ -3201,7 +3201,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setfadeinstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setfadeinstarttime()"
     },
     {
@@ -3212,7 +3212,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setendtime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setendtime()"
     },
     {
@@ -3223,7 +3223,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisfinished",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setisfinished()"
     },
     {
@@ -3234,7 +3234,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisstarted",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setisstarted()"
     },
     {
@@ -3245,7 +3245,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isavailable",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".isavailable()"
     },
     {
@@ -3255,7 +3255,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisavailable",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".setisavailable()"
     },
@@ -3267,7 +3267,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setstate",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setstate()"
     },
     {
@@ -3277,7 +3277,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstatetime",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".getstatetime()"
     },
@@ -3288,7 +3288,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstateweight",
-      "community": 63,
+      "community": 69,
       "community_name": "at",
       "norm_label": ".getstateweight()"
     },
@@ -3300,7 +3300,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getlastcheckeventseconds",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".getlastcheckeventseconds()"
     },
     {
@@ -3311,7 +3311,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setlastcheckeventseconds",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".setlastcheckeventseconds()"
     },
     {
@@ -3322,7 +3322,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_istriggeredfadeout",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".istriggeredfadeout()"
     },
     {
@@ -3333,7 +3333,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getfadeoutseconds",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".getfadeoutseconds()"
     },
     {
@@ -3365,8 +3365,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_startmotion",
-      "community": 86,
-      "community_name": "De",
+      "community": 79,
+      "community_name": ".startMotion",
       "norm_label": ".startmotion()"
     },
     {
@@ -3398,8 +3398,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_stopallmotions",
-      "community": 71,
-      "community_name": "bt",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".stopallmotions()"
     },
     {
@@ -3432,7 +3432,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_doupdatemotion",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".doupdatemotion()"
     },
     {
@@ -3541,8 +3541,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt",
-      "community": 54,
-      "community_name": "rt",
+      "community": 80,
+      "community_name": "kt",
       "norm_label": "kt"
     },
     {
@@ -3552,8 +3552,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 80,
+      "community_name": "kt",
       "norm_label": ".constructor()"
     },
     {
@@ -3563,8 +3563,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_geteyeblinkparameters",
-      "community": 54,
-      "community_name": "rt",
+      "community": 80,
+      "community_name": "kt",
       "norm_label": ".geteyeblinkparameters()"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_getlipsyncparameters",
-      "community": 54,
-      "community_name": "rt",
+      "community": 80,
+      "community_name": "kt",
       "norm_label": ".getlipsyncparameters()"
     },
     {
@@ -3585,8 +3585,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_isvalidjson",
-      "community": 84,
-      "community_name": "ut",
+      "community": 47,
+      "community_name": "c",
       "norm_label": ".isvalidjson()"
     },
     {
@@ -3596,8 +3596,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_replacefiles",
-      "community": 41,
-      "community_name": "x",
+      "community": 84,
+      "community_name": "ut",
       "norm_label": ".replacefiles()"
     },
     {
@@ -3629,8 +3629,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "jt"
     },
     {
@@ -3640,8 +3640,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt_constructor",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": ".constructor()"
     },
     {
@@ -3673,8 +3673,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "zt"
     },
     {
@@ -3684,8 +3684,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt_constructor",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": ".constructor()"
     },
     {
@@ -3695,8 +3695,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt_constructor",
-      "community": 45,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -3707,7 +3707,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": "yt"
     },
     {
@@ -3718,7 +3718,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_constructor",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -3729,7 +3729,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_release",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".release()"
     },
     {
@@ -3740,7 +3740,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionduration",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionduration()"
     },
     {
@@ -3751,7 +3751,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_ismotionloop",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".ismotionloop()"
     },
     {
@@ -3762,7 +3762,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getevaluationoptionflag",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getevaluationoptionflag()"
     },
     {
@@ -3773,7 +3773,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvecount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvecount()"
     },
     {
@@ -3784,7 +3784,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfps",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfps()"
     },
     {
@@ -3795,7 +3795,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalsegmentcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotiontotalsegmentcount()"
     },
     {
@@ -3806,7 +3806,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalpointcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotiontotalpointcount()"
     },
     {
@@ -3817,7 +3817,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeintime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfadeintime()"
     },
     {
@@ -3828,7 +3828,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeouttime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfadeouttime()"
     },
     {
@@ -3839,7 +3839,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvetarget",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvetarget()"
     },
     {
@@ -3850,7 +3850,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurveid",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurveid()"
     },
     {
@@ -3861,7 +3861,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeintime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvefadeintime()"
     },
     {
@@ -3872,7 +3872,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeouttime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvefadeouttime()"
     },
     {
@@ -3883,7 +3883,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegmentcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvesegmentcount()"
     },
     {
@@ -3894,7 +3894,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegment",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvesegment()"
     },
     {
@@ -3905,7 +3905,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventcount()"
     },
     {
@@ -3916,7 +3916,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_gettotaleventvaluesize",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".gettotaleventvaluesize()"
     },
     {
@@ -3927,7 +3927,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventtime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventtime()"
     },
     {
@@ -3938,7 +3938,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventvalue",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventvalue()"
     },
     {
@@ -3948,8 +3948,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_qt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 64,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "qt()"
     },
     {
@@ -3971,7 +3971,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_te",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": "te()"
     },
     {
@@ -3981,8 +3981,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "ee"
     },
     {
@@ -3992,8 +3992,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_constructor",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -4003,8 +4003,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_create",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".create()"
     },
     {
@@ -4015,7 +4015,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_doupdateparameters",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -4025,8 +4025,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setisloop",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".setisloop()"
     },
     {
@@ -4036,8 +4036,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_isloop",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isloop()"
     },
     {
@@ -4047,8 +4047,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setisloopfadein",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".setisloopfadein()"
     },
     {
@@ -4058,8 +4058,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_isloopfadein",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isloopfadein()"
     },
     {
@@ -4069,8 +4069,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getduration",
-      "community": 47,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getduration()"
     },
     {
@@ -4080,8 +4080,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getloopduration",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".getloopduration()"
     },
     {
@@ -4091,8 +4091,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setparameterfadeintime",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".setparameterfadeintime()"
     },
     {
@@ -4102,8 +4102,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setparameterfadeouttime",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".setparameterfadeouttime()"
     },
     {
@@ -4113,8 +4113,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getparameterfadeintime",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".getparameterfadeintime()"
     },
     {
@@ -4124,8 +4124,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getparameterfadeouttime",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".getparameterfadeouttime()"
     },
     {
@@ -4135,7 +4135,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_seteffectids",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".seteffectids()"
     },
@@ -4146,8 +4146,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_release",
-      "community": 47,
-      "community_name": "ee",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".release()"
     },
     {
@@ -4158,7 +4158,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_parse",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".parse()"
     },
     {
@@ -4169,7 +4169,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getfiredevent",
       "community": 69,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".getfiredevent()"
     },
     {
@@ -4190,8 +4190,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -4201,8 +4201,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_init",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -4234,8 +4234,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_stopallmotions",
-      "community": 58,
-      "community_name": "ie",
+      "community": 47,
+      "community_name": "c",
       "norm_label": "._stopallmotions()"
     },
     {
@@ -4245,7 +4245,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_createmotion",
-      "community": 46,
+      "community": 41,
       "community_name": "et",
       "norm_label": ".createmotion()"
     },
@@ -4256,8 +4256,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getmotionfile",
-      "community": 58,
-      "community_name": "ie",
+      "community": 57,
+      "community_name": "loadMotion",
       "norm_label": ".getmotionfile()"
     },
     {
@@ -4300,8 +4300,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 54,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -4367,7 +4367,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".updateparameters()"
     },
     {
@@ -4455,7 +4455,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "updateparameters()"
     },
     {
@@ -4466,7 +4466,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_determinnextblinkingtiming",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "determinnextblinkingtiming()"
     },
     {
@@ -4476,8 +4476,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": "le"
     },
     {
@@ -4487,8 +4487,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_constructor",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".constructor()"
     },
     {
@@ -4498,8 +4498,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcenterx",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcenterx()"
     },
     {
@@ -4509,8 +4509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcentery",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcentery()"
     },
     {
@@ -4520,8 +4520,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getright",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getright()"
     },
     {
@@ -4531,8 +4531,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getbottom",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getbottom()"
     },
     {
@@ -4542,8 +4542,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_setrect",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".setrect()"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_expand",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".expand()"
     },
     {
@@ -4575,8 +4575,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_getchannelflagascolor",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getchannelflagascolor()"
     },
     {
@@ -4609,7 +4609,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_calcclippeddrawtotalbounds",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".calcclippeddrawtotalbounds()"
     },
     {
@@ -4653,7 +4653,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_setupclippingcontext",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setupclippingcontext()"
     },
     {
@@ -4685,8 +4685,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_getcolorbuffer",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcolorbuffer()"
     },
     {
@@ -4872,8 +4872,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pe_setupshaderprogram",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".setupshaderprogram()"
     },
     {
@@ -5005,7 +5005,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_dodrawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".dodrawmodel()"
     },
     {
@@ -5070,8 +5070,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_getclippingcontextbufferformask",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getclippingcontextbufferformask()"
     },
     {
@@ -5092,8 +5092,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_getclippingcontextbufferfordraw",
-      "community": 83,
-      "community_name": "ce",
+      "community": 50,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getclippingcontextbufferfordraw()"
     },
     {
@@ -5136,8 +5136,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_setuplayout",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".setuplayout()"
     },
     {
@@ -5225,7 +5225,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_update",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -5236,7 +5236,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatefocus",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".updatefocus()"
     },
     {
@@ -5247,7 +5247,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatenaturalmovements",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".updatenaturalmovements()"
     },
     {
@@ -5257,8 +5257,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_draw",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": ".draw()"
     },
     {
@@ -5268,7 +5268,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": "fe"
     },
@@ -5279,7 +5279,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_create",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".create()"
     },
@@ -5290,7 +5290,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_updateparameters",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".updateparameters()"
     },
@@ -5301,7 +5301,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_reset",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".reset()"
     },
@@ -5312,8 +5312,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_copypartopacities",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".copypartopacities()"
     },
     {
@@ -5323,8 +5323,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_dofade",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".dofade()"
     },
     {
@@ -5334,7 +5334,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_fe_constructor",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".constructor()"
     },
@@ -5346,7 +5346,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": "de"
     },
     {
@@ -5357,7 +5357,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_constructor",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": ".constructor()"
     },
     {
@@ -5368,7 +5368,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_assignment",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": ".assignment()"
     },
     {
@@ -5378,8 +5378,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_initialize",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".initialize()"
     },
     {
@@ -5390,7 +5390,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_clone",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": ".clone()"
     },
     {
@@ -5400,7 +5400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": "ae"
     },
@@ -5412,7 +5412,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_update",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -5422,7 +5422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvaswidth",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvaswidth()"
     },
@@ -5433,7 +5433,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvasheight",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvasheight()"
     },
@@ -5445,7 +5445,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_saveparameters",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".saveparameters()"
     },
     {
@@ -5456,7 +5456,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getmodel()"
     },
     {
@@ -5466,8 +5466,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartindex",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartindex()"
     },
     {
@@ -5477,8 +5477,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartcount",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartcount()"
     },
     {
@@ -5488,8 +5488,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setpartopacitybyindex",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".setpartopacitybyindex()"
     },
     {
@@ -5499,8 +5499,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".setpartopacitybyid()"
     },
     {
@@ -5510,8 +5510,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartopacitybyindex",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartopacitybyindex()"
     },
     {
@@ -5521,8 +5521,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 45,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartopacitybyid()"
     },
     {
@@ -5533,7 +5533,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparameterindex()"
     },
     {
@@ -5544,7 +5544,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametercount",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametercount()"
     },
     {
@@ -5554,7 +5554,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametermaximumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparametermaximumvalue()"
     },
@@ -5565,7 +5565,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterminimumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterminimumvalue()"
     },
@@ -5576,7 +5576,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterdefaultvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterdefaultvalue()"
     },
@@ -5588,7 +5588,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyindex()"
     },
     {
@@ -5599,7 +5599,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyid()"
     },
     {
@@ -5610,7 +5610,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyindex()"
     },
     {
@@ -5621,7 +5621,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyid()"
     },
     {
@@ -5632,7 +5632,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyindex()"
     },
     {
@@ -5643,7 +5643,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyid()"
     },
     {
@@ -5654,7 +5654,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyid()"
     },
     {
@@ -5665,7 +5665,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyindex()"
     },
     {
@@ -5675,7 +5675,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableids",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableids()"
     },
@@ -5686,7 +5686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableindex",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableindex()"
     },
@@ -5708,7 +5708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableid",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableid()"
     },
@@ -5720,7 +5720,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablerenderorders",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablerenderorders()"
     },
     {
@@ -5731,7 +5731,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabletextureindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabletextureindices()"
     },
     {
@@ -5742,7 +5742,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvertexpositionsdidchange",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvertexpositionsdidchange()"
     },
     {
@@ -5753,7 +5753,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindexcount()"
     },
     {
@@ -5764,7 +5764,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexcount()"
     },
     {
@@ -5775,7 +5775,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertices()"
     },
     {
@@ -5786,7 +5786,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindices()"
     },
     {
@@ -5797,7 +5797,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexpositions",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexpositions()"
     },
     {
@@ -5808,7 +5808,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexuvs",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexuvs()"
     },
     {
@@ -5819,7 +5819,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableopacity",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableopacity()"
     },
     {
@@ -5830,7 +5830,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableculling",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableculling()"
     },
     {
@@ -5841,7 +5841,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableblendmode",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableblendmode()"
     },
     {
@@ -5852,7 +5852,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableinvertedmaskbit",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableinvertedmaskbit()"
     },
     {
@@ -5896,7 +5896,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagisvisible",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagisvisible()"
     },
     {
@@ -5906,7 +5906,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvisibilitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvisibilitydidchange()"
     },
@@ -5917,7 +5917,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagopacitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagopacitydidchange()"
     },
@@ -5928,7 +5928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagrenderorderdidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagrenderorderdidchange()"
     },
@@ -5940,7 +5940,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_loadparameters",
       "community": 131,
-      "community_name": ".updateParameters",
+      "community_name": ".update",
       "norm_label": ".loadparameters()"
     },
     {
@@ -5950,7 +5950,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_initialize",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".initialize()"
     },
@@ -5961,7 +5961,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_constructor",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".constructor()"
     },
@@ -5972,7 +5972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_release",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".release()"
     },
@@ -6500,8 +6500,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze",
-      "community": 54,
-      "community_name": "rt",
+      "community": 71,
+      "community_name": "bt",
       "norm_label": "ze"
     },
     {
@@ -6511,8 +6511,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_create",
-      "community": 54,
-      "community_name": "rt",
+      "community": 78,
+      "community_name": ".init",
       "norm_label": ".create()"
     },
     {
@@ -6533,8 +6533,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_setoptions",
-      "community": 54,
-      "community_name": "rt",
+      "community": 71,
+      "community_name": "bt",
       "norm_label": ".setoptions()"
     },
     {
@@ -6544,8 +6544,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_getoption",
-      "community": 54,
-      "community_name": "rt",
+      "community": 71,
+      "community_name": "bt",
       "norm_label": ".getoption()"
     },
     {
@@ -6555,8 +6555,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_constructor",
-      "community": 54,
-      "community_name": "rt",
+      "community": 71,
+      "community_name": "bt",
       "norm_label": ".constructor()"
     },
     {
@@ -6588,7 +6588,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_initialize",
-      "community": 131,
+      "community": 45,
       "community_name": ".updateParameters",
       "norm_label": ".initialize()"
     },
@@ -6688,7 +6688,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_si",
       "community": 86,
-      "community_name": "De",
+      "community_name": "e",
       "norm_label": "si()"
     },
     {
@@ -6940,8 +6940,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_e",
-      "community": 48,
-      "community_name": "live2d.min.js",
+      "community": 86,
+      "community_name": "e",
       "norm_label": "e()"
     },
     {
@@ -6962,8 +6962,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_x",
-      "community": 41,
-      "community_name": "x",
+      "community": 65,
+      "community_name": "ke",
       "norm_label": "x()"
     },
     {
@@ -8019,7 +8019,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_se",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": "se()"
     },
     {
@@ -8117,8 +8117,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_be",
-      "community": 50,
-      "community_name": "mt",
+      "community": 55,
+      "community_name": "je",
       "norm_label": "be()"
     },
     {
@@ -8777,8 +8777,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "mainactivity.kt"
     },
     {
@@ -8788,8 +8788,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "mainactivity"
     },
     {
@@ -8799,8 +8799,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "componentactivity",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "componentactivity"
     },
     {
@@ -8810,8 +8810,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity_oncreate",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": ".oncreate()"
     },
     {
@@ -8821,8 +8821,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "bundle",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "bundle"
     },
     {
@@ -8832,8 +8832,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_mainactivity_onnewintent",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": ".onnewintent()"
     },
     {
@@ -8843,8 +8843,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_mainactivity_kt_intent",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "intent"
     },
     {
@@ -10724,8 +10724,8 @@
       "source_location": "L465",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_openairepository_thinktagfilter",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 85,
+      "community_name": "ThinkTagFilter",
       "norm_label": "thinktagfilter"
     },
     {
@@ -10735,8 +10735,8 @@
       "source_location": "L469",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_openairepository_filterresult",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 85,
+      "community_name": "ThinkTagFilter",
       "norm_label": "filterresult"
     },
     {
@@ -10746,8 +10746,8 @@
       "source_location": "L474",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_openairepository_thinktagfilter_filter",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 85,
+      "community_name": "ThinkTagFilter",
       "norm_label": ".filter()"
     },
     {
@@ -10757,8 +10757,8 @@
       "source_location": "L523",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_openairepository_thinktagfilter_flush",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 85,
+      "community_name": "ThinkTagFilter",
       "norm_label": ".flush()"
     },
     {
@@ -10768,8 +10768,8 @@
       "source_location": "L535",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_data_network_openairepository_thinktagfilter_findpartialtagstart",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 85,
+      "community_name": "ThinkTagFilter",
       "norm_label": ".findpartialtagstart()"
     },
     {
@@ -11161,7 +11161,7 @@
       "label": ".buildOpenAiMessages()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
       "community": 6,
@@ -12121,8 +12121,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "notificationreplyreceiver.kt"
     },
     {
@@ -12132,8 +12132,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "notificationreplyreceiver"
     },
     {
@@ -12143,8 +12143,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "broadcastreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "broadcastreceiver"
     },
     {
@@ -12154,8 +12154,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver_onreceive",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": ".onreceive()"
     },
     {
@@ -12165,8 +12165,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_context",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "context"
     },
     {
@@ -12176,8 +12176,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_intent",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "intent"
     },
     {
@@ -13397,7 +13397,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph",
-      "community": 79,
+      "community": 67,
       "community_name": "MiraiNavGraph",
       "norm_label": "mirainavgraph.kt"
     },
@@ -13408,7 +13408,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_miraidestinations",
-      "community": 79,
+      "community": 67,
       "community_name": "MiraiNavGraph",
       "norm_label": "miraidestinations"
     },
@@ -13419,7 +13419,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_mirainavgraph",
-      "community": 79,
+      "community": 67,
       "community_name": "MiraiNavGraph",
       "norm_label": "mirainavgraph()"
     },
@@ -13430,7 +13430,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "navhostcontroller",
-      "community": 79,
+      "community": 67,
       "community_name": "MiraiNavGraph",
       "norm_label": "navhostcontroller"
     },
@@ -13837,8 +13837,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistscreen",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "characterlistscreen.kt"
     },
     {
@@ -13848,8 +13848,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistscreen_characterlistscreen",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "characterlistscreen()"
     },
     {
@@ -13859,8 +13859,8 @@
       "source_location": "L603",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistscreen_chatsessioncarditem",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "chatsessioncarditem()"
     },
     {
@@ -13870,8 +13870,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "characterlistviewmodel.kt"
     },
     {
@@ -13881,8 +13881,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_chatsessionitem",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "chatsessionitem"
     },
     {
@@ -13892,8 +13892,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistuistate",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "characterlistuistate"
     },
     {
@@ -13903,8 +13903,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "characterlistviewmodel"
     },
     {
@@ -13914,8 +13914,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_kt_viewmodel",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "viewmodel"
     },
     {
@@ -13925,8 +13925,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_kt_stateflow",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": "stateflow"
     },
     {
@@ -13936,8 +13936,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_onsearchquerychanged",
-      "community": 78,
-      "community_name": "CharacterListScreen",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".onsearchquerychanged()"
     },
     {
@@ -13947,8 +13947,8 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_deletecharacter",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".deletecharacter()"
     },
     {
@@ -13958,8 +13958,8 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_deletecharacters",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".deletecharacters()"
     },
     {
@@ -13969,8 +13969,8 @@
       "source_location": "L167",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_deletesession",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".deletesession()"
     },
     {
@@ -13980,8 +13980,8 @@
       "source_location": "L176",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_deletesessions",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".deletesessions()"
     },
     {
@@ -13991,8 +13991,8 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_insertfirstmessageifpresent",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".insertfirstmessageifpresent()"
     },
     {
@@ -14002,8 +14002,8 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_character_characterlistviewmodel_characterlistviewmodel_createnewchatsession",
-      "community": 64,
-      "community_name": "CharacterListViewModel",
+      "community": 9,
+      "community_name": "ChatSessionDao",
       "norm_label": ".createnewchatsession()"
     },
     {
@@ -14307,7 +14307,7 @@
       "label": ".detectMotionFromText()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L511",
+      "source_location": "L524",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_detectmotionfromtext",
       "community": 1,
@@ -14318,7 +14318,7 @@
       "label": ".toggleLive2dMode()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L559",
+      "source_location": "L578",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_togglelive2dmode",
       "community": 1,
@@ -14329,7 +14329,7 @@
       "label": ".updateChatSessionSettings()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L570",
+      "source_location": "L589",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_updatechatsessionsettings",
       "community": 1,
@@ -14340,7 +14340,7 @@
       "label": ".toggleLiveThinkingExpanded()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L582",
+      "source_location": "L601",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_togglelivethinkingexpanded",
       "community": 1,
@@ -14351,7 +14351,7 @@
       "label": ".onInputTextChanged()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L586",
+      "source_location": "L605",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_oninputtextchanged",
       "community": 62,
@@ -14362,7 +14362,7 @@
       "label": ".onImageSelected()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L588",
+      "source_location": "L607",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_onimageselected",
       "community": 62,
@@ -14373,7 +14373,7 @@
       "label": ".processImageAttachment()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L593",
+      "source_location": "L612",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_processimageattachment",
       "community": 1,
@@ -14395,7 +14395,7 @@
       "label": ".selectConfig()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L620",
+      "source_location": "L639",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_selectconfig",
       "community": 1,
@@ -14406,7 +14406,7 @@
       "label": ".loadLocalModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L626",
+      "source_location": "L645",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_loadlocalmodel",
       "community": 1,
@@ -14417,7 +14417,7 @@
       "label": ".unloadLocalModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L642",
+      "source_location": "L661",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_unloadlocalmodel",
       "community": 1,
@@ -14428,7 +14428,7 @@
       "label": ".dismissError()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L646",
+      "source_location": "L665",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_dismisserror",
       "community": 1,
@@ -14439,7 +14439,7 @@
       "label": ".sendMessage()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L651",
+      "source_location": "L670",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_sendmessage",
       "community": 1,
@@ -14450,7 +14450,7 @@
       "label": ".regenerateResponse()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L706",
+      "source_location": "L725",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_regenerateresponse",
       "community": 1,
@@ -14461,7 +14461,7 @@
       "label": ".stopStreaming()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L738",
+      "source_location": "L757",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_stopstreaming",
       "community": 1,
@@ -14472,7 +14472,7 @@
       "label": ".deleteMessage()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L742",
+      "source_location": "L761",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_deletemessage",
       "community": 1,
@@ -14483,7 +14483,7 @@
       "label": ".deleteMessages()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L749",
+      "source_location": "L768",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_deletemessages",
       "community": 1,
@@ -14494,7 +14494,7 @@
       "label": ".clearHistory()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L757",
+      "source_location": "L776",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_clearhistory",
       "community": 1,
@@ -14508,8 +14508,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementscreen.kt"
     },
     {
@@ -14519,8 +14519,8 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementscreen",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementscreen()"
     },
     {
@@ -14530,8 +14530,8 @@
       "source_location": "L455",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_charactercarditem",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "charactercarditem()"
     },
     {
@@ -14541,8 +14541,8 @@
       "source_location": "L591",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementpersonacarditem",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementpersonacarditem()"
     },
     {
@@ -14571,7 +14571,7 @@
       "label": "ModelCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L465",
+      "source_location": "L432",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelcarditem",
       "community": 3,
@@ -14582,7 +14582,7 @@
       "label": "ModelDetailDialog()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L733",
+      "source_location": "L700",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modeldetaildialog",
       "community": 3,
@@ -14593,7 +14593,7 @@
       "label": "IndicatorBadge()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L981",
+      "source_location": "L948",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_indicatorbadge",
       "community": 3,
@@ -14626,7 +14626,7 @@
       "label": "LocalFileCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L1014",
+      "source_location": "L981",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_localfilecarditem",
       "community": 3,
@@ -14711,76 +14711,10 @@
       "norm_label": "downloaded"
     },
     {
-      "label": "ModelSizeFilter",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L28",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "modelsizefilter"
-    },
-    {
-      "label": "ALL",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_all",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "all"
-    },
-    {
-      "label": "UNDER_1GB",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_under_1gb",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "under_1gb"
-    },
-    {
-      "label": "FROM_1_TO_3GB",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_from_1_to_3gb",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "from_1_to_3gb"
-    },
-    {
-      "label": "FROM_3_TO_6GB",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L32",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_from_3_to_6gb",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "from_3_to_6gb"
-    },
-    {
-      "label": "ABOVE_6GB",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_above_6gb",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": "above_6gb"
-    },
-    {
       "label": "DownloadStatus",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L36",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
       "community": 3,
@@ -14791,7 +14725,7 @@
       "label": "IDLE",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L37",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus_idle",
       "community": 3,
@@ -14802,7 +14736,7 @@
       "label": "DOWNLOADING",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L38",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus_downloading",
       "community": 3,
@@ -14813,7 +14747,7 @@
       "label": "PAUSED",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L39",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus_paused",
       "community": 3,
@@ -14824,7 +14758,7 @@
       "label": "COMPLETED",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L40",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus_completed",
       "community": 3,
@@ -14835,7 +14769,7 @@
       "label": "FAILED",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L41",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus_failed",
       "community": 3,
@@ -14846,7 +14780,7 @@
       "label": "ModelDownloadState",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L44",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modeldownloadstate",
       "community": 3,
@@ -14857,7 +14791,7 @@
       "label": "ModelHubUiState",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L51",
+      "source_location": "L43",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubuistate",
       "community": 3,
@@ -14868,7 +14802,7 @@
       "label": "ModelHubViewModel",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L66",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
       "community": 3,
@@ -14901,7 +14835,7 @@
       "label": ".refreshRamInfo()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L82",
+      "source_location": "L73",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_refreshraminfo",
       "community": 3,
@@ -14912,7 +14846,7 @@
       "label": ".onSearchQueryChanged()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L90",
+      "source_location": "L81",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_onsearchquerychanged",
       "community": 3,
@@ -14923,7 +14857,7 @@
       "label": ".selectFilter()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L94",
+      "source_location": "L85",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_selectfilter",
       "community": 3,
@@ -14931,21 +14865,10 @@
       "norm_label": ".selectfilter()"
     },
     {
-      "label": ".selectSizeFilter()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L101",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_selectsizefilter",
-      "community": 3,
-      "community_name": "ModelHubViewModel",
-      "norm_label": ".selectsizefilter()"
-    },
-    {
       "label": ".searchModels()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L105",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_searchmodels",
       "community": 3,
@@ -14956,7 +14879,7 @@
       "label": ".loadMore()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L128",
+      "source_location": "L115",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_loadmore",
       "community": 3,
@@ -14967,7 +14890,7 @@
       "label": ".downloadModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L150",
+      "source_location": "L137",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_downloadmodel",
       "community": 3,
@@ -14978,7 +14901,7 @@
       "label": ".pauseDownload()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L231",
+      "source_location": "L218",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_pausedownload",
       "community": 3,
@@ -14989,7 +14912,7 @@
       "label": ".cancelDownload()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L244",
+      "source_location": "L231",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_canceldownload",
       "community": 3,
@@ -15000,7 +14923,7 @@
       "label": ".loadDownloadedModels()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L263",
+      "source_location": "L250",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_loaddownloadedmodels",
       "community": 3,
@@ -15011,7 +14934,7 @@
       "label": ".deleteDownloadedFile()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L268",
+      "source_location": "L255",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_deletedownloadedfile",
       "community": 3,
@@ -15025,8 +14948,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personalistscreen.kt"
     },
     {
@@ -15036,8 +14959,8 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personalistscreen",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personalistscreen()"
     },
     {
@@ -15047,8 +14970,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personacarditem",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personacarditem()"
     },
     {
@@ -15058,8 +14981,8 @@
       "source_location": "L258",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personaeditdialog",
-      "community": 68,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personaeditdialog()"
     },
     {
@@ -15070,7 +14993,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "personaviewmodel.kt"
     },
     {
@@ -15081,7 +15004,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "personaviewmodel"
     },
     {
@@ -15092,7 +15015,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_kt_viewmodel",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "viewmodel"
     },
     {
@@ -15103,7 +15026,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_kt_stateflow",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": "stateflow"
     },
     {
@@ -15114,7 +15037,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel_onsearchquerychanged",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".onsearchquerychanged()"
     },
     {
@@ -15125,7 +15048,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel_savepersona",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".savepersona()"
     },
     {
@@ -15136,7 +15059,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel_setdefault",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".setdefault()"
     },
     {
@@ -15147,7 +15070,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel_deletepersona",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".deletepersona()"
     },
     {
@@ -15158,7 +15081,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personaviewmodel_personaviewmodel_deletepersonas",
       "community": 67,
-      "community_name": "PersonaViewModel",
+      "community_name": "MiraiNavGraph",
       "norm_label": ".deletepersonas()"
     },
     {
@@ -15674,8 +15597,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_theme_theme",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "theme.kt"
     },
     {
@@ -15685,8 +15608,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_theme_theme_miraiaitheme",
-      "community": 59,
-      "community_name": ".onCreate",
+      "community": 7,
+      "community_name": "SettingsRepository",
       "norm_label": "miraiaitheme()"
     },
     {
@@ -36336,7 +36259,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -36515,7 +36438,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "generic_arg",
       "_origin": "ast",
@@ -36636,7 +36559,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L769",
+      "source_location": "L788",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_clearhistory",
@@ -36647,7 +36570,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L742",
+      "source_location": "L761",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -36660,7 +36583,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L680",
+      "source_location": "L699",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_sendmessage",
@@ -36803,7 +36726,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L720",
+      "source_location": "L739",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_regenerateresponse",
@@ -36815,7 +36738,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L691",
+      "source_location": "L710",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_sendmessage",
@@ -36908,7 +36831,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38609,7 +38532,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder",
@@ -38632,7 +38555,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L93",
+      "source_location": "L96",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -38643,7 +38566,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38657,7 +38580,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L182",
+      "source_location": "L185",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -38669,7 +38592,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L186",
+      "source_location": "L189",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -38680,7 +38603,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -39685,7 +39608,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L465",
+      "source_location": "L432",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39697,7 +39620,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L733",
+      "source_location": "L700",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39709,7 +39632,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L244",
+      "source_location": "L231",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39721,7 +39644,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L150",
+      "source_location": "L137",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39733,7 +39656,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L231",
+      "source_location": "L218",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -42525,7 +42448,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt",
-      "source_location": "L327",
+      "source_location": "L326",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_mirainavgraph",
@@ -42645,7 +42568,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/navigation/MiraiNavGraph.kt",
-      "source_location": "L316",
+      "source_location": "L315",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_navigation_mirainavgraph_mirainavgraph",
@@ -43865,7 +43788,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L757",
+      "source_location": "L776",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43876,7 +43799,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L742",
+      "source_location": "L761",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43887,7 +43810,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L749",
+      "source_location": "L768",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43909,7 +43832,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L511",
+      "source_location": "L524",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43920,7 +43843,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L646",
+      "source_location": "L665",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43931,7 +43854,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L626",
+      "source_location": "L645",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43953,7 +43876,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L588",
+      "source_location": "L607",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43964,7 +43887,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L586",
+      "source_location": "L605",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43986,7 +43909,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L593",
+      "source_location": "L612",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -43997,7 +43920,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L706",
+      "source_location": "L725",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44008,7 +43931,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L620",
+      "source_location": "L639",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44019,7 +43942,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L651",
+      "source_location": "L670",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44030,7 +43953,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L738",
+      "source_location": "L757",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44041,7 +43964,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L559",
+      "source_location": "L578",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44052,7 +43975,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L582",
+      "source_location": "L601",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44063,7 +43986,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L642",
+      "source_location": "L661",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44074,7 +43997,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L570",
+      "source_location": "L589",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel",
@@ -44197,7 +44120,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L593",
+      "source_location": "L612",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44209,7 +44132,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L626",
+      "source_location": "L645",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44221,7 +44144,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L706",
+      "source_location": "L725",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44233,7 +44156,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L651",
+      "source_location": "L670",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44246,7 +44169,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L722",
+      "source_location": "L741",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_regenerateresponse",
@@ -44258,7 +44181,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L714",
+      "source_location": "L733",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_regenerateresponse",
@@ -44270,7 +44193,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatViewModel.kt",
-      "source_location": "L762",
+      "source_location": "L781",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatviewmodel_chatviewmodel_clearhistory",
@@ -44350,7 +44273,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L981",
+      "source_location": "L948",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen",
@@ -44361,7 +44284,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L1014",
+      "source_location": "L981",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen",
@@ -44372,7 +44295,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L465",
+      "source_location": "L432",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen",
@@ -44383,7 +44306,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L733",
+      "source_location": "L700",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen",
@@ -44406,7 +44329,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L335",
+      "source_location": "L302",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelhubscreen",
@@ -44418,7 +44341,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L381",
+      "source_location": "L348",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelhubscreen",
@@ -44430,7 +44353,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L411",
+      "source_location": "L378",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelhubscreen",
@@ -44455,7 +44378,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L239",
+      "source_location": "L230",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelhubscreen",
@@ -44466,7 +44389,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L629",
+      "source_location": "L596",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modelcarditem",
@@ -44477,7 +44400,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L465",
+      "source_location": "L432",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44490,7 +44413,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L780",
+      "source_location": "L747",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubscreen_modeldetaildialog",
@@ -44501,7 +44424,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L733",
+      "source_location": "L700",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44513,7 +44436,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L981",
+      "source_location": "L948",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44525,7 +44448,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubScreen.kt",
-      "source_location": "L981",
+      "source_location": "L948",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44537,7 +44460,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L36",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel",
@@ -44548,7 +44471,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L44",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel",
@@ -44570,7 +44493,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L51",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel",
@@ -44581,22 +44504,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L66",
+      "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel",
       "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L28",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
       "confidence_score": 1.0
     },
     {
@@ -44658,7 +44570,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L94",
+      "source_location": "L85",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -44667,77 +44579,10 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L101",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_selectsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "case_of",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L33",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_above_6gb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "case_of",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L29",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_all",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "case_of",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L31",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_from_1_to_3gb",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "case_of",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
       "source_location": "L32",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_from_3_to_6gb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "case_of",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L30",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelsizefilter_under_1gb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "case_of",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
@@ -44748,7 +44593,7 @@
       "relation": "case_of",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L38",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
@@ -44759,7 +44604,7 @@
       "relation": "case_of",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L41",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
@@ -44770,7 +44615,7 @@
       "relation": "case_of",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L37",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
@@ -44781,7 +44626,7 @@
       "relation": "case_of",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L39",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_downloadstatus",
@@ -44793,7 +44638,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L169",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_downloadmodel",
@@ -44804,7 +44649,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L72",
+      "source_location": "L63",
       "weight": 1.0,
       "context": "generic_arg",
       "_origin": "ast",
@@ -44816,7 +44661,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L72",
+      "source_location": "L63",
       "weight": 1.0,
       "context": "field",
       "_origin": "ast",
@@ -44828,7 +44673,7 @@
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L66",
+      "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44839,7 +44684,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L244",
+      "source_location": "L231",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44850,7 +44695,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L268",
+      "source_location": "L255",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44861,7 +44706,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L150",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44872,7 +44717,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L263",
+      "source_location": "L250",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44883,7 +44728,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L128",
+      "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44894,7 +44739,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L90",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44905,7 +44750,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L231",
+      "source_location": "L218",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44916,7 +44761,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L82",
+      "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44927,7 +44772,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L105",
+      "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44938,7 +44783,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L94",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
@@ -44946,22 +44791,11 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L101",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel",
-      "target": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_selectsizefilter",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L97",
+      "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_selectfilter",
@@ -44973,7 +44807,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L272",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_deletedownloadedfile",
@@ -44985,7 +44819,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L209",
+      "source_location": "L196",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_downloadmodel",
@@ -44997,7 +44831,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L134",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_loadmore",
@@ -45009,7 +44843,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L208",
+      "source_location": "L195",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_downloadmodel",
@@ -45021,7 +44855,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/modelhub/ModelHubViewModel.kt",
-      "source_location": "L271",
+      "source_location": "L258",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_modelhub_modelhubviewmodel_modelhubviewmodel_deletedownloadedfile",
@@ -46540,5 +46374,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8f61947f6c7d08dbd34f59a289b22db4e7dc12d8"
+  "built_at_commit": "6f8e3f05eab734fba987c886ab819a1a77490290"
 }

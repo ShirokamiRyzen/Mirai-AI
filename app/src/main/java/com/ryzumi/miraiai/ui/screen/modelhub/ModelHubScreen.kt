@@ -91,7 +91,6 @@ import java.util.Locale
 fun ModelHubScreen(
     uiState: ModelHubUiState,
     onFilterSelected: (ModelHubFilter) -> Unit,
-    onSizeFilterSelected: (ModelSizeFilter) -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onSearchClick: () -> Unit,
     onLoadMore: () -> Unit,
@@ -127,23 +126,15 @@ fun ModelHubScreen(
         }
     }
 
-    val displayModels = remember(uiState.models, uiState.selectedFilter, uiState.selectedSizeFilter) {
+    val displayModels = remember(uiState.models, uiState.selectedFilter) {
         uiState.models.filter { model ->
-            val matchesCategory = when (uiState.selectedFilter) {
+            when (uiState.selectedFilter) {
                 ModelHubFilter.ALL -> true
                 ModelHubFilter.TEXT_GGUF -> !model.hasVisionCapability && !model.hasImageGenCapability
                 ModelHubFilter.VISION -> model.hasVisionCapability
                 ModelHubFilter.IMAGE_GEN -> model.hasImageGenCapability
                 ModelHubFilter.DOWNLOADED -> model.isDownloaded
             }
-            val matchesSize = when (uiState.selectedSizeFilter) {
-                ModelSizeFilter.ALL -> true
-                ModelSizeFilter.UNDER_1GB -> model.estimatedSizeGb < 1.0
-                ModelSizeFilter.FROM_1_TO_3GB -> model.estimatedSizeGb in 1.0..3.0
-                ModelSizeFilter.FROM_3_TO_6GB -> model.estimatedSizeGb in 3.0..6.0
-                ModelSizeFilter.ABOVE_6GB -> model.estimatedSizeGb > 6.0
-            }
-            matchesCategory && matchesSize
         }
     }
 
@@ -292,31 +283,7 @@ fun ModelHubScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(6.dp))
 
-                // Size Filter Row
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Storage,
-                        contentDescription = "Filter by Size",
-                        modifier = Modifier.size(16.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    ModelSizeFilter.entries.forEach { sizeFilter ->
-                        FilterChip(
-                            selected = uiState.selectedSizeFilter == sizeFilter,
-                            onClick = { onSizeFilterSelected(sizeFilter) },
-                            label = { Text(sizeFilter.label, style = MaterialTheme.typography.labelSmall) }
-                        )
-                    }
-                }
             }
 
             Spacer(modifier = Modifier.height(6.dp))

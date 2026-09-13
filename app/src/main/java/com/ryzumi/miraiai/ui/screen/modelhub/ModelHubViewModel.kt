@@ -25,14 +25,6 @@ enum class ModelHubFilter(val label: String) {
     DOWNLOADED("Downloaded")
 }
 
-enum class ModelSizeFilter(val label: String) {
-    ALL("All Sizes"),
-    UNDER_1GB("< 1 GB"),
-    FROM_1_TO_3GB("1 - 3 GB"),
-    FROM_3_TO_6GB("3 - 6 GB"),
-    ABOVE_6GB("> 6 GB")
-}
-
 enum class DownloadStatus {
     IDLE,
     DOWNLOADING,
@@ -51,7 +43,6 @@ data class ModelDownloadState(
 data class ModelHubUiState(
     val searchQuery: String = "",
     val selectedFilter: ModelHubFilter = ModelHubFilter.ALL,
-    val selectedSizeFilter: ModelSizeFilter = ModelSizeFilter.ALL,
     val systemTotalRamGb: Double = 0.0,
     val systemAvailRamGb: Double = 0.0,
     val models: List<HuggingFaceModel> = emptyList(),
@@ -96,10 +87,6 @@ class ModelHubViewModel(
         if (filter == ModelHubFilter.DOWNLOADED) {
             loadDownloadedModels()
         }
-    }
-
-    fun selectSizeFilter(sizeFilter: ModelSizeFilter) {
-        _uiState.value = _uiState.value.copy(selectedSizeFilter = sizeFilter)
     }
 
     fun searchModels(query: String = _uiState.value.searchQuery) {

@@ -109,6 +109,10 @@ class Live2dViewerController {
         webView?.evaluateJavascript("if (window.setExpression) { window.setExpression('$safe'); }", null)
     }
 
+    fun resetExpression() {
+        webView?.evaluateJavascript("if (window.resetExpression) { window.resetExpression(); } else if (window.setExpression) { window.setExpression(''); }", null)
+    }
+
     fun setPartOpacity(partId: String, opacity: Float) {
         val safe = partId.replace("'", "\\'")
         webView?.evaluateJavascript("if (window.setPartOpacity) { window.setPartOpacity('$safe', $opacity); }", null)

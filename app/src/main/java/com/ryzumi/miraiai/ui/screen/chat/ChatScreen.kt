@@ -1955,6 +1955,7 @@ fun ChatScreen(
                                                         .fillMaxWidth()
                                                         .clickable {
                                                             currentLive2dModelPath = m.relativePath
+                                                            activeExpressionId = null
                                                             uiState.character?.id?.let { cid ->
                                                                 live2dController.loadOutfit(cid, m.relativePath)
                                                             }
@@ -2102,7 +2103,7 @@ fun ChatScreen(
                                         )
                                         TextButton(onClick = {
                                             activeExpressionId = null
-                                            live2dController.setExpression("")
+                                            live2dController.resetExpression()
                                         }) {
                                             Text("Reset")
                                         }
@@ -2142,8 +2143,13 @@ fun ChatScreen(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .clickable {
-                                                activeExpressionId = exp.id
-                                                live2dController.setExpression(exp.id)
+                                                if (isCurrent) {
+                                                    activeExpressionId = null
+                                                    live2dController.resetExpression()
+                                                } else {
+                                                    activeExpressionId = exp.id
+                                                    live2dController.setExpression(exp.id)
+                                                }
                                             }
                                     ) {
                                         Row(
