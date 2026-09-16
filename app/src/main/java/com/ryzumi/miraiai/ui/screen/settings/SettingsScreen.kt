@@ -69,6 +69,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.SelectAll
@@ -1334,6 +1335,7 @@ fun ConfigEditorForm(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AdvanceSettingsView(
     uiState: SettingsUiState,
@@ -1762,6 +1764,177 @@ fun AdvanceSettingsView(
                                 )
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        // Voice Model & TTS Debugger Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    val context = androidx.compose.ui.platform.LocalContext.current
+                    var testText by remember { mutableStateOf("Halo! Ini adalah tes output suara model.") }
+                    var selectedPresetId by remember { mutableStateOf("id_kawaii") }
+                    var isVoiceTesting by remember { mutableStateOf(false) }
+                    var isVoiceDropdownExpanded by remember { mutableStateOf(false) }
+                    var voiceDebugStatus by remember { mutableStateOf<String?>(null) }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Voice Model & TTS Debugger",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(
+                            imageVector = Icons.Default.VolumeUp,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+
+                    Text(
+                        text = "Test and debug TTS speech synthesis, voice presets, and local/API routing directly.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Voice Preset Dropdown
+                    ExposedDropdownMenuBox(
+                        expanded = isVoiceDropdownExpanded,
+                        onExpandedChange = { isVoiceDropdownExpanded = it },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        val currentPreset = com.ryzumi.miraiai.domain.tts.TtsManager.KOKORO_VOICE_PRESETS.find { it.id == selectedPresetId }
+                        OutlinedTextField(
+                            value = currentPreset?.let { "${it.name} (${it.id})" } ?: selectedPresetId,
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text("Voice Preset") },
+                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isVoiceDropdownExpanded) },
+                            modifier = Modifier
+                                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                                .fillMaxWidth()
+                        )
+
+                        ExposedDropdownMenu(
+                            expanded = isVoiceDropdownExpanded,
+                            onDismissRequest = { isVoiceDropdownExpanded = false }
+                        ) {
+                            com.ryzumi.miraiai.domain.tts.TtsManager.KOKORO_VOICE_PRESETS.forEach { preset ->
+                                DropdownMenuItem(
+                                    text = {
+                                        Column {
+                                            Text(preset.name, fontWeight = if (preset.id == selectedPresetId) FontWeight.Bold else FontWeight.Normal)
+                                            Text("${preset.id} • ${preset.language} • ${preset.gender}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
+                                    },
+                                    onClick = {
+                                        selectedPresetId = preset.id
+                                        isVoiceDropdownExpanded = false
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // Input Text
+                    OutlinedTextField(
+                        value = testText,
+                        onValueChange = { testText = it },
+                        label = { Text("Input Text to Speak") },
+                        placeholder = { Text("Enter sentence to test...") },
+                        modifier = Modifier.fillMaxWidth(),
+                        minLines = 2
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Button(
+                            onClick = {
+                                if (isVoiceTesting) {
+                                    com.ryzumi.miraiai.domain.tts.TtsManager.stop()
+                                    isVoiceTesting = false
+                                    voiceDebugStatus = "Playback stopped."
+                                } else {
+                                    isVoiceTesting = true
+                                    voiceDebugStatus = "Synthesizing voice with preset '$selectedPresetId'..."
+                                    val dummyChar = com.ryzumi.miraiai.data.local.entity.CharacterEntity(
+                                        name = "Tester",
+                                        voiceId = selectedPresetId,
+                                        voicePitch = 1.0f,
+                                        voiceSpeed = 1.0f
+                                    )
+                                    com.ryzumi.miraiai.domain.tts.TtsManager.speak(
+                                        context = context,
+                                        text = testText,
+                                        config = activeConfig,
+                                        character = dummyChar,
+                                        onStart = {
+                                            isVoiceTesting = true
+                                            voiceDebugStatus = "Playing audio successfully..."
+                                        },
+                                        onDone = {
+                                            isVoiceTesting = false
+                                            voiceDebugStatus = "Completed playback."
+                                        },
+                                        onError = { err ->
+                                            isVoiceTesting = false
+                                            voiceDebugStatus = "Error: $err"
+                                        }
+                                    )
+                                }
+                            },
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Icon(
+                                imageVector = if (isVoiceTesting) Icons.Default.Stop else Icons.Default.PlayArrow,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(if (isVoiceTesting) "Stop Voice" else "Play / Test Voice")
+                        }
+
+                        OutlinedButton(
+                            onClick = {
+                                com.ryzumi.miraiai.domain.tts.TtsManager.stop()
+                                isVoiceTesting = false
+                                voiceDebugStatus = null
+                            },
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text("Reset")
+                        }
+                    }
+
+                    if (!voiceDebugStatus.isNullOrBlank()) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = voiceDebugStatus ?: "",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (voiceDebugStatus!!.startsWith("Error")) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                        )
                     }
                 }
             }

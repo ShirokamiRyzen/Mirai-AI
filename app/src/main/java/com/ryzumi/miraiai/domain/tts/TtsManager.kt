@@ -595,32 +595,28 @@ object TtsManager {
     private fun getPresetPitchAndSpeedMultipliers(voiceId: String): Pair<Float, Float> {
         return when (voiceId.lowercase()) {
             // Indonesian
-            "id_kawaii" -> Pair(1.30f, 1.05f) // High cute anime
-            "id_manis" -> Pair(1.15f, 0.96f)  // Sweet, gentle
-            "id_ceria" -> Pair(1.24f, 1.12f)  // Cheerful, upbeat
-            "id_putri" -> Pair(1.02f, 1.00f)  // Natural feminine
-            "id_bima" -> Pair(0.80f, 0.95f)   // Deep cool male
-
+            "id_kawaii" -> Pair(1.45f, 1.08f) // Cute anime high-pitch
+            "id_manis" -> Pair(1.22f, 0.95f)  // Sweet, gentle
+            "id_ceria" -> Pair(1.35f, 1.15f)  // Cheerful, upbeat
+            "id_putri" -> Pair(1.05f, 1.00f)  // Natural feminine
+            "id_bima" -> Pair(0.72f, 0.92f)   // Deep cool male
             // Japanese
-            "jf_alpha" -> Pair(1.28f, 1.06f)      // High kawaii anime Japanese
-            "jf_gongitsune" -> Pair(1.12f, 0.94f) // Soft gentle Japanese
-            "jm_kumo" -> Pair(0.84f, 0.96f)       // Calm deep male Japanese
-
+            "jf_alpha" -> Pair(1.42f, 1.10f)      // High anime female
+            "jf_gongitsune" -> Pair(1.18f, 0.92f) // Soft gentle Japanese
+            "jm_kumo" -> Pair(0.75f, 0.95f)       // Calm deep male
             // English (US)
-            "af_heart" -> Pair(1.18f, 1.00f)  // Warm gentle
-            "af_bella" -> Pair(1.32f, 1.08f)  // Cute, higher pitch
-            "af_sarah" -> Pair(1.05f, 1.02f)  // Casual natural female
-            "af_nicole" -> Pair(0.96f, 0.92f) // Whispery, calm
-            "af_sky" -> Pair(1.26f, 1.14f)    // Cheerful, lively
-            "am_adam" -> Pair(0.86f, 1.00f)   // Natural male
-            "am_michael" -> Pair(0.76f, 0.92f) // Deep authoritative male
-
+            "af_heart" -> Pair(1.20f, 1.00f)  // Warm gentle
+            "af_bella" -> Pair(1.40f, 1.10f)  // Cute high pitch
+            "af_sarah" -> Pair(1.05f, 1.00f)  // Casual natural female
+            "af_nicole" -> Pair(0.92f, 0.90f) // Whispery calm
+            "af_sky" -> Pair(1.30f, 1.18f)    // Cheerful lively
+            "am_adam" -> Pair(0.82f, 1.00f)   // Natural male
+            "am_michael" -> Pair(0.68f, 0.90f) // Deep authoritative male
             // English (British)
-            "bf_emma" -> Pair(1.14f, 1.02f)   // British clear female
-            "bf_isabella" -> Pair(1.22f, 0.95f) // British soft female
-            "bm_george" -> Pair(0.85f, 1.00f) // British male
-            "bm_lewis" -> Pair(0.78f, 0.94f)  // British mature male
-
+            "bf_emma" -> Pair(1.18f, 1.02f)   // British clear female
+            "bf_isabella" -> Pair(1.28f, 0.94f) // British soft female
+            "bm_george" -> Pair(0.80f, 1.00f) // British male
+            "bm_lewis" -> Pair(0.70f, 0.92f)  // British mature male
             else -> Pair(1.0f, 1.0f)
         }
     }

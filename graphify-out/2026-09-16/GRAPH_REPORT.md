@@ -1,11 +1,11 @@
 # Graph Report - MiraiAI  (2026-09-16)
 
 ## Corpus Check
-- 80 files · ~96,575 words
+- 80 files · ~96,579 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1556 nodes · 2733 edges · 98 communities (62 shown, 36 thin omitted)
+- 1556 nodes · 2733 edges · 98 communities (63 shown, 35 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 203 edges (avg confidence: 0.67)
 - Token cost: 0 input · 0 output
 
@@ -133,7 +133,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (98 total, 36 thin omitted)
+## Communities (98 total, 35 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.08
@@ -252,8 +252,8 @@ Cohesion: 0.04
 Nodes (25): ai(), cardanoAlgorithmForBezier(), cbrt(), createInternalModel(), directionToDegrees(), directionToRadian(), ge, Gt (+17 more)
 
 ### Community 44 - "ke"
-Cohesion: 0.14
-Nodes (8): cancelXHRs(), d(), dt, ht, it, ke, p(), release()
+Cohesion: 0.19
+Nodes (6): cancelXHRs(), dt, ht, ke, p(), release()
 
 ### Community 47 - "ns"
 Cohesion: 0.33
@@ -284,8 +284,8 @@ Cohesion: 0.19
 Nodes (20): at(), ct(), dt(), et(), ft(), ht(), J(), K() (+12 more)
 
 ### Community 60 - "h"
-Cohesion: 0.11
-Nodes (4): f, g(), h(), j()
+Cohesion: 0.10
+Nodes (5): d(), f, h(), it, j()
 
 ### Community 61 - "pixi.min.js"
 Cohesion: 0.05
@@ -327,6 +327,10 @@ Nodes (5): com, Modifier, Live2dViewer(), Live2dViewerController, WebView
 Cohesion: 0.28
 Nodes (6): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), Context, Live2dJsBridge, WebResourceResponse
 
+### Community 79 - "m"
+Cohesion: 0.23
+Nodes (3): g(), log(), m()
+
 ### Community 86 - "De"
 Cohesion: 0.22
 Nodes (4): createSettings(), De, K, readText()
@@ -354,7 +358,7 @@ Nodes (12): Error, Context, Uri, Live2dImportResult, Live2dManager, Success, Liv
 ## Knowledge Gaps
 - **71 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `Error`, `Live2dExpressionInfo` (+66 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
