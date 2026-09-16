@@ -20,9 +20,16 @@ object WebContentExtractor {
     private const val TIMEOUT_MS = 15000
     private const val MAX_CONTENT_LENGTH = 12000 // Prevent exceeding LLM context budget
 
+    private val okHttpClient = okhttp3.OkHttpClient.Builder()
+        .followRedirects(true)
+        .followSslRedirects(true)
+        .connectTimeout(TIMEOUT_MS.toLong(), java.util.concurrent.TimeUnit.MILLISECONDS)
+        .readTimeout(TIMEOUT_MS.toLong(), java.util.concurrent.TimeUnit.MILLISECONDS)
+        .build()
+
     /**
-     * Fetches HTML from the target URL and extracts clean article text, metadata, and image links
-     * using Jsoup and Readability4j.
+     * Fetches HTML or JSON/text from the target URL and extracts clean article text, metadata, and image links
+     * using Jsoup, Readability4j, and OkHttp fallback.
      */
     suspend fun extractArticle(targetUrl: String): ArticleContent = withContext(Dispatchers.IO) {
         val trimmedUrl = targetUrl.trim()
@@ -34,16 +41,56 @@ object WebContentExtractor {
             trimmedUrl
         }
 
-        val doc = Jsoup.connect(validUrl)
-            .userAgent(USER_AGENT)
-            .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-            .header("Accept-Language", "en-US,en;q=0.9,id;q=0.8")
-            .referrer("https://www.google.com/")
-            .timeout(TIMEOUT_MS)
-            .followRedirects(true)
-            .ignoreHttpErrors(false)
-            .get()
+        // 1. Fetch raw response via OkHttp to inspect Content-Type and bypass header restrictions
+        var rawBody: String? = null
+        var contentType: String = ""
+        try {
+            val req = okhttp3.Request.Builder()
+                .url(validUrl)
+                .header("User-Agent", USER_AGENT)
+                .header("Accept", "*/*")
+                .header("Accept-Language", "en-US,en;q=0.9,id;q=0.8")
+                .build()
 
+            val resp = okHttpClient.newCall(req).execute()
+            contentType = resp.header("Content-Type") ?: ""
+            rawBody = resp.body?.string()
+        } catch (e: Exception) {
+            // Will fallback to Jsoup directly
+        }
+
+        // If it's JSON, XML, plain-text, CSV, or API responses
+        val trimmedRaw = rawBody?.trim() ?: ""
+        val isJson = contentType.contains("application/json", ignoreCase = true) ||
+                (trimmedRaw.startsWith("{") && trimmedRaw.endsWith("}")) ||
+                (trimmedRaw.startsWith("[") && trimmedRaw.endsWith("]"))
+        val isPlainTextOrXml = contentType.contains("text/plain", ignoreCase = true) ||
+                contentType.contains("application/xml", ignoreCase = true) ||
+                contentType.contains("text/xml", ignoreCase = true) ||
+                contentType.contains("text/csv", ignoreCase = true)
+
+        if (trimmedRaw.isNotBlank() && (isJson || isPlainTextOrXml || !trimmedRaw.contains("<html", ignoreCase = true))) {
+            val titleType = if (isJson) "API JSON Response" else "Plain Text / Web Content"
+            return@withContext ArticleContent(
+                url = validUrl,
+                title = titleType,
+                textContent = trimmedRaw.take(MAX_CONTENT_LENGTH)
+            )
+        }
+
+        val doc = if (!rawBody.isNullOrBlank()) {
+            Jsoup.parse(rawBody, validUrl)
+        } else {
+            Jsoup.connect(validUrl)
+                .userAgent(USER_AGENT)
+                .header("Accept", "*/*")
+                .header("Accept-Language", "en-US,en;q=0.9,id;q=0.8")
+                .timeout(TIMEOUT_MS)
+                .followRedirects(true)
+                .ignoreHttpErrors(true)
+                .ignoreContentType(true) // CRITICAL: Allows non-HTML content (JSON, XML, plain-text)
+                .get()
+        }
 
         val html = doc.html()
         val readability = Readability4J(validUrl, html)
@@ -55,13 +102,15 @@ object WebContentExtractor {
         var textContent = article.textContent?.trim() ?: ""
 
         // Fallback to Jsoup body text if readability produced little or no text
-        if (textContent.length < 100) {
+        if (textContent.length < 50) {
             // Remove scripts, styles, navigations, footers
             val cloneDoc = doc.clone()
             cloneDoc.select("script, style, noscript, nav, header, footer, iframe, svg, [role=navigation], [role=banner]").remove()
             val fallbackBody = cloneDoc.body()?.text()?.trim() ?: ""
             if (fallbackBody.isNotBlank()) {
                 textContent = fallbackBody
+            } else if (!rawBody.isNullOrBlank()) {
+                textContent = rawBody
             }
         }
 

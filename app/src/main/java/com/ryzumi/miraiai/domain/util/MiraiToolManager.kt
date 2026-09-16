@@ -110,7 +110,7 @@ object MiraiToolManager {
             addProperty("type", "function")
             val fn = JsonObject().apply {
                 addProperty("name", "read_article")
-                addProperty("description", "Fetch and extract clean article text, main content, metadata, and image links from a specific webpage URL using Jsoup and Readability4J. Use this to read full articles, documentation, or links found via web search.")
+                addProperty("description", "Fetch and read any URL content from the web, including webpage articles, REST API endpoints, raw JSON, plain text, XML, or documentation. Always use this whenever the user provides any URL or link.")
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     val props = JsonObject().apply {
@@ -139,8 +139,9 @@ object MiraiToolManager {
      * Executes the requested tool by name and returns the response string.
      */
     suspend fun executeTool(context: Context, functionName: String, argumentsJson: String? = null): String {
+        android.util.Log.d("MiraiToolManager", "executeTool called: $functionName with args: $argumentsJson")
         return try {
-            when (functionName) {
+            val result = when (functionName) {
                 "get_device_os_status" -> DeviceContextManager.getHardwareAndBatteryStatus(context)
                 "get_realtime_clock" -> DeviceContextManager.getClockStatus()
                 "get_location_and_weather" -> DeviceContextManager.getLocationAndWeatherStatus(context)
@@ -149,7 +150,10 @@ object MiraiToolManager {
                 "read_article" -> executeReadArticle(argumentsJson)
                 else -> DeviceContextManager.getLiveDeviceContext(context)
             }
+            android.util.Log.d("MiraiToolManager", "Tool $functionName result preview: ${result.take(200)}")
+            result
         } catch (e: Exception) {
+            android.util.Log.e("MiraiToolManager", "Tool $functionName failed", e)
             "Tool execution error: ${e.message}"
         }
     }
@@ -185,6 +189,15 @@ object MiraiToolManager {
         }
 
         val article = com.ryzumi.miraiai.domain.web.WebContentExtractor.extractArticle(url)
+        val content = article.textContent.trim()
+
+        // If the content is raw JSON, XML, or plain structured data, return the raw data as-is
+        val isJson = (content.startsWith("{") && content.endsWith("}")) ||
+                (content.startsWith("[") && content.endsWith("]"))
+        if (isJson || article.title == "API JSON Response" || article.title == "Plain Text / Web Content") {
+            return content
+        }
+
         val sb = StringBuilder()
         sb.append("Title: ${article.title}\n")
         sb.append("Source: ${article.url}\n")
@@ -201,7 +214,7 @@ object MiraiToolManager {
             }
         }
         sb.append("\nContent:\n")
-        sb.append(article.textContent)
+        sb.append(content)
 
         return sb.toString().trimEnd()
     }

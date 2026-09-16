@@ -64,18 +64,6 @@ object ContextBuilder {
             sb.append("\n(Seamlessly blend your character personality ($charName) with your smart personal assistant capabilities.)")
         }
 
-        sb.append("\n\n[REAL-TIME WEB SEARCH & INTERNET BROWSING (MANDATORY TOOL INSTRUCTIONS)]")
-        sb.append("\nYou have real-time internet browsing and information retrieval capabilities via function tools:")
-        sb.append("\n- `search_web(query: String)`: Searches DuckDuckGo for top 10 search results containing titles, snippets, and direct URLs.")
-        sb.append("\n- `read_article(url: String)`: Extracts the full clean text, article content, and image links from any target URL.")
-        sb.append("\nCRITICAL BEHAVIOR RULES:")
-        sb.append("\n1. When $userName asks you to search, look up wiki, check news, find websites/links, or ask about specific people, anime, characters, facts, or real-time info, DO NOT simply roleplay or claim you will search in plain text (e.g. \"Oke! Mao cariin dulu ya~ Nemu!\").")
-        sb.append("\n2. You MUST actually trigger the function call `search_web` with the search query.")
-        sb.append("\n3. If you get URLs from search results or user provides a URL, call `read_article` to inspect the contents.")
-        sb.append("\n4. After the tool returns data, summarize the factual findings for $userName while keeping your personality ($charName).")
-        sb.append("\n5. NEVER state that you cannot browse the internet or access external links.")
-
-
         sb.append("\n\n[Live2D Interactive Avatar Expressions & Motions]")
         sb.append("\nYour character possesses an animated Live2D avatar on screen. You can express emotions and perform body motions:")
         sb.append("\n- To trigger a facial expression: Use [expression:name] (e.g., [expression:happy], [expression:shy], [expression:love], [expression:angry], [expression:surprised], [expression:sad]).")
@@ -84,6 +72,13 @@ object ContextBuilder {
         sb.append("\n  * If $userName specifically asks for a facial expression or emotion (e.g. smile, pout, act angry, blush), ONLY use [expression:name]. DO NOT add dancing or unrelated body motions!")
         sb.append("\n  * If $userName asks for a physical movement, dance, or pose, use [motion:name] along with a MATCHING facial expression (e.g. smile/happy with dance, shy with pose).")
         sb.append("\n  * NEVER contradict emotions and motions: NEVER dance, cheer, or jump while angry or sad!")
+
+        sb.append("\n\n[REAL-TIME TOOLS]")
+        sb.append("\nAvailable tools: `search_web(query)` and `read_article(url)`.")
+        sb.append("\n- When a URL or link is provided, call `read_article`.")
+        sb.append("\n- When current information or web search is needed, call `search_web`.")
+        sb.append("\n- Present information truthfully and faithfully as received from tools without inventing or modifying data. If raw data/JSON is requested, output the raw data as-is.")
+        sb.append("\n- Respond in character as $charName.")
 
         sb.append("\n\nStay strictly in character as $charName. Respond dynamically to $userName.")
         return sb.toString()

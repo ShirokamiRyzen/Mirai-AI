@@ -495,6 +495,8 @@ fun ChatScreen(
                                         MaterialTheme.colorScheme.primary
                                     }
 
+                                    val percentage = (ratio * 100).toInt()
+
                                     Row(
                                         modifier = Modifier
                                             .clip(RoundedCornerShape(12.dp))
@@ -510,7 +512,7 @@ fun ChatScreen(
                                         )
                                         Spacer(modifier = Modifier.width(3.dp))
                                         Text(
-                                            text = "${TokenUtils.formatTokensK(currentTokens)} / ${TokenUtils.formatTokensK(maxTokens)}",
+                                            text = "$percentage%",
                                             style = MaterialTheme.typography.labelSmall,
                                             color = tokenColor,
                                             fontWeight = FontWeight.Bold,

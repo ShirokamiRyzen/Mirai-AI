@@ -299,7 +299,7 @@ object TtsManager {
                             isTtsInitialized = false
                             textToSpeech = null
                             val errMsg = "TTS initialization failed (code $status). Ensure Speech Recognition & Synthesis is enabled."
-                            Log.e(TAG, errMsg)
+                            Log.i(TAG, errMsg)
                             val errCallbacks = ArrayList(initErrorCallbacks)
                             initCallbacks.clear()
                             initErrorCallbacks.clear()
@@ -517,81 +517,34 @@ object TtsManager {
         onDone: () -> Unit,
         onError: (String) -> Unit
     ) {
-        val mainHandler = Handler(Looper.getMainLooper())
+        val voiceId = character?.voiceId ?: "af_heart"
 
+        // If voiceId is not explicitly "system", or system TTS is disabled/uninitialized,
+        // directly route to the neural speech synthesis engine to avoid Android OS TTS missing engine errors.
+        if (voiceId != "system") {
+            speakViaWebFallback(context, cleanText, character, onStart, onDone, onError)
+            return
+        }
+
+        val mainHandler = Handler(Looper.getMainLooper())
         initSystemTts(
             context = context,
             onReady = {
                 try {
                     val tts = textToSpeech
                     if (tts == null) {
-                        mainHandler.post {
-                            _isPlaying.value = false
-                            onError("Local TTS engine is not available on this device")
-                        }
+                        speakViaWebFallback(context, cleanText, character, onStart, onDone, onError)
                         return@initSystemTts
                     }
 
-                    val voiceId = character?.voiceId ?: "af_heart"
-                    val (basePitchMul, baseSpeedMul) = when (voiceId.lowercase()) {
-                        "id_kawaii" -> Pair(1.26f, 1.04f)
-                        "id_manis" -> Pair(1.16f, 0.98f)
-                        "id_ceria" -> Pair(1.30f, 1.08f)
-                        "id_putri" -> Pair(1.05f, 1.00f)
-                        "id_bima" -> Pair(0.85f, 0.98f)
-                        else -> Pair(1.0f, 1.0f)
-                    }
-
+                    val (basePitchMul, baseSpeedMul) = getPresetPitchAndSpeedMultipliers(voiceId)
                     val pitch = ((character?.voicePitch ?: 1.0f) * basePitchMul).coerceIn(0.5f, 2.0f)
                     val speed = ((character?.voiceSpeed ?: 1.0f) * baseSpeedMul).coerceIn(0.5f, 2.0f)
 
                     tts.setPitch(pitch)
                     tts.setSpeechRate(speed)
 
-                    // Configure language / voice based on voiceId preset
-                    val preset = KOKORO_VOICE_PRESETS.find { it.id.equals(voiceId, ignoreCase = true) }
-                    val targetLocale = when {
-                        preset != null && preset.language.startsWith("id", ignoreCase = true) -> Locale("id", "ID")
-                        preset != null && preset.language.startsWith("ja", ignoreCase = true) -> Locale.JAPANESE
-                        preset != null && preset.language.startsWith("en-GB", ignoreCase = true) -> Locale.UK
-                        preset != null && preset.language.startsWith("en", ignoreCase = true) -> Locale.US
-                        else -> Locale.getDefault()
-                    }
-
-                    var langSet = false
-                    val candidates = listOfNotNull(targetLocale, Locale.US, Locale.ENGLISH, Locale.getDefault())
-                    for (candidate in candidates) {
-                        val res = tts.setLanguage(candidate)
-                        if (res != TextToSpeech.LANG_MISSING_DATA && res != TextToSpeech.LANG_NOT_SUPPORTED) {
-                            langSet = true
-                            Log.d(TAG, "Using TTS locale: $candidate (result code $res)")
-                            break
-                        }
-                    }
-                    if (!langSet) {
-                        Log.w(TAG, "Preset locale $targetLocale not supported, keeping default device locale")
-                    }
-
-                    // Voice matching
-                    try {
-                        val voices = tts.voices
-                        if (!voices.isNullOrEmpty()) {
-                            val match = voices.firstOrNull { v ->
-                                !v.isNetworkConnectionRequired && (
-                                    v.name.contains(voiceId, ignoreCase = true) ||
-                                    (preset != null && v.locale.language.equals(preset.language.take(2), ignoreCase = true))
-                                )
-                            } ?: voices.firstOrNull { !it.isNetworkConnectionRequired }
-                            if (match != null) {
-                                tts.voice = match
-                            }
-                        }
-                    } catch (e: Throwable) {
-                        Log.w(TAG, "Voice matching exception: ${e.message}")
-                    }
-
                     val utteranceId = "mirai_${System.currentTimeMillis()}"
-
                     tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                         override fun onStart(id: String?) {
                             mainHandler.post {
@@ -624,19 +577,52 @@ object TtsManager {
                     _isPlaying.value = true
                     val speakResult = tts.speak(cleanText, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
                     if (speakResult != TextToSpeech.SUCCESS) {
-                        Log.w(TAG, "tts.speak returned $speakResult, attempting Web TTS fallback")
                         speakViaWebFallback(context, cleanText, character, onStart, onDone, onError)
                     }
                 } catch (e: Exception) {
-                    Log.e(TAG, "Error in local speak, falling back to Web TTS", e)
                     speakViaWebFallback(context, cleanText, character, onStart, onDone, onError)
                 }
             },
-            onError = { errMsg ->
-                Log.w(TAG, "$errMsg. Using online speech synthesis fallback...")
+            onError = { _ ->
                 speakViaWebFallback(context, cleanText, character, onStart, onDone, onError)
             }
         )
+    }
+
+    /**
+     * Pitch and speed characteristics across all voice presets to ensure noticeable voice differentiation.
+     */
+    private fun getPresetPitchAndSpeedMultipliers(voiceId: String): Pair<Float, Float> {
+        return when (voiceId.lowercase()) {
+            // Indonesian
+            "id_kawaii" -> Pair(1.30f, 1.05f) // High cute anime
+            "id_manis" -> Pair(1.15f, 0.96f)  // Sweet, gentle
+            "id_ceria" -> Pair(1.24f, 1.12f)  // Cheerful, upbeat
+            "id_putri" -> Pair(1.02f, 1.00f)  // Natural feminine
+            "id_bima" -> Pair(0.80f, 0.95f)   // Deep cool male
+
+            // Japanese
+            "jf_alpha" -> Pair(1.28f, 1.06f)      // High kawaii anime Japanese
+            "jf_gongitsune" -> Pair(1.12f, 0.94f) // Soft gentle Japanese
+            "jm_kumo" -> Pair(0.84f, 0.96f)       // Calm deep male Japanese
+
+            // English (US)
+            "af_heart" -> Pair(1.18f, 1.00f)  // Warm gentle
+            "af_bella" -> Pair(1.32f, 1.08f)  // Cute, higher pitch
+            "af_sarah" -> Pair(1.05f, 1.02f)  // Casual natural female
+            "af_nicole" -> Pair(0.96f, 0.92f) // Whispery, calm
+            "af_sky" -> Pair(1.26f, 1.14f)    // Cheerful, lively
+            "am_adam" -> Pair(0.86f, 1.00f)   // Natural male
+            "am_michael" -> Pair(0.76f, 0.92f) // Deep authoritative male
+
+            // English (British)
+            "bf_emma" -> Pair(1.14f, 1.02f)   // British clear female
+            "bf_isabella" -> Pair(1.22f, 0.95f) // British soft female
+            "bm_george" -> Pair(0.85f, 1.00f) // British male
+            "bm_lewis" -> Pair(0.78f, 0.94f)  // British mature male
+
+            else -> Pair(1.0f, 1.0f)
+        }
     }
 
     private val activeAudioFiles = Collections.synchronizedList(mutableListOf<File>())
@@ -705,20 +691,12 @@ object TtsManager {
                 if (chunkFiles.isEmpty()) {
                     withContext(Dispatchers.Main) {
                         _isPlaying.value = false
-                        onError("TTS speech unavailable on device")
+                        onError("Online speech synthesis unavailable")
                     }
                     return@launch
                 }
 
-                val (basePitchMul, baseSpeedMul) = when (voiceId.lowercase()) {
-                    "id_kawaii" -> Pair(1.26f, 1.04f)
-                    "id_manis" -> Pair(1.16f, 0.98f)
-                    "id_ceria" -> Pair(1.30f, 1.08f)
-                    "id_putri" -> Pair(1.05f, 1.00f)
-                    "id_bima" -> Pair(0.85f, 0.98f)
-                    else -> Pair(1.0f, 1.0f)
-                }
-
+                val (basePitchMul, baseSpeedMul) = getPresetPitchAndSpeedMultipliers(voiceId)
                 val pitch = ((character?.voicePitch ?: 1.0f) * basePitchMul).coerceIn(0.5f, 2.0f)
                 val speed = ((character?.voiceSpeed ?: 1.0f) * baseSpeedMul).coerceIn(0.5f, 2.0f)
 
@@ -761,13 +739,23 @@ object TtsManager {
             val currentFile = files[currentIndex]
             try {
                 mediaPlayer?.let {
-                    if (it.isPlaying) it.stop()
-                    it.release()
+                    try {
+                        it.setOnCompletionListener(null)
+                        it.setOnErrorListener(null)
+                        if (it.isPlaying) it.stop()
+                        it.reset()
+                        it.release()
+                    } catch (_: Exception) {}
                 }
                 val mp = MediaPlayer()
                 mediaPlayer = mp
                 mp.setDataSource(currentFile.absolutePath)
-                mp.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                mp.setAudioAttributes(
+                    android.media.AudioAttributes.Builder()
+                        .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
                 mp.setOnCompletionListener {
                     try { currentFile.delete() } catch (_: Exception) {}
                     activeAudioFiles.remove(currentFile)
@@ -823,7 +811,12 @@ object TtsManager {
             val mp = MediaPlayer()
             mediaPlayer = mp
             mp.setDataSource(file.absolutePath)
-            mp.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            mp.setAudioAttributes(
+                android.media.AudioAttributes.Builder()
+                    .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                    .build()
+            )
             mp.setOnCompletionListener {
                 _isPlaying.value = false
                 try { file.delete() } catch (_: Exception) {}
@@ -858,8 +851,13 @@ object TtsManager {
         try {
             _isPlaying.value = false
             mediaPlayer?.let {
-                if (it.isPlaying) it.stop()
-                it.release()
+                try {
+                    it.setOnCompletionListener(null)
+                    it.setOnErrorListener(null)
+                    if (it.isPlaying) it.stop()
+                    it.reset()
+                    it.release()
+                } catch (_: Exception) {}
             }
             mediaPlayer = null
 
