@@ -1,7 +1,7 @@
 {
   "app/build.gradle.kts": {
-    "mtime": 1789562496.7249727,
-    "ast_hash": "2b0591722cb3410bdf844642bd4ec08b",
+    "mtime": 1789301234.0086923,
+    "ast_hash": "ce28295bec948790b6ba7b205998ad05",
     "semantic_hash": ""
   },
   "app/src/androidTest/java/com/ryzumi/miraiai/ExampleInstrumentedTest.kt": {
@@ -105,8 +105,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt": {
-    "mtime": 1789562652.7258923,
-    "ast_hash": "4a59acbdf4ab1e9c1e682484f94632c1",
+    "mtime": 1789303426.5073617,
+    "ast_hash": "ce640a5aa9cc28c37bc5e8372bc3bc8a",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/engine/LocalInferenceEngine.kt": {
@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1789562760.021171,
-    "ast_hash": "a51b8f855faba06734a69954002b3557",
+    "mtime": 1788404286.9632447,
+    "ast_hash": "2338df555968e9fd314977fcb8540426",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/character/AvatarCropDialog.kt": {
@@ -365,8 +365,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt": {
-    "mtime": 1789562640.020646,
-    "ast_hash": "74a1ee700571f163145fb3de151e040f",
+    "mtime": 1789042237.957143,
+    "ast_hash": "db4076d79beafae87b44b7af6b610ea7",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/util/ChatNotificationHelper.kt": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt": {
-    "mtime": 1789562635.5253122,
-    "ast_hash": "c9eefa0e9be8f57ba9c85e70c88d201e",
+    "mtime": 1788938740.9932039,
+    "ast_hash": "1af2b6004e6994e34869c9cd2149445d",
     "semantic_hash": ""
   },
   "app/src/main/ic_launcher-playstore.png": {
@@ -497,16 +497,6 @@
   "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt": {
     "mtime": 1789315065.3796825,
     "ast_hash": "74ac284911541efff98ef44eb70e7e72",
-    "semantic_hash": ""
-  },
-  "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt": {
-    "mtime": 1789562603.3196397,
-    "ast_hash": "e7599614cb4f45f4610eb98cbff996c1",
-    "semantic_hash": ""
-  },
-  "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt": {
-    "mtime": 1789562613.2465353,
-    "ast_hash": "05ae9afea50f7557e6ae2b0f2751292b",
     "semantic_hash": ""
   }
 }

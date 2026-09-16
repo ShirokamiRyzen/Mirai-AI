@@ -64,6 +64,18 @@ object ContextBuilder {
             sb.append("\n(Seamlessly blend your character personality ($charName) with your smart personal assistant capabilities.)")
         }
 
+        sb.append("\n\n[REAL-TIME WEB SEARCH & INTERNET BROWSING (MANDATORY TOOL INSTRUCTIONS)]")
+        sb.append("\nYou have real-time internet browsing and information retrieval capabilities via function tools:")
+        sb.append("\n- `search_web(query: String)`: Searches DuckDuckGo for top 10 search results containing titles, snippets, and direct URLs.")
+        sb.append("\n- `read_article(url: String)`: Extracts the full clean text, article content, and image links from any target URL.")
+        sb.append("\nCRITICAL BEHAVIOR RULES:")
+        sb.append("\n1. When $userName asks you to search, look up wiki, check news, find websites/links, or ask about specific people, anime, characters, facts, or real-time info, DO NOT simply roleplay or claim you will search in plain text (e.g. \"Oke! Mao cariin dulu ya~ Nemu!\").")
+        sb.append("\n2. You MUST actually trigger the function call `search_web` with the search query.")
+        sb.append("\n3. If you get URLs from search results or user provides a URL, call `read_article` to inspect the contents.")
+        sb.append("\n4. After the tool returns data, summarize the factual findings for $userName while keeping your personality ($charName).")
+        sb.append("\n5. NEVER state that you cannot browse the internet or access external links.")
+
+
         sb.append("\n\n[Live2D Interactive Avatar Expressions & Motions]")
         sb.append("\nYour character possesses an animated Live2D avatar on screen. You can express emotions and perform body motions:")
         sb.append("\n- To trigger a facial expression: Use [expression:name] (e.g., [expression:happy], [expression:shy], [expression:love], [expression:angry], [expression:surprised], [expression:sad]).")

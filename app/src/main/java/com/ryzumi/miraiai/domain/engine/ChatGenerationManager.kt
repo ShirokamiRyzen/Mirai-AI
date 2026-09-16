@@ -177,15 +177,12 @@ object ChatGenerationManager {
                     uploadAsBase64 = isUploadAsBase64
                 )
 
-                val tools = if (isAllowDeviceContext) {
-                    MiraiToolManager.getToolDefinitions()
-                } else null
+                val tools = MiraiToolManager.getToolDefinitions()
 
-                val toolExecutor: (suspend (String, String) -> String)? = if (isAllowDeviceContext) {
-                    { name, args ->
-                        MiraiToolManager.executeTool(context, name, args)
-                    }
-                } else null
+                val toolExecutor: (suspend (String, String) -> String)? = { name, args ->
+                    MiraiToolManager.executeTool(context, name, args)
+                }
+
 
                 openAiRepository.streamChatCompletions(
                     baseUrl = config.baseUrl,

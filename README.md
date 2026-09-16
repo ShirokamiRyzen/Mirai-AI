@@ -71,12 +71,19 @@ Mirai AI provides a transparent, client-side, privacy-first native Android exper
 - Flexible restore options: Merge restore or clean overwrite restore.
 - Real-time backup inventory overview showing total characters, personas, sessions, messages, and configs.
 
-### 7. Modern Material 3 Design
+### 7. Real-Time Web Search & Content Extractor (LLM Tool Calling)
+- Autonomous tool execution harness for LLMs:
+  - `search_web(query: String)`: Live DuckDuckGo web search scraper returning top 10 results with titles, descriptions/snippets, and clean destination URLs.
+  - `read_article(url: String)`: Full article content and metadata extractor powered by Jsoup and Readability4J (cleans boilerplate, ads, navigation, and extracts article text + key images).
+- Always-on tool calling pipeline compatible with OpenAI function calling specifications (`tools` & `tool_calls`).
+
+### 8. Modern Material 3 Design
 - Native Android interface built with 100% Jetpack Compose.
 - Dynamic Material You (Monet) color palette support for Android 12+.
 - Tailored Dark Slate and Deep Indigo themes designed for prolonged reading comfort.
 
 ---
+
 
 ## Supported Providers and Local LLMs
 
@@ -112,6 +119,7 @@ Mirai AI is built according to Modern Android Architecture guidelines (Clean Arc
 - **Networking**: OkHttp 4, Retrofit 2, OkHttp SSE (Server-Sent Events)
 - **Image Pipeline**: Coil Compose, AndroidX ExifInterface
 - **Storage / Cloud**: AWS S3 Signature Version 4 (SigV4) client for RustFS / S3 object storage
+- **Web Scraping & Extraction**: Jsoup 1.18.3, Readability4J 1.0.8 (Mozilla Readability Kotlin port)
 - **Build System**: Gradle with Kotlin DSL and Version Catalogs (`libs.versions.toml`)
 
 ---
@@ -275,17 +283,26 @@ Mirai AI includes a complete backup engine located in Settings -> Backup:
 | **Data Privacy** | 100% Local SQLite Database | Server-side logged | Local / Host-dependent | Local |
 | **Reasoning / Thinking Support** | Live Stream + Auto-collapse | No | Partial | Partial |
 | **Vision / Multimodal** | Yes (S3 offload + local view) | Limited | Extension-dependent | Varies |
+| **Web Search & Article Reading** | Built-in (DuckDuckGo + Readability4J) | Limited / Subscription | Extension-dependent | Limited |
 | **Full Portable Backup (.miraidb)** | Yes (SAF + Avatar Images) | No | Yes | No |
 | **Open Source** | Yes | No | Yes | Yes |
 
 ---
 
+## Third-Party Libraries & Licenses
+
+- **[Jsoup](https://jsoup.org/)**: The MIT License (Copyright © Jonathan Hedley). Java HTML Parser for real-time web scraping and document traversal.
+- **[Readability4J](https://github.com/dankito/Readability4J)**: Apache License 2.0 (Copyright © dankito) & Mozilla Public License 2.0 (Original Readability.js). Kotlin port of Mozilla's Readability library for extracting readable article content, removing ads, navigation menus, and non-content elements.
+
+---
+
 ## Keywords
 
-`character-ai-alternative` `sillytavern-android` `ai-roleplay-client` `byok-ai-chat` `local-llm-android` `ollama-android-client` `lm-studio-client` `deepseek-r1-android` `openrouter-chat-app` `jetpack-compose-ai` `private-ai-chat` `uncensored-roleplay-client` `android-ai-frontend`
+`character-ai-alternative` `sillytavern-android` `ai-roleplay-client` `byok-ai-chat` `local-llm-android` `ollama-android-client` `lm-studio-client` `deepseek-r1-android` `openrouter-chat-app` `jetpack-compose-ai` `private-ai-chat` `uncensored-roleplay-client` `android-ai-frontend` `web-search-llm-tool`
 
 ---
 
 ## License
 
 This project is released under the [MIT License](LICENSE).
+

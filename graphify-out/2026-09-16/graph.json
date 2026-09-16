@@ -65,8 +65,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_log",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "log()"
     },
     {
@@ -76,8 +76,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_warn",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "warn()"
     },
     {
@@ -153,8 +153,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "m()"
     },
     {
@@ -186,8 +186,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_constructor",
-      "community": 80,
-      "community_name": "ze",
+      "community": 44,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -241,8 +241,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_restoreexpression",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": ".restoreexpression()"
     },
     {
@@ -263,8 +263,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_update",
-      "community": 59,
-      "community_name": "bt",
+      "community": 82,
+      "community_name": "_",
       "norm_label": ".update()"
     },
     {
@@ -395,8 +395,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_constructor",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".constructor()"
     },
     {
@@ -406,8 +406,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_reserve",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".reserve()"
     },
     {
@@ -417,8 +417,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_start",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".start()"
     },
     {
@@ -428,8 +428,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_complete",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".complete()"
     },
     {
@@ -439,8 +439,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setcurrent",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".setcurrent()"
     },
     {
@@ -450,8 +450,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setreserved",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".setreserved()"
     },
     {
@@ -461,8 +461,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_setreservedidle",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".setreservedidle()"
     },
     {
@@ -472,8 +472,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_isactive",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".isactive()"
     },
     {
@@ -483,8 +483,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_reset",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".reset()"
     },
     {
@@ -494,8 +494,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_shouldrequestidlemotion",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".shouldrequestidlemotion()"
     },
     {
@@ -505,8 +505,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_shouldoverrideexpression",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".shouldoverrideexpression()"
     },
     {
@@ -516,8 +516,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_m_dump",
-      "community": 79,
-      "community_name": "m",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".dump()"
     },
     {
@@ -527,8 +527,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "v"
     },
     {
@@ -538,8 +538,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_volume",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".volume()"
     },
     {
@@ -549,8 +549,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_add",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".add()"
     },
     {
@@ -560,8 +560,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_play",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".play()"
     },
     {
@@ -582,8 +582,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_destroy",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".destroy()"
     },
     {
@@ -637,8 +637,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_startmotion",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".startmotion()"
     },
     {
@@ -648,8 +648,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_startrandommotion",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 86,
+      "community_name": "De",
       "norm_label": ".startrandommotion()"
     },
     {
@@ -670,8 +670,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_update",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": ".update()"
     },
     {
@@ -725,7 +725,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_b_setuplayout",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".setuplayout()"
     },
@@ -835,8 +835,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_createxhr",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "createxhr()"
     },
     {
@@ -868,8 +868,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_l",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": "l()"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": "e"
     },
     {
@@ -890,8 +890,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e_load",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": ".load()"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_setuplive2dmodel",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 82,
+      "community_name": "_",
       "norm_label": "setuplive2dmodel()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_loadmotion",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "loadmotion()"
     },
     {
@@ -956,8 +956,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_constructor",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".constructor()"
     },
     {
@@ -967,8 +967,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_autointeract",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".autointeract()"
     },
     {
@@ -978,8 +978,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_registerinteraction",
-      "community": 84,
-      "community_name": "v",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".registerinteraction()"
     },
     {
@@ -989,8 +989,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_v_unregisterinteraction",
-      "community": 84,
-      "community_name": "v",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".unregisterinteraction()"
     },
     {
@@ -1000,8 +1000,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_j",
-      "community": 84,
-      "community_name": "v",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "j()"
     },
     {
@@ -1012,7 +1012,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_constructor",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".constructor()"
     },
     {
@@ -1055,8 +1055,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_autoupdate",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".autoupdate()"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_motion",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 86,
+      "community_name": "De",
       "norm_label": ".motion()"
     },
     {
@@ -1176,8 +1176,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_ontickerupdate",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".ontickerupdate()"
     },
     {
@@ -1198,8 +1198,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_render",
-      "community": 84,
-      "community_name": "v",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "._render()"
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_destroy",
-      "community": 96,
-      "community_name": ".destroy",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".destroy()"
     },
     {
@@ -1462,7 +1462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": "et"
     },
@@ -1474,7 +1474,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_constructor",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".constructor()"
     },
     {
@@ -1485,7 +1485,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_init",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".init()"
     },
     {
@@ -1495,7 +1495,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_isfinished",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".isfinished()"
     },
@@ -1517,7 +1517,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionfile",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getmotionfile()"
     },
@@ -1528,7 +1528,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionname",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getmotionname()"
     },
@@ -1539,7 +1539,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getsoundfile",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getsoundfile()"
     },
@@ -1550,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_startmotion",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": "._startmotion()"
     },
@@ -1561,7 +1561,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_stopallmotions",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": "._stopallmotions()"
     },
@@ -1583,8 +1583,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_destroy",
-      "community": 96,
-      "community_name": ".destroy",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".destroy()"
     },
     {
@@ -1639,7 +1639,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": "rt"
     },
     {
@@ -1650,7 +1650,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_constructor",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".constructor()"
     },
     {
@@ -1661,7 +1661,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_init",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".init()"
     },
     {
@@ -1672,7 +1672,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_getsize",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".getsize()"
     },
     {
@@ -1683,7 +1683,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_getlayout",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".getlayout()"
     },
     {
@@ -1705,7 +1705,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_bindtexture",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".bindtexture()"
     },
     {
@@ -1716,7 +1716,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_gethitareadefs",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".gethitareadefs()"
     },
     {
@@ -1727,7 +1727,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_getdrawableids",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".getdrawableids()"
     },
     {
@@ -1738,7 +1738,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_getdrawableindex",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".getdrawableindex()"
     },
     {
@@ -1749,7 +1749,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_getdrawablevertices",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".getdrawablevertices()"
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_update",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".update()"
     },
     {
@@ -1771,7 +1771,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_updatefocus",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".updatefocus()"
     },
     {
@@ -1782,7 +1782,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_updatenaturalmovements",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".updatenaturalmovements()"
     },
     {
@@ -1793,7 +1793,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_draw",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".draw()"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_destroy",
-      "community": 96,
-      "community_name": ".destroy",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".destroy()"
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt",
-      "community": 74,
-      "community_name": ".update",
+      "community": 63,
+      "community_name": "at",
       "norm_label": "lt"
     },
     {
@@ -1880,8 +1880,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_constructor",
-      "community": 74,
-      "community_name": ".update",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".constructor()"
     },
     {
@@ -1891,8 +1891,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_update",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".update()"
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_createcoremodel",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": "createcoremodel()"
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_add",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".add()"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_sqrt",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "sqrt()"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cbrt",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "cbrt()"
     },
     {
@@ -2331,8 +2331,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_quadraticequation",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "quadraticequation()"
     },
     {
@@ -2342,8 +2342,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cardanoalgorithmforbezier",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "cardanoalgorithmforbezier()"
     },
     {
@@ -2694,8 +2694,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_setisculling",
-      "community": 56,
-      "community_name": ".doDrawModel",
+      "community": 66,
+      "community_name": "pt",
       "norm_label": ".setisculling()"
     },
     {
@@ -2782,8 +2782,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": "ct"
     },
     {
@@ -2793,8 +2793,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_startup",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".startup()"
     },
     {
@@ -2804,8 +2804,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_cleanup",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".cleanup()"
     },
     {
@@ -2815,8 +2815,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_initialize",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".initialize()"
     },
     {
@@ -2826,8 +2826,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_dispose",
-      "community": 84,
-      "community_name": "v",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".dispose()"
     },
     {
@@ -2837,8 +2837,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isstarted",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".isstarted()"
     },
     {
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isinitialized",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".isinitialized()"
     },
     {
@@ -2859,8 +2859,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_corelogfunction",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".corelogfunction()"
     },
     {
@@ -2870,8 +2870,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_getlogginglevel",
-      "community": 74,
-      "community_name": ".update",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getlogginglevel()"
     },
     {
@@ -2881,8 +2881,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_constructor",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".constructor()"
     },
     {
@@ -2903,8 +2903,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": "wt()"
     },
     {
@@ -2914,8 +2914,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_print",
-      "community": 74,
-      "community_name": ".update",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".print()"
     },
     {
@@ -2925,8 +2925,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_dumpbytes",
-      "community": 74,
-      "community_name": ".update",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".dumpbytes()"
     },
     {
@@ -2936,7 +2936,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_release",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".release()"
     },
@@ -2947,7 +2947,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeintime",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".setfadeintime()"
     },
@@ -2958,7 +2958,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeouttime",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".setfadeouttime()"
     },
@@ -2969,8 +2969,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeouttime",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 86,
+      "community_name": "De",
       "norm_label": ".getfadeouttime()"
     },
     {
@@ -2980,7 +2980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeintime",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getfadeintime()"
     },
@@ -2991,7 +2991,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setweight",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".setweight()"
     },
@@ -3002,7 +3002,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getweight",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getweight()"
     },
@@ -3013,7 +3013,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getduration",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getduration()"
     },
@@ -3024,7 +3024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getloopduration",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getloopduration()"
     },
@@ -3035,7 +3035,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setoffsettime",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".setoffsettime()"
     },
@@ -3046,7 +3046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfiredevent",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getfiredevent()"
     },
@@ -3057,8 +3057,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfinishedmotionhandler",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".setfinishedmotionhandler()"
     },
     {
@@ -3068,7 +3068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfinishedmotionhandler",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".getfinishedmotionhandler()"
     },
@@ -3079,7 +3079,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_create",
-      "community": 51,
+      "community": 46,
       "community_name": "et",
       "norm_label": ".create()"
     },
@@ -3123,8 +3123,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_startfadeout",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".startfadeout()"
     },
     {
@@ -3299,8 +3299,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getlastcheckeventseconds",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getlastcheckeventseconds()"
     },
     {
@@ -3310,8 +3310,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setlastcheckeventseconds",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".setlastcheckeventseconds()"
     },
     {
@@ -3321,8 +3321,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_istriggeredfadeout",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".istriggeredfadeout()"
     },
     {
@@ -3332,8 +3332,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getfadeoutseconds",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getfadeoutseconds()"
     },
     {
@@ -3365,8 +3365,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_startmotion",
-      "community": 94,
-      "community_name": ".startMotion",
+      "community": 86,
+      "community_name": "De",
       "norm_label": ".startmotion()"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_doupdatemotion",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".doupdatemotion()"
     },
     {
@@ -3541,8 +3541,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt",
-      "community": 80,
-      "community_name": "ze",
+      "community": 44,
+      "community_name": "ke",
       "norm_label": "kt"
     },
     {
@@ -3552,8 +3552,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_constructor",
-      "community": 80,
-      "community_name": "ze",
+      "community": 44,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -3563,8 +3563,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_geteyeblinkparameters",
-      "community": 80,
-      "community_name": "ze",
+      "community": 44,
+      "community_name": "ke",
       "norm_label": ".geteyeblinkparameters()"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_getlipsyncparameters",
-      "community": 80,
-      "community_name": "ze",
+      "community": 44,
+      "community_name": "ke",
       "norm_label": ".getlipsyncparameters()"
     },
     {
@@ -3629,8 +3629,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "jt"
     },
     {
@@ -3640,8 +3640,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt_constructor",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": ".constructor()"
     },
     {
@@ -3673,8 +3673,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "zt"
     },
     {
@@ -3684,8 +3684,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt_constructor",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": ".constructor()"
     },
     {
@@ -3695,8 +3695,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt_constructor",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".constructor()"
     },
     {
@@ -3707,7 +3707,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": "yt"
     },
     {
@@ -3718,7 +3718,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_constructor",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".constructor()"
     },
     {
@@ -3729,7 +3729,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_release",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".release()"
     },
     {
@@ -3740,7 +3740,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionduration",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotionduration()"
     },
     {
@@ -3751,7 +3751,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_ismotionloop",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".ismotionloop()"
     },
     {
@@ -3762,7 +3762,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getevaluationoptionflag",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getevaluationoptionflag()"
     },
     {
@@ -3773,7 +3773,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvecount",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvecount()"
     },
     {
@@ -3784,7 +3784,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfps",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotionfps()"
     },
     {
@@ -3795,7 +3795,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalsegmentcount",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotiontotalsegmentcount()"
     },
     {
@@ -3806,7 +3806,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalpointcount",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotiontotalpointcount()"
     },
     {
@@ -3817,7 +3817,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeintime",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotionfadeintime()"
     },
     {
@@ -3828,7 +3828,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeouttime",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotionfadeouttime()"
     },
     {
@@ -3839,7 +3839,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvetarget",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvetarget()"
     },
     {
@@ -3850,7 +3850,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurveid",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurveid()"
     },
     {
@@ -3861,7 +3861,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeintime",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvefadeintime()"
     },
     {
@@ -3872,7 +3872,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeouttime",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvefadeouttime()"
     },
     {
@@ -3883,7 +3883,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegmentcount",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvesegmentcount()"
     },
     {
@@ -3894,7 +3894,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegment",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".getmotioncurvesegment()"
     },
     {
@@ -3905,7 +3905,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventcount",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".geteventcount()"
     },
     {
@@ -3916,7 +3916,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_gettotaleventvaluesize",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".gettotaleventvaluesize()"
     },
     {
@@ -3927,7 +3927,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventtime",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".geteventtime()"
     },
     {
@@ -3938,7 +3938,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventvalue",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".geteventvalue()"
     },
     {
@@ -3948,8 +3948,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_qt",
-      "community": 89,
-      "community_name": "cardanoAlgorithmForBezier",
+      "community": 43,
+      "community_name": "index.min.js",
       "norm_label": "qt()"
     },
     {
@@ -3981,8 +3981,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": "ee"
     },
     {
@@ -3992,8 +3992,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_constructor",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".constructor()"
     },
     {
@@ -4003,8 +4003,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_create",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".create()"
     },
     {
@@ -4025,8 +4025,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setisloop",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".setisloop()"
     },
     {
@@ -4036,8 +4036,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_isloop",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".isloop()"
     },
     {
@@ -4047,8 +4047,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setisloopfadein",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".setisloopfadein()"
     },
     {
@@ -4058,8 +4058,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_isloopfadein",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".isloopfadein()"
     },
     {
@@ -4069,8 +4069,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getduration",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getduration()"
     },
     {
@@ -4080,8 +4080,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getloopduration",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getloopduration()"
     },
     {
@@ -4091,8 +4091,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setparameterfadeintime",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".setparameterfadeintime()"
     },
     {
@@ -4102,8 +4102,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_setparameterfadeouttime",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".setparameterfadeouttime()"
     },
     {
@@ -4113,8 +4113,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getparameterfadeintime",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getparameterfadeintime()"
     },
     {
@@ -4124,8 +4124,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getparameterfadeouttime",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getparameterfadeouttime()"
     },
     {
@@ -4136,7 +4136,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_seteffectids",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".seteffectids()"
     },
     {
@@ -4146,8 +4146,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_release",
-      "community": 78,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".release()"
     },
     {
@@ -4158,7 +4158,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_parse",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".parse()"
     },
     {
@@ -4168,8 +4168,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getfiredevent",
-      "community": 92,
-      "community_name": ".doUpdateMotion",
+      "community": 63,
+      "community_name": "at",
       "norm_label": ".getfiredevent()"
     },
     {
@@ -4179,7 +4179,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": "ie"
     },
@@ -4190,8 +4190,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_constructor",
-      "community": 80,
-      "community_name": "ze",
+      "community": 54,
+      "community_name": "ie",
       "norm_label": ".constructor()"
     },
     {
@@ -4202,7 +4202,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_init",
       "community": 54,
-      "community_name": "rt",
+      "community_name": "ie",
       "norm_label": ".init()"
     },
     {
@@ -4223,8 +4223,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_startmotion",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "._startmotion()"
     },
     {
@@ -4246,7 +4246,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_createmotion",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": ".createmotion()"
     },
     {
@@ -4256,8 +4256,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getmotionfile",
-      "community": 87,
-      "community_name": "loadMotion",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".getmotionfile()"
     },
     {
@@ -4267,8 +4267,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getmotionname",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".getmotionname()"
     },
     {
@@ -4278,8 +4278,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getsoundfile",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".getsoundfile()"
     },
     {
@@ -4289,7 +4289,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updateparameters",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".updateparameters()"
     },
@@ -4300,8 +4300,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_destroy",
-      "community": 96,
-      "community_name": ".destroy",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".destroy()"
     },
     {
@@ -4476,8 +4476,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": "le"
     },
     {
@@ -4487,8 +4487,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_constructor",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".constructor()"
     },
     {
@@ -4498,8 +4498,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcenterx",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".getcenterx()"
     },
     {
@@ -4509,8 +4509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcentery",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".getcentery()"
     },
     {
@@ -4520,8 +4520,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getright",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".getright()"
     },
     {
@@ -4531,8 +4531,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getbottom",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".getbottom()"
     },
     {
@@ -4542,8 +4542,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_setrect",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".setrect()"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_expand",
-      "community": 57,
-      "community_name": "Ct",
+      "community": 83,
+      "community_name": "ce",
       "norm_label": ".expand()"
     },
     {
@@ -4894,8 +4894,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pe_generateshaders",
-      "community": 98,
-      "community_name": ".generateShaders",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": ".generateshaders()"
     },
     {
@@ -5048,8 +5048,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_predraw",
-      "community": 56,
-      "community_name": ".doDrawModel",
+      "community": 142,
+      "community_name": "se",
       "norm_label": ".predraw()"
     },
     {
@@ -5059,8 +5059,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_setclippingcontextbufferformask",
-      "community": 142,
-      "community_name": "se",
+      "community": 66,
+      "community_name": "pt",
       "norm_label": ".setclippingcontextbufferformask()"
     },
     {
@@ -5081,8 +5081,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_setclippingcontextbufferfordraw",
-      "community": 142,
-      "community_name": "se",
+      "community": 66,
+      "community_name": "pt",
       "norm_label": ".setclippingcontextbufferfordraw()"
     },
     {
@@ -5114,7 +5114,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getsize",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".getsize()"
     },
@@ -5125,7 +5125,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getlayout",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".getlayout()"
     },
@@ -5158,7 +5158,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_bindtexture",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".bindtexture()"
     },
@@ -5180,7 +5180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getdrawableids",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".getdrawableids()"
     },
@@ -5191,7 +5191,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getdrawableindex",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".getdrawableindex()"
     },
@@ -5202,7 +5202,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getdrawablevertices",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".getdrawablevertices()"
     },
@@ -5213,7 +5213,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatetransform",
-      "community": 69,
+      "community": 54,
       "community_name": "ie",
       "norm_label": ".updatetransform()"
     },
@@ -5224,8 +5224,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_update",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".update()"
     },
     {
@@ -5235,8 +5235,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatefocus",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".updatefocus()"
     },
     {
@@ -5246,8 +5246,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatenaturalmovements",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".updatenaturalmovements()"
     },
     {
@@ -5411,8 +5411,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_update",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".update()"
     },
     {
@@ -5444,8 +5444,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_saveparameters",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".saveparameters()"
     },
     {
@@ -5939,8 +5939,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_loadparameters",
-      "community": 74,
-      "community_name": ".update",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".loadparameters()"
     },
     {
@@ -5983,8 +5983,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": "be"
     },
     {
@@ -5994,8 +5994,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be_create",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".create()"
     },
     {
@@ -6005,8 +6005,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be_createmodel",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".createmodel()"
     },
     {
@@ -6016,8 +6016,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be_deletemodel",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".deletemodel()"
     },
     {
@@ -6027,8 +6027,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be_constructor",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".constructor()"
     },
     {
@@ -6038,8 +6038,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_be_release",
-      "community": 93,
-      "community_name": "Be",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".release()"
     },
     {
@@ -6500,8 +6500,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze",
-      "community": 80,
-      "community_name": "ze",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": "ze"
     },
     {
@@ -6511,8 +6511,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_create",
-      "community": 80,
-      "community_name": "ze",
+      "community": 54,
+      "community_name": "ie",
       "norm_label": ".create()"
     },
     {
@@ -6533,8 +6533,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_setoptions",
-      "community": 80,
-      "community_name": "ze",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".setoptions()"
     },
     {
@@ -6544,8 +6544,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_getoption",
-      "community": 80,
-      "community_name": "ze",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".getoption()"
     },
     {
@@ -6555,8 +6555,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_constructor",
-      "community": 80,
-      "community_name": "ze",
+      "community": 59,
+      "community_name": "bt",
       "norm_label": ".constructor()"
     },
     {
@@ -6687,8 +6687,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_si",
-      "community": 86,
-      "community_name": "De",
+      "community": 65,
+      "community_name": "ut",
       "norm_label": "si()"
     },
     {
@@ -6951,7 +6951,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_w",
-      "community": 47,
+      "community": 53,
       "community_name": "ns",
       "norm_label": "w()"
     },
@@ -6984,7 +6984,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_k",
-      "community": 47,
+      "community": 53,
       "community_name": "ns",
       "norm_label": "k()"
     },
@@ -7336,8 +7336,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2dcubismcore_min_da",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "da()"
     },
     {
@@ -7601,7 +7601,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_p",
       "community": 47,
-      "community_name": "ns",
+      "community_name": "E",
       "norm_label": "p()"
     },
     {
@@ -7612,7 +7612,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_x",
       "community": 47,
-      "community_name": "ns",
+      "community_name": "E",
       "norm_label": "x()"
     },
     {
@@ -7634,7 +7634,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_z",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "z()"
     },
     {
@@ -7645,7 +7645,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_w",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "w()"
     },
     {
@@ -7656,7 +7656,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_q",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "q()"
     },
     {
@@ -7667,7 +7667,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_k",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "k()"
     },
     {
@@ -7678,7 +7678,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_j",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "j()"
     },
     {
@@ -7689,7 +7689,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_tt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "tt()"
     },
     {
@@ -7700,7 +7700,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_et",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "et()"
     },
     {
@@ -7711,7 +7711,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_rt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "rt()"
     },
     {
@@ -7733,7 +7733,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_nt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "nt()"
     },
     {
@@ -7744,7 +7744,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ot",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "ot()"
     },
     {
@@ -7755,7 +7755,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_st",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "st()"
     },
     {
@@ -7766,7 +7766,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_at",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "at()"
     },
     {
@@ -7777,7 +7777,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ht",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "ht()"
     },
     {
@@ -7788,7 +7788,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ut",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "ut()"
     },
     {
@@ -7799,7 +7799,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_lt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "lt()"
     },
     {
@@ -7810,7 +7810,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ct",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "ct()"
     },
     {
@@ -7821,7 +7821,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_dt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "dt()"
     },
     {
@@ -7832,7 +7832,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ft",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "ft()"
     },
     {
@@ -7843,7 +7843,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_pt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "pt()"
     },
     {
@@ -7853,8 +7853,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_t",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 52,
+      "community_name": "r",
       "norm_label": "_t()"
     },
     {
@@ -7865,7 +7865,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_vt",
       "community": 53,
-      "community_name": "q",
+      "community_name": "ns",
       "norm_label": "vt()"
     },
     {
@@ -7875,8 +7875,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_m",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "m()"
     },
     {
@@ -7886,8 +7886,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_y",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "y()"
     },
     {
@@ -7908,8 +7908,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_e",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "e()"
     },
     {
@@ -7920,7 +7920,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_b",
       "community": 47,
-      "community_name": "ns",
+      "community_name": "E",
       "norm_label": "b()"
     },
     {
@@ -7974,8 +7974,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ee",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "ee()"
     },
     {
@@ -8019,7 +8019,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_se",
       "community": 46,
-      "community_name": "Yt",
+      "community_name": "et",
       "norm_label": "se()"
     },
     {
@@ -8084,8 +8084,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_fe",
-      "community": 98,
-      "community_name": ".generateShaders",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "fe()"
     },
     {
@@ -8106,8 +8106,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ve",
-      "community": 98,
-      "community_name": ".generateShaders",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ve()"
     },
     {
@@ -8128,8 +8128,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_re",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "re()"
     },
     {
@@ -8194,8 +8194,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ui",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ui()"
     },
     {
@@ -8205,8 +8205,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_li",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "li()"
     },
     {
@@ -8216,8 +8216,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ci",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ci()"
     },
     {
@@ -8227,8 +8227,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_di",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "di()"
     },
     {
@@ -8238,8 +8238,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_vi",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "vi()"
     },
     {
@@ -8249,8 +8249,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_mi",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "mi()"
     },
     {
@@ -8260,8 +8260,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_gi",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "gi()"
     },
     {
@@ -8271,8 +8271,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_bi",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "bi()"
     },
     {
@@ -8282,8 +8282,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_pi",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "pi()"
     },
     {
@@ -8293,8 +8293,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ki",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ki()"
     },
     {
@@ -8304,8 +8304,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ji",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ji()"
     },
     {
@@ -8315,8 +8315,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_tn",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "tn()"
     },
     {
@@ -8326,8 +8326,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_rn",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "rn()"
     },
     {
@@ -8337,8 +8337,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_mn",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "mn()"
     },
     {
@@ -8414,8 +8414,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ro",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ro()"
     },
     {
@@ -8458,8 +8458,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_mo",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "mo()"
     },
     {
@@ -8513,8 +8513,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_qo",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "qo()"
     },
     {
@@ -8546,7 +8546,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_rs",
-      "community": 47,
+      "community": 53,
       "community_name": "ns",
       "norm_label": "rs()"
     },
@@ -8568,7 +8568,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ns",
-      "community": 47,
+      "community": 53,
       "community_name": "ns",
       "norm_label": "ns()"
     },
@@ -8590,8 +8590,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ds",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 52,
+      "community_name": "r",
       "norm_label": "ds()"
     },
     {
@@ -8601,8 +8601,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_gs",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "gs()"
     },
     {
@@ -8612,8 +8612,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_us",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "us()"
     },
     {
@@ -8623,8 +8623,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ks",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "ks()"
     },
     {
@@ -8634,8 +8634,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_xs",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "xs()"
     },
     {
@@ -8645,8 +8645,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_hs",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "hs()"
     },
     {
@@ -8656,8 +8656,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ys",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "ys()"
     },
     {
@@ -8722,8 +8722,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ea",
-      "community": 61,
-      "community_name": "pixi.min.js",
+      "community": 47,
+      "community_name": "E",
       "norm_label": "ea()"
     },
     {
@@ -8744,8 +8744,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_xa",
-      "community": 68,
-      "community_name": "da",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "xa()"
     },
     {
@@ -11175,8 +11175,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "contextbuilder.kt"
     },
     {
@@ -11186,8 +11186,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "contextbuilder"
     },
     {
@@ -11197,19 +11197,19 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildsystemprompt",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": ".buildsystemprompt()"
     },
     {
       "label": ".buildOpenAiMessages()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": ".buildopenaimessages()"
     },
     {
@@ -11219,8 +11219,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_kt_context",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "context"
     },
     {
@@ -11348,7 +11348,7 @@
       "label": ".stopGeneration()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L342",
+      "source_location": "L345",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_stopgeneration",
       "community": 35,
@@ -11359,7 +11359,7 @@
       "label": ".dismissError()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L378",
+      "source_location": "L381",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_dismisserror",
       "community": 35,
@@ -12099,8 +12099,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "openaimessage.kt"
     },
     {
@@ -12121,8 +12121,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaitoolcall",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "openaitoolcall"
     },
     {
@@ -12132,8 +12132,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaifunctioncall",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "openaifunctioncall"
     },
     {
@@ -12143,8 +12143,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaicontentpart",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "openaicontentpart"
     },
     {
@@ -12154,8 +12154,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaiimageurl",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 87,
+      "community_name": ".buildOpenAiMessages",
       "norm_label": "openaiimageurl"
     },
     {
@@ -12165,8 +12165,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": "notificationreplyreceiver.kt"
     },
     {
@@ -12176,8 +12176,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": "notificationreplyreceiver"
     },
     {
@@ -12187,8 +12187,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "broadcastreceiver",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": "broadcastreceiver"
     },
     {
@@ -12198,8 +12198,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_notificationreplyreceiver_onreceive",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": ".onreceive()"
     },
     {
@@ -12209,8 +12209,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_context",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": "context"
     },
     {
@@ -12220,8 +12220,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_receiver_notificationreplyreceiver_kt_intent",
-      "community": 6,
-      "community_name": "OpenAiRepository",
+      "community": 51,
+      "community_name": ".onReceive",
       "norm_label": "intent"
     },
     {
@@ -13493,7 +13493,7 @@
       "label": ".executeTool()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L141",
+      "source_location": "L87",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executetool",
       "community": 38,
@@ -13510,39 +13510,6 @@
       "community": 38,
       "community_name": "MiraiToolManager",
       "norm_label": "context"
-    },
-    {
-      "label": ".executeSearchWeb()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L157",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executesearchweb",
-      "community": 38,
-      "community_name": "MiraiToolManager",
-      "norm_label": ".executesearchweb()"
-    },
-    {
-      "label": ".executeReadArticle()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L181",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executereadarticle",
-      "community": 38,
-      "community_name": "MiraiToolManager",
-      "norm_label": ".executereadarticle()"
-    },
-    {
-      "label": ".parseStringArgument()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L209",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_parsestringargument",
-      "community": 38,
-      "community_name": "MiraiToolManager",
-      "norm_label": ".parsestringargument()"
     },
     {
       "label": "TokenUtils.kt",
@@ -13620,105 +13587,6 @@
       "community": 71,
       "community_name": "TokenUtils",
       "norm_label": ".trimhistorytofitbudget()"
-    },
-    {
-      "label": "DuckDuckGoScraper.kt",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper",
-      "community": 95,
-      "community_name": "DuckDuckGoScraper",
-      "norm_label": "duckduckgoscraper.kt"
-    },
-    {
-      "label": "SearchResult",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_searchresult",
-      "community": 95,
-      "community_name": "DuckDuckGoScraper",
-      "norm_label": "searchresult"
-    },
-    {
-      "label": "DuckDuckGoScraper",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper",
-      "community": 95,
-      "community_name": "DuckDuckGoScraper",
-      "norm_label": "duckduckgoscraper"
-    },
-    {
-      "label": ".search()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_search",
-      "community": 95,
-      "community_name": "DuckDuckGoScraper",
-      "norm_label": ".search()"
-    },
-    {
-      "label": ".extractCleanUrl()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L103",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_extractcleanurl",
-      "community": 95,
-      "community_name": "DuckDuckGoScraper",
-      "norm_label": ".extractcleanurl()"
-    },
-    {
-      "label": "WebContentExtractor.kt",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor",
-      "community": 97,
-      "community_name": "WebContentExtractor.kt",
-      "norm_label": "webcontentextractor.kt"
-    },
-    {
-      "label": "ArticleContent",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_articlecontent",
-      "community": 97,
-      "community_name": "WebContentExtractor.kt",
-      "norm_label": "articlecontent"
-    },
-    {
-      "label": "WebContentExtractor",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor",
-      "community": 97,
-      "community_name": "WebContentExtractor.kt",
-      "norm_label": "webcontentextractor"
-    },
-    {
-      "label": ".extractArticle()",
-      "file_type": "code",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor_extractarticle",
-      "community": 97,
-      "community_name": "WebContentExtractor.kt",
-      "norm_label": ".extractarticle()"
     },
     {
       "label": "Live2dViewer.kt",
@@ -15168,8 +15036,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementscreen.kt"
     },
     {
@@ -15179,8 +15047,8 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementscreen",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementscreen()"
     },
     {
@@ -15190,8 +15058,8 @@
       "source_location": "L455",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_charactercarditem",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "charactercarditem()"
     },
     {
@@ -15201,8 +15069,8 @@
       "source_location": "L591",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementpersonacarditem",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "managementpersonacarditem()"
     },
     {
@@ -15619,8 +15487,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personalistscreen.kt"
     },
     {
@@ -15630,8 +15498,8 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personalistscreen",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personalistscreen()"
     },
     {
@@ -15641,8 +15509,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personacarditem",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personacarditem()"
     },
     {
@@ -15652,8 +15520,8 @@
       "source_location": "L258",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personaeditdialog",
-      "community": 90,
-      "community_name": "ManagementScreen",
+      "community": 2,
+      "community_name": "UserPersonaEntity",
       "norm_label": "personaeditdialog()"
     },
     {
@@ -16894,32 +16762,21 @@
       "norm_label": "6. full data backup and restore"
     },
     {
-      "label": "7. Real-Time Web Search & Content Extractor (LLM Tool Calling)",
+      "label": "7. Modern Material 3 Design",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L74",
       "_origin": "ast",
-      "id": "readme_7_real_time_web_search_content_extractor_llm_tool_calling",
+      "id": "readme_7_modern_material_3_design",
       "community": 29,
       "community_name": "Mirai AI",
-      "norm_label": "7. real-time web search & content extractor (llm tool calling)"
-    },
-    {
-      "label": "8. Modern Material 3 Design",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "readme_8_modern_material_3_design",
-      "community": 29,
-      "community_name": "Mirai AI",
-      "norm_label": "8. modern material 3 design"
+      "norm_label": "7. modern material 3 design"
     },
     {
       "label": "Supported Providers and Local LLMs",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L88",
+      "source_location": "L81",
       "_origin": "ast",
       "id": "readme_supported_providers_and_local_llms",
       "community": 29,
@@ -16930,7 +16787,7 @@
       "label": "Architecture and Tech Stack",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L110",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "readme_architecture_and_tech_stack",
       "community": 29,
@@ -16941,7 +16798,7 @@
       "label": "Building from Source",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L127",
+      "source_location": "L119",
       "_origin": "ast",
       "id": "readme_building_from_source",
       "community": 29,
@@ -16952,7 +16809,7 @@
       "label": "Prerequisites",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L129",
+      "source_location": "L121",
       "_origin": "ast",
       "id": "readme_prerequisites",
       "community": 29,
@@ -16963,7 +16820,7 @@
       "label": "Build Instructions",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L135",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "readme_build_instructions",
       "community": 29,
@@ -16974,7 +16831,7 @@
       "label": "Automated Builds and Releases (CI/CD)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L175",
+      "source_location": "L167",
       "_origin": "ast",
       "id": "readme_automated_builds_and_releases_ci_cd",
       "community": 29,
@@ -16985,7 +16842,7 @@
       "label": "Triggering a Release",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L179",
+      "source_location": "L171",
       "_origin": "ast",
       "id": "readme_triggering_a_release",
       "community": 29,
@@ -16996,7 +16853,7 @@
       "label": "Method 1: Push a Git Tag (Recommended)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L181",
+      "source_location": "L173",
       "_origin": "ast",
       "id": "readme_method_1_push_a_git_tag_recommended",
       "community": 29,
@@ -17007,7 +16864,7 @@
       "label": "Method 2: Manual Trigger via GitHub Actions UI",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L189",
+      "source_location": "L181",
       "_origin": "ast",
       "id": "readme_method_2_manual_trigger_via_github_actions_ui",
       "community": 29,
@@ -17018,7 +16875,7 @@
       "label": "Configuring GitHub Secrets for APK Signing",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L194",
+      "source_location": "L186",
       "_origin": "ast",
       "id": "readme_configuring_github_secrets_for_apk_signing",
       "community": 29,
@@ -17029,7 +16886,7 @@
       "label": "How to Generate `KEYSTORE_BASE64`",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L207",
+      "source_location": "L199",
       "_origin": "ast",
       "id": "readme_how_to_generate_keystore_base64",
       "community": 29,
@@ -17040,7 +16897,7 @@
       "label": "Configuration and Usage",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L229",
+      "source_location": "L221",
       "_origin": "ast",
       "id": "readme_configuration_and_usage",
       "community": 29,
@@ -17051,7 +16908,7 @@
       "label": "Character Macros",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L231",
+      "source_location": "L223",
       "_origin": "ast",
       "id": "readme_character_macros",
       "community": 29,
@@ -17062,7 +16919,7 @@
       "label": "Connecting to Local LLMs (Ollama / LM Studio)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L242",
+      "source_location": "L234",
       "_origin": "ast",
       "id": "readme_connecting_to_local_llms_ollama_lm_studio",
       "community": 29,
@@ -17073,7 +16930,7 @@
       "label": "Backup and Data Portability",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L265",
+      "source_location": "L257",
       "_origin": "ast",
       "id": "readme_backup_and_data_portability",
       "community": 29,
@@ -17084,7 +16941,7 @@
       "label": "SEO and Comparison Highlights",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L276",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "readme_seo_and_comparison_highlights",
       "community": 29,
@@ -17092,21 +16949,10 @@
       "norm_label": "seo and comparison highlights"
     },
     {
-      "label": "Third-Party Libraries & Licenses",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L292",
-      "_origin": "ast",
-      "id": "readme_third_party_libraries_licenses",
-      "community": 29,
-      "community_name": "Mirai AI",
-      "norm_label": "third-party libraries & licenses"
-    },
-    {
       "label": "Keywords",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L299",
+      "source_location": "L283",
       "_origin": "ast",
       "id": "readme_keywords",
       "community": 29,
@@ -17117,7 +16963,7 @@
       "label": "License",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L305",
+      "source_location": "L289",
       "_origin": "ast",
       "id": "readme_license",
       "community": 29,
@@ -35263,7 +35109,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L342",
+      "source_location": "L345",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -36952,7 +36798,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37191,7 +37037,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "generic_arg",
       "_origin": "ast",
@@ -37205,7 +37051,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L288",
+      "source_location": "L291",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_startgeneration",
@@ -37217,7 +37063,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L362",
+      "source_location": "L365",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_stopgeneration",
@@ -37632,7 +37478,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39450,7 +39296,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder",
@@ -39473,7 +39319,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L102",
+      "source_location": "L96",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -39484,7 +39330,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -39498,7 +39344,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L191",
+      "source_location": "L185",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -39510,7 +39356,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L195",
+      "source_location": "L189",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -39521,7 +39367,7 @@
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/context/ContextBuilder.kt",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_context_contextbuilder_contextbuilder_buildopenaimessages",
@@ -39579,7 +39425,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L375",
+      "source_location": "L378",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_stopgeneration",
@@ -39601,7 +39447,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L378",
+      "source_location": "L381",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager",
@@ -39667,7 +39513,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L342",
+      "source_location": "L345",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager",
@@ -39691,7 +39537,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/ChatGenerationManager.kt",
-      "source_location": "L300",
+      "source_location": "L303",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_chatgenerationmanager_chatgenerationmanager_startgeneration",
@@ -43660,29 +43506,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L181",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executereadarticle",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L157",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executesearchweb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L141",
+      "source_location": "L87",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager",
@@ -43701,17 +43525,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L209",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_parsestringargument",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "references",
       "context": "generic_arg",
       "confidence": "EXTRACTED",
@@ -43727,60 +43540,12 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L141",
+      "source_location": "L87",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executetool",
       "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_kt_context",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L149",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executetool",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executereadarticle",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L148",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executetool",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executesearchweb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L158",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executesearchweb",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_parsestringargument",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/util/MiraiToolManager.kt",
-      "source_location": "L182",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_executereadarticle",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_miraitoolmanager_miraitoolmanager_parsestringargument",
       "confidence_score": 1.0
     },
     {
@@ -43883,119 +43648,6 @@
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_trimhistorytofitbudget",
       "target": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_estimatemessagetokens",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_searchresult",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L24",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_search",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_searchresult",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L103",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_extractcleanurl",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L24",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/DuckDuckGoScraper.kt",
-      "source_location": "L47",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_search",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_duckduckgoscraper_duckduckgoscraper_extractcleanurl",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_articlecontent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "return_type",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L27",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor_extractarticle",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_articlecontent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/web/WebContentExtractor.kt",
-      "source_location": "L27",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_web_webcontentextractor_webcontentextractor_extractarticle",
       "confidence_score": 1.0
     },
     {
@@ -48173,7 +47825,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L110",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48184,7 +47836,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L175",
+      "source_location": "L167",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48195,7 +47847,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L265",
+      "source_location": "L257",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48206,7 +47858,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L127",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48217,7 +47869,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L229",
+      "source_location": "L221",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48239,7 +47891,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L299",
+      "source_location": "L283",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48250,7 +47902,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L305",
+      "source_location": "L289",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48272,7 +47924,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L276",
+      "source_location": "L268",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48283,7 +47935,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L88",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_mirai_ai",
@@ -48299,17 +47951,6 @@
       "_origin": "ast",
       "source": "readme_mirai_ai",
       "target": "readme_table_of_contents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L292",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "readme_mirai_ai",
-      "target": "readme_third_party_libraries_licenses",
       "confidence_score": 1.0
     },
     {
@@ -48386,25 +48027,14 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_key_features",
-      "target": "readme_7_real_time_web_search_content_extractor_llm_tool_calling",
+      "target": "readme_7_modern_material_3_design",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L80",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "readme_key_features",
-      "target": "readme_8_modern_material_3_design",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L135",
+      "source_location": "L127",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_building_from_source",
@@ -48415,7 +48045,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L129",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_building_from_source",
@@ -48426,7 +48056,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L194",
+      "source_location": "L186",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_automated_builds_and_releases_ci_cd",
@@ -48437,7 +48067,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L179",
+      "source_location": "L171",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_automated_builds_and_releases_ci_cd",
@@ -48448,7 +48078,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L181",
+      "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_triggering_a_release",
@@ -48459,7 +48089,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L189",
+      "source_location": "L181",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_triggering_a_release",
@@ -48470,7 +48100,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L207",
+      "source_location": "L199",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_configuring_github_secrets_for_apk_signing",
@@ -48481,7 +48111,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L231",
+      "source_location": "L223",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_configuration_and_usage",
@@ -48492,7 +48122,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L242",
+      "source_location": "L234",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_configuration_and_usage",
@@ -48501,5 +48131,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e533fd698cfdffe25008261f9240677209801b71"
+  "built_at_commit": "c27e13f2de709ced42be82024b43d6affc1f7e21"
 }

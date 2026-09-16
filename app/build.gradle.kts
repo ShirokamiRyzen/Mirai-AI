@@ -12,8 +12,8 @@ android {
         applicationId = "com.ryzumi.miraiai"
         minSdk = 26
         targetSdk = 37
-        versionCode = 8
-        versionName = "1.1.7"
+        versionCode = 9
+        versionName = "1.2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -84,6 +84,10 @@ dependencies {
 
     // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
+
+    // Web Search & Content Extraction (Jsoup + Readability4j)
+    implementation(libs.jsoup)
+    implementation(libs.readability4j)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
