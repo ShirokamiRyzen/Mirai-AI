@@ -2618,7 +2618,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_drawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".drawmodel()"
     },
     {
@@ -2695,7 +2695,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_setisculling",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setisculling()"
     },
     {
@@ -2761,7 +2761,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "ft"
     },
     {
@@ -2772,7 +2772,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_constructor",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".constructor()"
     },
     {
@@ -3091,7 +3091,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_doupdateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -4367,7 +4367,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".updateparameters()"
     },
     {
@@ -4455,7 +4455,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "updateparameters()"
     },
     {
@@ -4466,7 +4466,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_determinnextblinkingtiming",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "determinnextblinkingtiming()"
     },
     {
@@ -4609,7 +4609,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_calcclippeddrawtotalbounds",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".calcclippeddrawtotalbounds()"
     },
     {
@@ -4653,7 +4653,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_setupclippingcontext",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setupclippingcontext()"
     },
     {
@@ -5005,7 +5005,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_dodrawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".dodrawmodel()"
     },
     {
@@ -5049,7 +5049,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_predraw",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".predraw()"
     },
     {
@@ -5378,8 +5378,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_initialize",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".initialize()"
     },
     {
@@ -5400,7 +5400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": "ae"
     },
@@ -5422,7 +5422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvaswidth",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvaswidth()"
     },
@@ -5433,7 +5433,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvasheight",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvasheight()"
     },
@@ -5456,7 +5456,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getmodel()"
     },
     {
@@ -5466,8 +5466,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartindex",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartindex()"
     },
     {
@@ -5499,8 +5499,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".setpartopacitybyid()"
     },
     {
@@ -5521,8 +5521,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartopacitybyid()"
     },
     {
@@ -5533,7 +5533,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparameterindex()"
     },
     {
@@ -5544,7 +5544,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametercount",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametercount()"
     },
     {
@@ -5554,7 +5554,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametermaximumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparametermaximumvalue()"
     },
@@ -5565,7 +5565,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterminimumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterminimumvalue()"
     },
@@ -5576,7 +5576,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterdefaultvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterdefaultvalue()"
     },
@@ -5588,7 +5588,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyindex()"
     },
     {
@@ -5599,7 +5599,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyid()"
     },
     {
@@ -5610,7 +5610,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyindex()"
     },
     {
@@ -5621,7 +5621,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyid()"
     },
     {
@@ -5632,7 +5632,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyindex()"
     },
     {
@@ -5643,7 +5643,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyid()"
     },
     {
@@ -5654,7 +5654,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyid()"
     },
     {
@@ -5665,7 +5665,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyindex()"
     },
     {
@@ -5675,7 +5675,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableids",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableids()"
     },
@@ -5686,7 +5686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableindex",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableindex()"
     },
@@ -5708,7 +5708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableid",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableid()"
     },
@@ -5720,7 +5720,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablerenderorders",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablerenderorders()"
     },
     {
@@ -5731,7 +5731,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabletextureindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabletextureindices()"
     },
     {
@@ -5742,7 +5742,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvertexpositionsdidchange",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvertexpositionsdidchange()"
     },
     {
@@ -5753,7 +5753,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindexcount()"
     },
     {
@@ -5764,7 +5764,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexcount()"
     },
     {
@@ -5775,7 +5775,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertices()"
     },
     {
@@ -5786,7 +5786,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindices()"
     },
     {
@@ -5797,7 +5797,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexpositions",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexpositions()"
     },
     {
@@ -5808,7 +5808,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexuvs",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexuvs()"
     },
     {
@@ -5819,7 +5819,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableopacity",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableopacity()"
     },
     {
@@ -5830,7 +5830,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableculling",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableculling()"
     },
     {
@@ -5841,7 +5841,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableblendmode",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableblendmode()"
     },
     {
@@ -5852,7 +5852,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableinvertedmaskbit",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableinvertedmaskbit()"
     },
     {
@@ -5896,7 +5896,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagisvisible",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagisvisible()"
     },
     {
@@ -5906,7 +5906,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvisibilitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvisibilitydidchange()"
     },
@@ -5917,7 +5917,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagopacitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagopacitydidchange()"
     },
@@ -5928,7 +5928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagrenderorderdidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagrenderorderdidchange()"
     },
@@ -5950,7 +5950,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_initialize",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".initialize()"
     },
@@ -5972,7 +5972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_release",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".release()"
     },
@@ -15781,7 +15781,7 @@
       "label": "SettingsScreen()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L145",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
       "community": 13,
@@ -15792,7 +15792,7 @@
       "label": "ThemeSettingsView()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L465",
+      "source_location": "L466",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_themesettingsview",
       "community": 13,
@@ -15814,7 +15814,7 @@
       "label": "ThemeModeCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L574",
+      "source_location": "L575",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_thememodecarditem",
       "community": 13,
@@ -15836,7 +15836,7 @@
       "label": "ConfigCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L634",
+      "source_location": "L635",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_configcarditem",
       "community": 13,
@@ -15847,7 +15847,7 @@
       "label": "ConfigEditorForm()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L724",
+      "source_location": "L725",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_configeditorform",
       "community": 13,
@@ -15858,7 +15858,7 @@
       "label": "AdvanceSettingsView()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1338",
+      "source_location": "L1339",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
       "community": 13,
@@ -15869,7 +15869,7 @@
       "label": "DebugLogCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1989",
+      "source_location": "L2113",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_debuglogcarditem",
       "community": 13,
@@ -15880,7 +15880,7 @@
       "label": "BackupSettingsView()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2257",
+      "source_location": "L2381",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_backupsettingsview",
       "community": 13,
@@ -15891,7 +15891,7 @@
       "label": "StatBadgeItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2718",
+      "source_location": "L2842",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_statbadgeitem",
       "community": 13,
@@ -37560,7 +37560,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L634",
+      "source_location": "L635",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37572,7 +37572,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L724",
+      "source_location": "L725",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37585,7 +37585,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L239",
+      "source_location": "L240",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -37917,7 +37917,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1989",
+      "source_location": "L2113",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43661,7 +43661,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1748",
+      "source_location": "L1749",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
@@ -43673,7 +43673,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2141",
+      "source_location": "L2265",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_debuglogcarditem",
@@ -44757,7 +44757,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L412",
+      "source_location": "L413",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47163,7 +47163,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1338",
+      "source_location": "L1339",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47174,7 +47174,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2257",
+      "source_location": "L2381",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47185,7 +47185,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L634",
+      "source_location": "L635",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47196,7 +47196,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L724",
+      "source_location": "L725",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47207,7 +47207,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1989",
+      "source_location": "L2113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47218,7 +47218,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L145",
+      "source_location": "L146",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47229,7 +47229,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2718",
+      "source_location": "L2842",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47240,7 +47240,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L574",
+      "source_location": "L575",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47251,7 +47251,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L465",
+      "source_location": "L466",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -47263,7 +47263,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L390",
+      "source_location": "L391",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47275,7 +47275,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L403",
+      "source_location": "L404",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47287,7 +47287,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L357",
+      "source_location": "L358",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47299,7 +47299,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L324",
+      "source_location": "L325",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47311,7 +47311,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L383",
+      "source_location": "L384",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
@@ -47322,7 +47322,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L145",
+      "source_location": "L146",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47334,7 +47334,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L465",
+      "source_location": "L466",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47347,7 +47347,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L486",
+      "source_location": "L487",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_themesettingsview",
@@ -47358,7 +47358,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L574",
+      "source_location": "L575",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47370,7 +47370,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L724",
+      "source_location": "L725",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47383,7 +47383,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1982",
+      "source_location": "L2106",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
@@ -47394,7 +47394,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1338",
+      "source_location": "L1339",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47407,7 +47407,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2425",
+      "source_location": "L2549",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_backupsettingsview",
@@ -47418,7 +47418,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2257",
+      "source_location": "L2381",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -47430,7 +47430,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2718",
+      "source_location": "L2842",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -48547,5 +48547,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4c7b840f21ab11ffa3996d7171f22792f7b791dc"
+  "built_at_commit": "fbf1947767ed1f6b97fa9fc0fb07acbb1411f7f8"
 }

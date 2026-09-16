@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt": {
-    "mtime": 1789573269.1037254,
-    "ast_hash": "f7537ceea313f587ce60613e14029b9e",
+    "mtime": 1789573886.4945998,
+    "ast_hash": "2300f11981344ff48321d6f02dce2710",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsViewModel.kt": {

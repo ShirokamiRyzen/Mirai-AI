@@ -38,6 +38,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -1782,9 +1783,14 @@ fun AdvanceSettingsView(
                     val context = androidx.compose.ui.platform.LocalContext.current
                     var testText by remember { mutableStateOf("Halo! Ini adalah tes output suara model.") }
                     var selectedPresetId by remember { mutableStateOf("id_kawaii") }
+                    var voicePitch by remember { mutableFloatStateOf(1.0f) }
+                    var voiceSpeed by remember { mutableFloatStateOf(1.0f) }
+                    var selectedConfigId by remember { mutableStateOf<String?>(activeConfig?.id) }
+                    var isConfigDropdownExpanded by remember { mutableStateOf(false) }
                     var isVoiceTesting by remember { mutableStateOf(false) }
-                    var isVoiceDropdownExpanded by remember { mutableStateOf(false) }
                     var voiceDebugStatus by remember { mutableStateOf<String?>(null) }
+
+                    val activeTestConfig = uiState.configs.find { it.id == selectedConfigId } ?: activeConfig
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -1805,55 +1811,158 @@ fun AdvanceSettingsView(
                     }
 
                     Text(
-                        text = "Test and debug TTS speech synthesis, voice presets, and local/API routing directly.",
+                        text = "Debug speech synthesis, test voice presets, pitch, speed, and inference config models directly.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
-                    // Voice Preset Dropdown
-                    ExposedDropdownMenuBox(
-                        expanded = isVoiceDropdownExpanded,
-                        onExpandedChange = { isVoiceDropdownExpanded = it },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        val currentPreset = com.ryzumi.miraiai.domain.tts.TtsManager.KOKORO_VOICE_PRESETS.find { it.id == selectedPresetId }
-                        OutlinedTextField(
-                            value = currentPreset?.let { "${it.name} (${it.id})" } ?: selectedPresetId,
-                            onValueChange = {},
-                            readOnly = true,
-                            label = { Text("Voice Preset") },
-                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isVoiceDropdownExpanded) },
-                            modifier = Modifier
-                                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
-                                .fillMaxWidth()
+                    // 1. Inference Config Profile Selector
+                    if (uiState.configs.isNotEmpty()) {
+                        Text(
+                            text = "Inference Config (TTS Model & Engine)",
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.SemiBold
                         )
+                        Spacer(modifier = Modifier.height(4.dp))
 
-                        ExposedDropdownMenu(
-                            expanded = isVoiceDropdownExpanded,
-                            onDismissRequest = { isVoiceDropdownExpanded = false }
+                        ExposedDropdownMenuBox(
+                            expanded = isConfigDropdownExpanded,
+                            onExpandedChange = { isConfigDropdownExpanded = it },
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            com.ryzumi.miraiai.domain.tts.TtsManager.KOKORO_VOICE_PRESETS.forEach { preset ->
-                                DropdownMenuItem(
-                                    text = {
-                                        Column {
-                                            Text(preset.name, fontWeight = if (preset.id == selectedPresetId) FontWeight.Bold else FontWeight.Normal)
-                                            Text("${preset.id} • ${preset.language} • ${preset.gender}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            OutlinedTextField(
+                                value = activeTestConfig?.let {
+                                    "${it.name}${if (it.isActive) " (Active)" else ""} [${it.ttsEngine.uppercase()}${if (it.ttsEngine == "local") " • ${it.ttsLocalModel}" else if (it.ttsEngine == "api") " • ${it.ttsApiModel}" else ""}]"
+                                } ?: "Select Profile",
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text("Target Profile") },
+                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isConfigDropdownExpanded) },
+                                modifier = Modifier
+                                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                                    .fillMaxWidth()
+                            )
+
+                            ExposedDropdownMenu(
+                                expanded = isConfigDropdownExpanded,
+                                onDismissRequest = { isConfigDropdownExpanded = false }
+                            ) {
+                                uiState.configs.forEach { cfg ->
+                                    DropdownMenuItem(
+                                        text = {
+                                            Column {
+                                                Text(
+                                                    text = "${cfg.name}${if (cfg.isActive) " (Active)" else ""}",
+                                                    fontWeight = if (cfg.id == activeTestConfig?.id) FontWeight.Bold else FontWeight.Normal
+                                                )
+                                                Text(
+                                                    text = "Engine: ${cfg.ttsEngine.uppercase()}${if (cfg.ttsEngine == "local") " (Model: ${cfg.ttsLocalModel})" else if (cfg.ttsEngine == "api") " (Model: ${cfg.ttsApiModel})" else " (Built-in)"}",
+                                                    style = MaterialTheme.typography.bodySmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+                                        },
+                                        onClick = {
+                                            selectedConfigId = cfg.id
+                                            isConfigDropdownExpanded = false
                                         }
-                                    },
-                                    onClick = {
-                                        selectedPresetId = preset.id
-                                        isVoiceDropdownExpanded = false
-                                    }
-                                )
+                                    )
+                                }
                             }
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+
+                    // 2. Voice Preset Quick Selection Chips
+                    Text(
+                        text = "Voice Preset",
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        com.ryzumi.miraiai.domain.tts.TtsManager.KOKORO_VOICE_PRESETS.forEach { preset ->
+                            FilterChip(
+                                selected = selectedPresetId.equals(preset.id, ignoreCase = true),
+                                onClick = { selectedPresetId = preset.id },
+                                label = { Text(preset.name, style = MaterialTheme.typography.labelSmall) },
+                                leadingIcon = {
+                                    Icon(Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(14.dp))
+                                }
+                            )
                         }
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    // Input Text
+                    // 3. Custom Voice Preset ID Text Field
+                    OutlinedTextField(
+                        value = selectedPresetId,
+                        onValueChange = { selectedPresetId = it },
+                        label = { Text("Voice Identifier / Custom Preset") },
+                        placeholder = { Text("e.g. id_kawaii, af_heart, jf_alpha, or system") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // 4. Pitch Slider
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Voice Pitch: ${String.format(java.util.Locale.US, "%.2fx", voicePitch)}",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium
+                        )
+                        TextButton(onClick = { voicePitch = 1.0f }) {
+                            Text("Reset", style = MaterialTheme.typography.labelSmall)
+                        }
+                    }
+                    Slider(
+                        value = voicePitch,
+                        onValueChange = { voicePitch = Math.round(it * 100f) / 100f },
+                        valueRange = 0.5f..2.0f,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    // 5. Speed Slider
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Voice Speed: ${String.format(java.util.Locale.US, "%.2fx", voiceSpeed)}",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium
+                        )
+                        TextButton(onClick = { voiceSpeed = 1.0f }) {
+                            Text("Reset", style = MaterialTheme.typography.labelSmall)
+                        }
+                    }
+                    Slider(
+                        value = voiceSpeed,
+                        onValueChange = { voiceSpeed = Math.round(it * 100f) / 100f },
+                        valueRange = 0.5f..2.0f,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // 6. Input Text to Speak
                     OutlinedTextField(
                         value = testText,
                         onValueChange = { testText = it },
@@ -1863,8 +1972,9 @@ fun AdvanceSettingsView(
                         minLines = 2
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
 
+                    // 7. Action Controls
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -1877,25 +1987,26 @@ fun AdvanceSettingsView(
                                     voiceDebugStatus = "Playback stopped."
                                 } else {
                                     isVoiceTesting = true
-                                    voiceDebugStatus = "Synthesizing voice with preset '$selectedPresetId'..."
+                                    val engineLabel = activeTestConfig?.ttsEngine?.uppercase() ?: "LOCAL"
+                                    voiceDebugStatus = "[$engineLabel] Synthesizing voice '$selectedPresetId' (Pitch: ${voicePitch}x, Speed: ${voiceSpeed}x)..."
                                     val dummyChar = com.ryzumi.miraiai.data.local.entity.CharacterEntity(
                                         name = "Tester",
                                         voiceId = selectedPresetId,
-                                        voicePitch = 1.0f,
-                                        voiceSpeed = 1.0f
+                                        voicePitch = voicePitch,
+                                        voiceSpeed = voiceSpeed
                                     )
                                     com.ryzumi.miraiai.domain.tts.TtsManager.speak(
                                         context = context,
                                         text = testText,
-                                        config = activeConfig,
+                                        config = activeTestConfig,
                                         character = dummyChar,
                                         onStart = {
                                             isVoiceTesting = true
-                                            voiceDebugStatus = "Playing audio successfully..."
+                                            voiceDebugStatus = "[$engineLabel] Playing audio successfully..."
                                         },
                                         onDone = {
                                             isVoiceTesting = false
-                                            voiceDebugStatus = "Completed playback."
+                                            voiceDebugStatus = "[$engineLabel] Completed playback."
                                         },
                                         onError = { err ->
                                             isVoiceTesting = false
@@ -1929,12 +2040,25 @@ fun AdvanceSettingsView(
                     }
 
                     if (!voiceDebugStatus.isNullOrBlank()) {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = voiceDebugStatus ?: "",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = if (voiceDebugStatus!!.startsWith("Error")) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
-                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = if (voiceDebugStatus!!.startsWith("Error")) {
+                                    MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f)
+                                } else {
+                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                }
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = voiceDebugStatus ?: "",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = if (voiceDebugStatus!!.startsWith("Error")) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(10.dp)
+                            )
+                        }
                     }
                 }
             }

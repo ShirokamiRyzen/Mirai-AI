@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-16)
 
 ## Corpus Check
-- 80 files · ~97,079 words
+- 80 files · ~97,490 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1556 nodes · 2733 edges · 98 communities (63 shown, 35 thin omitted)
+- 1556 nodes · 2733 edges · 98 communities (62 shown, 36 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 203 edges (avg confidence: 0.67)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4c7b840f`
+- Built from commit: `fbf19477`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,6 +66,7 @@
 - q
 - le
 - je
+- Ae
 - Ct
 - c
 - bt
@@ -101,7 +102,7 @@
 - DuckDuckGoScraper
 - WebContentExtractor.kt
 - .generateShaders
-- Ae
+- .getParameterIndex
 - MiraiDatabase
 - Live2dManager
 - se
@@ -133,7 +134,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (98 total, 35 thin omitted)
+## Communities (98 total, 36 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.08
@@ -343,9 +344,9 @@ Nodes (6): createXHR(), E, L(), loadMotion(), setupLive2DModel(), warn()
 Cohesion: 0.32
 Nodes (6): MiraiDestinations, MiraiNavGraph(), CharacterCardItem(), ManagementPersonaCardItem(), ManagementScreen(), NavHostController
 
-### Community 104 - "Ae"
-Cohesion: 0.09
-Nodes (4): Ae, determinNextBlinkingTiming(), ft, updateParameters()
+### Community 104 - ".getParameterIndex"
+Cohesion: 0.18
+Nodes (3): determinNextBlinkingTiming(), ft, updateParameters()
 
 ### Community 115 - "MiraiDatabase"
 Cohesion: 0.18
@@ -358,7 +359,7 @@ Nodes (12): Error, Context, Uri, Live2dImportResult, Live2dManager, Success, Liv
 ## Knowledge Gaps
 - **71 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `Error`, `Live2dExpressionInfo` (+66 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -367,7 +368,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `Ue` connect `r` to `index.min.js`, `pixi.min.js`, `ns`?**
   _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `Ae`, `index.min.js`, `ce`, `.doDrawModel`?**
+- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `.getParameterIndex`, `index.min.js`, `ce`, `Ae`?**
   _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **What connects `AccumulatedToolCall`, `Unloaded`, `Error` to the rest of the system?**
   _71 weakly-connected nodes found - possible documentation gaps or missing edges._
