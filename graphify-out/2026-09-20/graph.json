@@ -109,8 +109,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_d",
-      "community": 44,
-      "community_name": "ke",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "d()"
     },
     {
@@ -142,8 +142,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_g",
-      "community": 60,
-      "community_name": "h",
+      "community": 79,
+      "community_name": "m",
       "norm_label": "g()"
     },
     {
@@ -1121,8 +1121,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_tap",
-      "community": 60,
-      "community_name": "h",
+      "community": 79,
+      "community_name": "m",
       "norm_label": ".tap()"
     },
     {
@@ -1594,8 +1594,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it",
-      "community": 44,
-      "community_name": "ke",
+      "community": 60,
+      "community_name": "h",
       "norm_label": "it"
     },
     {
@@ -1605,8 +1605,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_constructor",
-      "community": 44,
-      "community_name": "ke",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".constructor()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_seteyeparams",
-      "community": 44,
-      "community_name": "ke",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".seteyeparams()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_update",
-      "community": 44,
-      "community_name": "ke",
+      "community": 60,
+      "community_name": "h",
       "norm_label": ".update()"
     },
     {
@@ -2618,7 +2618,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_drawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".drawmodel()"
     },
     {
@@ -2695,7 +2695,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_setisculling",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setisculling()"
     },
     {
@@ -2761,7 +2761,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "ft"
     },
     {
@@ -2772,7 +2772,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_constructor",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".constructor()"
     },
     {
@@ -3091,7 +3091,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_doupdateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -4367,7 +4367,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".updateparameters()"
     },
     {
@@ -4455,7 +4455,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_updateparameters",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "updateparameters()"
     },
     {
@@ -4466,7 +4466,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_determinnextblinkingtiming",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "determinnextblinkingtiming()"
     },
     {
@@ -4609,7 +4609,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_calcclippeddrawtotalbounds",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".calcclippeddrawtotalbounds()"
     },
     {
@@ -4653,7 +4653,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_setupclippingcontext",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setupclippingcontext()"
     },
     {
@@ -5005,7 +5005,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_dodrawmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".dodrawmodel()"
     },
     {
@@ -5049,7 +5049,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_predraw",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".predraw()"
     },
     {
@@ -5378,8 +5378,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_initialize",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".initialize()"
     },
     {
@@ -5400,7 +5400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": "ae"
     },
@@ -5422,7 +5422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvaswidth",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvaswidth()"
     },
@@ -5433,7 +5433,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvasheight",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getcanvasheight()"
     },
@@ -5456,7 +5456,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getmodel",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getmodel()"
     },
     {
@@ -5466,8 +5466,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartindex",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartindex()"
     },
     {
@@ -5499,8 +5499,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".setpartopacitybyid()"
     },
     {
@@ -5521,8 +5521,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartopacitybyid",
-      "community": 104,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartopacitybyid()"
     },
     {
@@ -5533,7 +5533,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparameterindex()"
     },
     {
@@ -5544,7 +5544,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametercount",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametercount()"
     },
     {
@@ -5554,7 +5554,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametermaximumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparametermaximumvalue()"
     },
@@ -5565,7 +5565,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterminimumvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterminimumvalue()"
     },
@@ -5576,7 +5576,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterdefaultvalue",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getparameterdefaultvalue()"
     },
@@ -5588,7 +5588,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyindex()"
     },
     {
@@ -5599,7 +5599,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyid()"
     },
     {
@@ -5610,7 +5610,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyindex()"
     },
     {
@@ -5621,7 +5621,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyid()"
     },
     {
@@ -5632,7 +5632,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyindex()"
     },
     {
@@ -5643,7 +5643,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyid()"
     },
     {
@@ -5654,7 +5654,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyid",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyid()"
     },
     {
@@ -5665,7 +5665,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyindex",
       "community": 104,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyindex()"
     },
     {
@@ -5675,7 +5675,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableids",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableids()"
     },
@@ -5686,7 +5686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableindex",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableindex()"
     },
@@ -5708,7 +5708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableid",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawableid()"
     },
@@ -5720,7 +5720,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablerenderorders",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablerenderorders()"
     },
     {
@@ -5731,7 +5731,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabletextureindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabletextureindices()"
     },
     {
@@ -5742,7 +5742,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvertexpositionsdidchange",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvertexpositionsdidchange()"
     },
     {
@@ -5753,7 +5753,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindexcount()"
     },
     {
@@ -5764,7 +5764,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexcount",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexcount()"
     },
     {
@@ -5775,7 +5775,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertices()"
     },
     {
@@ -5786,7 +5786,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindices",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindices()"
     },
     {
@@ -5797,7 +5797,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexpositions",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexpositions()"
     },
     {
@@ -5808,7 +5808,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexuvs",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexuvs()"
     },
     {
@@ -5819,7 +5819,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableopacity",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableopacity()"
     },
     {
@@ -5830,7 +5830,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableculling",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableculling()"
     },
     {
@@ -5841,7 +5841,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableblendmode",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableblendmode()"
     },
     {
@@ -5852,7 +5852,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableinvertedmaskbit",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableinvertedmaskbit()"
     },
     {
@@ -5896,7 +5896,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagisvisible",
       "community": 56,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagisvisible()"
     },
     {
@@ -5906,7 +5906,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvisibilitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvisibilitydidchange()"
     },
@@ -5917,7 +5917,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagopacitydidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagopacitydidchange()"
     },
@@ -5928,7 +5928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagrenderorderdidchange",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagrenderorderdidchange()"
     },
@@ -5950,7 +5950,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_initialize",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".initialize()"
     },
@@ -5972,7 +5972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_release",
-      "community": 104,
+      "community": 56,
       "community_name": "Ae",
       "norm_label": ".release()"
     },
@@ -14703,7 +14703,7 @@
       "label": "StreamingBubbleItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2725",
+      "source_location": "L2735",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_streamingbubbleitem",
       "community": 62,
@@ -14725,7 +14725,7 @@
       "label": "ThinkingProcessCard()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2938",
+      "source_location": "L2957",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_thinkingprocesscard",
       "community": 62,
@@ -14736,7 +14736,7 @@
       "label": "TypingDotsIndicator()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3052",
+      "source_location": "L3071",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_typingdotsindicator",
       "community": 62,
@@ -14747,7 +14747,7 @@
       "label": "FullScreenImagePreviewDialog()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3112",
+      "source_location": "L3131",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_fullscreenimagepreviewdialog",
       "community": 62,
@@ -14758,7 +14758,7 @@
       "label": "TextSelectionDialog()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3205",
+      "source_location": "L3224",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_textselectiondialog",
       "community": 62,
@@ -37310,7 +37310,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3205",
+      "source_location": "L3224",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -40361,7 +40361,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2742",
+      "source_location": "L2752",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_streamingbubbleitem",
@@ -40373,7 +40373,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3221",
+      "source_location": "L3240",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_textselectiondialog",
@@ -45567,7 +45567,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3112",
+      "source_location": "L3131",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen",
@@ -45589,7 +45589,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2725",
+      "source_location": "L2735",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen",
@@ -45600,7 +45600,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3205",
+      "source_location": "L3224",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen",
@@ -45611,7 +45611,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2938",
+      "source_location": "L2957",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen",
@@ -45622,7 +45622,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L3052",
+      "source_location": "L3071",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen",
@@ -45646,7 +45646,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2784",
+      "source_location": "L2794",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_streamingbubbleitem",
@@ -45766,7 +45766,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2554",
+      "source_location": "L2564",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_chatbubbleitem",
@@ -45777,7 +45777,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2725",
+      "source_location": "L2735",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -45790,7 +45790,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2827",
+      "source_location": "L2846",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_streamingbubbleitem",
@@ -45802,7 +45802,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2843",
+      "source_location": "L2862",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_chat_chatscreen_streamingbubbleitem",
@@ -45813,7 +45813,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/chat/ChatScreen.kt",
-      "source_location": "L2725",
+      "source_location": "L2735",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -48547,5 +48547,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fd41dfc27077494af471a749cac061cdcaf91841"
+  "built_at_commit": "fbf1947767ed1f6b97fa9fc0fb07acbb1411f7f8"
 }

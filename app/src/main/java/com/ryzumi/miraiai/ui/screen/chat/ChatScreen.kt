@@ -2516,16 +2516,6 @@ fun ChatBubbleItem(
             Column(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                if (!isUser) {
-                    Text(
-                        text = characterName,
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
-
                 if (!message.imageUri.isNullOrBlank()) {
                     val imageModel = remember(message.imageUri) {
                         val uriStr = message.imageUri
@@ -2832,15 +2822,6 @@ fun StreamingBubbleItem(
             Column(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                Text(
-                    text = characterName,
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-
-                Spacer(modifier = Modifier.height(6.dp))
-
                 // Live Thinking Process Accordion while streaming
                 if (isShowThinkingEnabled && streamingThinking.isNotBlank()) {
                     ThinkingProcessCard(
