@@ -18,8 +18,17 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.offset
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -165,7 +174,7 @@ fun SettingsScreen(
     onToggleUploadAsBase64: (Boolean) -> Unit = {},
     onSetActiveProfile: (String) -> Unit = {},
     onExportBackup: (Uri) -> Unit = {},
-    onImportBackup: (Uri, Boolean) -> Unit = { _, _ -> },
+    onImportBackup: (Uri) -> Unit = {},
     onRefreshBackupStats: () -> Unit = {},
     onClearBackupMessage: () -> Unit = {},
     onUpdateThemeMode: (String) -> Unit,
@@ -2429,11 +2438,10 @@ fun DebugLogCardItem(log: DebugLogEntry) {
 fun BackupSettingsView(
     uiState: SettingsUiState,
     onExportBackup: (Uri) -> Unit,
-    onImportBackup: (Uri, Boolean) -> Unit,
+    onImportBackup: (Uri) -> Unit,
     onRefreshStats: () -> Unit,
     onClearBackupMessage: () -> Unit
 ) {
-    var clearExistingOnRestore by remember { mutableStateOf(false) }
     var showConfirmImportDialog by remember { mutableStateOf(false) }
     var pendingImportUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -2570,20 +2578,31 @@ fun BackupSettingsView(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(modifier = Modifier.weight(1f)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Storage,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
                         Text(
-                            text = "Local Data Overview",
+                            text = "Storage Overview",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
-                        Text(
-                            text = "Summary of records stored locally on your device",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
                     }
-                    IconButton(onClick = onRefreshStats) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Refresh stats")
+                    IconButton(
+                        onClick = onRefreshStats,
+                        modifier = Modifier.size(28.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = "Refresh",
+                            modifier = Modifier.size(18.dp)
+                        )
                     }
                 }
 
@@ -2595,40 +2614,22 @@ fun BackupSettingsView(
                 ) {
                     StatBadgeItem(
                         label = "Characters",
-                        count = uiState.backupStats.characterCount,
+                        value = "${uiState.backupStats.characterCount}",
                         modifier = Modifier.weight(1f)
                     )
                     StatBadgeItem(
                         label = "Personas",
-                        count = uiState.backupStats.personaCount,
+                        value = "${uiState.backupStats.personaCount}",
                         modifier = Modifier.weight(1f)
                     )
                     StatBadgeItem(
-                        label = "Live2D Models",
-                        count = uiState.backupStats.live2dModelCount,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    StatBadgeItem(
-                        label = "Chat Sessions",
-                        count = uiState.backupStats.sessionCount,
+                        label = "Chats",
+                        value = "${uiState.backupStats.sessionCount}",
                         modifier = Modifier.weight(1f)
                     )
                     StatBadgeItem(
                         label = "Messages",
-                        count = uiState.backupStats.messageCount,
-                        modifier = Modifier.weight(1f)
-                    )
-                    StatBadgeItem(
-                        label = "Configs",
-                        count = uiState.backupStats.configCount,
+                        value = "${uiState.backupStats.messageCount}",
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -2640,42 +2641,41 @@ fun BackupSettingsView(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     StatBadgeItem(
-                        label = "Assets (Images & Live2D)",
-                        count = uiState.backupStats.assetCount,
+                        label = "Configs",
+                        value = "${uiState.backupStats.configCount}",
+                        modifier = Modifier.weight(1f)
+                    )
+                    StatBadgeItem(
+                        label = "Assets/Files",
+                        value = "${uiState.backupStats.assetCount}",
+                        modifier = Modifier.weight(1f)
+                    )
+                    StatBadgeItem(
+                        label = "Live2D Models",
+                        value = "${uiState.backupStats.live2dModelCount}",
                         modifier = Modifier.weight(1f)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
-                // Storage Size Detail Card
                 Surface(
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
                     shape = RoundedCornerShape(10.dp),
-                    color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.65f),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 14.dp, vertical = 10.dp),
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Default.Storage,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Total Data & Assets Size",
-                                style = MaterialTheme.typography.bodySmall,
-                                fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
+                        Text(
+                            text = "Total App Data Size:",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                         Text(
                             text = uiState.backupStats.formattedDataSize,
                             style = MaterialTheme.typography.titleSmall,
@@ -2779,42 +2779,10 @@ fun BackupSettingsView(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "Restore chats, characters, persona images, Live2D models, and settings from a previously exported MiraiAI (.miraidb) backup file.",
+                    text = "Restore chats, characters, persona images, Live2D models, and settings from a previously exported MiraiAI (.miraidb) backup file. Existing data will be cleanly wiped and replaced.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // Clear existing checkbox
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { clearExistingOnRestore = !clearExistingOnRestore }
-                        .padding(vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Checkbox(
-                        checked = clearExistingOnRestore,
-                        onCheckedChange = { clearExistingOnRestore = it }
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Column {
-                        Text(
-                            text = "Clean Restore (Replace all existing data)",
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = if (clearExistingOnRestore)
-                                "Existing chats and characters will be deleted before restoring."
-                            else
-                                "Backup data will be merged with existing records.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
 
                 Spacer(modifier = Modifier.height(14.dp))
 
@@ -2844,34 +2812,44 @@ fun BackupSettingsView(
         Spacer(modifier = Modifier.height(24.dp))
     }
 
-    // Confirmation Dialog before restoring
+    // TWRP Style Confirmation Dialog before restoring
     if (showConfirmImportDialog && pendingImportUri != null) {
         AlertDialog(
             onDismissRequest = {
                 showConfirmImportDialog = false
                 pendingImportUri = null
             },
-            title = { Text("Confirm Data Restore") },
-            text = {
-                Text(
-                    text = if (clearExistingOnRestore)
-                        "Warning: Clean Restore is enabled. All current chats, characters, and profiles will be erased and replaced with the backup file.\n\nProceed?"
-                    else
-                        "Backup records will be merged with your current data (matching items will be updated).\n\nProceed?"
-                )
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        val uri = pendingImportUri
-                        showConfirmImportDialog = false
-                        pendingImportUri = null
-                        uri?.let { onImportBackup(it, clearExistingOnRestore) }
-                    }
-                ) {
-                    Text("Start Restore")
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Clean Restore", fontWeight = FontWeight.Bold)
                 }
             },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                    Text(
+                        text = "All current data (chats, characters, personas, Live2D models) will be completely wiped and replaced with the backup data.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    TwrpSwipeToConfirmSlider(
+                        text = "Swipe to Restore",
+                        onConfirmed = {
+                            val uri = pendingImportUri
+                            showConfirmImportDialog = false
+                            pendingImportUri = null
+                            uri?.let { onImportBackup(it) }
+                        }
+                    )
+                }
+            },
+            confirmButton = {},
             dismissButton = {
                 TextButton(
                     onClick = {
@@ -2887,9 +2865,108 @@ fun BackupSettingsView(
 }
 
 @Composable
+fun TwrpSwipeToConfirmSlider(
+    onConfirmed: () -> Unit,
+    modifier: Modifier = Modifier,
+    text: String = "Swipe to Restore"
+) {
+    val sliderHeight = 52.dp
+    val thumbWidth = 64.dp
+    var trackWidthPx by remember { mutableFloatStateOf(0f) }
+    var offsetX by remember { mutableFloatStateOf(0f) }
+    val density = LocalDensity.current
+    val thumbWidthPx = with(density) { thumbWidth.toPx() }
+    val maxDragPx = (trackWidthPx - thumbWidthPx).coerceAtLeast(0f)
+    val progress = if (maxDragPx > 0f) (offsetX / maxDragPx).coerceIn(0f, 1f) else 0f
+
+    // Authentic TWRP Colors
+    val twrpCyan = Color(0xFF00A5FF)
+    val twrpDarkBg = Color(0xFF181A1D)
+    val twrpBorder = Color(0xFF2C3238)
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(sliderHeight)
+            .border(BorderStroke(1.dp, twrpBorder), RoundedCornerShape(2.dp))
+            .background(twrpDarkBg)
+            .onGloballyPositioned { coordinates ->
+                trackWidthPx = coordinates.size.width.toFloat()
+            },
+        contentAlignment = Alignment.CenterStart
+    ) {
+        // Cyan fill that follows the thumb
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(with(density) { (offsetX + thumbWidthPx).toDp() })
+                .background(twrpCyan.copy(alpha = 0.22f))
+        )
+
+        // Centered TWRP label text
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White.copy(alpha = (1f - progress * 0.75f).coerceAtLeast(0.2f)),
+                letterSpacing = 0.5.sp
+            )
+        }
+
+        // Rectangular TWRP Draggable Thumb Button with triple chevron (>>>)
+        Box(
+            modifier = Modifier
+                .offset {
+                    IntOffset(offsetX.toInt(), 0)
+                }
+                .width(thumbWidth)
+                .fillMaxHeight()
+                .background(twrpCyan)
+                .pointerInput(maxDragPx) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = {
+                            if (maxDragPx > 0f && offsetX >= maxDragPx * 0.85f) {
+                                offsetX = maxDragPx
+                                onConfirmed()
+                            } else {
+                                offsetX = 0f
+                            }
+                        },
+                        onDragCancel = {
+                            offsetX = 0f
+                        },
+                        onHorizontalDrag = { _, dragAmount: Float ->
+                            offsetX = (offsetX + dragAmount).coerceIn(0f, maxDragPx)
+                        }
+                    )
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            // Triple chevron arrows like real TWRP slider
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "▶▶▶",
+                    color = Color.White,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    letterSpacing = (-1).sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun StatBadgeItem(
     label: String,
-    count: Int,
+    value: String,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -2902,7 +2979,7 @@ fun StatBadgeItem(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "$count",
+                text = value,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary

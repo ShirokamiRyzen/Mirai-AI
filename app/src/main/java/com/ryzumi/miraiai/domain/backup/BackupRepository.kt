@@ -108,7 +108,7 @@ class BackupRepository(
         val assetCount = avatarFiles.size + chatImageFiles.size + live2dFiles.size
         val assetSizeBytes = avatarFiles.sumOf { it.length() } + chatImageFiles.sumOf { it.length() } + live2dFiles.sumOf { it.length() }
 
-        val dbFile = context.getDatabasePath("mirai_database")
+        val dbFile = context.getDatabasePath("mirai_ai_database")
         val walFile = File(dbFile.path + "-wal")
         val shmFile = File(dbFile.path + "-shm")
         val dbSizeBytes = (if (dbFile.exists()) dbFile.length() else 0L) +
@@ -404,7 +404,7 @@ class BackupRepository(
         }
     }
 
-    suspend fun readBackupFromUri(uri: Uri): Result<MiraiBackupData> = withContext(Dispatchers.IO) {
+    suspend fun restoreBackupFromUri(uri: Uri): Result<BackupStats> = withContext(Dispatchers.IO) {
         try {
             val rawInputStream = context.contentResolver.openInputStream(uri)
                 ?: return@withContext Result.failure(Exception("Failed to read selected file"))
@@ -418,39 +418,69 @@ class BackupRepository(
             val isZip = bytesRead >= 4 && headerBytes[0] == 0x50.toByte() && headerBytes[1] == 0x4B.toByte()
 
             if (isZip) {
+                // 1. 100% Clean wipe first!
+                database.chatMessageDao().deleteAllMessages()
+                database.chatSessionDao().deleteAllSessions()
+                database.characterDao().deleteAllCharacters()
+                database.userPersonaDao().deleteAllPersonas()
+                database.inferenceConfigDao().deleteAllConfigs()
+                try {
+                    File(context.filesDir, "live2d").deleteRecursively()
+                    File(context.filesDir, "avatars").deleteRecursively()
+                    File(context.filesDir, "chat_images").deleteRecursively()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
                 val avatarsDir = File(context.filesDir, "avatars").apply { if (!exists()) mkdirs() }
                 val chatImagesDir = File(context.filesDir, "chat_images").apply { if (!exists()) mkdirs() }
                 val live2dBaseDir = File(context.filesDir, "live2d").apply { if (!exists()) mkdirs() }
+
                 var jsonContent: String? = null
                 val extractedCharAvatars = mutableMapOf<String, String>()
                 val extractedPersonaAvatars = mutableMapOf<String, String>()
                 val extractedChatImages = mutableMapOf<String, String>()
 
+                val buffer = ByteArray(8192)
                 ZipInputStream(bufferedInput).use { zipIn ->
                     var entry = zipIn.nextEntry
                     while (entry != null) {
                         val name = entry.name
                         if (name == "backup.json") {
-                            jsonContent = zipIn.bufferedReader(Charsets.UTF_8).readText()
+                            val baos = java.io.ByteArrayOutputStream()
+                            var len: Int
+                            while (zipIn.read(buffer).also { len = it } > 0) {
+                                baos.write(buffer, 0, len)
+                            }
+                            jsonContent = baos.toString(Charsets.UTF_8.name())
                         } else if (name.startsWith("avatars/characters/")) {
                             val charId = name.removePrefix("avatars/characters/").substringBeforeLast(".")
                             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
                             FileOutputStream(targetFile).use { out ->
-                                zipIn.copyTo(out)
+                                var len: Int
+                                while (zipIn.read(buffer).also { len = it } > 0) {
+                                    out.write(buffer, 0, len)
+                                }
                             }
                             extractedCharAvatars[charId] = targetFile.absolutePath
                         } else if (name.startsWith("avatars/personas/")) {
                             val personaId = name.removePrefix("avatars/personas/").substringBeforeLast(".")
                             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
                             FileOutputStream(targetFile).use { out ->
-                                zipIn.copyTo(out)
+                                var len: Int
+                                while (zipIn.read(buffer).also { len = it } > 0) {
+                                    out.write(buffer, 0, len)
+                                }
                             }
                             extractedPersonaAvatars[personaId] = targetFile.absolutePath
                         } else if (name.startsWith("chat_images/")) {
                             val msgId = name.removePrefix("chat_images/").substringBeforeLast(".")
                             val targetFile = File(chatImagesDir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
                             FileOutputStream(targetFile).use { out ->
-                                zipIn.copyTo(out)
+                                var len: Int
+                                while (zipIn.read(buffer).also { len = it } > 0) {
+                                    out.write(buffer, 0, len)
+                                }
                             }
                             extractedChatImages[msgId] = targetFile.absolutePath
                         } else if (name.startsWith("live2d/") && !entry.isDirectory) {
@@ -460,7 +490,10 @@ class BackupRepository(
                                 if (targetFile.canonicalPath.startsWith(live2dBaseDir.canonicalPath)) {
                                     targetFile.parentFile?.mkdirs()
                                     FileOutputStream(targetFile).use { out ->
-                                        zipIn.copyTo(out)
+                                        var len: Int
+                                        while (zipIn.read(buffer).also { len = it } > 0) {
+                                            out.write(buffer, 0, len)
+                                        }
                                     }
                                 }
                             }
@@ -523,17 +556,64 @@ class BackupRepository(
                     }
                 }
 
-                val finalBackup = rawBackup.copy(
-                    characters = updatedCharacters,
-                    personas = updatedPersonas,
-                    messages = updatedMessages
-                )
-                Result.success(finalBackup)
+                // Insert into database
+                if (updatedCharacters.isNotEmpty()) {
+                    database.characterDao().insertCharacters(updatedCharacters)
+                }
+                if (updatedPersonas.isNotEmpty()) {
+                    database.userPersonaDao().insertPersonas(updatedPersonas)
+                }
+                if (rawBackup.configs.isNotEmpty()) {
+                    database.inferenceConfigDao().insertConfigs(rawBackup.configs)
+                }
+                if (rawBackup.sessions.isNotEmpty()) {
+                    database.chatSessionDao().insertSessions(rawBackup.sessions)
+                }
+                if (updatedMessages.isNotEmpty()) {
+                    database.chatMessageDao().insertMessages(updatedMessages)
+                }
+
+                // Restore settings
+                rawBackup.themeSettings?.let {
+                    settingsRepository.updateThemeSettings(themeMode = it.themeMode, isMonetEnabled = it.isMonetEnabled)
+                }
+                rawBackup.showThinkingProcess?.let {
+                    settingsRepository.updateShowThinkingProcess(it)
+                }
+                rawBackup.debugLoggingEnabled?.let {
+                    settingsRepository.updateDebugLoggingEnabled(it)
+                }
+                rawBackup.tokenCounterEnabled?.let {
+                    settingsRepository.updateTokenCounterEnabled(it)
+                }
+                rawBackup.allowDeviceContext?.let {
+                    settingsRepository.updateAllowDeviceContext(it)
+                }
+                rawBackup.uploadAsBase64?.let {
+                    settingsRepository.updateUploadAsBase64(it)
+                }
+
+                val stats = getBackupStats()
+                Result.success(stats)
             } else {
-                // Fallback for legacy JSON backup or plain JSON
+                // Fallback for legacy JSON backup
                 val rawBackup = InputStreamReader(bufferedInput, Charsets.UTF_8).use { reader ->
                     gson.fromJson(reader, MiraiBackupData::class.java)
                 } ?: return@withContext Result.failure(Exception("Invalid or empty backup file format"))
+
+                // Clean wipe
+                database.chatMessageDao().deleteAllMessages()
+                database.chatSessionDao().deleteAllSessions()
+                database.characterDao().deleteAllCharacters()
+                database.userPersonaDao().deleteAllPersonas()
+                database.inferenceConfigDao().deleteAllConfigs()
+                try {
+                    File(context.filesDir, "live2d").deleteRecursively()
+                    File(context.filesDir, "avatars").deleteRecursively()
+                    File(context.filesDir, "chat_images").deleteRecursively()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
                 val updatedCharacters = rawBackup.characters.map { char ->
                     val localPath = rawBackup.characterAvatars?.get(char.id)?.let { b64 ->
@@ -568,7 +648,6 @@ class BackupRepository(
                     }
                 }
 
-                // Restore Live2D models from JSON backup if present
                 rawBackup.live2dModels?.forEach { (charId, base64Zip) ->
                     try {
                         val zipBytes = ImageUtils.safeBase64Decode(base64Zip)
@@ -578,12 +657,94 @@ class BackupRepository(
                     }
                 }
 
-                val finalBackup = rawBackup.copy(
-                    characters = updatedCharacters,
-                    personas = updatedPersonas,
-                    messages = updatedMessages
-                )
-                Result.success(finalBackup)
+                if (updatedCharacters.isNotEmpty()) {
+                    database.characterDao().insertCharacters(updatedCharacters)
+                }
+                if (updatedPersonas.isNotEmpty()) {
+                    database.userPersonaDao().insertPersonas(updatedPersonas)
+                }
+                if (rawBackup.configs.isNotEmpty()) {
+                    database.inferenceConfigDao().insertConfigs(rawBackup.configs)
+                }
+                if (rawBackup.sessions.isNotEmpty()) {
+                    database.chatSessionDao().insertSessions(rawBackup.sessions)
+                }
+                if (updatedMessages.isNotEmpty()) {
+                    database.chatMessageDao().insertMessages(updatedMessages)
+                }
+
+                rawBackup.themeSettings?.let {
+                    settingsRepository.updateThemeSettings(themeMode = it.themeMode, isMonetEnabled = it.isMonetEnabled)
+                }
+                rawBackup.showThinkingProcess?.let {
+                    settingsRepository.updateShowThinkingProcess(it)
+                }
+                rawBackup.debugLoggingEnabled?.let {
+                    settingsRepository.updateDebugLoggingEnabled(it)
+                }
+                rawBackup.tokenCounterEnabled?.let {
+                    settingsRepository.updateTokenCounterEnabled(it)
+                }
+                rawBackup.allowDeviceContext?.let {
+                    settingsRepository.updateAllowDeviceContext(it)
+                }
+                rawBackup.uploadAsBase64?.let {
+                    settingsRepository.updateUploadAsBase64(it)
+                }
+
+                val stats = getBackupStats()
+                Result.success(stats)
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun readBackupFromUri(uri: Uri): Result<MiraiBackupData> = withContext(Dispatchers.IO) {
+        try {
+            val rawInputStream = context.contentResolver.openInputStream(uri)
+                ?: return@withContext Result.failure(Exception("Failed to read selected file"))
+
+            val bufferedInput = BufferedInputStream(rawInputStream)
+            bufferedInput.mark(4)
+            val headerBytes = ByteArray(4)
+            val bytesRead = bufferedInput.read(headerBytes, 0, 4)
+            bufferedInput.reset()
+
+            val isZip = bytesRead >= 4 && headerBytes[0] == 0x50.toByte() && headerBytes[1] == 0x4B.toByte()
+
+            if (isZip) {
+                var jsonContent: String? = null
+                val buffer = ByteArray(8192)
+                ZipInputStream(bufferedInput).use { zipIn ->
+                    var entry = zipIn.nextEntry
+                    while (entry != null) {
+                        if (entry.name == "backup.json") {
+                            val baos = java.io.ByteArrayOutputStream()
+                            var len: Int
+                            while (zipIn.read(buffer).also { len = it } > 0) {
+                                baos.write(buffer, 0, len)
+                            }
+                            jsonContent = baos.toString(Charsets.UTF_8.name())
+                            break
+                        }
+                        zipIn.closeEntry()
+                        entry = zipIn.nextEntry
+                    }
+                }
+
+                if (jsonContent.isNullOrBlank()) {
+                    return@withContext Result.failure(Exception("Invalid .miraidb backup archive (missing backup.json)"))
+                }
+
+                val rawBackup = gson.fromJson(jsonContent, MiraiBackupData::class.java)
+                    ?: return@withContext Result.failure(Exception("Invalid or corrupted backup data"))
+                Result.success(rawBackup)
+            } else {
+                val rawBackup = InputStreamReader(bufferedInput, Charsets.UTF_8).use { reader ->
+                    gson.fromJson(reader, MiraiBackupData::class.java)
+                } ?: return@withContext Result.failure(Exception("Invalid or empty backup file format"))
+                Result.success(rawBackup)
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -624,7 +785,7 @@ class BackupRepository(
         }
     }
 
-    suspend fun restoreBackup(backup: MiraiBackupData, clearExisting: Boolean = false): Result<BackupStats> = withContext(Dispatchers.IO) {
+    suspend fun restoreBackup(backup: MiraiBackupData, clearExisting: Boolean = true): Result<BackupStats> = withContext(Dispatchers.IO) {
         try {
             if (clearExisting) {
                 database.chatMessageDao().deleteAllMessages()

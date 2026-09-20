@@ -472,23 +472,18 @@ class SettingsViewModel(
         }
     }
 
-    fun importBackup(uri: Uri, clearExisting: Boolean = false) {
+    fun importBackup(uri: Uri) {
         viewModelScope.launch {
             _isImportingBackup.value = true
             _backupSuccessMessage.value = null
             _backupErrorMessage.value = null
             backupRepository?.let { repo ->
-                val readResult = repo.readBackupFromUri(uri)
-                readResult.onSuccess { backupData ->
-                    val restoreResult = repo.restoreBackup(backupData, clearExisting)
-                    restoreResult.onSuccess { stats ->
-                        _backupSuccessMessage.value = "Restored successfully: ${stats.characterCount} chars, ${stats.personaCount} personas, ${stats.sessionCount} sessions, ${stats.messageCount} messages, ${stats.assetCount} assets (${stats.formattedDataSize})."
-                        _backupStats.value = repo.getBackupStats()
-                    }.onFailure { ex ->
-                        _backupErrorMessage.value = "Restore failed: ${ex.message}"
-                    }
+                val restoreResult = repo.restoreBackupFromUri(uri)
+                restoreResult.onSuccess { stats ->
+                    _backupSuccessMessage.value = "Restored successfully: ${stats.characterCount} chars, ${stats.personaCount} personas, ${stats.sessionCount} sessions, ${stats.messageCount} messages, ${stats.assetCount} assets (${stats.formattedDataSize})."
+                    _backupStats.value = repo.getBackupStats()
                 }.onFailure { ex ->
-                    _backupErrorMessage.value = "Import failed: ${ex.message}"
+                    _backupErrorMessage.value = "Restore failed: ${ex.message}"
                 }
             } ?: run {
                 _backupErrorMessage.value = "Backup service unavailable"

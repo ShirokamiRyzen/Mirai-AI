@@ -200,13 +200,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt": {
-    "mtime": 1789885369.0631986,
-    "ast_hash": "367b997183267e8a3e24e9b68830a691",
+    "mtime": 1789888532.3062744,
+    "ast_hash": "4921a4218754d9a10c90c4bc31876b6a",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsViewModel.kt": {
-    "mtime": 1788938963.2899642,
-    "ast_hash": "7b5b1783c6814f8f33cf2719400619d9",
+    "mtime": 1789888040.3669732,
+    "ast_hash": "3f7fbaa29e6a774f845ac5ddc584a115",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/ui/theme/Color.kt": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/backup/BackupRepository.kt": {
-    "mtime": 1789315469.8792026,
-    "ast_hash": "a993243f9d2789c751eeaf1ede34d5bb",
+    "mtime": 1789888032.4851453,
+    "ast_hash": "aafa040d85bfb2acad551a575f7e8c34",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/model/MiraiBackupData.kt": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "app/src/main/assets/live2d/viewer.html": {
-    "mtime": 1789882601.187415,
-    "ast_hash": "8d4d3d4ced6bd75d08035de11c183644",
+    "mtime": 1789887994.6103728,
+    "ast_hash": "f71274757b5508f2286293e3ab587680",
     "semantic_hash": ""
   },
   "app/src/main/java/com/ryzumi/miraiai/domain/live2d/Live2dModelData.kt": {
