@@ -64,6 +64,11 @@
         let emotionTimer = null;
         let allDiscoveredMotions = [];
 
+        // Track user drag/pinch transformations and screen dimensions
+        let userHasTransformed = false;
+        let lastScreenWidth = window.innerWidth || 0;
+        let lastScreenHeight = window.innerHeight || 0;
+
         // Pointer tracking target values (-1 to +1)
         let targetLookX = 0;
         let targetLookY = 0;
@@ -399,7 +404,8 @@
                 // Start active animation and parameter interpolation ticker loop
                 setupAnimationLoop();
 
-                window.addEventListener('resize', fitModel);
+                window.removeEventListener('resize', handleWindowResize);
+                window.addEventListener('resize', handleWindowResize);
             }).catch(err => {
                 console.error('Live2D Error in Live2DModel.from:', err);
                 showStatus('Failed to load Live2D model: ' + (err.message || 'Unsupported format or corrupted files'));
@@ -607,7 +613,37 @@
             currentModel.x = w / 2;
             // Center model vertically with comfortable clearance at top and bottom
             currentModel.y = 16 + (mh * scale) * 0.5;
+
+            userHasTransformed = false;
+            lastScreenWidth = w;
+            lastScreenHeight = h;
             console.log('fitModel completed: scale=' + scale + ', x=' + currentModel.x + ', y=' + currentModel.y);
+        }
+
+        function handleWindowResize() {
+            if (!currentModel || !app) return;
+            const newW = app.screen.width;
+            const newH = app.screen.height;
+            if (newW <= 0 || newH <= 0) return;
+
+            if (!userHasTransformed) {
+                // Not transformed by user: refit smoothly to the new viewport
+                fitModel();
+            } else {
+                // User has zoomed or dragged: keep user scale and shift position smoothly
+                const oldW = (lastScreenWidth > 0) ? lastScreenWidth : newW;
+                const oldH = (lastScreenHeight > 0) ? lastScreenHeight : newH;
+
+                const deltaX = (newW - oldW) / 2;
+                const deltaY = (newH - oldH) / 2;
+
+                currentModel.x += deltaX;
+                currentModel.y += deltaY;
+
+                lastScreenWidth = newW;
+                lastScreenHeight = newH;
+                console.log('handleWindowResize (preserved transform): newScreen=' + newW + 'x' + newH + ', x=' + currentModel.x + ', y=' + currentModel.y);
+            }
         }
 
         function setParam(id, val, weight = 1.0) {
@@ -961,6 +997,10 @@
             let isDown = false;
             let initialPinchDist = 0;
             let initialScale = 1;
+            let initialPanX = 0;
+            let initialPanY = 0;
+            let modelStartPanX = 0;
+            let modelStartPanY = 0;
             let lastTapTime = 0;
 
             function updatePointerLook(clientX, clientY) {
@@ -1004,6 +1044,7 @@
                 } else if (e.touches.length === 2 && currentModel) {
                     isDown = false;
                     isTrackingTouch = false;
+                    userHasTransformed = true;
                     initialPinchDist = Math.hypot(
                         e.touches[0].clientX - e.touches[1].clientX,
                         e.touches[0].clientY - e.touches[1].clientY
@@ -1023,6 +1064,7 @@
                     const t = e.touches[0];
                     updatePointerLook(t.clientX, t.clientY);
                 } else if (e.touches.length === 2 && currentModel && initialPinchDist > 0) {
+                    userHasTransformed = true;
                     const currentDist = Math.hypot(
                         e.touches[0].clientX - e.touches[1].clientX,
                         e.touches[0].clientY - e.touches[1].clientY
@@ -1427,6 +1469,7 @@
         };
 
         window.resetView = function() {
+            userHasTransformed = false;
             fitModel();
         };
 
