@@ -138,7 +138,7 @@ object ChatGenerationManager {
             val parallelImageGenDeferred = if (!detectedImagePrompt.isNullOrBlank() && !ImageGenerationManager.isGenerating()) {
                 val imageModel = config.imageGenModelId.takeIf { it.isNotBlank() && it != "none" && it != "None (Download via Model Hub)" } ?: "Stable Diffusion 3.5"
                 scope.async(Dispatchers.IO) {
-                    ImageGenerationManager.generateImage(context, detectedImagePrompt, imageModel).getOrNull()
+                    ImageGenerationManager.generateImage(context, detectedImagePrompt, imageModel, config).getOrNull()
                 }
             } else null
 
@@ -309,7 +309,7 @@ object ChatGenerationManager {
                         val fallbackPrompt = com.ryzumi.miraiai.domain.util.ImagePromptExtractor.extractPrompt(latestUserText, finalOutput)
                         if (!fallbackPrompt.isNullOrBlank() && !ImageGenerationManager.isGenerating()) {
                             val imageModel = config.imageGenModelId.takeIf { it.isNotBlank() && it != "none" && it != "None (Download via Model Hub)" } ?: "Stable Diffusion 3.5"
-                            generatedImageUri = ImageGenerationManager.generateImage(context, fallbackPrompt, imageModel).getOrNull()
+                            generatedImageUri = ImageGenerationManager.generateImage(context, fallbackPrompt, imageModel, config).getOrNull()
                         }
                     }
 

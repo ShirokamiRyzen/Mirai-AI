@@ -19,6 +19,7 @@
         android:name=".MiraiApplication"
         android:allowBackup="true"
         android:largeHeap="true"
+        android:extractNativeLibs="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MiraiAI">
+
+        <property
+            android:name="android.pageSizeCompat"
+            android:value="enabled" />
 
         <activity
             android:name=".MainActivity"

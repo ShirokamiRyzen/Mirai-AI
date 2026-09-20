@@ -26,5 +26,13 @@ data class InferenceConfigEntity(
     val ttsLocalModel: String = "kokoro-82m",
     val ttsApiEndpoint: String = "",
     val ttsApiKey: String = "",
-    val ttsApiModel: String = "kokoro"
+    val ttsApiModel: String = "kokoro",
+    val imageGenEngine: String = "local",
+    val imageGenApiEndpoint: String = "",
+    val imageGenApiKey: String = "",
+    val imageGenApiModel: String = "dall-e-3",
+    val imageGenSize: String = "1024x1024",
+    val imageGenSteps: Int = 20,
+    val imageGenGuidanceScale: Float = 7.5f,
+    val imageGenNegativePrompt: String = ""
 )

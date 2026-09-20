@@ -312,7 +312,7 @@ class ChatViewModel(
 
         val isUsingLocal = (currentConfig?.useLocalGenModel == true) ||
                 (currentConfig?.useLocalVisionModel == true) ||
-                (!currentConfig?.imageGenModelId.isNullOrBlank() && currentConfig?.imageGenModelId != "none" && currentConfig?.imageGenModelId != "None (Download via Model Hub)")
+                (currentConfig?.imageGenEngine == "local" && !currentConfig?.imageGenModelId.isNullOrBlank() && currentConfig?.imageGenModelId != "none" && currentConfig?.imageGenModelId != "None (Download via Model Hub)")
         val maxTokens = currentConfig?.maxTokens ?: 2048
 
         // Calculate estimated context tokens based on active context budget
@@ -726,12 +726,12 @@ class ChatViewModel(
             config.generateModelId
         } else if (config.useLocalVisionModel && config.visionModelId.isNotBlank()) {
             config.visionModelId
-        } else if (!config.imageGenModelId.isNullOrBlank() && config.imageGenModelId != "none" && config.imageGenModelId != "None (Download via Model Hub)") {
+        } else if (config.imageGenEngine == "local" && !config.imageGenModelId.isNullOrBlank() && config.imageGenModelId != "none" && config.imageGenModelId != "None (Download via Model Hub)") {
             config.imageGenModelId
         } else {
-            config.generateModelId
+            null
         }
-        if (chosenModel.isNotBlank() && chosenModel != "none" && chosenModel != "None (Download via Model Hub)") {
+        if (!chosenModel.isNullOrBlank() && chosenModel != "none" && chosenModel != "None (Download via Model Hub)") {
             viewModelScope.launch {
                 LocalModelManager.loadModel(context, chosenModel)
             }

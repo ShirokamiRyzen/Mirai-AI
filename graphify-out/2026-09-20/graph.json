@@ -76,8 +76,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_warn",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "warn()"
     },
     {
@@ -109,8 +109,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_d",
-      "community": 60,
-      "community_name": "h",
+      "community": 98,
+      "community_name": "it",
       "norm_label": "d()"
     },
     {
@@ -186,8 +186,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_constructor",
-      "community": 73,
-      "community_name": "ze",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -285,8 +285,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_f",
-      "community": 60,
-      "community_name": "h",
+      "community": 100,
+      "community_name": "f",
       "norm_label": "f"
     },
     {
@@ -296,8 +296,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_f_constructor",
-      "community": 60,
-      "community_name": "h",
+      "community": 100,
+      "community_name": "f",
       "norm_label": ".constructor()"
     },
     {
@@ -307,8 +307,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_f_focus",
-      "community": 60,
-      "community_name": "h",
+      "community": 100,
+      "community_name": "f",
       "norm_label": ".focus()"
     },
     {
@@ -318,8 +318,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_f_update",
-      "community": 60,
-      "community_name": "h",
+      "community": 100,
+      "community_name": "f",
       "norm_label": ".update()"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": "x"
     },
     {
@@ -340,8 +340,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_constructor",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".constructor()"
     },
     {
@@ -351,8 +351,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_resolveurl",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".resolveurl()"
     },
     {
@@ -362,8 +362,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_replacefiles",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".replacefiles()"
     },
     {
@@ -373,8 +373,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_getdefinedfiles",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".getdefinedfiles()"
     },
     {
@@ -384,8 +384,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_x_validatefiles",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".validatefiles()"
     },
     {
@@ -648,8 +648,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_startrandommotion",
-      "community": 58,
-      "community_name": "c",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".startrandommotion()"
     },
     {
@@ -670,8 +670,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_update",
-      "community": 58,
-      "community_name": "c",
+      "community": 82,
+      "community_name": "_",
       "norm_label": ".update()"
     },
     {
@@ -681,8 +681,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_c_destroy",
-      "community": 59,
-      "community_name": "bt",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".destroy()"
     },
     {
@@ -835,8 +835,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_createxhr",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "createxhr()"
     },
     {
@@ -868,8 +868,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_l",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "l()"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "e"
     },
     {
@@ -890,8 +890,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_e_load",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".load()"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_setuplive2dmodel",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "setuplive2dmodel()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_loadmotion",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": "loadmotion()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_constructor",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -1055,8 +1055,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_autoupdate",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".autoupdate()"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_motion",
-      "community": 58,
-      "community_name": "c",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".motion()"
     },
     {
@@ -1176,8 +1176,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_h_ontickerupdate",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".ontickerupdate()"
     },
     {
@@ -1220,8 +1220,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_resolveurl",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": "resolveurl()"
     },
     {
@@ -1231,8 +1231,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_upload",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": "upload()"
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_unzip",
-      "community": 76,
-      "community_name": "De",
+      "community": 87,
+      "community_name": "x",
       "norm_label": "unzip()"
     },
     {
@@ -1330,8 +1330,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k",
-      "community": 76,
-      "community_name": "De",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": "k"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k_constructor",
-      "community": 76,
-      "community_name": "De",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_k_updateparamexe",
-      "community": 76,
-      "community_name": "De",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".updateparamexe()"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": "tt"
     },
     {
@@ -1374,8 +1374,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_constructor",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".constructor()"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_isfinished",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".isfinished()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_getexpressionindex",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".getexpressionindex()"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_getexpressionfile",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".getexpressionfile()"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_createexpression",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".createexpression()"
     },
     {
@@ -1429,8 +1429,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_setexpression",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": "._setexpression()"
     },
     {
@@ -1440,8 +1440,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_stopallexpressions",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".stopallexpressions()"
     },
     {
@@ -1451,8 +1451,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_tt_updateparameters",
-      "community": 44,
-      "community_name": "rt",
+      "community": 93,
+      "community_name": "tt",
       "norm_label": ".updateparameters()"
     },
     {
@@ -1462,7 +1462,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": "et"
     },
@@ -1473,8 +1473,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_constructor",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_init",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -1495,7 +1495,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_isfinished",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".isfinished()"
     },
@@ -1506,8 +1506,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_createmotion",
-      "community": 76,
-      "community_name": "De",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".createmotion()"
     },
     {
@@ -1517,7 +1517,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionfile",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getmotionfile()"
     },
@@ -1528,7 +1528,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getmotionname",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getmotionname()"
     },
@@ -1539,7 +1539,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getsoundfile",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getsoundfile()"
     },
@@ -1550,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_startmotion",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": "._startmotion()"
     },
@@ -1561,7 +1561,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_stopallmotions",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": "._stopallmotions()"
     },
@@ -1573,7 +1573,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_updateparameters",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".updateparameters()"
     },
     {
@@ -1583,8 +1583,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 44,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -1594,8 +1594,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it",
-      "community": 60,
-      "community_name": "h",
+      "community": 98,
+      "community_name": "it",
       "norm_label": "it"
     },
     {
@@ -1605,8 +1605,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_constructor",
-      "community": 60,
-      "community_name": "h",
+      "community": 98,
+      "community_name": "it",
       "norm_label": ".constructor()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_seteyeparams",
-      "community": 60,
-      "community_name": "h",
+      "community": 98,
+      "community_name": "it",
       "norm_label": ".seteyeparams()"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_it_update",
-      "community": 60,
-      "community_name": "h",
+      "community": 98,
+      "community_name": "it",
       "norm_label": ".update()"
     },
     {
@@ -1649,8 +1649,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_constructor",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_init",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -1759,8 +1759,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_update",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_rt_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 44,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -1814,7 +1814,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": "at"
     },
@@ -1836,7 +1836,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isvalidjson",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".isvalidjson()"
     },
@@ -1858,8 +1858,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_replacefiles",
-      "community": 65,
-      "community_name": "ut",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".replacefiles()"
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "lt"
     },
     {
@@ -1880,8 +1880,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_constructor",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -1891,8 +1891,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_update",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -2045,8 +2045,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_add",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".add()"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_normalize",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": ".normalize()"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_sin",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "sin()"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cos",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "cos()"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_sqrt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "sqrt()"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cbrt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "cbrt()"
     },
     {
@@ -2244,7 +2244,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_geteasingsine",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": "geteasingsine()"
     },
     {
@@ -2276,8 +2276,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_degreestoradian",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "degreestoradian()"
     },
     {
@@ -2320,8 +2320,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_radiantodirection",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "radiantodirection()"
     },
     {
@@ -2331,8 +2331,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_quadraticequation",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "quadraticequation()"
     },
     {
@@ -2342,8 +2342,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_cardanoalgorithmforbezier",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "cardanoalgorithmforbezier()"
     },
     {
@@ -2618,7 +2618,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pt_drawmodel",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".drawmodel()"
     },
     {
@@ -2761,7 +2761,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "ft"
     },
     {
@@ -2772,7 +2772,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_constructor",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".constructor()"
     },
     {
@@ -2782,8 +2782,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "ct"
     },
     {
@@ -2793,8 +2793,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_startup",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".startup()"
     },
     {
@@ -2804,8 +2804,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_cleanup",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".cleanup()"
     },
     {
@@ -2815,8 +2815,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_initialize",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".initialize()"
     },
     {
@@ -2837,8 +2837,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isstarted",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isstarted()"
     },
     {
@@ -2848,8 +2848,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_isinitialized",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".isinitialized()"
     },
     {
@@ -2859,8 +2859,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_corelogfunction",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".corelogfunction()"
     },
     {
@@ -2870,8 +2870,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_getlogginglevel",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".getlogginglevel()"
     },
     {
@@ -2881,8 +2881,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ct_constructor",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -2903,8 +2903,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": "wt()"
     },
     {
@@ -2914,8 +2914,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_print",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".print()"
     },
     {
@@ -2925,8 +2925,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_lt_dumpbytes",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".dumpbytes()"
     },
     {
@@ -2936,7 +2936,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_release",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".release()"
     },
@@ -2948,7 +2948,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeintime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".setfadeintime()"
     },
     {
@@ -2959,7 +2959,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfadeouttime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".setfadeouttime()"
     },
     {
@@ -2969,8 +2969,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeouttime",
-      "community": 58,
-      "community_name": "c",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".getfadeouttime()"
     },
     {
@@ -2980,7 +2980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfadeintime",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getfadeintime()"
     },
@@ -2991,7 +2991,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setweight",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".setweight()"
     },
@@ -3002,7 +3002,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getweight",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getweight()"
     },
@@ -3013,7 +3013,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getduration",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getduration()"
     },
@@ -3024,7 +3024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getloopduration",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getloopduration()"
     },
@@ -3035,7 +3035,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setoffsettime",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".setoffsettime()"
     },
@@ -3046,7 +3046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfiredevent",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getfiredevent()"
     },
@@ -3057,8 +3057,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_setfinishedmotionhandler",
-      "community": 46,
-      "community_name": "et",
+      "community": 69,
+      "community_name": "ie",
       "norm_label": ".setfinishedmotionhandler()"
     },
     {
@@ -3068,7 +3068,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_et_getfinishedmotionhandler",
-      "community": 46,
+      "community": 37,
       "community_name": "et",
       "norm_label": ".getfinishedmotionhandler()"
     },
@@ -3080,7 +3080,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_create",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".create()"
     },
     {
@@ -3091,7 +3091,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ft_doupdateparameters",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -3101,7 +3101,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_release",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".release()"
     },
@@ -3112,8 +3112,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setfadeout",
-      "community": 76,
-      "community_name": "De",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".setfadeout()"
     },
     {
@@ -3124,7 +3124,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_startfadeout",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".startfadeout()"
     },
     {
@@ -3134,7 +3134,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isfinished",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".isfinished()"
     },
@@ -3146,7 +3146,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isstarted",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".isstarted()"
     },
     {
@@ -3156,7 +3156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstarttime",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".getstarttime()"
     },
@@ -3168,7 +3168,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getfadeinstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getfadeinstarttime()"
     },
     {
@@ -3179,7 +3179,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getendtime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getendtime()"
     },
     {
@@ -3190,7 +3190,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setstarttime()"
     },
     {
@@ -3201,7 +3201,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setfadeinstarttime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setfadeinstarttime()"
     },
     {
@@ -3212,7 +3212,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setendtime",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setendtime()"
     },
     {
@@ -3223,7 +3223,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisfinished",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setisfinished()"
     },
     {
@@ -3234,7 +3234,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisstarted",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setisstarted()"
     },
     {
@@ -3245,7 +3245,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_isavailable",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".isavailable()"
     },
     {
@@ -3255,7 +3255,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setisavailable",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".setisavailable()"
     },
@@ -3267,7 +3267,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setstate",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".setstate()"
     },
     {
@@ -3277,7 +3277,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstatetime",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".getstatetime()"
     },
@@ -3288,7 +3288,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getstateweight",
-      "community": 63,
+      "community": 86,
       "community_name": "at",
       "norm_label": ".getstateweight()"
     },
@@ -3300,7 +3300,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getlastcheckeventseconds",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".getlastcheckeventseconds()"
     },
     {
@@ -3311,7 +3311,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_setlastcheckeventseconds",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".setlastcheckeventseconds()"
     },
     {
@@ -3322,7 +3322,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_istriggeredfadeout",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".istriggeredfadeout()"
     },
     {
@@ -3333,7 +3333,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_at_getfadeoutseconds",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".getfadeoutseconds()"
     },
     {
@@ -3365,8 +3365,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_startmotion",
-      "community": 58,
-      "community_name": "c",
+      "community": 37,
+      "community_name": "et",
       "norm_label": ".startmotion()"
     },
     {
@@ -3398,8 +3398,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_stopallmotions",
-      "community": 59,
-      "community_name": "bt",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".stopallmotions()"
     },
     {
@@ -3432,7 +3432,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_bt_doupdatemotion",
       "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community_name": "at",
       "norm_label": ".doupdatemotion()"
     },
     {
@@ -3541,8 +3541,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt",
-      "community": 73,
-      "community_name": "ze",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": "kt"
     },
     {
@@ -3552,8 +3552,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_constructor",
-      "community": 73,
-      "community_name": "ze",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".constructor()"
     },
     {
@@ -3563,8 +3563,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_geteyeblinkparameters",
-      "community": 73,
-      "community_name": "ze",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".geteyeblinkparameters()"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_kt_getlipsyncparameters",
-      "community": 73,
-      "community_name": "ze",
+      "community": 13,
+      "community_name": "ke",
       "norm_label": ".getlipsyncparameters()"
     },
     {
@@ -3596,8 +3596,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ut_replacefiles",
-      "community": 65,
-      "community_name": "ut",
+      "community": 87,
+      "community_name": "x",
       "norm_label": ".replacefiles()"
     },
     {
@@ -3629,8 +3629,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "jt"
     },
     {
@@ -3640,8 +3640,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_jt_constructor",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": ".constructor()"
     },
     {
@@ -3673,8 +3673,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "zt"
     },
     {
@@ -3684,8 +3684,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_zt_constructor",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": ".constructor()"
     },
     {
@@ -3695,8 +3695,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_wt_constructor",
-      "community": 37,
-      "community_name": "Ct",
+      "community": 46,
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -3707,7 +3707,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": "yt"
     },
     {
@@ -3718,7 +3718,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_constructor",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".constructor()"
     },
     {
@@ -3729,7 +3729,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_release",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".release()"
     },
     {
@@ -3740,7 +3740,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionduration",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionduration()"
     },
     {
@@ -3751,7 +3751,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_ismotionloop",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".ismotionloop()"
     },
     {
@@ -3762,7 +3762,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getevaluationoptionflag",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getevaluationoptionflag()"
     },
     {
@@ -3773,7 +3773,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvecount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvecount()"
     },
     {
@@ -3784,7 +3784,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfps",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfps()"
     },
     {
@@ -3795,7 +3795,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalsegmentcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotiontotalsegmentcount()"
     },
     {
@@ -3806,7 +3806,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotiontotalpointcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotiontotalpointcount()"
     },
     {
@@ -3817,7 +3817,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeintime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfadeintime()"
     },
     {
@@ -3828,7 +3828,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotionfadeouttime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotionfadeouttime()"
     },
     {
@@ -3839,7 +3839,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvetarget",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvetarget()"
     },
     {
@@ -3850,7 +3850,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurveid",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurveid()"
     },
     {
@@ -3861,7 +3861,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeintime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvefadeintime()"
     },
     {
@@ -3872,7 +3872,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvefadeouttime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvefadeouttime()"
     },
     {
@@ -3883,7 +3883,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegmentcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvesegmentcount()"
     },
     {
@@ -3894,7 +3894,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_getmotioncurvesegment",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".getmotioncurvesegment()"
     },
     {
@@ -3905,7 +3905,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventcount",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventcount()"
     },
     {
@@ -3916,7 +3916,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_gettotaleventvaluesize",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".gettotaleventvaluesize()"
     },
     {
@@ -3927,7 +3927,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventtime",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventtime()"
     },
     {
@@ -3938,7 +3938,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_yt_geteventvalue",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".geteventvalue()"
     },
     {
@@ -3948,8 +3948,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_qt",
-      "community": 43,
-      "community_name": "index.min.js",
+      "community": 89,
+      "community_name": "cardanoAlgorithmForBezier",
       "norm_label": "qt()"
     },
     {
@@ -3970,8 +3970,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_te",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "te()"
     },
     {
@@ -4015,7 +4015,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_doupdateparameters",
       "community": 63,
-      "community_name": "at",
+      "community_name": ".doUpdateParameters",
       "norm_label": ".doupdateparameters()"
     },
     {
@@ -4069,8 +4069,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getduration",
-      "community": 39,
-      "community_name": "ee",
+      "community": 63,
+      "community_name": ".doUpdateParameters",
       "norm_label": ".getduration()"
     },
     {
@@ -4136,7 +4136,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_seteffectids",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".seteffectids()"
     },
     {
@@ -4158,7 +4158,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_parse",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".parse()"
     },
     {
@@ -4168,8 +4168,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ee_getfiredevent",
-      "community": 86,
-      "community_name": ".doUpdateMotion",
+      "community": 39,
+      "community_name": "ee",
       "norm_label": ".getfiredevent()"
     },
     {
@@ -4190,8 +4190,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_constructor",
-      "community": 73,
-      "community_name": "ze",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".constructor()"
     },
     {
@@ -4201,8 +4201,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_init",
-      "community": 44,
-      "community_name": "rt",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".init()"
     },
     {
@@ -4246,7 +4246,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_createmotion",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": ".createmotion()"
     },
     {
@@ -4256,8 +4256,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_getmotionfile",
-      "community": 69,
-      "community_name": "ie",
+      "community": 58,
+      "community_name": "c",
       "norm_label": ".getmotionfile()"
     },
     {
@@ -4300,8 +4300,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_destroy",
-      "community": 60,
-      "community_name": "h",
+      "community": 44,
+      "community_name": "rt",
       "norm_label": ".destroy()"
     },
     {
@@ -4367,7 +4367,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_updateparameters",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".updateparameters()"
     },
     {
@@ -4455,7 +4455,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_updateparameters",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "updateparameters()"
     },
     {
@@ -4466,7 +4466,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_determinnextblinkingtiming",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": "determinnextblinkingtiming()"
     },
     {
@@ -4476,8 +4476,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": "le"
     },
     {
@@ -4487,8 +4487,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_constructor",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".constructor()"
     },
     {
@@ -4498,8 +4498,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcenterx",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcenterx()"
     },
     {
@@ -4509,8 +4509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getcentery",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcentery()"
     },
     {
@@ -4520,8 +4520,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getright",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getright()"
     },
     {
@@ -4531,8 +4531,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_getbottom",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getbottom()"
     },
     {
@@ -4542,8 +4542,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_setrect",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".setrect()"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_le_expand",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".expand()"
     },
     {
@@ -4575,8 +4575,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_getchannelflagascolor",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getchannelflagascolor()"
     },
     {
@@ -4609,7 +4609,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_calcclippeddrawtotalbounds",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".calcclippeddrawtotalbounds()"
     },
     {
@@ -4653,7 +4653,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_setupclippingcontext",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".setupclippingcontext()"
     },
     {
@@ -4685,8 +4685,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ce_getcolorbuffer",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getcolorbuffer()"
     },
     {
@@ -4872,8 +4872,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_pe_setupshaderprogram",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".setupshaderprogram()"
     },
     {
@@ -5005,7 +5005,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_dodrawmodel",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".dodrawmodel()"
     },
     {
@@ -5070,8 +5070,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_getclippingcontextbufferformask",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getclippingcontextbufferformask()"
     },
     {
@@ -5092,8 +5092,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_se_getclippingcontextbufferfordraw",
-      "community": 4,
-      "community_name": "ce",
+      "community": 81,
+      "community_name": ".setupShaderProgram",
       "norm_label": ".getclippingcontextbufferfordraw()"
     },
     {
@@ -5224,8 +5224,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_update",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -5235,8 +5235,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatefocus",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".updatefocus()"
     },
     {
@@ -5246,8 +5246,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ie_updatenaturalmovements",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".updatenaturalmovements()"
     },
     {
@@ -5379,7 +5379,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_de_initialize",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".initialize()"
     },
     {
@@ -5400,7 +5400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": "ae"
     },
@@ -5411,8 +5411,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_update",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".update()"
     },
     {
@@ -5422,7 +5422,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvaswidth",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getcanvaswidth()"
     },
@@ -5433,7 +5433,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getcanvasheight",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getcanvasheight()"
     },
@@ -5444,8 +5444,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_saveparameters",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".saveparameters()"
     },
     {
@@ -5456,7 +5456,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getmodel",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getmodel()"
     },
     {
@@ -5466,8 +5466,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartindex",
-      "community": 56,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartindex()"
     },
     {
@@ -5499,8 +5499,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setpartopacitybyid",
-      "community": 56,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".setpartopacitybyid()"
     },
     {
@@ -5521,8 +5521,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getpartopacitybyid",
-      "community": 56,
-      "community_name": "Ae",
+      "community": 75,
+      "community_name": ".updateParameters",
       "norm_label": ".getpartopacitybyid()"
     },
     {
@@ -5533,7 +5533,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterindex",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparameterindex()"
     },
     {
@@ -5544,7 +5544,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametercount",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametercount()"
     },
     {
@@ -5554,7 +5554,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametermaximumvalue",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getparametermaximumvalue()"
     },
@@ -5565,7 +5565,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterminimumvalue",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getparameterminimumvalue()"
     },
@@ -5576,7 +5576,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparameterdefaultvalue",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getparameterdefaultvalue()"
     },
@@ -5588,7 +5588,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyindex",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyindex()"
     },
     {
@@ -5599,7 +5599,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getparametervaluebyid",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".getparametervaluebyid()"
     },
     {
@@ -5610,7 +5610,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyindex",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyindex()"
     },
     {
@@ -5621,7 +5621,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_setparametervaluebyid",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".setparametervaluebyid()"
     },
     {
@@ -5632,7 +5632,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyindex",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyindex()"
     },
     {
@@ -5643,7 +5643,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_addparametervaluebyid",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".addparametervaluebyid()"
     },
     {
@@ -5654,7 +5654,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyid",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyid()"
     },
     {
@@ -5665,7 +5665,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_multiplyparametervaluebyindex",
       "community": 56,
-      "community_name": "Ae",
+      "community_name": ".getParameterIndex",
       "norm_label": ".multiplyparametervaluebyindex()"
     },
     {
@@ -5675,7 +5675,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableids",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawableids()"
     },
@@ -5686,7 +5686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableindex",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawableindex()"
     },
@@ -5708,7 +5708,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableid",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawableid()"
     },
@@ -5720,7 +5720,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablerenderorders",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablerenderorders()"
     },
     {
@@ -5731,7 +5731,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabletextureindices",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabletextureindices()"
     },
     {
@@ -5742,7 +5742,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvertexpositionsdidchange",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvertexpositionsdidchange()"
     },
     {
@@ -5753,7 +5753,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindexcount",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindexcount()"
     },
     {
@@ -5764,7 +5764,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexcount",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexcount()"
     },
     {
@@ -5775,7 +5775,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertices",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertices()"
     },
     {
@@ -5786,7 +5786,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexindices",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexindices()"
     },
     {
@@ -5797,7 +5797,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexpositions",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexpositions()"
     },
     {
@@ -5808,7 +5808,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawablevertexuvs",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawablevertexuvs()"
     },
     {
@@ -5819,7 +5819,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableopacity",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableopacity()"
     },
     {
@@ -5830,7 +5830,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableculling",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableculling()"
     },
     {
@@ -5841,7 +5841,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableblendmode",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableblendmode()"
     },
     {
@@ -5852,7 +5852,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawableinvertedmaskbit",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawableinvertedmaskbit()"
     },
     {
@@ -5896,7 +5896,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagisvisible",
       "community": 83,
-      "community_name": ".doDrawModel",
+      "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagisvisible()"
     },
     {
@@ -5906,7 +5906,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagvisibilitydidchange",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagvisibilitydidchange()"
     },
@@ -5917,7 +5917,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagopacitydidchange",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagopacitydidchange()"
     },
@@ -5928,7 +5928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_getdrawabledynamicflagrenderorderdidchange",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".getdrawabledynamicflagrenderorderdidchange()"
     },
@@ -5939,8 +5939,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_loadparameters",
-      "community": 75,
-      "community_name": ".updateParameters",
+      "community": 88,
+      "community_name": ".update",
       "norm_label": ".loadparameters()"
     },
     {
@@ -5950,7 +5950,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_initialize",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".initialize()"
     },
@@ -5972,7 +5972,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ae_release",
-      "community": 56,
+      "community": 83,
       "community_name": "Ae",
       "norm_label": ".release()"
     },
@@ -6501,7 +6501,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze",
       "community": 73,
-      "community_name": "ze",
+      "community_name": "ii",
       "norm_label": "ze"
     },
     {
@@ -6511,8 +6511,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_create",
-      "community": 73,
-      "community_name": "ze",
+      "community": 94,
+      "community_name": ".init",
       "norm_label": ".create()"
     },
     {
@@ -6522,8 +6522,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_evaluate",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": ".evaluate()"
     },
     {
@@ -6534,7 +6534,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_setoptions",
       "community": 73,
-      "community_name": "ze",
+      "community_name": "ii",
       "norm_label": ".setoptions()"
     },
     {
@@ -6545,7 +6545,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_getoption",
       "community": 73,
-      "community_name": "ze",
+      "community_name": "ii",
       "norm_label": ".getoption()"
     },
     {
@@ -6556,7 +6556,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ze_constructor",
       "community": 73,
-      "community_name": "ze",
+      "community_name": "ii",
       "norm_label": ".constructor()"
     },
     {
@@ -6676,8 +6676,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_ii",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "ii()"
     },
     {
@@ -6687,8 +6687,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_index_min_si",
-      "community": 65,
-      "community_name": "ut",
+      "community": 73,
+      "community_name": "ii",
       "norm_label": "si()"
     },
     {
@@ -6940,8 +6940,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_e",
-      "community": 52,
-      "community_name": "r",
+      "community": 48,
+      "community_name": "live2d.min.js",
       "norm_label": "e()"
     },
     {
@@ -6962,8 +6962,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2d_min_x",
-      "community": 13,
-      "community_name": "ke",
+      "community": 87,
+      "community_name": "x",
       "norm_label": "x()"
     },
     {
@@ -7446,8 +7446,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_live2dcubismcore_min_c",
-      "community": 41,
-      "community_name": "live2dcubismcore.min.js",
+      "community": 48,
+      "community_name": "live2d.min.js",
       "norm_label": "c()"
     },
     {
@@ -7853,8 +7853,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_t",
-      "community": 52,
-      "community_name": "r",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "_t()"
     },
     {
@@ -8019,7 +8019,7 @@
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_se",
       "community": 46,
-      "community_name": "et",
+      "community_name": "Yt",
       "norm_label": "se()"
     },
     {
@@ -8590,8 +8590,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_src_main_assets_live2d_pixi_min_ds",
-      "community": 52,
-      "community_name": "r",
+      "community": 61,
+      "community_name": "pixi.min.js",
       "norm_label": "ds()"
     },
     {
@@ -11997,7 +11997,7 @@
       "label": ".appendIpaToTokens()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L323",
+      "source_location": "L348",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_appendipatotokens",
       "community": 54,
@@ -12008,7 +12008,7 @@
       "label": ".isIndonesianText()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L339",
+      "source_location": "L364",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_isindonesiantext",
       "community": 54,
@@ -12019,7 +12019,7 @@
       "label": ".normalizeIndonesianText()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L377",
+      "source_location": "L402",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_normalizeindonesiantext",
       "community": 54,
@@ -12030,7 +12030,7 @@
       "label": ".indonesianG2P()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L408",
+      "source_location": "L433",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_indonesiang2p",
       "community": 54,
@@ -12041,7 +12041,7 @@
       "label": ".applyPenultimateStress()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L508",
+      "source_location": "L533",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_applypenultimatestress",
       "community": 54,
@@ -12052,7 +12052,7 @@
       "label": ".isIndonesianVowel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L540",
+      "source_location": "L565",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_isindonesianvowel",
       "community": 54,
@@ -12063,7 +12063,7 @@
       "label": ".expandIndonesianNumber()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L546",
+      "source_location": "L571",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_expandindonesiannumber",
       "community": 54,
@@ -12074,7 +12074,7 @@
       "label": ".expandIndonesianLong()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L554",
+      "source_location": "L579",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_expandindonesianlong",
       "community": 54,
@@ -12085,7 +12085,7 @@
       "label": ".digitToIndonesian()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L570",
+      "source_location": "L595",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_digittoindonesian",
       "community": 54,
@@ -12096,7 +12096,7 @@
       "label": ".ruleBasedEnglishG2P()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L588",
+      "source_location": "L613",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_rulebasedenglishg2p",
       "community": 54,
@@ -12104,10 +12104,65 @@
       "norm_label": ".rulebasedenglishg2p()"
     },
     {
+      "label": ".containsJapanese()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L709",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_containsjapanese",
+      "community": 54,
+      "community_name": "SherpaOnnxTtsEngine",
+      "norm_label": ".containsjapanese()"
+    },
+    {
+      "label": ".isJapaneseRun()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L721",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_isjapaneserun",
+      "community": 54,
+      "community_name": "SherpaOnnxTtsEngine",
+      "norm_label": ".isjapaneserun()"
+    },
+    {
+      "label": ".japaneseToRomaji()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L819",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japanesetoromaji",
+      "community": 54,
+      "community_name": "SherpaOnnxTtsEngine",
+      "norm_label": ".japanesetoromaji()"
+    },
+    {
+      "label": ".resolveKanjiToHiragana()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L872",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_resolvekanjitohiragana",
+      "community": 54,
+      "community_name": "SherpaOnnxTtsEngine",
+      "norm_label": ".resolvekanjitohiragana()"
+    },
+    {
+      "label": ".japaneseRomajiToIPA()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L906",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japaneseromajitoipa",
+      "community": 54,
+      "community_name": "SherpaOnnxTtsEngine",
+      "norm_label": ".japaneseromajitoipa()"
+    },
+    {
       "label": ".loadVoiceStyleEmbedding()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L683",
+      "source_location": "L977",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_loadvoicestyleembedding",
       "community": 54,
@@ -12129,7 +12184,7 @@
       "label": ".playWav()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L748",
+      "source_location": "L1042",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_playwav",
       "community": 54,
@@ -12140,7 +12195,7 @@
       "label": ".stop()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L775",
+      "source_location": "L1069",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_stop",
       "community": 54,
@@ -12151,7 +12206,7 @@
       "label": ".writeWavFile()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L783",
+      "source_location": "L1077",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_writewavfile",
       "community": 54,
@@ -12847,8 +12902,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage",
-      "community": 74,
-      "community_name": ".buildOpenAiMessages",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "openaimessage.kt"
     },
     {
@@ -12869,8 +12924,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaitoolcall",
-      "community": 74,
-      "community_name": ".buildOpenAiMessages",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "openaitoolcall"
     },
     {
@@ -12880,8 +12935,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaifunctioncall",
-      "community": 74,
-      "community_name": ".buildOpenAiMessages",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "openaifunctioncall"
     },
     {
@@ -12891,8 +12946,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaicontentpart",
-      "community": 74,
-      "community_name": ".buildOpenAiMessages",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "openaicontentpart"
     },
     {
@@ -12902,8 +12957,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_model_openaimessage_openaiimageurl",
-      "community": 74,
-      "community_name": ".buildOpenAiMessages",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "openaiimageurl"
     },
     {
@@ -12979,81 +13034,81 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "ttsmanager.kt"
     },
     {
       "label": "TtsDownloadState",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L34",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsdownloadstate",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "ttsdownloadstate"
     },
     {
       "label": "Idle",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L35",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_idle",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "idle"
     },
     {
       "label": "Downloading",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L36",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_downloading",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "downloading"
     },
     {
       "label": "Completed",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L37",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_completed",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "completed"
     },
     {
       "label": "Error",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L38",
+      "source_location": "L40",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_error",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "error"
     },
     {
       "label": "VoicePreset",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L41",
+      "source_location": "L43",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_voicepreset",
-      "community": 81,
-      "community_name": "TtsDownloadState",
+      "community": 50,
+      "community_name": "TtsManager",
       "norm_label": "voicepreset"
     },
     {
       "label": "TtsManager",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L48",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
       "community": 50,
@@ -13094,10 +13149,21 @@
       "norm_label": "mediaplayer"
     },
     {
+      "label": "TextToSpeech",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "texttospeech",
+      "community": 50,
+      "community_name": "TtsManager",
+      "norm_label": "texttospeech"
+    },
+    {
       "label": ".getTtsModelsDir()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L96",
+      "source_location": "L102",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getttsmodelsdir",
       "community": 50,
@@ -13119,7 +13185,7 @@
       "label": ".getKokoroModelFile()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L104",
+      "source_location": "L110",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getkokoromodelfile",
       "community": 50,
@@ -13130,7 +13196,7 @@
       "label": ".getSelectedVoiceModelFile()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L123",
+      "source_location": "L129",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getselectedvoicemodelfile",
       "community": 50,
@@ -13141,7 +13207,7 @@
       "label": ".isKokoroModelDownloaded()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L144",
+      "source_location": "L150",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_iskokoromodeldownloaded",
       "community": 50,
@@ -13152,7 +13218,7 @@
       "label": ".getKokoroModelSizeText()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L149",
+      "source_location": "L155",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getkokoromodelsizetext",
       "community": 50,
@@ -13163,7 +13229,7 @@
       "label": ".downloadKokoroModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L156",
+      "source_location": "L162",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_downloadkokoromodel",
       "community": 50,
@@ -13174,7 +13240,7 @@
       "label": ".cancelDownload()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L239",
+      "source_location": "L245",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_canceldownload",
       "community": 50,
@@ -13185,7 +13251,7 @@
       "label": ".deleteKokoroModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L244",
+      "source_location": "L250",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_deletekokoromodel",
       "community": 50,
@@ -13196,7 +13262,7 @@
       "label": ".loadKokoroModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L253",
+      "source_location": "L259",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_loadkokoromodel",
       "community": 50,
@@ -13207,7 +13273,7 @@
       "label": ".unloadKokoroModel()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L262",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_unloadkokoromodel",
       "community": 50,
@@ -13218,7 +13284,7 @@
       "label": ".cleanTextForSpeech()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L269",
+      "source_location": "L275",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_cleantextforspeech",
       "community": 50,
@@ -13229,7 +13295,7 @@
       "label": ".speak()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L311",
+      "source_location": "L317",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
       "community": 50,
@@ -13240,7 +13306,7 @@
       "label": ".speakViaApi()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L337",
+      "source_location": "L349",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviaapi",
       "community": 50,
@@ -13251,7 +13317,7 @@
       "label": ".speakViaLocal()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L449",
+      "source_location": "L461",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakvialocal",
       "community": 50,
@@ -13259,10 +13325,21 @@
       "norm_label": ".speakvialocal()"
     },
     {
+      "label": ".speakViaSystem()",
+      "file_type": "code",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L523",
+      "_origin": "ast",
+      "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "community": 50,
+      "community_name": "TtsManager",
+      "norm_label": ".speakviasystem()"
+    },
+    {
       "label": ".getPresetPitchAndSpeedMultipliers()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L510",
+      "source_location": "L603",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getpresetpitchandspeedmultipliers",
       "community": 50,
@@ -13273,7 +13350,7 @@
       "label": ".speakViaWebFallback()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L541",
+      "source_location": "L634",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviawebfallback",
       "community": 50,
@@ -13284,7 +13361,7 @@
       "label": ".playAudioPlaylist()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L627",
+      "source_location": "L720",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_playaudioplaylist",
       "community": 50,
@@ -13295,7 +13372,7 @@
       "label": ".playAudioFile()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L712",
+      "source_location": "L805",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_playaudiofile",
       "community": 50,
@@ -13306,7 +13383,7 @@
       "label": ".stop()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L761",
+      "source_location": "L854",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_stop",
       "community": 50,
@@ -13317,7 +13394,7 @@
       "label": ".testVoice()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L787",
+      "source_location": "L886",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_testvoice",
       "community": 50,
@@ -14365,8 +14442,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "tokenutils.kt"
     },
     {
@@ -14376,8 +14453,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": "tokenutils"
     },
     {
@@ -14387,8 +14464,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_formattokensk",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": ".formattokensk()"
     },
     {
@@ -14398,8 +14475,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_estimatetokencount",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": ".estimatetokencount()"
     },
     {
@@ -14409,8 +14486,8 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_estimatecontexttokens",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": ".estimatecontexttokens()"
     },
     {
@@ -14420,8 +14497,8 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_estimatemessagetokens",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": ".estimatemessagetokens()"
     },
     {
@@ -14431,8 +14508,8 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_domain_util_tokenutils_tokenutils_trimhistorytofitbudget",
-      "community": 93,
-      "community_name": "TokenUtils",
+      "community": 6,
+      "community_name": "OpenAiRepository",
       "norm_label": ".trimhistorytofitbudget()"
     },
     {
@@ -15993,8 +16070,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "managementscreen.kt"
     },
     {
@@ -16004,8 +16081,8 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementscreen",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "managementscreen()"
     },
     {
@@ -16015,8 +16092,8 @@
       "source_location": "L484",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_charactercarditem",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "charactercarditem()"
     },
     {
@@ -16026,8 +16103,8 @@
       "source_location": "L620",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_management_managementscreen_managementpersonacarditem",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "managementpersonacarditem()"
     },
     {
@@ -16444,8 +16521,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "personalistscreen.kt"
     },
     {
@@ -16455,8 +16532,8 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personalistscreen",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "personalistscreen()"
     },
     {
@@ -16466,8 +16543,8 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personacarditem",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "personacarditem()"
     },
     {
@@ -16477,8 +16554,8 @@
       "source_location": "L258",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_persona_personalistscreen_personaeditdialog",
-      "community": 2,
-      "community_name": "UserPersonaEntity",
+      "community": 96,
+      "community_name": "ManagementScreen",
       "norm_label": "personaeditdialog()"
     },
     {
@@ -16598,8 +16675,8 @@
       "source_location": "L159",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_settingsscreen",
-      "community": 80,
-      "community_name": "SettingsScreen.kt",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": "settingsscreen()"
     },
     {
@@ -16653,8 +16730,8 @@
       "source_location": "L650",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_configcarditem",
-      "community": 80,
-      "community_name": "SettingsScreen.kt",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": "configcarditem()"
     },
     {
@@ -16664,15 +16741,15 @@
       "source_location": "L740",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_configeditorform",
-      "community": 80,
-      "community_name": "SettingsScreen.kt",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": "configeditorform()"
     },
     {
       "label": "AdvanceSettingsView()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1369",
+      "source_location": "L1387",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
       "community": 80,
@@ -16683,7 +16760,7 @@
       "label": "DebugLogCardItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2143",
+      "source_location": "L2161",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_debuglogcarditem",
       "community": 80,
@@ -16694,7 +16771,7 @@
       "label": "BackupSettingsView()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2411",
+      "source_location": "L2429",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_backupsettingsview",
       "community": 80,
@@ -16705,7 +16782,7 @@
       "label": "TwrpSwipeToConfirmSlider()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2841",
+      "source_location": "L2859",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_twrpswipetoconfirmslider",
       "community": 80,
@@ -16727,7 +16804,7 @@
       "label": "StatBadgeItem()",
       "file_type": "code",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2940",
+      "source_location": "L2958",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_statbadgeitem",
       "community": 80,
@@ -16741,8 +16818,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsviewmodel",
-      "community": 0,
-      "community_name": "SettingsViewModel",
+      "community": 80,
+      "community_name": "SettingsScreen.kt",
       "norm_label": "settingsviewmodel.kt"
     },
     {
@@ -16928,8 +17005,8 @@
       "source_location": "L347",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsviewmodel_settingsviewmodel_saveconfigprofile",
-      "community": 0,
-      "community_name": "SettingsViewModel",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": ".saveconfigprofile()"
     },
     {
@@ -16939,8 +17016,8 @@
       "source_location": "L362",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsviewmodel_settingsviewmodel_deleteconfigprofile",
-      "community": 0,
-      "community_name": "SettingsViewModel",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": ".deleteconfigprofile()"
     },
     {
@@ -16972,8 +17049,8 @@
       "source_location": "L435",
       "_origin": "ast",
       "id": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsviewmodel_settingsviewmodel_testvisioncapability",
-      "community": 0,
-      "community_name": "SettingsViewModel",
+      "community": 71,
+      "community_name": "InferenceConfigEntity",
       "norm_label": ".testvisioncapability()"
     },
     {
@@ -37860,7 +37937,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L311",
+      "source_location": "L317",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37872,7 +37949,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L337",
+      "source_location": "L349",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37884,7 +37961,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L449",
+      "source_location": "L461",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37896,7 +37973,19 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L541",
+      "source_location": "L523",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "target": "app_src_main_java_com_ryzumi_miraiai_data_local_entity_characterentity_characterentity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L634",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -37909,7 +37998,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L798",
+      "source_location": "L897",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_testvoice",
@@ -38349,7 +38438,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L311",
+      "source_location": "L317",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38361,7 +38450,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L337",
+      "source_location": "L349",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38373,7 +38462,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L449",
+      "source_location": "L461",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38385,7 +38474,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L787",
+      "source_location": "L886",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -38790,7 +38879,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2143",
+      "source_location": "L2161",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -41407,7 +41496,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L323",
+      "source_location": "L348",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41418,7 +41507,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L508",
+      "source_location": "L533",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41429,7 +41518,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L570",
+      "source_location": "L709",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_containsjapanese",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L595",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41440,7 +41540,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L554",
+      "source_location": "L579",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41451,7 +41551,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L546",
+      "source_location": "L571",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41473,7 +41573,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L408",
+      "source_location": "L433",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41484,7 +41584,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L339",
+      "source_location": "L364",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41495,7 +41595,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L540",
+      "source_location": "L565",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41506,7 +41606,40 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L683",
+      "source_location": "L721",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_isjapaneserun",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L906",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japaneseromajitoipa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L819",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japanesetoromaji",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L977",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41517,7 +41650,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L377",
+      "source_location": "L402",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41539,7 +41672,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L748",
+      "source_location": "L1042",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41550,7 +41683,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L588",
+      "source_location": "L872",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_resolvekanjitohiragana",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L613",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41561,7 +41705,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L775",
+      "source_location": "L1069",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41583,7 +41727,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L783",
+      "source_location": "L1077",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine",
@@ -41607,7 +41751,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L756",
+      "source_location": "L1050",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_playwav",
@@ -41726,7 +41870,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L683",
+      "source_location": "L977",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -41738,7 +41882,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L748",
+      "source_location": "L1042",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -41751,7 +41895,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L301",
+      "source_location": "L311",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
@@ -41763,7 +41907,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L292",
+      "source_location": "L269",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_containsjapanese",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L317",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
@@ -41775,7 +41931,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L297",
+      "source_location": "L322",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
@@ -41799,7 +41955,43 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L269",
+      "source_location": "L308",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_isjapaneserun",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L310",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japaneseromajitoipa",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L309",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japanesetoromaji",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L270",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
@@ -41811,7 +42003,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L299",
+      "source_location": "L324",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_phonemizetokokorotokens",
@@ -41835,7 +42027,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L501",
+      "source_location": "L526",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_indonesiang2p",
@@ -41847,7 +42039,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L547",
+      "source_location": "L572",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_expandindonesiannumber",
@@ -41859,7 +42051,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L550",
+      "source_location": "L575",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_expandindonesiannumber",
@@ -41871,7 +42063,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L557",
+      "source_location": "L582",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_expandindonesianlong",
@@ -41879,11 +42071,23 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
+      "source_location": "L823",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_japanesetoromaji",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_resolvekanjitohiragana",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L683",
+      "source_location": "L977",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_loadvoicestyleembedding",
@@ -41895,7 +42099,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L755",
+      "source_location": "L1049",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_engine_sherpaonnxttsengine_sherpaonnxttsengine_playwav",
@@ -41906,7 +42110,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/engine/SherpaOnnxTtsEngine.kt",
-      "source_location": "L783",
+      "source_location": "L1077",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43050,7 +43254,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L34",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager",
@@ -43061,7 +43265,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L48",
+      "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager",
@@ -43072,7 +43276,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager",
@@ -43083,7 +43287,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsdownloadstate",
@@ -43094,7 +43298,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L36",
+      "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsdownloadstate",
@@ -43105,7 +43309,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L38",
+      "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsdownloadstate",
@@ -43116,7 +43320,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L35",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsdownloadstate",
@@ -43127,7 +43331,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L85",
+      "source_location": "L87",
       "weight": 1.0,
       "context": "generic_arg",
       "_origin": "ast",
@@ -43140,11 +43344,23 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L160",
+      "source_location": "L166",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_downloadkokoromodel",
       "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_downloading",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L95",
+      "weight": 1.0,
+      "context": "field",
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_kt_mediaplayer",
       "confidence_score": 1.0
     },
     {
@@ -43156,18 +43372,6 @@
       "context": "field",
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
-      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_kt_mediaplayer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L91",
-      "weight": 1.0,
-      "context": "field",
-      "_origin": "ast",
-      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
       "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_kt_stateflow",
       "confidence_score": 1.0
     },
@@ -43175,7 +43379,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L239",
+      "source_location": "L245",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43186,7 +43390,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L269",
+      "source_location": "L275",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43197,7 +43401,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L244",
+      "source_location": "L250",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43208,7 +43412,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L156",
+      "source_location": "L162",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43219,7 +43423,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L104",
+      "source_location": "L110",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43230,7 +43434,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L149",
+      "source_location": "L155",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43241,7 +43445,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L510",
+      "source_location": "L603",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43252,7 +43456,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L123",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43263,7 +43467,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L96",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43274,7 +43478,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L144",
+      "source_location": "L150",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43285,7 +43489,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L253",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43296,7 +43500,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L712",
+      "source_location": "L805",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43307,7 +43511,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L627",
+      "source_location": "L720",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43318,7 +43522,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L311",
+      "source_location": "L317",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43329,7 +43533,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L337",
+      "source_location": "L349",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43340,7 +43544,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L449",
+      "source_location": "L461",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43351,7 +43555,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L541",
+      "source_location": "L523",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L634",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43362,7 +43577,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L761",
+      "source_location": "L854",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43373,7 +43588,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L787",
+      "source_location": "L886",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43384,7 +43599,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L262",
+      "source_location": "L268",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
@@ -43395,7 +43610,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L82",
+      "source_location": "L84",
       "weight": 1.0,
       "context": "field",
       "_origin": "ast",
@@ -43404,11 +43619,23 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L99",
+      "weight": 1.0,
+      "context": "field",
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager",
+      "target": "texttospeech",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L722",
+      "source_location": "L815",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_playaudiofile",
@@ -43420,7 +43647,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L105",
+      "source_location": "L583",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "target": "texttospeech",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getkokoromodelfile",
@@ -43432,7 +43671,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L134",
+      "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getselectedvoicemodelfile",
@@ -43443,7 +43682,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L96",
+      "source_location": "L102",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43455,7 +43694,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L244",
+      "source_location": "L250",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43467,7 +43706,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L156",
+      "source_location": "L162",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43479,7 +43718,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L104",
+      "source_location": "L110",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43491,7 +43730,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L149",
+      "source_location": "L155",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43503,7 +43742,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L123",
+      "source_location": "L129",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43515,7 +43754,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L144",
+      "source_location": "L150",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43527,7 +43766,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L253",
+      "source_location": "L259",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43539,7 +43778,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L712",
+      "source_location": "L805",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43551,7 +43790,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L311",
+      "source_location": "L317",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43563,7 +43802,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L337",
+      "source_location": "L349",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43575,7 +43814,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L449",
+      "source_location": "L461",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43587,7 +43826,19 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L541",
+      "source_location": "L523",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_kt_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L634",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43599,7 +43850,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L787",
+      "source_location": "L886",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -43612,7 +43863,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L245",
+      "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_deletekokoromodel",
@@ -43624,7 +43875,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L162",
+      "source_location": "L168",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_downloadkokoromodel",
@@ -43636,7 +43887,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L150",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getkokoromodelsizetext",
@@ -43648,7 +43899,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L145",
+      "source_location": "L151",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_iskokoromodeldownloaded",
@@ -43660,7 +43911,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L466",
+      "source_location": "L478",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakvialocal",
@@ -43672,7 +43923,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L464",
+      "source_location": "L476",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakvialocal",
@@ -43684,7 +43935,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L322",
+      "source_location": "L328",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
@@ -43696,7 +43947,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L331",
+      "source_location": "L338",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
@@ -43708,7 +43959,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L333",
+      "source_location": "L344",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
@@ -43720,7 +43971,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L320",
+      "source_location": "L341",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L326",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speak",
@@ -43732,7 +43995,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L811",
+      "source_location": "L910",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_testvoice",
@@ -43744,7 +44007,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L435",
+      "source_location": "L447",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviaapi",
@@ -43756,7 +44019,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L610",
+      "source_location": "L532",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviasystem",
+      "target": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_getpresetpitchandspeedmultipliers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
+      "source_location": "L703",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviawebfallback",
@@ -43768,7 +44043,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L615",
+      "source_location": "L708",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_speakviawebfallback",
@@ -43780,7 +44055,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L639",
+      "source_location": "L732",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_playaudioplaylist",
@@ -43792,7 +44067,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/domain/tts/TtsManager.kt",
-      "source_location": "L720",
+      "source_location": "L813",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_domain_tts_ttsmanager_ttsmanager_playaudiofile",
@@ -45829,7 +46104,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1779",
+      "source_location": "L1797",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
@@ -45841,7 +46116,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2295",
+      "source_location": "L2313",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_debuglogcarditem",
@@ -49426,7 +49701,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1369",
+      "source_location": "L1387",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -49437,7 +49712,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2411",
+      "source_location": "L2429",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -49470,7 +49745,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2143",
+      "source_location": "L2161",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -49492,7 +49767,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2940",
+      "source_location": "L2958",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -49525,7 +49800,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2841",
+      "source_location": "L2859",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen",
@@ -49657,7 +49932,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2136",
+      "source_location": "L2154",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_advancesettingsview",
@@ -49668,7 +49943,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L1369",
+      "source_location": "L1387",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -49681,7 +49956,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2589",
+      "source_location": "L2607",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_backupsettingsview",
@@ -49693,7 +49968,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2815",
+      "source_location": "L2833",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_src_main_java_com_ryzumi_miraiai_ui_screen_settings_settingsscreen_backupsettingsview",
@@ -49704,7 +49979,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2411",
+      "source_location": "L2429",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -49716,7 +49991,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2841",
+      "source_location": "L2859",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",
@@ -49728,7 +50003,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "app/src/main/java/com/ryzumi/miraiai/ui/screen/settings/SettingsScreen.kt",
-      "source_location": "L2940",
+      "source_location": "L2958",
       "weight": 1.0,
       "context": "parameter_type",
       "_origin": "ast",

@@ -152,6 +152,7 @@ import androidx.compose.ui.unit.sp
 import com.ryzumi.miraiai.data.local.entity.InferenceConfigEntity
 import com.ryzumi.miraiai.ui.screen.about.AboutAppView
 import com.ryzumi.miraiai.data.network.DebugLogEntry
+import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -271,6 +272,7 @@ fun SettingsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .imePadding()
         ) {
             if (editingConfig == null) {
                 PrimaryTabRow(
@@ -279,7 +281,7 @@ fun SettingsScreen(
                     Tab(
                         selected = pagerState.currentPage == 0,
                         onClick = {
-                            coroutineScope.launch { pagerState.animateScrollToPage(0) }
+                            coroutineScope.launch { pagerState.scrollToPage(0) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Inference", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -288,7 +290,7 @@ fun SettingsScreen(
                     Tab(
                         selected = pagerState.currentPage == 1,
                         onClick = {
-                            coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                            coroutineScope.launch { pagerState.scrollToPage(1) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Themes", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -297,7 +299,7 @@ fun SettingsScreen(
                     Tab(
                         selected = pagerState.currentPage == 2,
                         onClick = {
-                            coroutineScope.launch { pagerState.animateScrollToPage(2) }
+                            coroutineScope.launch { pagerState.scrollToPage(2) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Advance", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -306,7 +308,7 @@ fun SettingsScreen(
                     Tab(
                         selected = pagerState.currentPage == 3,
                         onClick = {
-                            coroutineScope.launch { pagerState.animateScrollToPage(3) }
+                            coroutineScope.launch { pagerState.scrollToPage(3) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Backup", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -315,7 +317,7 @@ fun SettingsScreen(
                     Tab(
                         selected = pagerState.currentPage == 4,
                         onClick = {
-                            coroutineScope.launch { pagerState.animateScrollToPage(4) }
+                            coroutineScope.launch { pagerState.scrollToPage(4) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("About", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -339,6 +341,8 @@ fun SettingsScreen(
             } else {
                 HorizontalPager(
                     state = pagerState,
+                    beyondViewportPageCount = 1,
+                    key = { page -> page },
                     modifier = Modifier.fillMaxSize()
                 ) { pageIndex ->
                     when (pageIndex) {
@@ -770,6 +774,14 @@ fun ConfigEditorForm(
     var ttsApiEndpoint by remember(config.id) { mutableStateOf(config.ttsApiEndpoint) }
     var ttsApiKey by remember(config.id) { mutableStateOf(config.ttsApiKey) }
     var ttsApiModel by remember(config.id) { mutableStateOf(config.ttsApiModel) }
+    var imageGenEngine by remember(config.id) { mutableStateOf(config.imageGenEngine) }
+    var imageGenApiEndpoint by remember(config.id) { mutableStateOf(config.imageGenApiEndpoint) }
+    var imageGenApiKey by remember(config.id) { mutableStateOf(config.imageGenApiKey) }
+    var imageGenApiModel by remember(config.id) { mutableStateOf(config.imageGenApiModel) }
+    var imageGenSize by remember(config.id) { mutableStateOf(config.imageGenSize) }
+    var imageGenSteps by remember(config.id) { mutableIntStateOf(config.imageGenSteps) }
+    var imageGenGuidanceScale by remember(config.id) { mutableFloatStateOf(config.imageGenGuidanceScale) }
+    var imageGenNegativePrompt by remember(config.id) { mutableStateOf(config.imageGenNegativePrompt) }
 
     val context = LocalContext.current
 
@@ -1007,51 +1019,162 @@ fun ConfigEditorForm(
             }
         }
 
-        // 3. Image Generation Model (Local Model Only)
-        Text(
-            text = "Image Generation Model (Local Only)",
-            style = MaterialTheme.typography.titleSmall,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = "Downloaded diffusion model for image generation",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        // 3. Image Generation Model (Local vs API Switch)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Image Generation Engine",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = if (imageGenEngine == "local") "Use Local Downloaded Diffusion Model" else "Use Endpoint API (DALL-E, SD, FLUX API)",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Text("Local", style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(end = 4.dp))
+            Switch(
+                checked = imageGenEngine == "local",
+                onCheckedChange = { imageGenEngine = if (it) "local" else "api" }
+            )
+        }
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        ExposedDropdownMenuBox(
-            expanded = isImageGenModelDropdownExpanded,
-            onExpandedChange = { isImageGenModelDropdownExpanded = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 20.dp)
-        ) {
-            OutlinedTextField(
-                value = imageGenModelId,
-                onValueChange = { },
-                readOnly = true,
-                label = { Text("Local Image Gen Model") },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isImageGenModelDropdownExpanded) },
+        if (imageGenEngine == "api") {
+            // API Image Generation Configuration
+            Column(
                 modifier = Modifier
-                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
                     .fillMaxWidth()
-            )
-
-            val imgModels = uiState.localImageGenModels
-            ExposedDropdownMenu(
-                expanded = isImageGenModelDropdownExpanded,
-                onDismissRequest = { isImageGenModelDropdownExpanded = false }
+                    .padding(bottom = 20.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                imgModels.forEach { model ->
-                    DropdownMenuItem(
-                        text = { Text(model) },
-                        onClick = {
-                            imageGenModelId = model
-                            isImageGenModelDropdownExpanded = false
-                        }
+                OutlinedTextField(
+                    value = imageGenApiEndpoint,
+                    onValueChange = { imageGenApiEndpoint = it },
+                    label = { Text("Image Gen API Endpoint URL") },
+                    placeholder = { Text("https://api.openai.com/v1/images/generations") },
+                    supportingText = { Text("Leave blank to use Base Endpoint URL + /images/generations") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+
+                OutlinedTextField(
+                    value = imageGenApiKey,
+                    onValueChange = { imageGenApiKey = it },
+                    label = { Text("Image Gen API Key (Optional)") },
+                    placeholder = { Text("Leave blank to use profile API key") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+
+                OutlinedTextField(
+                    value = imageGenApiModel,
+                    onValueChange = { imageGenApiModel = it },
+                    label = { Text("Image Gen API Model ID") },
+                    placeholder = { Text("dall-e-3, dall-e-2, or black-forest-labs/FLUX.1-schnell") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+
+                Text(
+                    text = "Image Resolution",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    val sizes = listOf("auto", "1024x1024", "512x512", "768x768", "1024x1792", "1792x1024")
+                    sizes.forEach { sz ->
+                        FilterChip(
+                            selected = imageGenSize == sz || (sz == "auto" && imageGenSize.isBlank()),
+                            onClick = { imageGenSize = sz },
+                            label = { Text(sz) }
+                        )
+                    }
+                }
+
+                // Inference Steps
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("Inference Steps: ", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = "$imageGenSteps",
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
                     )
+                }
+                Slider(
+                    value = imageGenSteps.toFloat(),
+                    onValueChange = { imageGenSteps = it.roundToInt() },
+                    valueRange = 1f..100f
+                )
+
+                // Guidance Scale / CFG Scale
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("CFG / Guidance Scale: ", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = String.format(Locale.US, "%.1f", imageGenGuidanceScale),
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Slider(
+                    value = imageGenGuidanceScale,
+                    onValueChange = { imageGenGuidanceScale = Math.round(it * 10f) / 10f },
+                    valueRange = 1.0f..20.0f
+                )
+
+                OutlinedTextField(
+                    value = imageGenNegativePrompt,
+                    onValueChange = { imageGenNegativePrompt = it },
+                    label = { Text("Negative Prompt (Optional)") },
+                    placeholder = { Text("blurry, low quality, distorted, bad anatomy") },
+                    modifier = Modifier.fillMaxWidth(),
+                    minLines = 2
+                )
+            }
+        } else {
+            // Local Image Generation Dropdown
+            ExposedDropdownMenuBox(
+                expanded = isImageGenModelDropdownExpanded,
+                onExpandedChange = { isImageGenModelDropdownExpanded = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp)
+            ) {
+                OutlinedTextField(
+                    value = imageGenModelId,
+                    onValueChange = { },
+                    readOnly = true,
+                    label = { Text("Local Image Gen Model") },
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isImageGenModelDropdownExpanded) },
+                    modifier = Modifier
+                        .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                        .fillMaxWidth()
+                )
+
+                val imgModels = uiState.localImageGenModels
+                ExposedDropdownMenu(
+                    expanded = isImageGenModelDropdownExpanded,
+                    onDismissRequest = { isImageGenModelDropdownExpanded = false }
+                ) {
+                    imgModels.forEach { model ->
+                        DropdownMenuItem(
+                            text = { Text(model) },
+                            onClick = {
+                                imageGenModelId = model
+                                isImageGenModelDropdownExpanded = false
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -1369,7 +1492,15 @@ fun ConfigEditorForm(
                         ttsLocalModel = ttsLocalModel,
                         ttsApiEndpoint = ttsApiEndpoint,
                         ttsApiKey = ttsApiKey,
-                        ttsApiModel = ttsApiModel
+                        ttsApiModel = ttsApiModel,
+                        imageGenEngine = imageGenEngine,
+                        imageGenApiEndpoint = imageGenApiEndpoint,
+                        imageGenApiKey = imageGenApiKey,
+                        imageGenApiModel = imageGenApiModel,
+                        imageGenSize = imageGenSize,
+                        imageGenSteps = imageGenSteps,
+                        imageGenGuidanceScale = imageGenGuidanceScale,
+                        imageGenNegativePrompt = imageGenNegativePrompt
                     )
                     onSave(updated)
                 },

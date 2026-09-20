@@ -16,6 +16,7 @@ import com.ryzumi.miraiai.data.network.DebugLogManager
 import com.ryzumi.miraiai.domain.backup.BackupRepository
 import com.ryzumi.miraiai.domain.model.BackupStats
 import com.ryzumi.miraiai.domain.model.LocalModelClassifier
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -108,21 +109,23 @@ class SettingsViewModel(
     }
 
     fun loadLocalModels() {
-        val downloadedFiles = huggingFaceRepository.getDownloadedModels()
-        val allNames = downloadedFiles.map { it.name }
+        viewModelScope.launch(Dispatchers.IO) {
+            val downloadedFiles = huggingFaceRepository.getDownloadedModels()
+            val allNames = downloadedFiles.map { it.name }
 
-        val textModels = downloadedFiles.filter { LocalModelClassifier.isTextModel(it) }.map { it.name }
-        val visionModels = downloadedFiles.filter { LocalModelClassifier.isVisionModel(it) }.map { it.name }
-        val imageGenModels = downloadedFiles.filter { LocalModelClassifier.isImageGenModel(it) }.map { it.name }
-        val voiceModels = downloadedFiles.filter { LocalModelClassifier.isVoiceModel(it) }.map { it.name }
+            val textModels = downloadedFiles.filter { LocalModelClassifier.isTextModel(it) }.map { it.name }
+            val visionModels = downloadedFiles.filter { LocalModelClassifier.isVisionModel(it) }.map { it.name }
+            val imageGenModels = downloadedFiles.filter { LocalModelClassifier.isImageGenModel(it) }.map { it.name }
+            val voiceModels = downloadedFiles.filter { LocalModelClassifier.isVoiceModel(it) }.map { it.name }
 
-        _localModels.value = allNames.ifEmpty { listOf("None (Download via Model Hub)") }
-        _localTextModels.value = textModels.ifEmpty { listOf("None (Download via Model Hub)") }
-        _localVisionModels.value = visionModels.ifEmpty {
-            if (textModels.isNotEmpty()) textModels else listOf("None (Download via Model Hub)")
+            _localModels.value = allNames.ifEmpty { listOf("None (Download via Model Hub)") }
+            _localTextModels.value = textModels.ifEmpty { listOf("None (Download via Model Hub)") }
+            _localVisionModels.value = visionModels.ifEmpty {
+                if (textModels.isNotEmpty()) textModels else listOf("None (Download via Model Hub)")
+            }
+            _localImageGenModels.value = imageGenModels.ifEmpty { listOf("None (Download via Model Hub)") }
+            _localVoiceModels.value = voiceModels.ifEmpty { listOf("none (System Default)") }
         }
-        _localImageGenModels.value = imageGenModels.ifEmpty { listOf("None (Download via Model Hub)") }
-        _localVoiceModels.value = voiceModels.ifEmpty { listOf("none (System Default)") }
     }
 
     private val _isTestingVision = MutableStateFlow(false)
@@ -488,7 +491,7 @@ class SettingsViewModel(
     }
 
     fun refreshBackupStats() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             backupRepository?.let {
                 _backupStats.value = it.getBackupStats()
             }

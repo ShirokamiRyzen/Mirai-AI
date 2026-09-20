@@ -26,7 +26,7 @@ import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
         ChatMessageEntity::class,
         InferenceConfigEntity::class
     ],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -114,6 +114,19 @@ abstract class MiraiDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_8_9 = object : Migration(8, 9) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenEngine` TEXT NOT NULL DEFAULT 'local'")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenApiEndpoint` TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenApiKey` TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenApiModel` TEXT NOT NULL DEFAULT 'dall-e-3'")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenSize` TEXT NOT NULL DEFAULT '1024x1024'")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenSteps` INTEGER NOT NULL DEFAULT 20")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenGuidanceScale` REAL NOT NULL DEFAULT 7.5")
+                db.execSQL("ALTER TABLE `inference_configs` ADD COLUMN `imageGenNegativePrompt` TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
         fun getInstance(context: Context): MiraiDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -121,7 +134,11 @@ abstract class MiraiDatabase : RoomDatabase() {
                     MiraiDatabase::class.java,
                     "mirai_ai_database"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+                    .addMigrations(
+                        MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4,
+                        MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7,
+                        MIGRATION_7_8, MIGRATION_8_9
+                    )
                     .build()
                 INSTANCE = instance
                 instance

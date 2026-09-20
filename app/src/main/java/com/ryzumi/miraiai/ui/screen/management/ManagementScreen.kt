@@ -1,6 +1,7 @@
 package com.ryzumi.miraiai.ui.screen.management
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -208,7 +209,7 @@ fun ManagementScreen(
                 Tab(
                     selected = pagerState.currentPage == 0,
                     onClick = {
-                        coroutineScope.launch { pagerState.animateScrollToPage(0) }
+                        coroutineScope.launch { pagerState.animateScrollToPage(0, animationSpec = tween(300)) }
                         selectedPersonaIds = emptySet()
                     },
                     text = { Text("Characters (${characters.size})") },
@@ -217,7 +218,7 @@ fun ManagementScreen(
                 Tab(
                     selected = pagerState.currentPage == 1,
                     onClick = {
-                        coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                        coroutineScope.launch { pagerState.animateScrollToPage(1, animationSpec = tween(300)) }
                         selectedCharIds = emptySet()
                     },
                     text = { Text("User Personas (${personas.size})") },
@@ -227,6 +228,7 @@ fun ManagementScreen(
 
             HorizontalPager(
                 state = pagerState,
+                beyondViewportPageCount = 2,
                 modifier = Modifier.fillMaxSize()
             ) { page ->
                 if (page == 0) {

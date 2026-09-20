@@ -3,6 +3,7 @@ package com.ryzumi.miraiai.domain.util
 import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.ryzumi.miraiai.domain.engine.ImageGenerationManager
 
 object MiraiToolManager {
 
@@ -197,7 +198,7 @@ object MiraiToolManager {
         }
         val modelName = activeConfig?.imageGenModelId?.takeIf { it != "none" && it.isNotBlank() } ?: "Stable Diffusion 3.5"
 
-        val result = com.ryzumi.miraiai.domain.engine.ImageGenerationManager.generateImage(context, prompt, modelName)
+        val result = ImageGenerationManager.generateImage(context, prompt, modelName, activeConfig)
         return if (result.isSuccess) {
             val localPath = result.getOrNull() ?: ""
             "Image generation completed successfully! Local image file saved at: $localPath. Prompt: \"$prompt\"."

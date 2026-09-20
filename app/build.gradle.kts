@@ -12,10 +12,16 @@ android {
         applicationId = "com.ryzumi.miraiai"
         minSdk = 26
         targetSdk = 37
-        versionCode = 11
-        versionName = "1.2.2"
+        versionCode = 12
+        versionName = "2.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                arguments += listOf("-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON")
+            }
+        }
     }
 
     sourceSets {
@@ -42,6 +48,11 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 }
 
@@ -86,6 +97,7 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
 
     // Web Search & Content Extraction (Jsoup + Readability4j)
+
     implementation(libs.jsoup)
     implementation(libs.readability4j)
 

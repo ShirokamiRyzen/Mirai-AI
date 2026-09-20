@@ -20,7 +20,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 jsoup = "1.18.3"
 readability4j = "1.0.8"
-onnxruntime = "1.18.0"
+onnxruntime = "1.20.0"
 litert = "1.0.1"
 
 [libraries]
