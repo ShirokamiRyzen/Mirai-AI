@@ -15,6 +15,7 @@ import com.ryzumi.miraiai.data.network.DebugLogEntry
 import com.ryzumi.miraiai.data.network.DebugLogManager
 import com.ryzumi.miraiai.domain.backup.BackupRepository
 import com.ryzumi.miraiai.domain.model.BackupStats
+import com.ryzumi.miraiai.domain.model.LocalModelClassifier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +30,10 @@ data class SettingsUiState(
     val availableModels: List<String> = emptyList(),
     val visionModels: List<String> = emptyList(),
     val localModels: List<String> = emptyList(),
+    val localTextModels: List<String> = emptyList(),
+    val localVisionModels: List<String> = emptyList(),
+    val localImageGenModels: List<String> = emptyList(),
+    val localVoiceModels: List<String> = emptyList(),
     val isFetchingModels: Boolean = false,
     val isTestingVision: Boolean = false,
     val visionTestResult: String? = null,
@@ -61,6 +66,10 @@ class SettingsViewModel(
     private val _availableModels = MutableStateFlow<List<String>>(emptyList())
     private val _visionModels = MutableStateFlow<List<String>>(emptyList())
     private val _localModels = MutableStateFlow<List<String>>(emptyList())
+    private val _localTextModels = MutableStateFlow<List<String>>(emptyList())
+    private val _localVisionModels = MutableStateFlow<List<String>>(emptyList())
+    private val _localImageGenModels = MutableStateFlow<List<String>>(emptyList())
+    private val _localVoiceModels = MutableStateFlow<List<String>>(emptyList())
     private val _isFetchingModels = MutableStateFlow(false)
     private val _statusMessage = MutableStateFlow<String?>(null)
     private val _isError = MutableStateFlow(false)
@@ -99,8 +108,21 @@ class SettingsViewModel(
     }
 
     fun loadLocalModels() {
-        val downloaded = huggingFaceRepository.getDownloadedModels().map { it.name }
-        _localModels.value = downloaded.ifEmpty { listOf("None (Download via Model Hub)") }
+        val downloadedFiles = huggingFaceRepository.getDownloadedModels()
+        val allNames = downloadedFiles.map { it.name }
+
+        val textModels = downloadedFiles.filter { LocalModelClassifier.isTextModel(it) }.map { it.name }
+        val visionModels = downloadedFiles.filter { LocalModelClassifier.isVisionModel(it) }.map { it.name }
+        val imageGenModels = downloadedFiles.filter { LocalModelClassifier.isImageGenModel(it) }.map { it.name }
+        val voiceModels = downloadedFiles.filter { LocalModelClassifier.isVoiceModel(it) }.map { it.name }
+
+        _localModels.value = allNames.ifEmpty { listOf("None (Download via Model Hub)") }
+        _localTextModels.value = textModels.ifEmpty { listOf("None (Download via Model Hub)") }
+        _localVisionModels.value = visionModels.ifEmpty {
+            if (textModels.isNotEmpty()) textModels else listOf("None (Download via Model Hub)")
+        }
+        _localImageGenModels.value = imageGenModels.ifEmpty { listOf("None (Download via Model Hub)") }
+        _localVoiceModels.value = voiceModels.ifEmpty { listOf("none (System Default)") }
     }
 
     private val _isTestingVision = MutableStateFlow(false)
@@ -110,18 +132,35 @@ class SettingsViewModel(
         val models: List<String>,
         val visionModels: List<String>,
         val localModels: List<String>,
+        val localTextModels: List<String>,
+        val localVisionModels: List<String>,
+        val localImageGenModels: List<String>,
+        val localVoiceModels: List<String>,
         val isFetching: Boolean,
         val status: String?
     )
 
     private val networkStateFlow = combine(
-        _availableModels,
-        _visionModels,
-        _localModels,
+        combine(
+            _availableModels,
+            _visionModels,
+            _localModels,
+            _localTextModels,
+            _localVisionModels
+        ) { models, visionModels, localModels, localText, localVision ->
+            FiveNetwork(models, visionModels, localModels, localText, localVision, emptyList(), emptyList(), false, null)
+        },
+        _localImageGenModels,
+        _localVoiceModels,
         _isFetchingModels,
         _statusMessage
-    ) { models, visionModels, localModels, isFetching, status ->
-        FiveNetwork(models, visionModels, localModels, isFetching, status)
+    ) { base, localImageGen, localVoice, isFetching, status ->
+        base.copy(
+            localImageGenModels = localImageGen,
+            localVoiceModels = localVoice,
+            isFetching = isFetching,
+            status = status
+        )
     }
 
     private data class ExtraState(
@@ -242,6 +281,10 @@ class SettingsViewModel(
             availableModels = modelsToShow,
             visionModels = tuple.net.visionModels.ifEmpty { modelsToShow },
             localModels = tuple.net.localModels,
+            localTextModels = tuple.net.localTextModels,
+            localVisionModels = tuple.net.localVisionModels,
+            localImageGenModels = tuple.net.localImageGenModels,
+            localVoiceModels = tuple.net.localVoiceModels,
             isFetchingModels = tuple.net.isFetching,
             isTestingVision = tuple.isTesting,
             visionTestResult = tuple.testResult,

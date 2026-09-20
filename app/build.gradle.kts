@@ -12,8 +12,8 @@ android {
         applicationId = "com.ryzumi.miraiai"
         minSdk = 26
         targetSdk = 37
-        versionCode = 10
-        versionName = "1.2.1"
+        versionCode = 11
+        versionName = "1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -88,6 +88,12 @@ dependencies {
     // Web Search & Content Extraction (Jsoup + Readability4j)
     implementation(libs.jsoup)
     implementation(libs.readability4j)
+
+    // Local Machine Learning & Neural Inference Engines
+    // ONNX Runtime for Local Neural Models (TTS & Diffusion)
+    implementation(libs.onnxruntime.android)
+    // Google LiteRT for on-device Text and Vision LLM/VLM execution
+    implementation(libs.litert)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

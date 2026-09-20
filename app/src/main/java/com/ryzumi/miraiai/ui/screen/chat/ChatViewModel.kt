@@ -19,6 +19,8 @@ import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
 import com.ryzumi.miraiai.data.network.DebugLogManager
 import com.ryzumi.miraiai.data.network.OpenAiRepository
 import com.ryzumi.miraiai.domain.engine.ChatGenerationManager
+import com.ryzumi.miraiai.domain.engine.ImageGenerationManager
+import com.ryzumi.miraiai.domain.engine.ImageGenProgress
 import com.ryzumi.miraiai.domain.model.LocalModelManager
 import com.ryzumi.miraiai.domain.model.LocalModelStatus
 import com.ryzumi.miraiai.domain.util.ImageUtils
@@ -69,7 +71,8 @@ data class ChatUiState(
     val currentMotion: String? = null,
     val motionTrigger: Long = 0L,
     val touchReactionText: String? = null,
-    val touchReactionZone: String? = null
+    val touchReactionZone: String? = null,
+    val imageGenProgress: ImageGenProgress = ImageGenProgress()
 )
 
 class ChatViewModel(
@@ -272,15 +275,17 @@ class ChatViewModel(
         val motion: String?,
         val motionTrigger: Long,
         val isVoicePlaying: Boolean,
-        val currentlyPlayingMessageId: String?
+        val currentlyPlayingMessageId: String?,
+        val imageGenProgress: ImageGenProgress = ImageGenProgress()
     )
 
     private val uiAuxStateFlow = combine(
         combine(_localError, _manualEmotion, _touchReactionText) { err, emo, txt -> Triple(err, emo, txt) },
         combine(_touchReactionZone, _currentMotion, _motionTrigger) { zone, mot, trg -> Triple(zone, mot, trg) },
-        combine(TtsManager.isPlaying, _currentlyPlayingMessageId) { isPlaying, msgId -> Pair(isPlaying, msgId) }
-    ) { (err, emo, txt), (zone, mot, trg), (isPlaying, msgId) ->
-        UiAuxState(err, emo, txt, zone, mot, trg, isPlaying, msgId)
+        combine(TtsManager.isPlaying, _currentlyPlayingMessageId) { isPlaying, msgId -> Pair(isPlaying, msgId) },
+        ImageGenerationManager.progressFlow
+    ) { (err, emo, txt), (zone, mot, trg), (isPlaying, msgId), imgProgress ->
+        UiAuxState(err, emo, txt, zone, mot, trg, isPlaying, msgId, imgProgress)
     }
 
     val uiState: StateFlow<ChatUiState> = combine(
@@ -305,7 +310,9 @@ class ChatViewModel(
             core.configs.find { it.isActive } ?: core.configs.firstOrNull()
         }
 
-        val isUsingLocal = (currentConfig?.useLocalGenModel == true) || (currentConfig?.useLocalVisionModel == true)
+        val isUsingLocal = (currentConfig?.useLocalGenModel == true) ||
+                (currentConfig?.useLocalVisionModel == true) ||
+                (!currentConfig?.imageGenModelId.isNullOrBlank() && currentConfig?.imageGenModelId != "none" && currentConfig?.imageGenModelId != "None (Download via Model Hub)")
         val maxTokens = currentConfig?.maxTokens ?: 2048
 
         // Calculate estimated context tokens based on active context budget
@@ -365,7 +372,8 @@ class ChatViewModel(
             currentMotion = auxState.motion,
             motionTrigger = auxState.motionTrigger,
             touchReactionText = auxState.touchReactionText,
-            touchReactionZone = auxState.touchReactionZone
+            touchReactionZone = auxState.touchReactionZone,
+            imageGenProgress = auxState.imageGenProgress
         )
     }.stateIn(
         scope = viewModelScope,
@@ -718,10 +726,12 @@ class ChatViewModel(
             config.generateModelId
         } else if (config.useLocalVisionModel && config.visionModelId.isNotBlank()) {
             config.visionModelId
+        } else if (!config.imageGenModelId.isNullOrBlank() && config.imageGenModelId != "none" && config.imageGenModelId != "None (Download via Model Hub)") {
+            config.imageGenModelId
         } else {
             config.generateModelId
         }
-        if (chosenModel.isNotBlank()) {
+        if (chosenModel.isNotBlank() && chosenModel != "none" && chosenModel != "None (Download via Model Hub)") {
             viewModelScope.launch {
                 LocalModelManager.loadModel(context, chosenModel)
             }

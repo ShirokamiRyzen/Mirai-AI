@@ -41,6 +41,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -1152,12 +1153,13 @@ fun ChatScreen(
                                         }
                                     }
 
-                                    if (uiState.isStreaming) {
+                                    if (uiState.isStreaming || uiState.imageGenProgress.isGenerating) {
                                         item(key = "streaming_bubble") {
                                             StreamingBubbleItem(
                                                 streamingThinking = uiState.streamingThinking,
                                                 streamingText = uiState.streamingText,
                                                 streamingModelName = uiState.streamingModelName,
+                                                imageGenProgress = uiState.imageGenProgress,
                                                 isThinkingExpanded = uiState.isLiveThinkingExpanded,
                                                 isShowThinkingEnabled = uiState.isShowThinkingEnabled,
                                                 isTokenCounterEnabled = uiState.isTokenCounterEnabled,
@@ -1350,12 +1352,13 @@ fun ChatScreen(
                         }
                     }
 
-                    if (uiState.isStreaming) {
+                    if (uiState.isStreaming || uiState.imageGenProgress.isGenerating) {
                         item(key = "streaming_bubble") {
                             StreamingBubbleItem(
                                 streamingThinking = uiState.streamingThinking,
                                 streamingText = uiState.streamingText,
                                 streamingModelName = uiState.streamingModelName,
+                                imageGenProgress = uiState.imageGenProgress,
                                 isThinkingExpanded = uiState.isLiveThinkingExpanded,
                                 isShowThinkingEnabled = uiState.isShowThinkingEnabled,
                                 isTokenCounterEnabled = uiState.isTokenCounterEnabled,
@@ -2537,15 +2540,15 @@ fun ChatBubbleItem(
                         model = imageModel,
                         contentDescription = "Attached Image",
                         modifier = Modifier
-                            .height(180.dp)
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(14.dp))
                             .clickable {
                                 if (isSelectionMode) onClick() else onImageClick(message.imageUri)
                             },
                         contentScale = ContentScale.Crop
                     )
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
                 // Expandable Thinking Process Accordion for Character Past Messages
@@ -2728,6 +2731,7 @@ fun StreamingBubbleItem(
     streamingThinking: String = "",
     streamingText: String,
     streamingModelName: String = "",
+    imageGenProgress: com.ryzumi.miraiai.domain.engine.ImageGenProgress = com.ryzumi.miraiai.domain.engine.ImageGenProgress(),
     isThinkingExpanded: Boolean = true,
     isShowThinkingEnabled: Boolean = false,
     isTokenCounterEnabled: Boolean = false,
@@ -2833,22 +2837,130 @@ fun StreamingBubbleItem(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                if (visibleText.isBlank()) {
-                    // Active typing / working indicator to visibly follow stream response from the start
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    ) {
-                        TypingDotsIndicator()
-                        if (isShowThinkingEnabled && streamingThinking.isNotBlank()) {
-                            Text(
-                                text = "Generating response...",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontFamily = FontFamily.Monospace,
-                                color = textColor.copy(alpha = 0.55f),
-                                fontSize = 11.sp
+                // 1:1 Aspect Ratio Image Generation Progress Card in Bubble (Gemini / ChatGPT style)
+                if (imageGenProgress.isGenerating) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                if (isDark) Color(0xFF1E2230) else Color(0xFFF1F3F9)
                             )
+                            .border(
+                                width = 1.dp,
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.6f),
+                                        MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f),
+                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
+                                    )
+                                ),
+                                shape = RoundedCornerShape(14.dp)
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            val pulseScale by infiniteTransition.animateFloat(
+                                initialValue = 0.88f,
+                                targetValue = 1.12f,
+                                animationSpec = infiniteRepeatable(
+                                    animation = tween(900, easing = LinearEasing),
+                                    repeatMode = RepeatMode.Reverse
+                                ),
+                                label = "pulseScale"
+                            )
+
+                            Box(
+                                modifier = Modifier
+                                    .size(56.dp)
+                                    .graphicsLayer(scaleX = pulseScale, scaleY = pulseScale)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.AddPhotoAlternate,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(28.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            // Prominent Percentage Badge
+                            Surface(
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(
+                                    text = "${imageGenProgress.progressPercent}%",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 4.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            val animatedProgress by androidx.compose.animation.core.animateFloatAsState(
+                                targetValue = (imageGenProgress.progressPercent / 100f).coerceIn(0f, 1f),
+                                animationSpec = spring(stiffness = Spring.StiffnessLow),
+                                label = "imageGenLinearProgress"
+                            )
+
+                            androidx.compose.material3.LinearProgressIndicator(
+                                progress = { animatedProgress },
+                                modifier = Modifier
+                                    .fillMaxWidth(0.82f)
+                                    .height(7.dp)
+                                    .clip(RoundedCornerShape(4.dp)),
+                                color = MaterialTheme.colorScheme.primary,
+                                trackColor = MaterialTheme.colorScheme.surfaceVariant
+                            )
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            Text(
+                                text = imageGenProgress.statusText.ifBlank { "Membuat gambar..." },
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.fillMaxWidth(0.9f)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+
+                if (visibleText.isBlank()) {
+                    if (!imageGenProgress.isGenerating) {
+                        // Active typing / working indicator to visibly follow stream response from the start
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        ) {
+                            TypingDotsIndicator()
+                            if (isShowThinkingEnabled && streamingThinking.isNotBlank()) {
+                                Text(
+                                    text = "Generating response...",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = textColor.copy(alpha = 0.55f),
+                                    fontSize = 11.sp
+                                )
+                            }
                         }
                     }
                 } else {

@@ -307,9 +307,12 @@ fun Live2dViewer(
             WebView(ctx).apply {
                 webViewRef = this
                 controller.webView = this
-                setBackgroundColor(Color.TRANSPARENT)
-                setLayerType(View.LAYER_TYPE_NONE, null)
+                setBackgroundColor(0)
+                setLayerType(View.LAYER_TYPE_HARDWARE, null)
                 onResume()
+
+                isVerticalScrollBarEnabled = false
+                isHorizontalScrollBarEnabled = false
 
                 settings.apply {
                     javaScriptEnabled = true

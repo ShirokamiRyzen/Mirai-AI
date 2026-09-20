@@ -23,6 +23,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import com.ryzumi.miraiai.domain.model.LocalModelClassifier
+import com.ryzumi.miraiai.domain.model.LocalModelType
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -1058,16 +1060,13 @@ fun LocalFileCardItem(
         }
     }
 
-    val modelInfo = remember(file.name) {
+    val modelCategory = remember(file.name, file.absolutePath) {
+        LocalModelClassifier.classify(file)
+    }
+
+    val modelInfo = remember(file.name, modelCategory) {
         val cleanName = file.name.removeSuffix(".onnx").removeSuffix(".gguf")
         val parts = cleanName.split("_")
-        val isVoice = file.name.endsWith(".onnx", ignoreCase = true) ||
-                cleanName.contains("kokoro", ignoreCase = true) ||
-                cleanName.contains("piper", ignoreCase = true) ||
-                cleanName.contains("voice", ignoreCase = true)
-        val isVision = cleanName.contains("vision", ignoreCase = true) ||
-                cleanName.contains("vlm", ignoreCase = true) ||
-                cleanName.contains("llava", ignoreCase = true)
 
         val author: String
         val repo: String
@@ -1090,18 +1089,16 @@ fun LocalFileCardItem(
             repo = parts[1]
             displayName = parts[1]
         } else {
-            author = if (isVoice) "Local TTS" else "Local Storage"
+            author = if (modelCategory == LocalModelType.VOICE_TTS) "Local TTS" else "Local Storage"
             repo = cleanName
             displayName = cleanName
         }
 
-        Triple(author, displayName, Pair(isVoice, isVision))
+        Pair(author, displayName)
     }
 
     val author = modelInfo.first
     val title = modelInfo.second
-    val isVoice = modelInfo.third.first
-    val isVision = modelInfo.third.second
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -1165,27 +1162,39 @@ fun LocalFileCardItem(
                 )
 
                 // 2. Capability Badge
-                if (isVoice) {
-                    IndicatorBadge(
-                        icon = Icons.AutoMirrored.Filled.VolumeUp,
-                        label = "Voice (TTS / ONNX)",
-                        containerColor = Color(0xFF004D40),
-                        contentColor = Color(0xFF80CBC4)
-                    )
-                } else if (isVision) {
-                    IndicatorBadge(
-                        icon = Icons.Default.Visibility,
-                        label = "Vision (VLM / GGUF)",
-                        containerColor = Color(0xFF004D40),
-                        contentColor = Color(0xFF80CBC4)
-                    )
-                } else {
-                    IndicatorBadge(
-                        icon = Icons.Default.Memory,
-                        label = "Text LLM (GGUF)",
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                when (modelCategory) {
+                    LocalModelType.VOICE_TTS -> {
+                        IndicatorBadge(
+                            icon = Icons.AutoMirrored.Filled.VolumeUp,
+                            label = "Voice (TTS / ONNX)",
+                            containerColor = Color(0xFF004D40),
+                            contentColor = Color(0xFF80CBC4)
+                        )
+                    }
+                    LocalModelType.IMAGE_GEN -> {
+                        IndicatorBadge(
+                            icon = Icons.Default.Image,
+                            label = "Image Gen (Diffusion)",
+                            containerColor = Color(0xFF4A148C),
+                            contentColor = Color(0xFFCE93D8)
+                        )
+                    }
+                    LocalModelType.VISION -> {
+                        IndicatorBadge(
+                            icon = Icons.Default.Visibility,
+                            label = "Vision (VLM / GGUF)",
+                            containerColor = Color(0xFF004D40),
+                            contentColor = Color(0xFF80CBC4)
+                        )
+                    }
+                    LocalModelType.TEXT_LLM -> {
+                        IndicatorBadge(
+                            icon = Icons.Default.Memory,
+                            label = "Text LLM (GGUF)",
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
 
                 // 3. Offline Ready Status Badge

@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -129,6 +130,17 @@ object ChatGenerationManager {
             var smoothedSpeed = 0.0
 
             val history = database.chatMessageDao().getMessagesForSessionSync(sessionId)
+            val latestUserMsg = history.lastOrNull { it.sender.equals("USER", ignoreCase = true) }
+            val latestUserText = latestUserMsg?.content ?: ""
+
+            // Parallel image generation trigger if user explicitly requested an image
+            val detectedImagePrompt = com.ryzumi.miraiai.domain.util.ImagePromptExtractor.extractPrompt(latestUserText)
+            val parallelImageGenDeferred = if (!detectedImagePrompt.isNullOrBlank() && !ImageGenerationManager.isGenerating()) {
+                val imageModel = config.imageGenModelId.takeIf { it.isNotBlank() && it != "none" && it != "None (Download via Model Hub)" } ?: "Stable Diffusion 3.5"
+                scope.async(Dispatchers.IO) {
+                    ImageGenerationManager.generateImage(context, detectedImagePrompt, imageModel).getOrNull()
+                }
+            } else null
 
             val settingsRepo = SettingsRepository(context)
             val isAllowDeviceContext = try {
@@ -285,11 +297,28 @@ object ChatGenerationManager {
                 }
 
                 if (finalOutput.isNotBlank()) {
+                    var generatedImageUri = ImageGenerationManager.consumeLastGeneratedImage()
+                    if (generatedImageUri == null && parallelImageGenDeferred != null) {
+                        try {
+                            generatedImageUri = parallelImageGenDeferred.await()
+                        } catch (e: Exception) {
+                            android.util.Log.w("ChatGenManager", "Awaiting parallel image generation failed", e)
+                        }
+                    }
+                    if (generatedImageUri == null) {
+                        val fallbackPrompt = com.ryzumi.miraiai.domain.util.ImagePromptExtractor.extractPrompt(latestUserText, finalOutput)
+                        if (!fallbackPrompt.isNullOrBlank() && !ImageGenerationManager.isGenerating()) {
+                            val imageModel = config.imageGenModelId.takeIf { it.isNotBlank() && it != "none" && it != "None (Download via Model Hub)" } ?: "Stable Diffusion 3.5"
+                            generatedImageUri = ImageGenerationManager.generateImage(context, fallbackPrompt, imageModel).getOrNull()
+                        }
+                    }
+
                     val charMsg = ChatMessageEntity(
                         id = UUID.randomUUID().toString(),
                         sessionId = sessionId,
                         sender = "CHARACTER",
                         content = finalOutput,
+                        imageUri = generatedImageUri,
                         tokensCount = finalTokens,
                         generationSpeedTps = finalSpeed,
                         modelName = chosenModel

@@ -73,8 +73,9 @@ object ContextBuilder {
         sb.append("\n  * If $userName asks for a physical movement, dance, or pose, use [motion:name] along with a MATCHING facial expression (e.g. smile/happy with dance, shy with pose).")
         sb.append("\n  * NEVER contradict emotions and motions: NEVER dance, cheer, or jump while angry or sad!")
 
-        sb.append("\n\n[REAL-TIME TOOLS]")
-        sb.append("\nAvailable tools: `search_web(query)` and `read_article(url)`.")
+        sb.append("\n\n[REAL-TIME TOOLS & CAPABILITIES]")
+        sb.append("\nAvailable tools: `generate_image(prompt)`, `search_web(query)` and `read_article(url)`.")
+        sb.append("\n- CRITICAL FOR IMAGE GENERATION: When $userName asks to generate, create, draw, paint, or make an image/picture/illustration (e.g., \"generate gambar...\", \"buat gambar...\", \"draw a picture of...\"), you MUST IMMEDIATELY trigger the `generate_image` function call with a descriptive English prompt. NEVER pretend or state in text 'Aku sudah mengirim permintaan' or 'sedang diproses oleh modelnya' without calling `generate_image`. If you do not call the tool, no image will be created.")
         sb.append("\n- When a URL or link is provided, call `read_article`.")
         sb.append("\n- When current information or web search is needed, call `search_web`.")
         sb.append("\n- Present information truthfully and faithfully as received from tools without inventing or modifying data. If raw data/JSON is requested, output the raw data as-is.")

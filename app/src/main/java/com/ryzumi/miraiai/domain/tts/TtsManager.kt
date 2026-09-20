@@ -1,6 +1,7 @@
 package com.ryzumi.miraiai.domain.tts
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -28,6 +29,7 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.net.URLEncoder
 import java.util.Collections
 import java.util.Locale
 import java.util.UUID
@@ -665,7 +667,7 @@ object TtsManager {
 
                 val chunkFiles = mutableListOf<File>()
                 for ((idx, chunk) in chunks.withIndex()) {
-                    val encoded = java.net.URLEncoder.encode(chunk, "UTF-8")
+                    val encoded = URLEncoder.encode(chunk, "UTF-8")
                     val url = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=$langCode&q=$encoded"
                     val request = Request.Builder()
                         .url(url)
@@ -747,9 +749,9 @@ object TtsManager {
                 mediaPlayer = mp
                 mp.setDataSource(currentFile.absolutePath)
                 mp.setAudioAttributes(
-                    android.media.AudioAttributes.Builder()
-                        .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH)
-                        .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
                         .build()
                 )
                 mp.setOnCompletionListener {
@@ -808,9 +810,9 @@ object TtsManager {
             mediaPlayer = mp
             mp.setDataSource(file.absolutePath)
             mp.setAudioAttributes(
-                android.media.AudioAttributes.Builder()
-                    .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH)
-                    .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
                     .build()
             )
             mp.setOnCompletionListener {

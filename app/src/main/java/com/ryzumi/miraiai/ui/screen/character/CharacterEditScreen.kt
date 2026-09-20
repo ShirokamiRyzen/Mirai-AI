@@ -662,7 +662,7 @@ fun CharacterEditScreen(
                 value = uiState.voiceId,
                 onValueChange = onVoiceIdChanged,
                 label = { Text("Voice Identifier") },
-                placeholder = { Text("e.g. af_heart, jf_alpha, or system") },
+                placeholder = { Text("e.g. af_heart, af_bella, am_adam, jf_alpha") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 12.dp),

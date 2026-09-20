@@ -130,7 +130,32 @@ object MiraiToolManager {
             }
             add("function", fn)
         }
-        tools.add(readArticleTool)
+        // 7. generate_image
+        val imageGenTool = JsonObject().apply {
+            addProperty("type", "function")
+            val fn = JsonObject().apply {
+                addProperty("name", "generate_image")
+                addProperty("description", "Generate or draw an image, artwork, illustration, or photo based on a descriptive prompt. Use this whenever the user asks to generate, create, draw, paint, or make an image/picture/photo.")
+                val params = JsonObject().apply {
+                    addProperty("type", "object")
+                    val props = JsonObject().apply {
+                        val promptProp = JsonObject().apply {
+                            addProperty("type", "string")
+                            addProperty("description", "The detailed descriptive prompt for image generation in English.")
+                        }
+                        add("prompt", promptProp)
+                    }
+                    add("properties", props)
+                    val required = JsonArray().apply {
+                        add("prompt")
+                    }
+                    add("required", required)
+                }
+                add("parameters", params)
+            }
+            add("function", fn)
+        }
+        tools.add(imageGenTool)
 
         return tools
     }
@@ -148,6 +173,7 @@ object MiraiToolManager {
                 "get_network_details" -> DeviceContextManager.getDetailedNetworkSummary(context)
                 "search_web" -> executeSearchWeb(argumentsJson)
                 "read_article" -> executeReadArticle(argumentsJson)
+                "generate_image" -> executeGenerateImage(context, argumentsJson)
                 else -> DeviceContextManager.getLiveDeviceContext(context)
             }
             android.util.Log.d("MiraiToolManager", "Tool $functionName result preview: ${result.take(200)}")
@@ -155,6 +181,28 @@ object MiraiToolManager {
         } catch (e: Exception) {
             android.util.Log.e("MiraiToolManager", "Tool $functionName failed", e)
             "Tool execution error: ${e.message}"
+        }
+    }
+
+    private suspend fun executeGenerateImage(context: Context, argumentsJson: String?): String {
+        val prompt = parseStringArgument(argumentsJson, "prompt")
+        if (prompt.isNullOrBlank()) {
+            return "Error: 'prompt' argument is required for generate_image."
+        }
+
+        val activeConfig = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            try {
+                com.ryzumi.miraiai.data.local.MiraiDatabase.getInstance(context).inferenceConfigDao().getActiveConfigSync()
+            } catch (e: Exception) { null }
+        }
+        val modelName = activeConfig?.imageGenModelId?.takeIf { it != "none" && it.isNotBlank() } ?: "Stable Diffusion 3.5"
+
+        val result = com.ryzumi.miraiai.domain.engine.ImageGenerationManager.generateImage(context, prompt, modelName)
+        return if (result.isSuccess) {
+            val localPath = result.getOrNull() ?: ""
+            "Image generation completed successfully! Local image file saved at: $localPath. Prompt: \"$prompt\"."
+        } else {
+            "Image generation failed: ${result.exceptionOrNull()?.message}"
         }
     }
 

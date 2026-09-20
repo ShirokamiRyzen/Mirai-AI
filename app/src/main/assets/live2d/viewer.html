@@ -70,6 +70,10 @@
         let lastScreenWidth = window.innerWidth || 0;
         let lastScreenHeight = window.innerHeight || 0;
 
+        // Flag to suppress eye blink during resize transitions
+        let isResizing = false;
+        let resizeSuppressTimer = null;
+
         // Pointer tracking target values (-1 to +1)
         let targetLookX = 0;
         let targetLookY = 0;
@@ -323,7 +327,11 @@
                     view: canvas,
                     transparent: true,
                     backgroundAlpha: 0,
-                    resizeTo: window,
+                    // Do NOT use resizeTo: window — auto-resize disrupts the animation
+                    // ticker and causes the Cubism eye blink state machine to produce
+                    // unexpected closed-eye frames during dimension changes.
+                    width: window.innerWidth,
+                    height: window.innerHeight,
                     antialias: true,
                     autoDensity: true,
                     preserveDrawingBuffer: true,
@@ -621,30 +629,94 @@
             console.log('fitModel completed: scale=' + scale + ', x=' + currentModel.x + ', y=' + currentModel.y);
         }
 
+        let resizeDebounceTimer = null;
+
+        /**
+         * Suppress eye blink during resize by forcing eye-open parameters.
+         * The Cubism SDK's internal EyeBlinkController uses a timing-based
+         * state machine that can produce closed-eye frames when the animation
+         * ticker is disrupted by renderer resizing.
+         */
+        function beginResizeSuppression() {
+            isResizing = true;
+            if (resizeSuppressTimer) {
+                clearTimeout(resizeSuppressTimer);
+            }
+            // Keep eyes forced open for a short period after resize settles
+            resizeSuppressTimer = setTimeout(() => {
+                isResizing = false;
+                resizeSuppressTimer = null;
+            }, 350);
+        }
+
+        function forceEyesOpen() {
+            if (!currentModel || !currentModel.internalModel) return;
+            // Force both eyes fully open to prevent visible blink artifact
+            setParam('ParamEyeLOpen', 1.0);
+            setParam('ParamEyeROpen', 1.0);
+            setParam('PARAM_EYE_L_OPEN', 1.0);
+            setParam('PARAM_EYE_R_OPEN', 1.0);
+        }
+
         function handleWindowResize() {
             if (!currentModel || !app) return;
-            const newW = app.screen.width;
-            const newH = app.screen.height;
+            const newW = window.innerWidth || (app.screen ? app.screen.width : 0);
+            const newH = window.innerHeight || (app.screen ? app.screen.height : 0);
             if (newW <= 0 || newH <= 0) return;
 
-            if (!userHasTransformed) {
-                // Not transformed by user: refit smoothly to the new viewport
-                fitModel();
-            } else {
-                // User has zoomed or dragged: keep user scale and shift position smoothly
-                const oldW = (lastScreenWidth > 0) ? lastScreenWidth : newW;
-                const oldH = (lastScreenHeight > 0) ? lastScreenHeight : newH;
+            // Immediately suppress blink before any resize processing
+            beginResizeSuppression();
 
-                const deltaX = (newW - oldW) / 2;
-                const deltaY = (newH - oldH) / 2;
-
-                currentModel.x += deltaX;
-                currentModel.y += deltaY;
-
-                lastScreenWidth = newW;
-                lastScreenHeight = newH;
-                console.log('handleWindowResize (preserved transform): newScreen=' + newW + 'x' + newH + ', x=' + currentModel.x + ', y=' + currentModel.y);
+            if (resizeDebounceTimer) {
+                clearTimeout(resizeDebounceTimer);
             }
+
+            resizeDebounceTimer = setTimeout(() => {
+                if (!currentModel || !app) return;
+                const curW = window.innerWidth || (app.screen ? app.screen.width : newW);
+                const curH = window.innerHeight || (app.screen ? app.screen.height : newH);
+
+                // Manually resize the PIXI renderer (since we disabled resizeTo: window)
+                try {
+                    app.renderer.resize(curW, curH);
+                } catch (e) {
+                    console.warn('Renderer resize error:', e);
+                }
+
+                // Force eyes open right after renderer resize
+                forceEyesOpen();
+
+                // Check if this is a soft keyboard toggle (width is unchanged, height shifted)
+                const isSoftKeyboardToggle = lastScreenWidth > 0 && Math.abs(curW - lastScreenWidth) < 12 && Math.abs(curH - lastScreenHeight) > 60;
+
+                if (isSoftKeyboardToggle && !userHasTransformed) {
+                    // Soft keyboard open/close: keep model scale stable so character doesn't shrink or jump!
+                    currentModel.x = curW / 2;
+                    lastScreenWidth = curW;
+                    lastScreenHeight = curH;
+                    return;
+                }
+
+                if (!userHasTransformed) {
+                    // Real orientation or container resize: refit model smoothly
+                    fitModel();
+                } else {
+                    const oldW = (lastScreenWidth > 0) ? lastScreenWidth : curW;
+                    const oldH = (lastScreenHeight > 0) ? lastScreenHeight : curH;
+
+                    const deltaX = (curW - oldW) / 2;
+                    const deltaY = (curH - oldH) / 2;
+
+                    currentModel.x += deltaX;
+                    currentModel.y += deltaY;
+
+                    lastScreenWidth = curW;
+                    lastScreenHeight = curH;
+                }
+
+                // Re-suppress blink after model reposition to cover any late frame updates
+                beginResizeSuppression();
+            }, 100);
         }
 
         function setParam(id, val, weight = 1.0) {
@@ -904,6 +976,11 @@
             if (currentModel.internalModel && typeof currentModel.internalModel.on === 'function') {
                 currentModel.internalModel.on('beforeModelUpdate', () => {
                     applyLive2dParameters();
+                    // During resize, force eyes open AFTER all other parameter updates
+                    // to override the SDK's eye blink controller output
+                    if (isResizing) {
+                        forceEyesOpen();
+                    }
                 });
             }
 
@@ -911,6 +988,11 @@
             app.ticker.add((delta) => {
                 updateDynamics(delta);
                 applyLive2dParameters();
+                // Force eyes open during resize in the ticker as well,
+                // ensuring the override happens at every render opportunity
+                if (isResizing) {
+                    forceEyesOpen();
+                }
             });
         }
 

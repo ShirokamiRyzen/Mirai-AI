@@ -41,7 +41,7 @@ data class CharacterEditUiState(
     val isImportingLive2d: Boolean = false,
     val live2dImportError: String? = null,
     val live2dImportSuccessMsg: String? = null,
-    val voiceId: String = "id_kawaii",
+    val voiceId: String = "af_heart",
     val voicePitch: Float = 1.0f,
     val voiceSpeed: Float = 1.0f,
     val isTestingVoice: Boolean = false,

@@ -92,6 +92,7 @@ import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.OutlinedButton
@@ -914,7 +915,7 @@ fun ConfigEditorForm(
             )
 
             val genModels = if (useLocalGenModel) {
-                uiState.localModels
+                uiState.localTextModels
             } else {
                 uiState.availableModels.ifEmpty {
                     listOf("auto", "gpt-3.5-turbo", "deepseek-v4-flash", "glm-5.1")
@@ -982,7 +983,7 @@ fun ConfigEditorForm(
             )
 
             val visModels = if (useLocalVisionModel) {
-                uiState.localModels
+                uiState.localVisionModels
             } else {
                 uiState.visionModels.ifEmpty {
                     uiState.availableModels.ifEmpty {
@@ -1038,7 +1039,7 @@ fun ConfigEditorForm(
                     .fillMaxWidth()
             )
 
-            val imgModels = uiState.localModels
+            val imgModels = uiState.localImageGenModels
             ExposedDropdownMenu(
                 expanded = isImageGenModelDropdownExpanded,
                 onDismissRequest = { isImageGenModelDropdownExpanded = false }
@@ -1185,13 +1186,25 @@ fun ConfigEditorForm(
                 selected = ttsEngine == "system",
                 onClick = { ttsEngine = "system" },
                 label = { Text("System TTS") },
-                leadingIcon = { Icon(Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(16.dp)) }
+                leadingIcon = { Icon(Icons.Default.PhoneAndroid, contentDescription = null, modifier = Modifier.size(16.dp)) }
             )
         }
 
         Spacer(modifier = Modifier.height(12.dp))
 
         when (ttsEngine) {
+            "system" -> {
+                Text(
+                    text = "System TTS (Lightweight)",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Uses Android's built-in speech engine (Google TTS). No model download needed — ideal for low-end devices. Voice presets will adjust pitch & speed to match the selected character voice.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
             "local" -> {
                 Text(
                     text = "Local Voice Model",
@@ -1251,9 +1264,9 @@ fun ConfigEditorForm(
                             .fillMaxWidth()
                     )
 
-                    val downloadedVoices = remember(uiState.localModels) {
+                    val downloadedVoices = remember(uiState.localVoiceModels) {
                         val list = mutableListOf("none (System Default)")
-                        list.addAll(uiState.localModels.filter { it != "None (Download via Model Hub)" })
+                        list.addAll(uiState.localVoiceModels.filter { it != "none (System Default)" && it != "None (Download via Model Hub)" })
                         list.distinct()
                     }
 
@@ -1316,26 +1329,6 @@ fun ConfigEditorForm(
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true
                     )
-                }
-            }
-            "system" -> {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.padding(14.dp)) {
-                        Text(
-                            text = "Android System TTS",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = "Uses your device's built-in Text-To-Speech engine. Fast, lightweight, and works offline immediately.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
                 }
             }
         }
@@ -1837,8 +1830,8 @@ fun AdvanceSettingsView(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     val context = androidx.compose.ui.platform.LocalContext.current
-                    var testText by remember { mutableStateOf("Halo! Ini adalah tes output suara model.") }
-                    var selectedPresetId by remember { mutableStateOf("id_kawaii") }
+                    var testText by remember { mutableStateOf("Hello! This is a voice model audio synthesis test.") }
+                    var selectedPresetId by remember { mutableStateOf("af_heart") }
                     var voicePitch by remember { mutableFloatStateOf(1.0f) }
                     var voiceSpeed by remember { mutableFloatStateOf(1.0f) }
                     var selectedConfigId by remember { mutableStateOf<String?>(activeConfig?.id) }
@@ -1914,7 +1907,7 @@ fun AdvanceSettingsView(
                                                     fontWeight = if (cfg.id == activeTestConfig?.id) FontWeight.Bold else FontWeight.Normal
                                                 )
                                                 Text(
-                                                    text = "Engine: ${cfg.ttsEngine.uppercase()}${if (cfg.ttsEngine == "local") " (Model: ${cfg.ttsLocalModel})" else if (cfg.ttsEngine == "api") " (Model: ${cfg.ttsApiModel})" else " (Built-in)"}",
+                                                    text = "Engine: ${cfg.ttsEngine.uppercase()}${if (cfg.ttsEngine == "local") " (Model: ${cfg.ttsLocalModel})" else " (Model: ${cfg.ttsApiModel})"}",
                                                     style = MaterialTheme.typography.bodySmall,
                                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                                 )
@@ -1965,7 +1958,7 @@ fun AdvanceSettingsView(
                         value = selectedPresetId,
                         onValueChange = { selectedPresetId = it },
                         label = { Text("Voice Identifier / Custom Preset") },
-                        placeholder = { Text("e.g. id_kawaii, af_heart, jf_alpha, or system") },
+                        placeholder = { Text("e.g. af_heart, af_bella, am_adam, or jf_alpha") },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true
                     )
