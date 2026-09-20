@@ -1042,58 +1042,181 @@ fun IndicatorBadge(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LocalFileCardItem(
     file: File,
     onDeleteClick: () -> Unit
 ) {
-    val sizeInMb = remember(file.length()) {
-        String.format(Locale.US, "%.1f MB", file.length().toDouble() / (1024 * 1024))
+    val fileLength = file.length()
+    val formattedSize = remember(fileLength) {
+        val sizeInGb = fileLength.toDouble() / (1024.0 * 1024.0 * 1024.0)
+        if (sizeInGb >= 1.0) {
+            String.format(Locale.US, "%.2f GB", sizeInGb)
+        } else {
+            String.format(Locale.US, "%.1f MB", fileLength.toDouble() / (1024.0 * 1024.0))
+        }
     }
+
+    val modelInfo = remember(file.name) {
+        val cleanName = file.name.removeSuffix(".onnx").removeSuffix(".gguf")
+        val parts = cleanName.split("_")
+        val isVoice = file.name.endsWith(".onnx", ignoreCase = true) ||
+                cleanName.contains("kokoro", ignoreCase = true) ||
+                cleanName.contains("piper", ignoreCase = true) ||
+                cleanName.contains("voice", ignoreCase = true)
+        val isVision = cleanName.contains("vision", ignoreCase = true) ||
+                cleanName.contains("vlm", ignoreCase = true) ||
+                cleanName.contains("llava", ignoreCase = true)
+
+        val author: String
+        val repo: String
+        val displayName: String
+
+        if (parts.size >= 3) {
+            author = parts[0]
+            repo = parts[1]
+            val remainder = parts.drop(2).joinToString("_")
+            displayName = if (remainder.equals("model", ignoreCase = true) ||
+                remainder.equals("model_quantized", ignoreCase = true) ||
+                remainder.equals("quantized", ignoreCase = true)
+            ) {
+                "$repo (${remainder})"
+            } else {
+                remainder
+            }
+        } else if (parts.size == 2) {
+            author = parts[0]
+            repo = parts[1]
+            displayName = parts[1]
+        } else {
+            author = if (isVoice) "Local TTS" else "Local Storage"
+            repo = cleanName
+            displayName = cleanName
+        }
+
+        Triple(author, displayName, Pair(isVoice, isVision))
+    }
+
+    val author = modelInfo.first
+    val title = modelInfo.second
+    val isVoice = modelInfo.third.first
+    val isVision = modelInfo.third.second
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
         )
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 18.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Default.Folder,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(32.dp)
-            )
+        Column(modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp)) {
+            // Header: Model Title, Author & Delete Button
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "by $author",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
 
-            Spacer(modifier = Modifier.width(14.dp))
+                Spacer(modifier = Modifier.width(8.dp))
 
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = file.name,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                IconButton(
+                    onClick = onDeleteClick,
+                    modifier = Modifier.size(36.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete Model",
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(22.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Indicators: Size, Type, Offline Ready Status
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                // 1. Exact Size
+                IndicatorBadge(
+                    icon = Icons.Default.Storage,
+                    label = "Size: $formattedSize",
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                 )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = sizeInMb,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+
+                // 2. Capability Badge
+                if (isVoice) {
+                    IndicatorBadge(
+                        icon = Icons.AutoMirrored.Filled.VolumeUp,
+                        label = "Voice (TTS / ONNX)",
+                        containerColor = Color(0xFF004D40),
+                        contentColor = Color(0xFF80CBC4)
+                    )
+                } else if (isVision) {
+                    IndicatorBadge(
+                        icon = Icons.Default.Visibility,
+                        label = "Vision (VLM / GGUF)",
+                        containerColor = Color(0xFF004D40),
+                        contentColor = Color(0xFF80CBC4)
+                    )
+                } else {
+                    IndicatorBadge(
+                        icon = Icons.Default.Memory,
+                        label = "Text LLM (GGUF)",
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                // 3. Offline Ready Status Badge
+                IndicatorBadge(
+                    icon = Icons.Default.CheckCircle,
+                    label = "Ready for Offline Use",
+                    containerColor = Color(0xFF1B5E20),
+                    contentColor = Color(0xFFA5D6A7)
                 )
             }
 
-            IconButton(onClick = onDeleteClick) {
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // File Name details
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete Local Model",
-                    tint = MaterialTheme.colorScheme.error
+                    imageVector = Icons.Default.Folder,
+                    contentDescription = null,
+                    modifier = Modifier.size(14.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    text = file.name,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

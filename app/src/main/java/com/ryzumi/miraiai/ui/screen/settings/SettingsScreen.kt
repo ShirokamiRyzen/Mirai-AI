@@ -1198,8 +1198,35 @@ fun ConfigEditorForm(
                         .fillMaxWidth()
                         .padding(bottom = 12.dp)
                 ) {
+                    fun formatVoiceName(raw: String): Pair<String, String?> {
+                        if (raw.isBlank() || raw.startsWith("none")) return Pair("none (System Default)", null)
+                        val clean = raw.removeSuffix(".onnx").removeSuffix(".gguf")
+                        val parts = clean.split("_")
+                        return if (parts.size >= 3) {
+                            val remainder = parts.drop(2).joinToString("_")
+                            val title = if (remainder.equals("model", ignoreCase = true) ||
+                                remainder.equals("model_quantized", ignoreCase = true) ||
+                                remainder.equals("quantized", ignoreCase = true)
+                            ) {
+                                "${parts[1]} ($remainder)"
+                            } else {
+                                remainder
+                            }
+                            Pair(title, parts[0])
+                        } else if (parts.size == 2) {
+                            Pair(parts[1], parts[0])
+                        } else {
+                            Pair(clean, null)
+                        }
+                    }
+
+                    val selectedDisplayName = remember(ttsLocalModel) {
+                        val (title, author) = formatVoiceName(ttsLocalModel)
+                        if (author != null) "$title (by $author)" else title
+                    }
+
                     OutlinedTextField(
-                        value = if (ttsLocalModel.isBlank() || ttsLocalModel == "none") "none (System Default)" else ttsLocalModel,
+                        value = selectedDisplayName,
                         onValueChange = { },
                         readOnly = true,
                         label = { Text("Local Voice Model") },
@@ -1220,8 +1247,22 @@ fun ConfigEditorForm(
                         onDismissRequest = { isTtsLocalModelDropdownExpanded = false }
                     ) {
                         downloadedVoices.forEach { model ->
+                            val (title, author) = formatVoiceName(model)
                             DropdownMenuItem(
-                                text = { Text(model) },
+                                text = {
+                                    if (author != null) {
+                                        Column {
+                                            Text(title, fontWeight = FontWeight.SemiBold)
+                                            Text(
+                                                "by $author",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                    } else {
+                                        Text(title)
+                                    }
+                                },
                                 onClick = {
                                     ttsLocalModel = if (model.startsWith("none")) "none" else model
                                     isTtsLocalModelDropdownExpanded = false

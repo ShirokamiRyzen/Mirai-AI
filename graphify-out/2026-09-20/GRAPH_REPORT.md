@@ -1,7 +1,7 @@
-# Graph Report - MiraiAI  (2026-09-16)
+# Graph Report - MiraiAI  (2026-09-20)
 
 ## Corpus Check
-- 80 files · ~97,490 words
+- 80 files · ~97,638 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fbf19477`
+- Built from commit: `fd41dfc2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,6 @@
 - q
 - le
 - je
-- Ae
 - Ct
 - c
 - bt
@@ -102,7 +101,7 @@
 - DuckDuckGoScraper
 - WebContentExtractor.kt
 - .generateShaders
-- .getParameterIndex
+- Ae
 - MiraiDatabase
 - Live2dManager
 - se
@@ -253,8 +252,8 @@ Cohesion: 0.04
 Nodes (25): ai(), cardanoAlgorithmForBezier(), cbrt(), createInternalModel(), directionToDegrees(), directionToRadian(), ge, Gt (+17 more)
 
 ### Community 44 - "ke"
-Cohesion: 0.19
-Nodes (6): cancelXHRs(), dt, ht, ke, p(), release()
+Cohesion: 0.14
+Nodes (8): cancelXHRs(), d(), dt, ht, it, ke, p(), release()
 
 ### Community 47 - "ns"
 Cohesion: 0.33
@@ -285,8 +284,8 @@ Cohesion: 0.19
 Nodes (20): at(), ct(), dt(), et(), ft(), ht(), J(), K() (+12 more)
 
 ### Community 60 - "h"
-Cohesion: 0.10
-Nodes (5): d(), f, h(), it, j()
+Cohesion: 0.11
+Nodes (4): f, g(), h(), j()
 
 ### Community 61 - "pixi.min.js"
 Cohesion: 0.05
@@ -328,10 +327,6 @@ Nodes (5): com, Modifier, Live2dViewer(), Live2dViewerController, WebView
 Cohesion: 0.28
 Nodes (6): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), Context, Live2dJsBridge, WebResourceResponse
 
-### Community 79 - "m"
-Cohesion: 0.23
-Nodes (3): g(), log(), m()
-
 ### Community 86 - "De"
 Cohesion: 0.22
 Nodes (4): createSettings(), De, K, readText()
@@ -344,9 +339,9 @@ Nodes (6): createXHR(), E, L(), loadMotion(), setupLive2DModel(), warn()
 Cohesion: 0.32
 Nodes (6): MiraiDestinations, MiraiNavGraph(), CharacterCardItem(), ManagementPersonaCardItem(), ManagementScreen(), NavHostController
 
-### Community 104 - ".getParameterIndex"
-Cohesion: 0.18
-Nodes (3): determinNextBlinkingTiming(), ft, updateParameters()
+### Community 104 - "Ae"
+Cohesion: 0.09
+Nodes (4): Ae, determinNextBlinkingTiming(), ft, updateParameters()
 
 ### Community 115 - "MiraiDatabase"
 Cohesion: 0.18
@@ -368,7 +363,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `Ue` connect `r` to `index.min.js`, `pixi.min.js`, `ns`?**
   _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `.getParameterIndex`, `index.min.js`, `ce`, `Ae`?**
+- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `Ae`, `index.min.js`, `ce`, `.doDrawModel`?**
   _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **What connects `AccumulatedToolCall`, `Unloaded`, `Error` to the rest of the system?**
   _71 weakly-connected nodes found - possible documentation gaps or missing edges._

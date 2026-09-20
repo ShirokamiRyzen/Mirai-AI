@@ -1,16 +1,16 @@
 # Graph Report - MiraiAI  (2026-09-20)
 
 ## Corpus Check
-- 80 files · ~97,638 words
+- 80 files · ~98,329 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1556 nodes · 2733 edges · 98 communities (62 shown, 36 thin omitted)
+- 1556 nodes · 2734 edges · 103 communities (61 shown, 42 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 203 edges (avg confidence: 0.67)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fd41dfc2`
+- Built from commit: `bd8de72c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,44 +64,51 @@
 - et
 - r
 - q
-- le
+- .setupShaderProgram
 - je
+- Ae
 - Ct
 - c
 - bt
 - h
 - pixi.min.js
 - ChatScreen
-- at
-- TtsDownloadState
+- .doUpdateParameters
+- rt
 - ut
 - pt
 - PersonaViewModel
 - da
 - ie
 - CharacterEntity
-- TokenUtils
+- at
 - pe
-- PersonaEditDialog
+- ManagementScreen
 - .updateParameters
 - Live2dViewerController
 - Live2dViewer.kt
 - ee
 - m
 - ze
-- lt
+- cardanoAlgorithmForBezier
 - _
 - ce
 - v
+- tt
 - De
-- loadMotion
+- .startMotion
 - Context
+- .onCreate
 - MiraiNavGraph
+- it
+- .buildOpenAiMessages
 - Be
+- .startMotion
 - DuckDuckGoScraper
+- AvatarCropDialog
 - WebContentExtractor.kt
 - .generateShaders
-- Ae
+- .getParameterIndex
 - MiraiDatabase
 - Live2dManager
 - se
@@ -133,7 +140,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (98 total, 36 thin omitted)
+## Communities (103 total, 42 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.08
@@ -160,12 +167,12 @@ Cohesion: 0.12
 Nodes (5): CharacterEditScreen(), CharacterEditUiState, CharacterEditViewModel, StateFlow, ViewModel
 
 ### Community 6 - "OpenAiRepository"
-Cohesion: 0.10
-Nodes (20): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+12 more)
+Cohesion: 0.07
+Nodes (23): AccumulatedToolCall, FilterResult, Flow, JsonObject, Result, ModelFetchResult, OpenAiRepository, SingleTurnResult (+15 more)
 
 ### Community 7 - "SettingsRepository"
-Cohesion: 0.07
-Nodes (13): AppSettings, Flow, SettingsRepository, ThemeSettings, Context, Intent, NotificationReplyReceiver, Intent (+5 more)
+Cohesion: 0.14
+Nodes (4): AppSettings, Flow, SettingsRepository, ThemeSettings
 
 ### Community 8 - "InferenceState"
 Cohesion: 0.18
@@ -180,7 +187,7 @@ Cohesion: 0.31
 Nodes (6): DataUrlFetcher, Factory, ImageLoader, Fetcher, FetchResult, Options
 
 ### Community 11 - "ChatMessageEntity"
-Cohesion: 0.14
+Cohesion: 0.13
 Nodes (4): ChatMessageDao, Flow, ChatMessageEntity, Flow
 
 ### Community 12 - "ImageUtils"
@@ -248,12 +255,12 @@ Cohesion: 0.35
 Nodes (10): AboutAppView(), AboutScreen(), AppIconImage(), AppVersionInfo, ComponentLicenseCard(), getAppVersionInfo(), Context, Modifier (+2 more)
 
 ### Community 43 - "index.min.js"
-Cohesion: 0.04
-Nodes (25): ai(), cardanoAlgorithmForBezier(), cbrt(), createInternalModel(), directionToDegrees(), directionToRadian(), ge, Gt (+17 more)
+Cohesion: 0.05
+Nodes (21): ai(), createInternalModel(), directionToDegrees(), directionToRadian(), E, ge, Gt, He() (+13 more)
 
 ### Community 44 - "ke"
-Cohesion: 0.14
-Nodes (8): cancelXHRs(), d(), dt, ht, it, ke, p(), release()
+Cohesion: 0.19
+Nodes (6): cancelXHRs(), dt, ht, ke, p(), release()
 
 ### Community 47 - "ns"
 Cohesion: 0.33
@@ -268,12 +275,8 @@ Cohesion: 0.18
 Nodes (5): resolveURL(), unzip(), upload(), x, x()
 
 ### Community 50 - "TtsManager"
-Cohesion: 0.16
-Nodes (7): Downloading, Context, StateFlow, TtsManager, Job, MediaPlayer, TextToSpeech
-
-### Community 51 - "et"
-Cohesion: 0.05
-Nodes (3): et, rt, tt
+Cohesion: 0.12
+Nodes (12): Completed, Downloading, Error, Idle, Context, StateFlow, TtsDownloadState, TtsManager (+4 more)
 
 ### Community 52 - "r"
 Cohesion: 0.20
@@ -282,6 +285,10 @@ Nodes (22): Ue, a(), co(), g(), h(), i(), is(), it() (+14 more)
 ### Community 53 - "q"
 Cohesion: 0.19
 Nodes (20): at(), ct(), dt(), et(), ft(), ht(), J(), K() (+12 more)
+
+### Community 57 - "Ct"
+Cohesion: 0.13
+Nodes (3): Ct, lt, wt()
 
 ### Community 60 - "h"
 Cohesion: 0.11
@@ -294,10 +301,6 @@ Nodes (20): Bo(), Ds(), E(), Ea(), ee(), Gs(), Hs(), ks() (+12 more)
 ### Community 62 - "ChatScreen"
 Cohesion: 0.29
 Nodes (11): cleanLive2dControlTags(), ChatBubbleItem(), ChatScreen(), FullScreenImagePreviewDialog(), Modifier, scrollToBottom(), StreamingBubbleItem(), TextSelectionDialog() (+3 more)
-
-### Community 64 - "TtsDownloadState"
-Cohesion: 0.33
-Nodes (5): Completed, Error, Idle, TtsDownloadState, VoicePreset
 
 ### Community 65 - "ut"
 Cohesion: 0.15
@@ -312,12 +315,12 @@ Cohesion: 0.14
 Nodes (17): da(), bi(), ci(), di(), gi(), Ji(), Ki(), li() (+9 more)
 
 ### Community 70 - "CharacterEntity"
-Cohesion: 0.13
+Cohesion: 0.14
 Nodes (4): CharacterDao, Flow, CharacterEntity, ContextBuilderTest
 
-### Community 73 - "PersonaEditDialog"
-Cohesion: 0.47
-Nodes (4): AvatarCropDialog(), PersonaCardItem(), PersonaEditDialog(), PersonaListScreen()
+### Community 73 - "ManagementScreen"
+Cohesion: 0.39
+Nodes (6): CharacterCardItem(), ManagementPersonaCardItem(), ManagementScreen(), PersonaCardItem(), PersonaEditDialog(), PersonaListScreen()
 
 ### Community 76 - "Live2dViewerController"
 Cohesion: 0.20
@@ -327,21 +330,29 @@ Nodes (5): com, Modifier, Live2dViewer(), Live2dViewerController, WebView
 Cohesion: 0.28
 Nodes (6): getMimeTypeForExtension(), getOptimizedImageStream(), handleLocalLive2dRequest(), Context, Live2dJsBridge, WebResourceResponse
 
-### Community 86 - "De"
-Cohesion: 0.22
-Nodes (4): createSettings(), De, K, readText()
+### Community 81 - "cardanoAlgorithmForBezier"
+Cohesion: 0.25
+Nodes (7): cardanoAlgorithmForBezier(), cbrt(), jt, qt(), quadraticEquation(), sqrt(), zt
 
-### Community 87 - "loadMotion"
+### Community 86 - "De"
+Cohesion: 0.47
+Nodes (3): createSettings(), De, readText()
+
+### Community 87 - ".startMotion"
+Cohesion: 0.27
+Nodes (3): createXHR(), loadMotion(), warn()
+
+### Community 89 - ".onCreate"
 Cohesion: 0.22
-Nodes (6): createXHR(), E, L(), loadMotion(), setupLive2DModel(), warn()
+Nodes (5): Intent, MainActivity, MiraiAITheme(), Bundle, ComponentActivity
 
 ### Community 90 - "MiraiNavGraph"
-Cohesion: 0.32
-Nodes (6): MiraiDestinations, MiraiNavGraph(), CharacterCardItem(), ManagementPersonaCardItem(), ManagementScreen(), NavHostController
+Cohesion: 0.50
+Nodes (3): MiraiDestinations, MiraiNavGraph(), NavHostController
 
-### Community 104 - "Ae"
-Cohesion: 0.09
-Nodes (4): Ae, determinNextBlinkingTiming(), ft, updateParameters()
+### Community 104 - ".getParameterIndex"
+Cohesion: 0.18
+Nodes (3): determinNextBlinkingTiming(), ft, updateParameters()
 
 ### Community 115 - "MiraiDatabase"
 Cohesion: 0.18
@@ -354,16 +365,16 @@ Nodes (12): Error, Context, Uri, Live2dImportResult, Live2dManager, Success, Liv
 ## Knowledge Gaps
 - **71 isolated node(s):** `AccumulatedToolCall`, `Unloaded`, `Error`, `Error`, `Live2dExpressionInfo` (+66 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `ModelHubViewModel`, `PersonaViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`, `AboutScreen.kt`, `PersonaEditDialog`, `SettingsScreen`, `ChatScreen`, `BackupRepository`?**
+- **Why does `MiraiNavGraph()` connect `MiraiNavGraph` to `SettingsViewModel`, `ChatViewModel`, `ModelHubViewModel`, `PersonaViewModel`, `CharacterEditViewModel`, `OpenAiRepository`, `SettingsRepository`, `ChatSessionDao`, `AboutScreen.kt`, `ManagementScreen`, `SettingsScreen`, `ChatScreen`, `.onCreate`, `BackupRepository`?**
   _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `Ue` connect `r` to `index.min.js`, `pixi.min.js`, `ns`?**
   _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `Ae`, `index.min.js`, `ce`, `.doDrawModel`?**
+- **Why does `se` connect `se` to `ut`, `pt`, `pe`, `.getParameterIndex`, `index.min.js`, `.setupShaderProgram`, `Ae`?**
   _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **What connects `AccumulatedToolCall`, `Unloaded`, `Error` to the rest of the system?**
   _71 weakly-connected nodes found - possible documentation gaps or missing edges._
@@ -372,4 +383,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `ChatViewModel` be split into smaller, more focused modules?**
   _Cohesion score 0.07394957983193277 - nodes in this community are weakly interconnected._
 - **Should `ModelHubViewModel` be split into smaller, more focused modules?**
-  _Cohesion score 0.058823529411764705 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0596078431372549 - nodes in this community are weakly interconnected._

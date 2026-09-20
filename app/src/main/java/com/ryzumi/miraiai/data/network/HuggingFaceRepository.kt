@@ -55,6 +55,9 @@ class HuggingFaceRepository(private val context: Context) {
         val audioCppFile = File(modelsDir, "audio-cpp_audio.cpp-gguf_model.gguf")
         val isAudioCppDownloaded = audioCppFile.exists() && audioCppFile.length() > 5 * 1024 * 1024
 
+        val onnxSizeBytes = if (onnxFile.exists()) onnxFile.length() else if (kokoroTtsFile.exists()) kokoroTtsFile.length() else 92360543L
+        val piperSizeBytes = if (piperFile.exists()) piperFile.length() else 63201294L
+
         return listOf(
             HuggingFaceModel(
                 id = "hexgrad/Kokoro-82M",
@@ -67,7 +70,7 @@ class HuggingFaceRepository(private val context: Context) {
                 isDownloaded = isHexgradDownloaded,
                 localFilePath = if (isHexgradDownloaded) hexgradFile.absolutePath else null,
                 estimatedSizeGb = 0.082,
-                formattedSize = "82 MB",
+                formattedSize = "82.0 MB",
                 hasVisionCapability = false,
                 hasImageGenCapability = false,
                 hasVoiceCapability = true,
@@ -86,8 +89,8 @@ class HuggingFaceRepository(private val context: Context) {
                 pipelineTag = "text-to-speech",
                 isDownloaded = isOnnxDownloaded,
                 localFilePath = if (isOnnxDownloaded) (if (onnxFile.exists()) onnxFile.absolutePath else kokoroTtsFile.absolutePath) else null,
-                estimatedSizeGb = 0.086,
-                formattedSize = "86 MB",
+                estimatedSizeGb = onnxSizeBytes.toDouble() / (1024.0 * 1024.0 * 1024.0),
+                formattedSize = String.format(Locale.US, "%.1f MB", onnxSizeBytes.toDouble() / (1024.0 * 1024.0)),
                 hasVisionCapability = false,
                 hasImageGenCapability = false,
                 hasVoiceCapability = true,
@@ -106,8 +109,8 @@ class HuggingFaceRepository(private val context: Context) {
                 pipelineTag = "text-to-speech",
                 isDownloaded = isPiperDownloaded,
                 localFilePath = if (isPiperDownloaded) piperFile.absolutePath else null,
-                estimatedSizeGb = 0.065,
-                formattedSize = "65 MB",
+                estimatedSizeGb = piperSizeBytes.toDouble() / (1024.0 * 1024.0 * 1024.0),
+                formattedSize = String.format(Locale.US, "%.1f MB", piperSizeBytes.toDouble() / (1024.0 * 1024.0)),
                 hasVisionCapability = false,
                 hasImageGenCapability = false,
                 hasVoiceCapability = true,
@@ -127,7 +130,7 @@ class HuggingFaceRepository(private val context: Context) {
                 isDownloaded = isAudioCppDownloaded,
                 localFilePath = if (isAudioCppDownloaded) audioCppFile.absolutePath else null,
                 estimatedSizeGb = 0.084,
-                formattedSize = "84 MB",
+                formattedSize = "84.0 MB",
                 hasVisionCapability = false,
                 hasImageGenCapability = false,
                 hasVoiceCapability = true,
@@ -143,9 +146,9 @@ class HuggingFaceRepository(private val context: Context) {
         try {
             val cleanQuery = query.trim()
             val url = pageUrl ?: if (cleanQuery.isEmpty()) {
-                "https://huggingface.co/api/models?filter=gguf&sort=downloads&direction=-1&limit=40&full=true"
+                "https://huggingface.co/api/models?filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
             } else {
-                "https://huggingface.co/api/models?search=$cleanQuery&sort=downloads&direction=-1&limit=40&full=true"
+                "https://huggingface.co/api/models?search=$cleanQuery&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
             }
 
             val request = Request.Builder()
@@ -276,12 +279,26 @@ class HuggingFaceRepository(private val context: Context) {
                                 id.contains("flux", ignoreCase = true) ||
                                 id.contains("sdxl", ignoreCase = true)
 
-                        // 3. Size calculation
+                        // 3. Accurate Size Calculation
+                        val ggufObj = obj.getAsJsonObject("gguf")
+                        val ggufTotalFileSize = ggufObj?.get("totalFileSize")?.asLong ?: 0L
+                        val ggufFileCount = modelFiles.count { it.first.endsWith(".gguf", ignoreCase = true) }
+
                         val estimatedSizeGb = if (directSizeBytes > 0L) {
                             directSizeBytes.toDouble() / (1024.0 * 1024.0 * 1024.0)
                         } else if (isVoiceRepo) {
-                            0.082
+                            if (id.contains("kokoro", ignoreCase = true)) {
+                                0.086
+                            } else if (id.contains("piper", ignoreCase = true)) {
+                                0.060
+                            } else {
+                                0.082
+                            }
+                        } else if (ggufTotalFileSize > 0L && ggufFileCount == 1) {
+                            // Single GGUF repository where totalFileSize is the exact file size
+                            ggufTotalFileSize.toDouble() / (1024.0 * 1024.0 * 1024.0)
                         } else {
+                            // Extract parameter count (e.g. 3B, 7B, 0.5B)
                             val lowerName = "$id $modelName ${tagsList.joinToString(" ")}".lowercase(Locale.ROOT)
                             val pattern = Pattern.compile("(\\d+(\\.\\d+)?)[bB]")
                             val matcher = pattern.matcher(lowerName)
@@ -293,26 +310,37 @@ class HuggingFaceRepository(private val context: Context) {
                                 }
                             }
 
-                            when {
-                                paramB in 0.1..0.8 -> 0.6
-                                paramB in 0.8..1.8 -> 1.2
-                                paramB in 1.8..3.8 -> 2.4
-                                paramB in 3.8..6.5 -> 3.8
-                                paramB in 6.5..8.5 -> 4.9
-                                paramB in 8.5..12.0 -> 7.2
-                                paramB in 12.0..16.0 -> 9.5
-                                paramB in 16.0..34.0 -> 19.5
-                                paramB > 34.0 -> 42.0
-                                hasImageGen -> 3.5
-                                hasVision -> 3.2
-                                else -> 2.2
+                            if (paramB > 0.0) {
+                                // Calculate accurate quant-based size
+                                val quantLower = selectedFileName.lowercase(Locale.ROOT)
+                                val bitsPerParam = when {
+                                    quantLower.contains("q2") || quantLower.contains("iq2") -> 2.6
+                                    quantLower.contains("q3") || quantLower.contains("iq3") -> 3.5
+                                    quantLower.contains("q4") || quantLower.contains("iq4") -> 4.5
+                                    quantLower.contains("q5") || quantLower.contains("iq5") -> 5.5
+                                    quantLower.contains("q6") || quantLower.contains("iq6") -> 6.6
+                                    quantLower.contains("q8") -> 8.5
+                                    quantLower.contains("f16") || quantLower.contains("bf16") -> 16.0
+                                    else -> 4.5 // Standard default Q4 quantization
+                                }
+                                val estimatedBytes = (paramB * 1_000_000_000.0 * (bitsPerParam / 8.0)) + 120_000_000.0
+                                estimatedBytes / (1024.0 * 1024.0 * 1024.0)
+                            } else if (ggufTotalFileSize > 0L && ggufFileCount > 1) {
+                                // Approximate individual quant file size from BF16 base size (Q4 is ~30% of BF16)
+                                (ggufTotalFileSize.toDouble() * 0.30) / (1024.0 * 1024.0 * 1024.0)
+                            } else {
+                                when {
+                                    hasImageGen -> 3.5
+                                    hasVision -> 3.2
+                                    else -> 2.0
+                                }
                             }
                         }
 
                         val formattedSize = if (estimatedSizeGb >= 1.0) {
                             String.format(Locale.US, "%.1f GB", estimatedSizeGb)
                         } else {
-                            String.format(Locale.US, "%.0f MB", estimatedSizeGb * 1024.0)
+                            String.format(Locale.US, "%.1f MB", estimatedSizeGb * 1024.0)
                         }
 
                         // 4. Calculate RAM Requirement & Device Compatibility
