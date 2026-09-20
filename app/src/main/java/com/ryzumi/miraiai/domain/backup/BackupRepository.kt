@@ -12,9 +12,11 @@ import com.ryzumi.miraiai.domain.util.ImageUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.InputStreamReader
 import java.util.UUID
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
@@ -404,10 +406,16 @@ class BackupRepository(
 
     suspend fun readBackupFromUri(uri: Uri): Result<MiraiBackupData> = withContext(Dispatchers.IO) {
         try {
-            val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+            val rawInputStream = context.contentResolver.openInputStream(uri)
                 ?: return@withContext Result.failure(Exception("Failed to read selected file"))
 
-            val isZip = bytes.size >= 4 && bytes[0] == 0x50.toByte() && bytes[1] == 0x4B.toByte()
+            val bufferedInput = BufferedInputStream(rawInputStream)
+            bufferedInput.mark(4)
+            val headerBytes = ByteArray(4)
+            val bytesRead = bufferedInput.read(headerBytes, 0, 4)
+            bufferedInput.reset()
+
+            val isZip = bytesRead >= 4 && headerBytes[0] == 0x50.toByte() && headerBytes[1] == 0x4B.toByte()
 
             if (isZip) {
                 val avatarsDir = File(context.filesDir, "avatars").apply { if (!exists()) mkdirs() }
@@ -418,7 +426,7 @@ class BackupRepository(
                 val extractedPersonaAvatars = mutableMapOf<String, String>()
                 val extractedChatImages = mutableMapOf<String, String>()
 
-                ZipInputStream(ByteArrayInputStream(bytes)).use { zipIn ->
+                ZipInputStream(bufferedInput).use { zipIn ->
                     var entry = zipIn.nextEntry
                     while (entry != null) {
                         val name = entry.name
@@ -426,21 +434,24 @@ class BackupRepository(
                             jsonContent = zipIn.bufferedReader(Charsets.UTF_8).readText()
                         } else if (name.startsWith("avatars/characters/")) {
                             val charId = name.removePrefix("avatars/characters/").substringBeforeLast(".")
-                            val entryBytes = zipIn.readBytes()
                             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
-                            FileOutputStream(targetFile).use { it.write(entryBytes) }
+                            FileOutputStream(targetFile).use { out ->
+                                zipIn.copyTo(out)
+                            }
                             extractedCharAvatars[charId] = targetFile.absolutePath
                         } else if (name.startsWith("avatars/personas/")) {
                             val personaId = name.removePrefix("avatars/personas/").substringBeforeLast(".")
-                            val entryBytes = zipIn.readBytes()
                             val targetFile = File(avatarsDir, "avatar_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
-                            FileOutputStream(targetFile).use { it.write(entryBytes) }
+                            FileOutputStream(targetFile).use { out ->
+                                zipIn.copyTo(out)
+                            }
                             extractedPersonaAvatars[personaId] = targetFile.absolutePath
                         } else if (name.startsWith("chat_images/")) {
                             val msgId = name.removePrefix("chat_images/").substringBeforeLast(".")
-                            val entryBytes = zipIn.readBytes()
                             val targetFile = File(chatImagesDir, "chat_img_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}.webp")
-                            FileOutputStream(targetFile).use { it.write(entryBytes) }
+                            FileOutputStream(targetFile).use { out ->
+                                zipIn.copyTo(out)
+                            }
                             extractedChatImages[msgId] = targetFile.absolutePath
                         } else if (name.startsWith("live2d/") && !entry.isDirectory) {
                             val relPath = name.removePrefix("live2d/")
@@ -520,9 +531,9 @@ class BackupRepository(
                 Result.success(finalBackup)
             } else {
                 // Fallback for legacy JSON backup or plain JSON
-                val jsonString = String(bytes, Charsets.UTF_8)
-                val rawBackup = gson.fromJson(jsonString, MiraiBackupData::class.java)
-                    ?: return@withContext Result.failure(Exception("Invalid or empty backup file format"))
+                val rawBackup = InputStreamReader(bufferedInput, Charsets.UTF_8).use { reader ->
+                    gson.fromJson(reader, MiraiBackupData::class.java)
+                } ?: return@withContext Result.failure(Exception("Invalid or empty backup file format"))
 
                 val updatedCharacters = rawBackup.characters.map { char ->
                     val localPath = rawBackup.characterAvatars?.get(char.id)?.let { b64 ->

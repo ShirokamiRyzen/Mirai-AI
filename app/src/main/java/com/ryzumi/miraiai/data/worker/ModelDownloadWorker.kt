@@ -48,9 +48,13 @@ class ModelDownloadWorker(
                 modelsDir.mkdirs()
             }
 
-            val safeFileName = "${modelId.replace("/", "_")}_$fileName"
+            val cleanFileName = fileName.replace("/", "_").replace("\\", "_")
+            val safeFileName = "${modelId.replace("/", "_")}_$cleanFileName"
             val targetFile = File(modelsDir, safeFileName)
             val tempFile = File(modelsDir, "$safeFileName.tmp")
+
+            targetFile.parentFile?.mkdirs()
+            tempFile.parentFile?.mkdirs()
 
             var existingBytes = if (tempFile.exists()) tempFile.length() else 0L
 
@@ -129,6 +133,7 @@ class ModelDownloadWorker(
                 )
             )
         } catch (e: Exception) {
+            android.util.Log.e("ModelDownloadWorker", "Download failed for model $modelId: ${e.message}", e)
             if (isStopped) {
                 Result.failure(workDataOf(KEY_ERROR to "Download stopped"))
             } else {

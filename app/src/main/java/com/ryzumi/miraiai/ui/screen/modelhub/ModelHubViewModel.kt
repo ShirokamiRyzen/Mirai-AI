@@ -84,19 +84,24 @@ class ModelHubViewModel(
     }
 
     fun selectFilter(filter: ModelHubFilter) {
+        if (_uiState.value.selectedFilter == filter) return
         _uiState.value = _uiState.value.copy(selectedFilter = filter)
         if (filter == ModelHubFilter.DOWNLOADED) {
             loadDownloadedModels()
+        } else {
+            searchModels(_uiState.value.searchQuery, filter)
         }
     }
 
-    fun searchModels(query: String = _uiState.value.searchQuery) {
+    fun searchModels(
+        query: String = _uiState.value.searchQuery,
+        filter: ModelHubFilter = _uiState.value.selectedFilter
+    ) {
         viewModelScope.launch {
-            val currentFilter = _uiState.value.selectedFilter
-            val targetFilter = if (query.isNotBlank() && currentFilter != ModelHubFilter.DOWNLOADED) {
+            val targetFilter = if (query.isNotBlank() && filter != ModelHubFilter.DOWNLOADED) {
                 ModelHubFilter.ALL
             } else {
-                currentFilter
+                filter
             }
             _uiState.value = _uiState.value.copy(
                 isSearching = true,
@@ -104,7 +109,7 @@ class ModelHubViewModel(
                 nextPageUrl = null,
                 selectedFilter = targetFilter
             )
-            val result = repository.searchModels(query)
+            val result = repository.searchModels(query, targetFilter)
             result.onSuccess { pageResult ->
                 _uiState.value = _uiState.value.copy(
                     models = pageResult.models,
@@ -126,7 +131,11 @@ class ModelHubViewModel(
 
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoadingMore = true)
-            val result = repository.searchModels(state.searchQuery, state.nextPageUrl)
+            val result = repository.searchModels(
+                query = state.searchQuery,
+                filter = state.selectedFilter,
+                pageUrl = state.nextPageUrl
+            )
             result.onSuccess { pageResult ->
                 val currentIds = state.models.map { it.id }.toSet()
                 val newUnique = pageResult.models.filter { it.id !in currentIds }
@@ -171,53 +180,54 @@ class ModelHubViewModel(
 
         workManager.enqueue(workRequest)
 
-        workManager.getWorkInfoByIdLiveData(workRequest.id).observeForever { workInfo ->
-            if (workInfo != null) {
-                val latestMap = _uiState.value.downloadStateMap.toMutableMap()
-                val existing = latestMap[model.id]
+        viewModelScope.launch {
+            workManager.getWorkInfoByIdFlow(workRequest.id).collect { workInfo ->
+                if (workInfo != null) {
+                    val latestMap = _uiState.value.downloadStateMap.toMutableMap()
+                    val existing = latestMap[model.id]
 
-                if (existing != null && existing.status == DownloadStatus.PAUSED) {
-                    // Do not overwrite paused state
-                    return@observeForever
-                }
+                    if (existing != null && existing.status == DownloadStatus.PAUSED) {
+                        return@collect
+                    }
 
-                when (workInfo.state) {
-                    WorkInfo.State.RUNNING -> {
-                        val progress = workInfo.progress.getInt(ModelDownloadWorker.KEY_PROGRESS, existing?.progress ?: 0)
-                        latestMap[model.id] = ModelDownloadState(
-                            modelId = model.id,
-                            progress = progress,
-                            status = DownloadStatus.DOWNLOADING,
-                            workRequestId = workRequest.id
-                        )
-                        _uiState.value = _uiState.value.copy(downloadStateMap = latestMap)
-                    }
-                    WorkInfo.State.SUCCEEDED -> {
-                        latestMap[model.id] = ModelDownloadState(
-                            modelId = model.id,
-                            progress = 100,
-                            status = DownloadStatus.COMPLETED,
-                            workRequestId = null
-                        )
-                        _uiState.value = _uiState.value.copy(downloadStateMap = latestMap)
-                        loadDownloadedModels()
-                        searchModels()
-                    }
-                    WorkInfo.State.FAILED -> {
-                        if (existing?.status != DownloadStatus.PAUSED) {
+                    when (workInfo.state) {
+                        WorkInfo.State.RUNNING -> {
+                            val progress = workInfo.progress.getInt(ModelDownloadWorker.KEY_PROGRESS, existing?.progress ?: 0)
                             latestMap[model.id] = ModelDownloadState(
                                 modelId = model.id,
-                                progress = existing?.progress ?: 0,
-                                status = DownloadStatus.FAILED,
-                                workRequestId = null
+                                progress = progress,
+                                status = DownloadStatus.DOWNLOADING,
+                                workRequestId = workRequest.id
                             )
                             _uiState.value = _uiState.value.copy(downloadStateMap = latestMap)
                         }
+                        WorkInfo.State.SUCCEEDED -> {
+                            latestMap[model.id] = ModelDownloadState(
+                                modelId = model.id,
+                                progress = 100,
+                                status = DownloadStatus.COMPLETED,
+                                workRequestId = null
+                            )
+                            _uiState.value = _uiState.value.copy(downloadStateMap = latestMap)
+                            loadDownloadedModels()
+                            searchModels()
+                        }
+                        WorkInfo.State.FAILED -> {
+                            if (existing?.status != DownloadStatus.PAUSED) {
+                                latestMap[model.id] = ModelDownloadState(
+                                    modelId = model.id,
+                                    progress = existing?.progress ?: 0,
+                                    status = DownloadStatus.FAILED,
+                                    workRequestId = null
+                                )
+                                _uiState.value = _uiState.value.copy(downloadStateMap = latestMap)
+                            }
+                        }
+                        WorkInfo.State.CANCELLED -> {
+                            // Handled by pause/cancel methods
+                        }
+                        else -> Unit
                     }
-                    WorkInfo.State.CANCELLED -> {
-                        // Handled by pause/cancel methods
-                    }
-                    else -> Unit
                 }
             }
         }

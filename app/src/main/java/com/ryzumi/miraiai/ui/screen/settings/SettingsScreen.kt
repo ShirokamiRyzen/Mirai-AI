@@ -11,6 +11,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -168,13 +172,14 @@ fun SettingsScreen(
     onUpdateMonetEnabled: (Boolean) -> Unit,
     onBackClick: () -> Unit
 ) {
-    var selectedMainTab by remember { mutableIntStateOf(0) }
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 5 })
+    val coroutineScope = rememberCoroutineScope()
     var editingConfig by remember { mutableStateOf<InferenceConfigEntity?>(null) }
     var configToDelete by remember { mutableStateOf<InferenceConfigEntity?>(null) }
     var selectedConfigIds by rememberSaveable { mutableStateOf<Set<String>>(emptySet()) }
     var showBulkConfigDeleteDialog by remember { mutableStateOf(false) }
 
-    val isConfigSelectionMode = selectedMainTab == 0 && editingConfig == null && selectedConfigIds.isNotEmpty()
+    val isConfigSelectionMode = pagerState.currentPage == 0 && editingConfig == null && selectedConfigIds.isNotEmpty()
 
     BackHandler(enabled = isConfigSelectionMode) {
         selectedConfigIds = emptySet<String>()
@@ -233,7 +238,7 @@ fun SettingsScreen(
             }
         },
         floatingActionButton = {
-            if (selectedMainTab == 0 && editingConfig == null && !isConfigSelectionMode) {
+            if (pagerState.currentPage == 0 && editingConfig == null && !isConfigSelectionMode) {
                 FloatingActionButton(
                     onClick = {
                         val count = uiState.configs.size + 1
@@ -259,48 +264,48 @@ fun SettingsScreen(
         ) {
             if (editingConfig == null) {
                 PrimaryTabRow(
-                    selectedTabIndex = selectedMainTab
+                    selectedTabIndex = pagerState.currentPage
                 ) {
                     Tab(
-                        selected = selectedMainTab == 0,
+                        selected = pagerState.currentPage == 0,
                         onClick = {
-                            selectedMainTab = 0
+                            coroutineScope.launch { pagerState.animateScrollToPage(0) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Inference", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.SettingsInputComponent, contentDescription = null) }
                     )
                     Tab(
-                        selected = selectedMainTab == 1,
+                        selected = pagerState.currentPage == 1,
                         onClick = {
-                            selectedMainTab = 1
+                            coroutineScope.launch { pagerState.animateScrollToPage(1) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Themes", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Palette, contentDescription = null) }
                     )
                     Tab(
-                        selected = selectedMainTab == 2,
+                        selected = pagerState.currentPage == 2,
                         onClick = {
-                            selectedMainTab = 2
+                            coroutineScope.launch { pagerState.animateScrollToPage(2) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Advance", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Tune, contentDescription = null) }
                     )
                     Tab(
-                        selected = selectedMainTab == 3,
+                        selected = pagerState.currentPage == 3,
                         onClick = {
-                            selectedMainTab = 3
+                            coroutineScope.launch { pagerState.animateScrollToPage(3) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("Backup", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
                         icon = { Icon(Icons.Default.Backup, contentDescription = null) }
                     )
                     Tab(
-                        selected = selectedMainTab == 4,
+                        selected = pagerState.currentPage == 4,
                         onClick = {
-                            selectedMainTab = 4
+                            coroutineScope.launch { pagerState.animateScrollToPage(4) }
                             selectedConfigIds = emptySet<String>()
                         },
                         text = { Text("About", maxLines = 1, style = MaterialTheme.typography.labelSmall) },
@@ -309,108 +314,109 @@ fun SettingsScreen(
                 }
             }
 
-            AnimatedContent(
-                targetState = Pair(selectedMainTab, editingConfig),
-                transitionSpec = {
-                    fadeIn(animationSpec = tween(300)) +
-                            slideInHorizontally { width -> if (targetState.second != null || targetState.first > 0) width else -width } togetherWith
-                            fadeOut(animationSpec = tween(300)) +
-                            slideOutHorizontally { width -> if (targetState.second != null || targetState.first > 0) -width else width }
-                },
-                label = "SettingsTabTransition",
-                modifier = Modifier.fillMaxSize()
-            ) { (tabIndex, currentEditing) ->
-                if (currentEditing != null) {
-                    // Config Editor Form View
-                    ConfigEditorForm(
-                        config = currentEditing,
-                        uiState = uiState,
-                        onSave = { updated ->
-                            onSaveConfigProfile(updated)
-                            editingConfig = null
-                        },
-                        onFetchModelsClick = onFetchModelsClick,
-                        onCancel = { editingConfig = null }
-                    )
-                } else if (tabIndex == 0) {
-                    // Tab 0: Inference Configurations List
-                    if (uiState.configs.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "No configs created yet. Tap + to add one!",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(horizontal = 16.dp),
-                            contentPadding = PaddingValues(top = 8.dp, bottom = 88.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            items(uiState.configs, key = { it.id }) { config ->
-                                val isSelected = selectedConfigIds.contains(config.id)
-                                ConfigCardItem(
-                                    config = config,
-                                    isSelected = isSelected,
-                                    isSelectionMode = isConfigSelectionMode,
-                                    onClick = {
-                                        if (isConfigSelectionMode) {
-                                            selectedConfigIds = if (isSelected) selectedConfigIds - config.id else selectedConfigIds + config.id
-                                        } else {
-                                            onSelectConfigProfile(config.id)
-                                            editingConfig = config
-                                        }
-                                    },
-                                    onLongClick = {
-                                        selectedConfigIds = if (isSelected) selectedConfigIds - config.id else selectedConfigIds + config.id
-                                    },
-                                    onEdit = {
-                                        onSelectConfigProfile(config.id)
-                                        editingConfig = config
-                                    },
-                                    onDelete = { configToDelete = config }
-                                )
+            if (editingConfig != null) {
+                // Config Editor Form View
+                ConfigEditorForm(
+                    config = editingConfig!!,
+                    uiState = uiState,
+                    onSave = { updated ->
+                        onSaveConfigProfile(updated)
+                        editingConfig = null
+                    },
+                    onFetchModelsClick = onFetchModelsClick,
+                    onCancel = { editingConfig = null }
+                )
+            } else {
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier.fillMaxSize()
+                ) { pageIndex ->
+                    when (pageIndex) {
+                        0 -> {
+                            // Tab 0: Inference Configurations List
+                            if (uiState.configs.isEmpty()) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "No configs created yet. Tap + to add one!",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            } else {
+                                LazyColumn(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(horizontal = 16.dp),
+                                    contentPadding = PaddingValues(top = 8.dp, bottom = 88.dp),
+                                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    items(uiState.configs, key = { it.id }) { config ->
+                                        val isSelected = selectedConfigIds.contains(config.id)
+                                        ConfigCardItem(
+                                            config = config,
+                                            isSelected = isSelected,
+                                            isSelectionMode = isConfigSelectionMode,
+                                            onClick = {
+                                                if (isConfigSelectionMode) {
+                                                    selectedConfigIds = if (isSelected) selectedConfigIds - config.id else selectedConfigIds + config.id
+                                                } else {
+                                                    onSelectConfigProfile(config.id)
+                                                    editingConfig = config
+                                                }
+                                            },
+                                            onLongClick = {
+                                                selectedConfigIds = if (isSelected) selectedConfigIds - config.id else selectedConfigIds + config.id
+                                            },
+                                            onEdit = {
+                                                onSelectConfigProfile(config.id)
+                                                editingConfig = config
+                                            },
+                                            onDelete = { configToDelete = config }
+                                        )
+                                    }
+                                }
                             }
                         }
+                        1 -> {
+                            // Tab 1: Themes & Appearance
+                            ThemeSettingsView(
+                                themeSettings = uiState.themeSettings,
+                                onUpdateThemeMode = onUpdateThemeMode,
+                                onUpdateMonetEnabled = onUpdateMonetEnabled
+                            )
+                        }
+                        2 -> {
+                            // Tab 2: Advance Settings (Debug & Thinking)
+                            AdvanceSettingsView(
+                                uiState = uiState,
+                                onTestVisionCapability = onTestVisionCapability,
+                                onClearDebugLogs = onClearDebugLogs,
+                                onToggleDebugLogging = onToggleDebugLogging,
+                                onToggleShowThinkingProcess = onToggleShowThinkingProcess,
+                                onToggleTokenCounter = onToggleTokenCounter,
+                                onToggleAllowDeviceContext = onToggleAllowDeviceContext,
+                                onToggleUploadAsBase64 = onToggleUploadAsBase64,
+                                onSetActiveProfile = onSetActiveProfile
+                            )
+                        }
+                        3 -> {
+                            // Tab 3: Backup & Restore
+                            BackupSettingsView(
+                                uiState = uiState,
+                                onExportBackup = onExportBackup,
+                                onImportBackup = onImportBackup,
+                                onRefreshStats = onRefreshBackupStats,
+                                onClearBackupMessage = onClearBackupMessage
+                            )
+                        }
+                        else -> {
+                            // Tab 4: About App
+                            AboutAppView()
+                        }
                     }
-                } else if (tabIndex == 1) {
-                    // Tab 1: Themes & Appearance
-                    ThemeSettingsView(
-                        themeSettings = uiState.themeSettings,
-                        onUpdateThemeMode = onUpdateThemeMode,
-                        onUpdateMonetEnabled = onUpdateMonetEnabled
-                    )
-                } else if (tabIndex == 2) {
-                    // Tab 2: Advance Settings (Debug & Thinking)
-                    AdvanceSettingsView(
-                        uiState = uiState,
-                        onTestVisionCapability = onTestVisionCapability,
-                        onClearDebugLogs = onClearDebugLogs,
-                        onToggleDebugLogging = onToggleDebugLogging,
-                        onToggleShowThinkingProcess = onToggleShowThinkingProcess,
-                        onToggleTokenCounter = onToggleTokenCounter,
-                        onToggleAllowDeviceContext = onToggleAllowDeviceContext,
-                        onToggleUploadAsBase64 = onToggleUploadAsBase64,
-                        onSetActiveProfile = onSetActiveProfile
-                    )
-                } else if (tabIndex == 3) {
-                    // Tab 3: Backup & Restore
-                    BackupSettingsView(
-                        uiState = uiState,
-                        onExportBackup = onExportBackup,
-                        onImportBackup = onImportBackup,
-                        onRefreshStats = onRefreshBackupStats,
-                        onClearBackupMessage = onClearBackupMessage
-                    )
-                } else {
-                    // Tab 4: About App
-                    AboutAppView()
                 }
             }
         }

@@ -142,13 +142,28 @@ class HuggingFaceRepository(private val context: Context) {
         )
     }
 
-    suspend fun searchModels(query: String, pageUrl: String? = null): Result<HuggingFacePageResult> = withContext(Dispatchers.IO) {
+    suspend fun searchModels(
+        query: String,
+        filter: com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter = com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.ALL,
+        pageUrl: String? = null
+    ): Result<HuggingFacePageResult> = withContext(Dispatchers.IO) {
         try {
             val cleanQuery = query.trim()
-            val url = pageUrl ?: if (cleanQuery.isEmpty()) {
-                "https://huggingface.co/api/models?filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
-            } else {
+            val url = pageUrl ?: if (cleanQuery.isNotEmpty()) {
                 "https://huggingface.co/api/models?search=$cleanQuery&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+            } else {
+                when (filter) {
+                    com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.TEXT_GGUF ->
+                        "https://huggingface.co/api/models?filter=gguf&pipeline_tag=text-generation&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+                    com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.VISION ->
+                        "https://huggingface.co/api/models?search=vision&filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+                    com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.IMAGE_GEN ->
+                        "https://huggingface.co/api/models?search=diffusion&filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+                    com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.VOICE_TTS ->
+                        "https://huggingface.co/api/models?search=tts&filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+                    else ->
+                        "https://huggingface.co/api/models?filter=gguf&sort=downloads&direction=-1&limit=40&full=true&expand[]=gguf&expand[]=siblings"
+                }
             }
 
             val request = Request.Builder()
@@ -181,7 +196,7 @@ class HuggingFaceRepository(private val context: Context) {
                 val resultList = mutableListOf<HuggingFaceModel>()
                 val localModelsDir = File(context.filesDir, "models")
 
-                if (pageUrl == null) {
+                if (pageUrl == null && (filter == com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.ALL || filter == com.ryzumi.miraiai.ui.screen.modelhub.ModelHubFilter.VOICE_TTS)) {
                     val voiceModels = getFeaturedVoiceModels().filter { m ->
                         cleanQuery.isEmpty() ||
                                 m.modelName.contains(cleanQuery, ignoreCase = true) ||

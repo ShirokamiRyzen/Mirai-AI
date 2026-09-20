@@ -73,6 +73,11 @@ import com.ryzumi.miraiai.data.local.entity.CharacterEntity
 import com.ryzumi.miraiai.data.local.entity.UserPersonaEntity
 import com.ryzumi.miraiai.ui.screen.persona.PersonaEditDialog
 
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManagementScreen(
@@ -90,7 +95,8 @@ fun ManagementScreen(
     onDeletePersonas: (Set<String>) -> Unit = {},
     onBackClick: () -> Unit
 ) {
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 2 })
+    val coroutineScope = rememberCoroutineScope()
     var selectedCharIds by rememberSaveable { mutableStateOf(setOf<String>()) }
     var selectedPersonaIds by rememberSaveable { mutableStateOf(setOf<String>()) }
     var showBulkCharDeleteDialog by remember { mutableStateOf(false) }
@@ -100,8 +106,8 @@ fun ManagementScreen(
     var isCreatingPersona by remember { mutableStateOf(false) }
     var localSearchText by rememberSaveable { mutableStateOf(searchQuery) }
 
-    val isCharSelectionMode = selectedTabIndex == 0 && selectedCharIds.isNotEmpty()
-    val isPersonaSelectionMode = selectedTabIndex == 1 && selectedPersonaIds.isNotEmpty()
+    val isCharSelectionMode = pagerState.currentPage == 0 && selectedCharIds.isNotEmpty()
+    val isPersonaSelectionMode = pagerState.currentPage == 1 && selectedPersonaIds.isNotEmpty()
 
     BackHandler(enabled = isCharSelectionMode || isPersonaSelectionMode) {
         if (isCharSelectionMode) selectedCharIds = emptySet()
@@ -175,7 +181,7 @@ fun ManagementScreen(
         },
         floatingActionButton = {
             if (!isCharSelectionMode && !isPersonaSelectionMode) {
-                if (selectedTabIndex == 0) {
+                if (pagerState.currentPage == 0) {
                     FloatingActionButton(
                         onClick = onCreateCharacterClick,
                         containerColor = MaterialTheme.colorScheme.primary
@@ -198,20 +204,20 @@ fun ManagementScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
+            PrimaryTabRow(selectedTabIndex = pagerState.currentPage) {
                 Tab(
-                    selected = selectedTabIndex == 0,
+                    selected = pagerState.currentPage == 0,
                     onClick = {
-                        selectedTabIndex = 0
+                        coroutineScope.launch { pagerState.animateScrollToPage(0) }
                         selectedPersonaIds = emptySet()
                     },
                     text = { Text("Characters (${characters.size})") },
                     icon = { Icon(Icons.Default.People, contentDescription = null) }
                 )
                 Tab(
-                    selected = selectedTabIndex == 1,
+                    selected = pagerState.currentPage == 1,
                     onClick = {
-                        selectedTabIndex = 1
+                        coroutineScope.launch { pagerState.animateScrollToPage(1) }
                         selectedCharIds = emptySet()
                     },
                     text = { Text("User Personas (${personas.size})") },
@@ -219,169 +225,192 @@ fun ManagementScreen(
                 )
             }
 
-            if (selectedTabIndex == 0) {
-                // Characters Tab
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    OutlinedTextField(
-                        value = localSearchText,
-                        onValueChange = {
-                            localSearchText = it
-                            onSearchQueryChanged(it)
-                        },
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.fillMaxSize()
+            ) { page ->
+                if (page == 0) {
+                    // Characters Tab
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 12.dp),
-                        placeholder = { Text("Search characters...") },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Search Characters"
-                            )
-                        },
-                        trailingIcon = {
-                            if (localSearchText.isNotEmpty()) {
-                                IconButton(onClick = {
-                                    localSearchText = ""
-                                    onSearchQueryChanged("")
-                                }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Clear,
-                                        contentDescription = "Clear Search"
+                            .fillMaxSize()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        OutlinedTextField(
+                            value = localSearchText,
+                            onValueChange = {
+                                localSearchText = it
+                                onSearchQueryChanged(it)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 12.dp),
+                            placeholder = { Text("Search characters...") },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = "Search Characters"
+                                )
+                            },
+                            trailingIcon = {
+                                if (localSearchText.isNotEmpty()) {
+                                    IconButton(onClick = {
+                                        localSearchText = ""
+                                        onSearchQueryChanged("")
+                                    }) {
+                                        Icon(
+                                            imageVector = Icons.Default.Clear,
+                                            contentDescription = "Clear Search"
+                                        )
+                                    }
+                                }
+                            },
+                            singleLine = true,
+                            shape = RoundedCornerShape(28.dp)
+                        )
+
+                        if (characters.isEmpty()) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(32.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = if (localSearchText.isNotEmpty()) "No characters match \"$localSearchText\"" else "No characters found",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Text(
+                                        text = "Tap + below to create a new character",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                                     )
                                 }
                             }
-                        },
-                        singleLine = true,
-                        shape = RoundedCornerShape(28.dp)
-                    )
-
-                    if (characters.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = if (localSearchText.isBlank()) "No characters found. Tap + to create one!" else "No characters match '$localSearchText'",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(top = 4.dp, bottom = 88.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            items(
-                                items = characters,
-                                key = { it.id },
-                                contentType = { "character" }
-                            ) { character ->
-                                val isSelected = selectedCharIds.contains(character.id)
-                                CharacterCardItem(
-                                    character = character,
-                                    isSelected = isSelected,
-                                    isSelectionMode = isCharSelectionMode,
-                                    onClick = {
-                                        if (isCharSelectionMode) {
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.spacedBy(10.dp),
+                                contentPadding = PaddingValues(bottom = 88.dp)
+                            ) {
+                                items(characters, key = { it.id }) { character ->
+                                    val isSelected = selectedCharIds.contains(character.id)
+                                    CharacterCardItem(
+                                        character = character,
+                                        isSelected = isSelected,
+                                        isSelectionMode = isCharSelectionMode,
+                                        onClick = {
+                                            if (isCharSelectionMode) {
+                                                selectedCharIds = if (isSelected) selectedCharIds - character.id else selectedCharIds + character.id
+                                            } else {
+                                                onEditCharacterClick(character.id)
+                                            }
+                                        },
+                                        onLongClick = {
                                             selectedCharIds = if (isSelected) selectedCharIds - character.id else selectedCharIds + character.id
-                                        } else {
-                                            onEditCharacterClick(character.id)
-                                        }
-                                    },
-                                    onLongClick = {
-                                        selectedCharIds = if (isSelected) selectedCharIds - character.id else selectedCharIds + character.id
-                                    },
-                                    onEditClick = { onEditCharacterClick(character.id) }
-                                )
+                                        },
+                                        onEditClick = { onEditCharacterClick(character.id) }
+                                    )
+                                }
                             }
                         }
                     }
-                }
-            } else {
-                // Personas Tab
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    OutlinedTextField(
-                        value = localSearchText,
-                        onValueChange = {
-                            localSearchText = it
-                            onSearchQueryChanged(it)
-                        },
+                } else {
+                    // Personas Tab
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 12.dp),
-                        placeholder = { Text("Search user personas...") },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Search Personas"
-                            )
-                        },
-                        trailingIcon = {
-                            if (localSearchText.isNotEmpty()) {
-                                IconButton(onClick = {
-                                    localSearchText = ""
-                                    onSearchQueryChanged("")
-                                }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Clear,
-                                        contentDescription = "Clear Search"
+                            .fillMaxSize()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        OutlinedTextField(
+                            value = localSearchText,
+                            onValueChange = {
+                                localSearchText = it
+                                onSearchQueryChanged(it)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 12.dp),
+                            placeholder = { Text("Search user personas...") },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = "Search Personas"
+                                )
+                            },
+                            trailingIcon = {
+                                if (localSearchText.isNotEmpty()) {
+                                    IconButton(onClick = {
+                                        localSearchText = ""
+                                        onSearchQueryChanged("")
+                                    }) {
+                                        Icon(
+                                            imageVector = Icons.Default.Clear,
+                                            contentDescription = "Clear Search"
+                                        )
+                                    }
+                                }
+                            },
+                            singleLine = true,
+                            shape = RoundedCornerShape(28.dp)
+                        )
+
+                        if (personas.isEmpty()) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(32.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = if (localSearchText.isNotEmpty()) "No user personas match \"$localSearchText\"" else "No user personas found",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Text(
+                                        text = "Tap + below to create a new persona",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                                     )
                                 }
                             }
-                        },
-                        singleLine = true,
-                        shape = RoundedCornerShape(28.dp)
-                    )
-
-                    if (personas.isEmpty()) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = if (localSearchText.isBlank()) "No user personas found. Tap + to create one!" else "No personas match '$localSearchText'",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(top = 4.dp, bottom = 88.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            items(
-                                items = personas,
-                                key = { it.id },
-                                contentType = { "persona" }
-                            ) { persona ->
-                                val isSelected = selectedPersonaIds.contains(persona.id)
-                                ManagementPersonaCardItem(
-                                    persona = persona,
-                                    isSelected = isSelected,
-                                    isSelectionMode = isPersonaSelectionMode,
-                                    onClick = {
-                                        if (isPersonaSelectionMode) {
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.spacedBy(10.dp),
+                                contentPadding = PaddingValues(bottom = 88.dp)
+                            ) {
+                                items(personas, key = { it.id }) { persona ->
+                                    val isSelected = selectedPersonaIds.contains(persona.id)
+                                    ManagementPersonaCardItem(
+                                        persona = persona,
+                                        isSelected = isSelected,
+                                        isSelectionMode = isPersonaSelectionMode,
+                                        onClick = {
+                                            if (isPersonaSelectionMode) {
+                                                selectedPersonaIds = if (isSelected) selectedPersonaIds - persona.id else selectedPersonaIds + persona.id
+                                            } else {
+                                                personaToEdit = persona
+                                            }
+                                        },
+                                        onLongClick = {
                                             selectedPersonaIds = if (isSelected) selectedPersonaIds - persona.id else selectedPersonaIds + persona.id
-                                        } else {
-                                            personaToEdit = persona
-                                        }
-                                    },
-                                    onLongClick = {
-                                        selectedPersonaIds = if (isSelected) selectedPersonaIds - persona.id else selectedPersonaIds + persona.id
-                                    },
-                                    onSetDefault = { onSetDefaultPersona(persona.id) },
-                                    onEdit = { personaToEdit = persona }
-                                )
+                                        },
+                                        onSetDefault = { onSetDefaultPersona(persona.id) },
+                                        onEdit = { personaToEdit = persona }
+                                    )
+                                }
                             }
                         }
                     }

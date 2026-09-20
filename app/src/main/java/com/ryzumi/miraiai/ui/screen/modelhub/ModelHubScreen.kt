@@ -144,10 +144,10 @@ fun ModelHubScreen(
 
             when (uiState.selectedFilter) {
                 ModelHubFilter.ALL -> true
-                ModelHubFilter.TEXT_GGUF -> !model.hasVisionCapability && !model.hasImageGenCapability && !model.hasVoiceCapability
-                ModelHubFilter.VISION -> model.hasVisionCapability
-                ModelHubFilter.IMAGE_GEN -> model.hasImageGenCapability
-                ModelHubFilter.VOICE_TTS -> model.hasVoiceCapability
+                ModelHubFilter.TEXT_GGUF -> true
+                ModelHubFilter.VISION -> true
+                ModelHubFilter.IMAGE_GEN -> true
+                ModelHubFilter.VOICE_TTS -> true
                 ModelHubFilter.DOWNLOADED -> model.isDownloaded
             }
         }
