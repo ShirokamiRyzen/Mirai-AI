@@ -14,6 +14,7 @@ data class InferenceConfigEntity(
     val useLocalGenModel: Boolean = false,
     val visionModelId: String = "",
     val useLocalVisionModel: Boolean = false,
+    val enableVision: Boolean = true,
     val imageGenModelId: String = "none",
     val temperature: Float = 0.7f,
     val topP: Float = 0.9f,

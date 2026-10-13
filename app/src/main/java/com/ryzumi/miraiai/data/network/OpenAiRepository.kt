@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.ryzumi.miraiai.domain.model.OpenAiContentPart
 import com.ryzumi.miraiai.domain.model.OpenAiFunctionCall
 import com.ryzumi.miraiai.domain.model.OpenAiMessage
 import com.ryzumi.miraiai.domain.model.OpenAiToolCall
@@ -113,6 +114,8 @@ class OpenAiRepository {
                                     }
                                 }
                             }
+                        } else if (com.ryzumi.miraiai.domain.model.ModelCapabilityDetector.detectCapabilities(id).supportsVision) {
+                            isVision = true
                         }
 
                         if (isVision) {
@@ -127,7 +130,7 @@ class OpenAiRepository {
                 Result.success(
                     ModelFetchResult(
                         allModels = allModels,
-                        visionModels = visionModels.ifEmpty { allModels }
+                        visionModels = visionModels
                     )
                 )
             }
@@ -171,47 +174,146 @@ class OpenAiRepository {
 
                 while (loopCount < maxLoops) {
                     loopCount++
-                    val turnResult = executeSingleTurn(
-                        baseUrl = baseUrl,
-                        apiKey = apiKey,
-                        modelId = modelId,
-                        messages = currentMessages,
-                        temperature = temperature,
-                        topP = topP,
-                        maxTokens = maxTokens,
-                        customHeadersJson = customHeadersJson,
-                        tools = currentTools,
-                        onChunk = { chunk ->
-                            trySend(chunk)
-                        }
-                    )
+                    val turnResult = try {
+                        executeSingleTurn(
+                            baseUrl = baseUrl,
+                            apiKey = apiKey,
+                            modelId = modelId,
+                            messages = currentMessages,
+                            temperature = temperature,
+                            topP = topP,
+                            maxTokens = maxTokens,
+                            customHeadersJson = customHeadersJson,
+                            tools = currentTools,
+                            onChunk = { chunk ->
+                                trySend(chunk)
+                            }
+                        )
+                    } catch (e: Exception) {
+                        val errMsg = e.message ?: ""
+                        val is400or422 = errMsg.contains("400") || errMsg.contains("422") || errMsg.contains("rejected", ignoreCase = true) || errMsg.contains("unsupported", ignoreCase = true) || errMsg.contains("schema", ignoreCase = true) || errMsg.contains("attachment", ignoreCase = true)
 
-                    if (turnResult.toolCalls.isNotEmpty() && toolExecutor != null) {
-                        currentMessages.add(
-                            OpenAiMessage(
-                                role = "assistant",
-                                content = if (turnResult.accumulatedContent.isNotBlank()) turnResult.accumulatedContent else null,
-                                tool_calls = turnResult.toolCalls.mapIndexed { idx, tc ->
-                                    OpenAiToolCall(
-                                        id = tc.id.ifBlank { "call_${System.currentTimeMillis()}_$idx" },
-                                        function = OpenAiFunctionCall(name = tc.name, arguments = tc.arguments)
+                        if (is400or422) {
+                            if (currentTools != null) {
+                                // Stage 1 Fallback: Retry without tools, but KEEP image_url attachments intact in currentMessages
+                                android.util.Log.w("OpenAiRepository", "Request with tools failed ($errMsg). Stage 1 Retry: Dropping tools while preserving image attachments...", e)
+                                currentTools = null
+                                try {
+                                    executeSingleTurn(
+                                        baseUrl = baseUrl,
+                                        apiKey = apiKey,
+                                        modelId = modelId,
+                                        messages = currentMessages,
+                                        temperature = temperature,
+                                        topP = topP,
+                                        maxTokens = maxTokens,
+                                        customHeadersJson = customHeadersJson,
+                                        tools = null,
+                                        onChunk = { chunk -> trySend(chunk) }
+                                    )
+                                } catch (e2: Exception) {
+                                    // Stage 2 Fallback: If model still rejects request (e.g. text-only model that cannot read attachments), sanitize messages to plain text
+                                    val errMsg2 = e2.message ?: ""
+                                    android.util.Log.w("OpenAiRepository", "Stage 1 Retry failed ($errMsg2). Stage 2 Retry: Sanitizing messages to plain text...", e2)
+                                    currentMessages = sanitizeMessagesToPlainText(currentMessages).toMutableList()
+                                    executeSingleTurn(
+                                        baseUrl = baseUrl,
+                                        apiKey = apiKey,
+                                        modelId = modelId,
+                                        messages = currentMessages,
+                                        temperature = temperature,
+                                        topP = topP,
+                                        maxTokens = maxTokens,
+                                        customHeadersJson = customHeadersJson,
+                                        tools = null,
+                                        onChunk = { chunk -> trySend(chunk) }
                                     )
                                 }
+                            } else {
+                                // Stage 2 Fallback: Tools were already null, sanitize messages to plain text
+                                android.util.Log.w("OpenAiRepository", "Request failed ($errMsg). Stage 2 Retry: Sanitizing messages to plain text...", e)
+                                currentMessages = sanitizeMessagesToPlainText(currentMessages).toMutableList()
+                                executeSingleTurn(
+                                    baseUrl = baseUrl,
+                                    apiKey = apiKey,
+                                    modelId = modelId,
+                                    messages = currentMessages,
+                                    temperature = temperature,
+                                    topP = topP,
+                                    maxTokens = maxTokens,
+                                    customHeadersJson = customHeadersJson,
+                                    tools = null,
+                                    onChunk = { chunk -> trySend(chunk) }
+                                )
+                            }
+                        } else {
+                            throw e
+                        }
+                    }
+
+                    if (turnResult.toolCalls.isNotEmpty() && toolExecutor != null) {
+                        val isDsmlCall = turnResult.toolCalls.any { it.id.startsWith("call_dsml_") }
+
+                        if (isDsmlCall) {
+                            val rawAssistantContent = if (turnResult.accumulatedContent.isNotBlank()) {
+                                turnResult.accumulatedContent
+                            } else {
+                                val sb = StringBuilder("< | DSML | calls>\n")
+                                for (tc in turnResult.toolCalls) {
+                                    sb.append("< | DSML | invoke name=\"${tc.name}\">\n")
+                                    try {
+                                        val argsObj = JsonParser.parseString(tc.arguments).asJsonObject
+                                        for ((k, v) in argsObj.entrySet()) {
+                                            sb.append("< | DSML | parameter name=\"$k\" string=\"true\">${v.asString}</ | DSML | parameter>\n")
+                                        }
+                                    } catch (e: Exception) { }
+                                    sb.append("</ | DSML | invoke>\n")
+                                }
+                                sb.append("</ | DSML | calls>")
+                                sb.toString()
+                            }
+                            currentMessages.add(
+                                OpenAiMessage(
+                                    role = "assistant",
+                                    content = rawAssistantContent
+                                )
                             )
-                        )
+                        } else {
+                            currentMessages.add(
+                                OpenAiMessage(
+                                    role = "assistant",
+                                    content = if (turnResult.accumulatedContent.isNotBlank()) turnResult.accumulatedContent else null,
+                                    tool_calls = turnResult.toolCalls.mapIndexed { idx, tc ->
+                                        OpenAiToolCall(
+                                            id = tc.id.ifBlank { "call_${System.currentTimeMillis()}_$idx" },
+                                            function = OpenAiFunctionCall(name = tc.name, arguments = tc.arguments)
+                                        )
+                                    }
+                                )
+                            )
+                        }
 
                         for ((idx, tc) in turnResult.toolCalls.withIndex()) {
                             val callId = tc.id.ifBlank { "call_${System.currentTimeMillis()}_$idx" }
                             trySend(StreamChunk(thinking = "\n[Tool: ${tc.name}]\n"))
                             val output = toolExecutor(tc.name, tc.arguments)
-                            currentMessages.add(
-                                OpenAiMessage(
-                                    role = "tool",
-                                    name = tc.name,
-                                    tool_call_id = callId,
-                                    content = output
+                            if (isDsmlCall) {
+                                currentMessages.add(
+                                    OpenAiMessage(
+                                        role = "user",
+                                        content = "[Tool Output for ${tc.name}]:\n$output"
+                                    )
                                 )
-                            )
+                            } else {
+                                currentMessages.add(
+                                    OpenAiMessage(
+                                        role = "tool",
+                                        name = tc.name,
+                                        tool_call_id = callId,
+                                        content = output
+                                    )
+                                )
+                            }
                         }
                         currentTools = null // Do not re-request tools on follow-up answer
                     } else {
@@ -337,10 +439,11 @@ class OpenAiRepository {
 
                     if (!isCompleted) {
                         isCompleted = true
+                        val (cleanContent, dsmlCalls) = parseDsmlToolCalls(accumulatedResponse.toString())
                         val resultToolCalls = toolMap.values.map {
                             AccumulatedToolCall(id = it.id, name = it.name, arguments = it.args.toString())
-                        }
-                        continuation.resumeWith(Result.success(SingleTurnResult(accumulatedResponse.toString(), accumulatedReasoning.toString(), resultToolCalls)))
+                        } + dsmlCalls
+                        continuation.resumeWith(Result.success(SingleTurnResult(cleanContent, accumulatedReasoning.toString(), resultToolCalls)))
                     }
                     return
                 }
@@ -416,8 +519,10 @@ class OpenAiRepository {
             override fun onFailure(eventSource: EventSource, t: Throwable?, response: Response?) {
                 val duration = System.currentTimeMillis() - startTime
                 val responseBody = try { response?.body?.string() } catch (e: Exception) { null }
-                val errMsg = if (t != null) t.message ?: "Unknown error" else "HTTP ${response?.code}: ${response?.message ?: responseBody}"
-                DebugLogManager.updateResponse(logId, accumulatedResponse.toString(), response?.code ?: 500, duration, errMsg)
+                val code = response?.code ?: 500
+                val serverMsg = if (!responseBody.isNullOrBlank()) responseBody else (response?.message ?: "Unknown error")
+                val errMsg = if (t != null) t.message ?: "Unknown network error" else "HTTP $code: $serverMsg"
+                DebugLogManager.updateResponse(logId, accumulatedResponse.toString(), code, duration, errMsg)
                 if (!isCompleted) {
                     isCompleted = true
                     continuation.resumeWith(Result.failure(t ?: Exception(errMsg)))
@@ -429,16 +534,90 @@ class OpenAiRepository {
                 DebugLogManager.updateResponse(logId, accumulatedResponse.toString(), 200, duration)
                 if (!isCompleted) {
                     isCompleted = true
+                    val (cleanContent, dsmlCalls) = parseDsmlToolCalls(accumulatedResponse.toString())
                     val resultToolCalls = toolMap.values.map {
                         AccumulatedToolCall(id = it.id, name = it.name, arguments = it.args.toString())
-                    }
-                    continuation.resumeWith(Result.success(SingleTurnResult(accumulatedResponse.toString(), accumulatedReasoning.toString(), resultToolCalls)))
+                    } + dsmlCalls
+                    continuation.resumeWith(Result.success(SingleTurnResult(cleanContent, accumulatedReasoning.toString(), resultToolCalls)))
                 }
             }
         })
 
         continuation.invokeOnCancellation {
             eventSource.cancel()
+        }
+    }
+
+    private fun parseDsmlToolCalls(rawContent: String): Pair<String, List<AccumulatedToolCall>> {
+        val dsmlToolCalls = mutableListOf<AccumulatedToolCall>()
+
+        val invokeRegex = Regex(
+            """<[\s|]*DSML[\s|]*invoke\s+name=["']?([^"'>\s]+)["']?\s*>(.*?)(?:</[\s|]*DSML[\s|]*invoke>|$)""",
+            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)
+        )
+
+        val paramRegex = Regex(
+            """<[\s|]*DSML[\s|]*parameter\s+name=["']?([^"'>\s]+)["']?[^>]*>(.*?)(?:</[\s|]*DSML[\s|]*parameter>|$)""",
+            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)
+        )
+
+        val matches = invokeRegex.findAll(rawContent)
+        for ((idx, match) in matches.withIndex()) {
+            val fnName = match.groupValues[1].trim()
+            val body = match.groupValues[2]
+
+            val argsObj = JsonObject()
+            val paramMatches = paramRegex.findAll(body)
+            for (pMatch in paramMatches) {
+                val paramName = pMatch.groupValues[1].trim()
+                val paramValue = pMatch.groupValues[2].trim()
+                argsObj.addProperty(paramName, paramValue)
+            }
+
+            dsmlToolCalls.add(
+                AccumulatedToolCall(
+                    id = "call_dsml_${System.currentTimeMillis()}_$idx",
+                    name = fnName,
+                    arguments = argsObj.toString()
+                )
+            )
+        }
+
+        var cleanContent = rawContent
+        cleanContent = cleanContent.replace(
+            Regex("""<[\s|]*DSML[\s|]*calls\s*>(.*?)</[\s|]*DSML[\s|]*calls>""", setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)),
+            ""
+        )
+        cleanContent = cleanContent.replace(
+            Regex("""<[\s|]*DSML[\s|]*invoke.*?(?:</[\s|]*DSML[\s|]*invoke>|$)""", setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)),
+            ""
+        )
+        cleanContent = cleanContent.replace(
+            Regex("""</?[\s|]*DSML[\s|]*[^>]*>""", RegexOption.IGNORE_CASE),
+            ""
+        ).trim()
+
+        return Pair(cleanContent, dsmlToolCalls)
+    }
+
+    private fun sanitizeMessagesToPlainText(messages: List<OpenAiMessage>): List<OpenAiMessage> {
+        return messages.map { msg ->
+            val plainTextContent = when (val c = msg.content) {
+                is String -> c
+                is List<*> -> {
+                    c.filterIsInstance<OpenAiContentPart>()
+                        .mapNotNull { it.text }
+                        .joinToString("\n")
+                        .ifEmpty { "Analyze this image" }
+                }
+                else -> c?.toString() ?: ""
+            }
+            OpenAiMessage(
+                role = msg.role,
+                content = plainTextContent,
+                name = msg.name,
+                tool_call_id = msg.tool_call_id
+            )
         }
     }
 
@@ -464,6 +643,7 @@ data class StreamChunk(
 
 class ThinkTagFilter {
     private var insideThink = false
+    private var insideDsml = false
     private val buffer = StringBuilder()
 
     data class FilterResult(
@@ -477,43 +657,66 @@ class ThinkTagFilter {
         val thinkingResult = StringBuilder()
 
         while (buffer.isNotEmpty()) {
-            if (!insideThink) {
-                val thinkStart = buffer.indexOf("<think>")
-                if (thinkStart != -1) {
-                    contentResult.append(buffer.substring(0, thinkStart))
+            val text = buffer.toString()
+            if (!insideThink && !insideDsml) {
+                val thinkStart = text.indexOf("<think>")
+                val dsmlMatch = findDsmlMatch(text)
+
+                if (thinkStart != -1 && (dsmlMatch == null || thinkStart < dsmlMatch.range.first)) {
+                    contentResult.append(text.substring(0, thinkStart))
                     buffer.delete(0, thinkStart + 7)
                     insideThink = true
+                } else if (dsmlMatch != null) {
+                    contentResult.append(text.substring(0, dsmlMatch.range.first))
+                    buffer.delete(0, dsmlMatch.range.last + 1)
+                    insideDsml = true
                 } else {
-                    val partialIndex = findPartialTagStart(buffer.toString(), "<think>")
+                    val partialThink = findPartialTagStart(text, "<think>")
+                    val partialDsml = findPartialDsmlStart(text)
+                    val partialIndex = when {
+                        partialThink != -1 && partialDsml != -1 -> minOf(partialThink, partialDsml)
+                        partialThink != -1 -> partialThink
+                        else -> partialDsml
+                    }
+
                     if (partialIndex != -1) {
-                        contentResult.append(buffer.substring(0, partialIndex))
-                        val remaining = buffer.substring(partialIndex)
+                        contentResult.append(text.substring(0, partialIndex))
+                        val remaining = text.substring(partialIndex)
                         buffer.clear()
                         buffer.append(remaining)
                         break
                     } else {
-                        contentResult.append(buffer.toString())
+                        contentResult.append(text)
                         buffer.clear()
                     }
                 }
-            } else {
-                val thinkEnd = buffer.indexOf("</think>")
+            } else if (insideThink) {
+                val thinkEnd = text.indexOf("</think>")
                 if (thinkEnd != -1) {
-                    thinkingResult.append(buffer.substring(0, thinkEnd))
+                    thinkingResult.append(text.substring(0, thinkEnd))
                     buffer.delete(0, thinkEnd + 8)
                     insideThink = false
                 } else {
-                    val partialIndex = findPartialTagStart(buffer.toString(), "</think>")
+                    val partialIndex = findPartialTagStart(text, "</think>")
                     if (partialIndex != -1) {
-                        thinkingResult.append(buffer.substring(0, partialIndex))
-                        val remaining = buffer.substring(partialIndex)
+                        thinkingResult.append(text.substring(0, partialIndex))
+                        val remaining = text.substring(partialIndex)
                         buffer.clear()
                         buffer.append(remaining)
                         break
                     } else {
-                        thinkingResult.append(buffer.toString())
+                        thinkingResult.append(text)
                         buffer.clear()
                     }
+                }
+            } else { // insideDsml
+                val dsmlEndMatch = findDsmlEndMatch(text)
+                if (dsmlEndMatch != null) {
+                    buffer.delete(0, dsmlEndMatch.range.last + 1)
+                    insideDsml = false
+                } else {
+                    buffer.clear()
+                    break
                 }
             }
         }
@@ -525,11 +728,42 @@ class ThinkTagFilter {
             val text = buffer.toString()
             buffer.clear()
             FilterResult(content = "", thinking = text)
+        } else if (insideDsml) {
+            buffer.clear()
+            FilterResult(content = "", thinking = "")
         } else {
             val text = buffer.toString()
             buffer.clear()
             FilterResult(content = text, thinking = "")
         }
+    }
+
+    private fun findDsmlMatch(text: String): MatchResult? {
+        val regexCalls = Regex("""<[\s|]*DSML[\s|]*calls\s*>""", RegexOption.IGNORE_CASE)
+        val matchCalls = regexCalls.find(text)
+        if (matchCalls != null) return matchCalls
+
+        val regexInvoke = Regex("""<[\s|]*DSML[\s|]*invoke\b""", RegexOption.IGNORE_CASE)
+        return regexInvoke.find(text)
+    }
+
+    private fun findDsmlEndMatch(text: String): MatchResult? {
+        val regexCalls = Regex("""</[\s|]*DSML[\s|]*calls\s*>""", RegexOption.IGNORE_CASE)
+        val matchCalls = regexCalls.find(text)
+        if (matchCalls != null) return matchCalls
+
+        val regexInvoke = Regex("""</[\s|]*DSML[\s|]*invoke\s*>""", RegexOption.IGNORE_CASE)
+        return regexInvoke.find(text)
+    }
+
+    private fun findPartialDsmlStart(text: String): Int {
+        val prefixes = listOf("<", "< ", "<|", "< |", "< | D", "< | DS", "< | DSM", "< | DSML")
+        for (prefix in prefixes.asReversed()) {
+            if (text.endsWith(prefix)) {
+                return text.length - prefix.length
+            }
+        }
+        return -1
     }
 
     private fun findPartialTagStart(text: String, tag: String): Int {

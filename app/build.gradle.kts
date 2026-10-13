@@ -12,8 +12,8 @@ android {
         applicationId = "com.ryzumi.miraiai"
         minSdk = 26
         targetSdk = 37
-        versionCode = 12
-        versionName = "2.0.1"
+        versionCode = 13
+        versionName = "2.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

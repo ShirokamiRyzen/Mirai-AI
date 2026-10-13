@@ -88,16 +88,8 @@ object ChatGenerationManager {
         val stateFlow = streamStates.getOrPut(sessionId) { MutableStateFlow(GenerationStreamState()) }
 
         val job = scope.launch {
-            val isLocalNeeded = if (hasImage) config.useLocalVisionModel else config.useLocalGenModel
-            val chosenModel = if (hasImage) {
-                if (config.visionModelId.isNotBlank() && config.visionModelId != "auto-debug" && config.visionModelId != "none") {
-                    config.visionModelId
-                } else {
-                    config.generateModelId
-                }
-            } else {
-                config.generateModelId
-            }
+            val isLocalNeeded = config.useLocalGenModel
+            val chosenModel = config.generateModelId
 
             stateFlow.value = GenerationStreamState(
                 isStreaming = true,
@@ -183,7 +175,7 @@ object ChatGenerationManager {
                     persona = persona,
                     chatHistory = history,
                     context = context,
-                    includeImages = hasImage,
+                    includeImages = config.enableVision && (hasImage || history.any { !it.imageUri.isNullOrBlank() }),
                     deviceContext = liveDeviceContext,
                     maxContextTokens = config.maxTokens,
                     uploadAsBase64 = isUploadAsBase64
@@ -214,6 +206,9 @@ object ChatGenerationManager {
                 streamFlow.collect { chunk ->
                     var hasNewToken = false
                     if (chunk.thinking.isNotEmpty()) {
+                        if (chunk.thinking.contains("[Tool:")) {
+                            contentSb.clear()
+                        }
                         thinkingSb.append(chunk.thinking)
                         hasNewToken = true
                     }

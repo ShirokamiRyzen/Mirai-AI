@@ -724,8 +724,6 @@ class ChatViewModel(
         val config = uiState.value.activeConfig ?: return
         val chosenModel = if (config.useLocalGenModel && config.generateModelId.isNotBlank()) {
             config.generateModelId
-        } else if (config.useLocalVisionModel && config.visionModelId.isNotBlank()) {
-            config.visionModelId
         } else if (config.imageGenEngine == "local" && !config.imageGenModelId.isNullOrBlank() && config.imageGenModelId != "none" && config.imageGenModelId != "None (Download via Model Hub)") {
             config.imageGenModelId
         } else {

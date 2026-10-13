@@ -135,6 +135,32 @@ class ContextBuilderTest {
     }
 
     @Test
+    fun testAssistantMessageWithImageUriDoesNotAddImageUrlPart() {
+        val character = CharacterEntity(name = "Aria")
+        val persona = UserPersonaEntity(name = "Fatih")
+
+        val dummyDataUrl = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        val history = listOf(
+            ChatMessageEntity(
+                sessionId = "sess1",
+                sender = "CHARACTER",
+                content = "Here is your generated image.",
+                imageUri = dummyDataUrl
+            )
+        )
+
+        val messages = kotlinx.coroutines.runBlocking {
+            ContextBuilder.buildOpenAiMessages(character, persona, history, includeImages = true)
+        }
+
+        // Assistant message must remain String content, NOT a List/OpenAiContentPart with image_url
+        assertEquals(2, messages.size) // system + assistant
+        assertEquals("assistant", messages[1].role)
+        assertTrue(messages[1].content is String)
+        assertEquals("Here is your generated image.", messages[1].content)
+    }
+
+    @Test
     fun testTrimHistoryToFitBudgetDoesNotExceedLimit() {
         val history = (1..20).map { i ->
             ChatMessageEntity(

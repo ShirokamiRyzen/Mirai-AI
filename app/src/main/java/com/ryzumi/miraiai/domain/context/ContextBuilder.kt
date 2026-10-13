@@ -140,7 +140,7 @@ object ContextBuilder {
 
             val processedText = MacroEngine.processMacros(msg.content, charName, userName)
 
-            if (includeImages && !msg.imageUri.isNullOrBlank()) {
+            if (includeImages && role == "user" && !msg.imageUri.isNullOrBlank()) {
                 val rawUri = msg.imageUri
 
                 // Determine image format based on uploadAsBase64 preference

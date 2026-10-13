@@ -22,7 +22,6 @@ object MiraiToolManager {
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     add("properties", JsonObject())
-                    add("required", JsonArray())
                 }
                 add("parameters", params)
             }
@@ -39,7 +38,6 @@ object MiraiToolManager {
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     add("properties", JsonObject())
-                    add("required", JsonArray())
                 }
                 add("parameters", params)
             }
@@ -56,12 +54,13 @@ object MiraiToolManager {
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     add("properties", JsonObject())
-                    add("required", JsonArray())
                 }
                 add("parameters", params)
             }
             add("function", fn)
         }
+        tools.add(weatherTool)
+
         // 4. get_network_details
         val networkTool = JsonObject().apply {
             addProperty("type", "function")
@@ -71,7 +70,6 @@ object MiraiToolManager {
                 val params = JsonObject().apply {
                     addProperty("type", "object")
                     add("properties", JsonObject())
-                    add("required", JsonArray())
                 }
                 add("parameters", params)
             }
@@ -131,6 +129,8 @@ object MiraiToolManager {
             }
             add("function", fn)
         }
+        tools.add(readArticleTool)
+
         // 7. generate_image
         val imageGenTool = JsonObject().apply {
             addProperty("type", "function")

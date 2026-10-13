@@ -721,7 +721,7 @@ fun ConfigCardItem(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Gen: ${config.generateModelId} | Vis: ${config.visionModelId}",
+                    text = "Model: ${config.generateModelId} ${if (config.enableVision) "• Vision ON" else "• Vision OFF"}",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -752,7 +752,6 @@ fun ConfigEditorForm(
     onCancel: () -> Unit
 ) {
     var isGenModelDropdownExpanded by remember { mutableStateOf(false) }
-    var isVisionModelDropdownExpanded by remember { mutableStateOf(false) }
     var isImageGenModelDropdownExpanded by remember { mutableStateOf(false) }
 
     var profileName by remember(config.id) { mutableStateOf(config.name) }
@@ -760,8 +759,7 @@ fun ConfigEditorForm(
     var apiKey by remember(config.id) { mutableStateOf(config.apiKey) }
     var generateModelId by remember(config.id, config.generateModelId) { mutableStateOf(config.generateModelId) }
     var useLocalGenModel by remember(config.id) { mutableStateOf(config.useLocalGenModel) }
-    var visionModelId by remember(config.id, config.visionModelId) { mutableStateOf(config.visionModelId) }
-    var useLocalVisionModel by remember(config.id) { mutableStateOf(config.useLocalVisionModel) }
+    var enableVision by remember(config.id) { mutableStateOf(config.enableVision) }
     var imageGenModelId by remember(config.id, config.imageGenModelId) { mutableStateOf(config.imageGenModelId) }
     var temperature by remember(config.id) { mutableFloatStateOf(config.temperature) }
     var topP by remember(config.id) { mutableFloatStateOf(config.topP) }
@@ -881,14 +879,14 @@ fun ConfigEditorForm(
         )
         Spacer(modifier = Modifier.height(12.dp))
 
-        // 1. Text Generate Model Header with Local Model Switch
+        // 1. Unified AI Model Header with Local Model Switch
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Text Generate Model",
+                    text = "AI Model ID",
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
@@ -907,26 +905,38 @@ fun ConfigEditorForm(
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        // Text Generate Model Dropdown Selector
+        // Unified Model Dropdown Selector with Capability Badges
         ExposedDropdownMenuBox(
             expanded = isGenModelDropdownExpanded,
             onExpandedChange = { isGenModelDropdownExpanded = it },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(bottom = 12.dp)
         ) {
+            val selectedCaps = com.ryzumi.miraiai.domain.model.ModelCapabilityDetector.detectCapabilities(generateModelId, uiState.visionModels)
+
             OutlinedTextField(
                 value = generateModelId,
                 onValueChange = { },
                 readOnly = true,
-                label = { Text(if (useLocalGenModel) "Local Text Model" else "API Text Model") },
+                label = { Text(if (useLocalGenModel) "Local AI Model" else "API AI Model") },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isGenModelDropdownExpanded) },
+                supportingText = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.padding(top = 2.dp)
+                    ) {
+                        Text("Capabilities: ", style = MaterialTheme.typography.labelSmall)
+                        ModelCapabilityBadges(capabilities = selectedCaps)
+                    }
+                },
                 modifier = Modifier
                     .menuAnchor(MenuAnchorType.PrimaryNotEditable)
                     .fillMaxWidth()
             )
 
-            val genModels = if (useLocalGenModel) {
+            val availableModels = if (useLocalGenModel) {
                 uiState.localTextModels
             } else {
                 uiState.availableModels.ifEmpty {
@@ -937,9 +947,25 @@ fun ConfigEditorForm(
                 expanded = isGenModelDropdownExpanded,
                 onDismissRequest = { isGenModelDropdownExpanded = false }
             ) {
-                genModels.forEach { model ->
+                availableModels.forEach { model ->
+                    val caps = com.ryzumi.miraiai.domain.model.ModelCapabilityDetector.detectCapabilities(model, uiState.visionModels)
                     DropdownMenuItem(
-                        text = { Text(model) },
+                        text = {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = model,
+                                    modifier = Modifier.weight(1f, fill = false),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                ModelCapabilityBadges(capabilities = caps)
+                            }
+                        },
                         onClick = {
                             generateModelId = model
                             isGenModelDropdownExpanded = false
@@ -949,74 +975,29 @@ fun ConfigEditorForm(
             }
         }
 
-        // 2. Vision Model Header with Local Model Switch
+        // 2. Vision Capability Switch
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Vision Model (for images)",
+                    text = "Vision / Image Capability",
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = if (useLocalVisionModel) "Use Local Downloaded Model" else "Use Endpoint API Model",
+                    text = if (enableVision) "ON — Sends image attachments to model" else "OFF — Strips images (Use for text-only models to avoid 400 errors)",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            Text("Local", style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(end = 4.dp))
             Switch(
-                checked = useLocalVisionModel,
-                onCheckedChange = { useLocalVisionModel = it }
+                checked = enableVision,
+                onCheckedChange = { enableVision = it }
             )
-        }
-
-        Spacer(modifier = Modifier.height(6.dp))
-
-        // Vision Model Dropdown Selector
-        ExposedDropdownMenuBox(
-            expanded = isVisionModelDropdownExpanded,
-            onExpandedChange = { isVisionModelDropdownExpanded = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        ) {
-            OutlinedTextField(
-                value = visionModelId,
-                onValueChange = { },
-                readOnly = true,
-                label = { Text(if (useLocalVisionModel) "Local Vision Model" else "API Vision Model") },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isVisionModelDropdownExpanded) },
-                modifier = Modifier
-                    .menuAnchor(MenuAnchorType.PrimaryNotEditable)
-                    .fillMaxWidth()
-            )
-
-            val visModels = if (useLocalVisionModel) {
-                uiState.localVisionModels
-            } else {
-                uiState.visionModels.ifEmpty {
-                    uiState.availableModels.ifEmpty {
-                        listOf("auto-debug", "claude-opus-5-b", "deepseek-v4-flash-vision-exp", "gpt-5.6-luna-b")
-                    }
-                }
-            }
-            ExposedDropdownMenu(
-                expanded = isVisionModelDropdownExpanded,
-                onDismissRequest = { isVisionModelDropdownExpanded = false }
-            ) {
-                visModels.forEach { model ->
-                    DropdownMenuItem(
-                        text = { Text(model) },
-                        onClick = {
-                            visionModelId = model
-                            isVisionModelDropdownExpanded = false
-                        }
-                    )
-                }
-            }
         }
 
         // 3. Image Generation Model (Local vs API Switch)
@@ -1480,8 +1461,9 @@ fun ConfigEditorForm(
                         apiKey = apiKey,
                         generateModelId = generateModelId,
                         useLocalGenModel = useLocalGenModel,
-                        visionModelId = visionModelId,
-                        useLocalVisionModel = useLocalVisionModel,
+                        visionModelId = generateModelId,
+                        useLocalVisionModel = useLocalGenModel,
+                        enableVision = enableVision,
                         imageGenModelId = imageGenModelId,
                         temperature = Math.round(temperature * 100f) / 100f,
                         topP = Math.round(topP * 100f) / 100f,
@@ -1846,12 +1828,12 @@ fun AdvanceSettingsView(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "Generate Model: ${activeConfig.generateModelId.ifBlank { "Auto / Default" }}",
+                            text = "Model ID: ${activeConfig.generateModelId.ifBlank { "Auto / Default" }}",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "Vision Model: ${activeConfig.visionModelId.ifBlank { "None (Using generate model)" }}",
+                            text = "Vision Capability: ${if (activeConfig.enableVision) "Enabled (ON)" else "Disabled (OFF)"}",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -3115,6 +3097,67 @@ fun StatBadgeItem(
                 fontSize = 10.sp
             )
         }
+    }
+}
+
+@Composable
+fun ModelCapabilityBadges(
+    capabilities: com.ryzumi.miraiai.domain.model.ModelCapabilities,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
+        if (capabilities.supportsVision) {
+            BadgeTag(
+                text = "Vision",
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        }
+        if (capabilities.isReasoningModel) {
+            BadgeTag(
+                text = "Reasoning",
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            )
+        }
+        if (capabilities.supportsTools) {
+            BadgeTag(
+                text = "Tools",
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+        }
+        if (!capabilities.supportsVision && !capabilities.isReasoningModel && !capabilities.supportsTools) {
+            BadgeTag(
+                text = "Text",
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun BadgeTag(
+    text: String,
+    containerColor: Color,
+    contentColor: Color
+) {
+    Surface(
+        color = containerColor,
+        contentColor = contentColor,
+        shape = RoundedCornerShape(4.dp)
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp)
+        )
     }
 }
 
